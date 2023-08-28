@@ -6,12 +6,9 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Grievance-client-app": {
+    "exams-and-admissions-app": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:application": {
-          "strict": true
-        },
         "@schematics/angular:component": {
           "style": "scss"
         }
@@ -23,17 +20,20 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/grievance-client-app",
+            "outputPath": "dist/exams-and-admissions-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss",
-              "node_modules/basscss/css/basscss.min.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "src/styles.scss"
+              
             ],
             "scripts": []
           },
@@ -74,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Grievance-client-app:build:production"
+              "browserTarget": "exams-and-admissions-app:build:production"
             },
             "development": {
-              "browserTarget": "Grievance-client-app:build:development"
+              "browserTarget": "exams-and-admissions-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,7 +85,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Grievance-client-app:build"
+            "browserTarget": "exams-and-admissions-app:build"
           }
         },
         "test": {
@@ -95,17 +95,19 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "@angular/material/prebuilt-themes/indigo-pink.css"
             ],
             "scripts": []
           }
         }
       }
     }
-  },
-  "defaultProject": "Grievance-client-app"
+  }
 }
