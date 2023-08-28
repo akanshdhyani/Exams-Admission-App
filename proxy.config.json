@@ -1,0 +1,12 @@
+
+{
+	"/*": {
+		"target": "https://grievances.uphrh.in",
+		"pathRewrite": {
+			"^/client-api": ""
+		},
+		"secure": false,
+		"changeOrigin": true,
+		"logLevel": "debug"
+	}
+}
