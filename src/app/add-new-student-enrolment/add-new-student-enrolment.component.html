@@ -1,0 +1,122 @@
+<div class="main-container">
+  <div class="secondary-container">
+    <h2 class="title-header">{{ "Add New Student Enrolment" }}</h2>
+    <div class="body-section">
+      <div class="sidebar">
+        <button class="btn">Basic Details</button>
+        <button class="btn">Educational Details</button>
+      </div>
+      <div class="outer-container">
+        <div class="form-section">
+          <div class="form-inputs">
+            <mat-label class="asterix--after">First Name</mat-label>
+            <mat-form-field class="address-column" appearance="outline">
+              <input matInput />
+            </mat-form-field>
+
+            <mat-label class="asterix--after">Last Name</mat-label>
+            <mat-form-field class="address-column" appearance="outline">
+              <input class="input-field" matInput />
+            </mat-form-field>
+
+            <mat-label class="label">Mother's Name</mat-label>
+            <mat-form-field class="address-column" appearance="outline">
+              <input matInput />
+            </mat-form-field>
+
+            <mat-label class="label">Father's Name</mat-label>
+            <mat-form-field class="address-column" appearance="outline">
+              <input matInput />
+            </mat-form-field>
+
+            <mat-label class="label">DOB</mat-label>
+            <mat-form-field class="address-column" appearance="outline">
+              <input matInput [matDatepicker]="picker" />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-label class="label">Gender </mat-label>
+            <mat-radio-group class="group-select">
+              <mat-radio-button class="select" value="male"
+                >Male</mat-radio-button
+              >
+              <mat-radio-button class="select" value="female"
+                >Female</mat-radio-button
+              >
+            </mat-radio-group>
+
+            <mat-label class="label">Caste </mat-label>
+            <mat-radio-group class="group-select">
+              <mat-radio-button class="select" value="general"
+                >General</mat-radio-button
+              >
+              <mat-radio-button class="select" value="sc">SC</mat-radio-button>
+              <mat-radio-button class="select" value="st">ST</mat-radio-button>
+              <mat-radio-button class="select" value="obc"
+                >OBC</mat-radio-button
+              >
+              <mat-radio-button class="select" value="none"
+                >None</mat-radio-button
+              >
+            </mat-radio-group>
+
+            <mat-label class="label">Category </mat-label>
+            <mat-radio-group class="group-select">
+              <mat-radio-button class="select" value="freedom_fighter_dependent"
+                >Freedom Fighter Dependent</mat-radio-button
+              >
+              <mat-radio-button class="select" value="handicapped"
+                >Handicapped</mat-radio-button
+              >
+            </mat-radio-group>
+
+            <mat-label class="label">Mobile Number</mat-label>
+            <mat-form-field class="address-column" appearance="outline">
+              <input matInput />
+            </mat-form-field>
+
+            <mat-label class="label">Email Id</mat-label>
+            <mat-form-field class="address-column" appearance="outline">
+              <input matInput />
+            </mat-form-field>
+
+            <mat-label class="label">Aadhar Number</mat-label>
+            <mat-form-field class="address-column" appearance="outline">
+              <input matInput />
+            </mat-form-field>
+
+            <!-- <mat-grid-list cols="2" rowHeight="6:1">
+              <mat-grid-tile>
+                <div class="address-input">
+                  <mat-label>abc</mat-label>
+                  <mat-form-field class="address-column" appearance="outline">
+                    <input matInput />
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <div class="address-input">
+                  <mat-label class="label">def</mat-label>
+                  <mat-form-field class="address-column" appearance="outline">
+                    <input style="width: 100%" matInput />
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
+            </mat-grid-list> -->
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="btn-2">Previous</button>
+          <div class="btn-group">
+            <button class="btn-1">Cancel</button>
+            <button class="btn-2">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
