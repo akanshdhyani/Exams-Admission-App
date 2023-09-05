@@ -16,6 +16,9 @@ import { ManageExamCycleListComponent } from './manage-exam-cycle-list/manage-ex
 import { ManageExamCycleViewComponent } from './manage-exam-cycle-view/manage-exam-cycle-view.component';
 import { FeeManagementInstituteComponent } from './fee-management-institute/fee-management-institute.component';
 import { StudentEnrollmentAdminComponent } from './student-enrollment-admin/student-enrollment-admin.component';
+import { FeeManagementAdminComponent } from './fee-management-admin/fee-management-admin.component';
+import { CctvManagementAdminComponent } from './cctv-management-admin/cctv-management-admin.component';
+import { ManageHallTicketsAdminListComponent } from './manage-hall-tickets-admin-list/manage-hall-tickets-admin-list.component';
 
 // import { SharedTableComponent } from './shared-table/shared-table.component';
 
@@ -32,6 +35,9 @@ import { StudentEnrollmentAdminComponent } from './student-enrollment-admin/stud
     ManageExamCycleViewComponent,
     FeeManagementInstituteComponent,
     StudentEnrollmentAdminComponent,
+    FeeManagementAdminComponent,
+    CctvManagementAdminComponent,
+    ManageHallTicketsAdminListComponent,
   ],
   imports: [
     BrowserModule,
