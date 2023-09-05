@@ -10,6 +10,13 @@ import { StudentEnrollmentComponent } from './student-enrollment/student-enrollm
 import { RegisterStudentsComponent } from './register-students/register-students.component';
 import { AddNewStudentEnrolmentComponent } from './add-new-student-enrolment/add-new-student-enrolment.component';
 import { EducationalDetailsComponent } from './educational-details/educational-details.component';
+import { ManageExamCycleFormComponent } from './manage-exam-cycle-form/manage-exam-cycle-form.component';
+import { MatTimepickerModule } from 'mat-timepicker';
+import { ManageExamCycleListComponent } from './manage-exam-cycle-list/manage-exam-cycle-list.component';
+import { ManageExamCycleViewComponent } from './manage-exam-cycle-view/manage-exam-cycle-view.component';
+import { FeeManagementInstituteComponent } from './fee-management-institute/fee-management-institute.component';
+import { StudentEnrollmentAdminComponent } from './student-enrollment-admin/student-enrollment-admin.component';
+
 // import { SharedTableComponent } from './shared-table/shared-table.component';
 
 @NgModule({
@@ -20,12 +27,18 @@ import { EducationalDetailsComponent } from './educational-details/educational-d
     RegisterStudentsComponent,
     AddNewStudentEnrolmentComponent,
     EducationalDetailsComponent,
+    ManageExamCycleFormComponent,
+    ManageExamCycleListComponent,
+    ManageExamCycleViewComponent,
+    FeeManagementInstituteComponent,
+    StudentEnrollmentAdminComponent,
   ],
   imports: [
     BrowserModule,
     MaterialModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTimepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

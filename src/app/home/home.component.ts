@@ -8,11 +8,11 @@ import { Component } from '@angular/core';
 export class HomeComponent {
   cardList: any[] = [
     {
-      title: 'Student enrollment',
+      title: 'Student Enrollment',
       type: 'admin',
     },
     {
-      title: 'Register student to Exam Cycles & Exams',
+      title: 'Manage Exam Cycles & Exams',
       type: 'admin',
     },
 
@@ -22,23 +22,23 @@ export class HomeComponent {
     },
 
     {
-      title: 'Attendence Record',
+      title: 'Update CCTV Verification Status',
       type: 'admin',
     },
     {
-      title: 'Download Question Papers',
+      title: 'Manage Hall Tickets',
       type: 'users',
     },
+    // {
+    //   title: 'Attendence Record',
+    //   type: 'admin',
+    // },
     {
-      title: 'Attendence Record',
+      title: 'Manage Question Papers',
       type: 'admin',
     },
     {
-      title: 'Download Question Paper',
-      type: 'admin',
-    },
-    {
-      title: 'Update Dispatches',
+      title: 'Track Dispatches',
       type: 'admin',
     },
     {

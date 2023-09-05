@@ -1,4 +1,4 @@
-.main-container {
+    .main-container {
     background-color: #F0F3F4;
     height: fit-content;
     width: 100%;
@@ -82,6 +82,8 @@
     border: 1.5px solid rgba(4,93,173, 1);
     opacity: 1;
     cursor: pointer;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 .btn-2{
     background-color: #045DAD;
@@ -94,6 +96,8 @@
     border: 1.5px solid rgba(4,93,173, 1);
     opacity: 1;
     cursor: pointer;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 .data-container{
 display: flex;

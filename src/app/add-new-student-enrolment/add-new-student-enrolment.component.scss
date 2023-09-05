@@ -34,7 +34,7 @@
 background-color: #fff;
 width: 90%;
 height: fit-content;
-padding: 16px;
+padding:28px;
 margin-bottom: 24px;
 }
 .form-inputs{
@@ -70,6 +70,8 @@ margin-bottom: 24px;
     letter-spacing: 0.16px;
     line-height: 28px;
     color: #000000;
+    cursor: pointer;
+
 }.btn:focus{
     padding: 12px;
     font-weight: 550;
