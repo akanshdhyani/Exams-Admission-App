@@ -25,6 +25,7 @@
    background-color: white;
    box-shadow: rgba(0, 0, 0, 0.20) 0px 1px 3px 0px !important;
    border-radius: 6px;
+    height: fit-content;
   }
   .content-container {
     display: flex;
@@ -105,3 +106,22 @@ width: 50%;
     flex-direction: column;
     row-gap: 4px; 
 }
+.upload-background{
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between ;
+    background-color: rgb(235, 235, 235);
+    padding: 12px;
+    border-radius: 4px;
+    }
+    ::ng-deep .exam-form {
+        margin-top: 5px;
+        width: 276px;
+        .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+        padding: 13px 0px;
+    }
+    .mat-mdc-text-field-wrapper {
+        background-color: white;
+        }
+    
+    }

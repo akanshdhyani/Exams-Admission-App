@@ -22,12 +22,14 @@ export class RegisterStudentsComponent {
       "Course_name" : 'xxxx xxxx',
       "Start_date" : "29-06-2023",
       "End_date" : "31-07-2023",
+      "Maximum_marks": "100"
     },
     {
        "Name" : 'B.Sc.(NURSING)-SEMESTER 2',
       "Course_name" : 'xxxx xxxx',
       "Start_date" : "29-06-2023",
       "End_date" : "31-07-2023",
+      "Maximum_marks": "100"
     },
 
     {
@@ -35,6 +37,8 @@ export class RegisterStudentsComponent {
       "Course_name" : 'xxxx xxxx',
       "Start_date" : "29-06-2023",
       "End_date" : "31-07-2023",
+      // max marks is for
+      "Maximum_marks": "100"
     }
   ];
 
