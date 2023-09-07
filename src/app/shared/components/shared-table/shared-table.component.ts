@@ -2,9 +2,9 @@ import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from
 import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
-import { ConfigService, getRole } from '../..';
+// import { ConfigService, getRole } from '../..';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/core';
+// import { AuthService } from 'src/app/core';
 export interface TableProps {
   id?: string;
   code?: string;
@@ -48,25 +48,25 @@ export class SharedTableComponent implements AfterViewInit {
   displayedColumns: Array<string> = [];
   isFilter:boolean = false;
   grievancesTypes: any[] = [];
-  userRole:string;
+  // userRole:string;
   filterForm:FormGroup;
   isClient:boolean = false;
   accumulatedSearchTerm:string = '';
   //dataSource: MatTableDataSource<[any]> = new MatTableDataSource();
   public dataSource = new MatTableDataSource([]);
  // dataSource = new MatTableDataSource([])
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort ;
+  // @ViewChild(MatPaginator) paginator: MatPaginator;
+  // @ViewChild(MatSort) sort: MatSort ;
 
-  @Input() isPageable = true;
-  @Input() tableColumns: TableColumn[] ;
+  // @Input() isPageable = true;
+  // @Input() tableColumns: TableColumn[] ;
   @Input() set tableData(data: any[]) {
     this.setTableDataSource(data);
   }
-  @Input() pageLength: number;
-  @Input() pageSize: number;
-  @Input() pageIndex: number;
-  @Input() isServerSidePagination: boolean;
+  // @Input() pageLength: number;
+  // @Input() pageSize: number;
+  // @Input() pageIndex: number;
+  // @Input() isServerSidePagination: boolean;
 
   @Output() rowAction: EventEmitter<any> = new EventEmitter<any>();
   @Output() editData: EventEmitter<any>= new EventEmitter<any>();
@@ -74,13 +74,12 @@ export class SharedTableComponent implements AfterViewInit {
   @Output() toggleData: EventEmitter<any>= new EventEmitter<any>();
   @Output() pageChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() searchParmas: EventEmitter<any> = new EventEmitter<any>();
-  pageEvent: PageEvent;
+  // pageEvent: PageEvent;
   private timeoutId: any;
 
 
-  constructor( private configService: ConfigService,
-    private authService: AuthService) {
-    this.grievancesTypes = this.configService.dropDownConfig.GRIEVANCE_TYPES;
+  constructor() {
+    // this.grievancesTypes = this.configService.dropDownConfig.GRIEVANCE_TYPES;
     this.filterForm = new FormGroup({
       grievanceType: new FormControl('',Validators.required),
       startDate: new FormControl(''),
@@ -89,13 +88,13 @@ export class SharedTableComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
   }
 
   ngOnInit(): void {
-    this.displayedColumns = this.tableColumns?.map((tableColumn:any) => tableColumn.columnDef);
-    this.userRole = this.authService.getUserRoles()[0];
+    // this.displayedColumns = this.tableColumns?.map((tableColumn:any) => tableColumn.columnDef);
+    // this.userRole = this.authService.getUserRoles()[0];
   }
 
     applyFilter(filterValue: string) {
@@ -128,9 +127,9 @@ export class SharedTableComponent implements AfterViewInit {
 
     setTableDataSource(data : any) {
      
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      // this.dataSource = new MatTableDataSource(data);
+      // this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
     }
 
     emitRowAction(row: any) {
@@ -149,7 +148,7 @@ export class SharedTableComponent implements AfterViewInit {
       this.toggleData.emit(e);
     }
     getUserRole(roleName: string) {
-      return getRole(roleName);
+      // return getRole(roleName);
      }
 
     handlePageEvent(e: PageEvent) {

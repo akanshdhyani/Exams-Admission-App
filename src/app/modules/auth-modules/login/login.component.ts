@@ -18,7 +18,6 @@ export class LoginComponent {
       this.loginForm = new FormGroup({
         emailId: new FormControl('', [Validators.email, Validators.required]),
         password: new FormControl('',Validators.required)
-  
       })
   
       this.otpForm = new FormGroup({
@@ -72,6 +71,7 @@ export class LoginComponent {
     }
     
     getOTP(){
+      this.router.navigate(['/home']);
       // if(this.loginForm.value.emailId){
       //  this.isOtpForm = true
       //  this.authService.generateOTP(this.loginForm.value.emailId).subscribe({
@@ -100,6 +100,7 @@ export class LoginComponent {
     }
   
     SubmitOTP(){
+      this.router.navigate(['/home']);
     //  this.authService.loginWithOTP(this.loginForm.value.emailId, this.otpForm.value.otp).subscribe({
     //   next: (res) => {
     //     this.authService.saveUserData(res.responseData);

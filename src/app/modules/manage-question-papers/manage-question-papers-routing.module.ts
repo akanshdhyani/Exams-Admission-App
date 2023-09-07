@@ -1,18 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [
-  // {path: 'track', component: ''},
-  // {path: 'update', component: ''}
-];
+const routes: Routes = [];
 
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forChild(routes)
+    RouterModule.forRoot(routes)
   ],
   exports: [
     RouterModule
   ]
 })
-export class TrackDispatchesRoutingModule { }
+export class ManageQuestionPapersRoutingModule { }

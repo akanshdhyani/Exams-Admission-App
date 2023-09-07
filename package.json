@@ -24,7 +24,6 @@
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0",
     "basscss": "^8.1.0",
-    "mat-timepicker": "^5.1.8",
     "material-icons": "^1.13.10",
     "ngx-toastr": "^15.2.2"
   },
