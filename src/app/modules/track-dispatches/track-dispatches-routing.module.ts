@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  // {path: 'track', component: ''},
+  // {path: 'update', component: ''}
+];
 
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forChild(routes)
   ],
   exports: [
     RouterModule
