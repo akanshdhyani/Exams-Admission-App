@@ -1,0 +1,160 @@
+
+
+.main-container {
+    background-color: #F0F3F4;
+    height: fit-content;
+    width: 100%;
+}
+.secondary-container{
+    padding: 3%;
+    margin: 8%;
+}
+.title-header {
+    font-size: 24px;
+    letter-spacing: 0.12px;
+    font-weight: 550;
+    line-height: 36px;
+    color: #000000;
+    margin-bottom: 24px;
+}
+.outer-container{
+    width: 100%;
+}
+.form-section{
+    background-color: #fff;
+    width: 50%;
+    height: fit-content;
+    padding:28px;
+    display: flex;
+    flex-direction: row;
+    }
+    
+.label{
+    font-weight: 550; 
+    font-size: 16px;
+   letter-spacing: 0.16px;    
+}
+.form-inputs{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.body-header{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.button-group {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+
+
+.btn-1{
+    color: #045DAD;
+    width: 6rem;
+    padding: 12px;
+    border-width: 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    border: 1.5px solid rgba(4,93,173, 1);
+    opacity: 1;
+    cursor: pointer;
+    background-color: #fff;
+
+}
+.btn-2{
+    background-color: #045DAD;
+    color:#fff;
+    width: 6rem;
+    padding:12px;
+    border-radius: 4px;
+    font-weight: 600;
+    border: 1.5px solid rgba(4,93,173, 1);
+    opacity: 1;
+    cursor: pointer;
+}
+.body{
+  width:100%;
+  background-color: #fff;
+  height: fit-content;
+  padding-bottom: 2rem;
+}
+.examcycleform{
+    display: flex;
+    margin-left: 2rem;
+}
+.btn-3{
+    background-color: #045DAD;
+    color:#fff;
+    width: 6rem;
+    padding:12px;
+    border-radius: 4px;
+    font-weight: 600;
+    border: 1.5px solid rgba(4,93,173, 1);
+    opacity: 1;
+
+}
+
+.card1  {
+    height: 9rem;
+    width:17rem;
+    border: thin solid rgb(185, 181, 181);
+    border-radius: 4px;
+
+}
+.time{
+    font-weight:100;
+    font-size: small;
+    margin-left: 4px;
+    margin-top:3px
+}
+::ng-deep .custom-timepicker:focus {
+    appearance: outline;
+    outline: none; /* This removes the default blue outline on some browsers */
+    border-color: rgba(4,93,173, 1);
+    border-width: 12px  ;
+}
+.custom-timepicker:focus {
+    outline:none;
+    
+}
+.custom-timepicker{
+    font-size: medium;
+}
+.cards-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    margin-top: 4%;
+    height: fit-content;
+    margin-bottom: 4%;
+    padding:16px;    
+}
+
+.example-card {
+   width:276px;
+   height: fit-content;
+   background-color: white;
+   box-shadow: rgba(0, 0, 0, 0.20) 0px 1px 3px 0px !important;
+   border-radius: 6px;
+   cursor: pointer;
+   padding-bottom:8px;
+  }
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 12px;
+  }
+ .desc-section {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(0,0,0,0.6);
+    letter-spacing: 0.25px;
+ }
