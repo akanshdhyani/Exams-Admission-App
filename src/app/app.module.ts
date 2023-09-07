@@ -11,7 +11,6 @@ import { RegisterStudentsComponent } from './register-students/register-students
 import { AddNewStudentEnrolmentComponent } from './add-new-student-enrolment/add-new-student-enrolment.component';
 import { EducationalDetailsComponent } from './educational-details/educational-details.component';
 import { ManageExamCycleFormComponent } from './manage-exam-cycle-form/manage-exam-cycle-form.component';
-import { MatTimepickerModule } from 'mat-timepicker';
 import { ManageExamCycleListComponent } from './manage-exam-cycle-list/manage-exam-cycle-list.component';
 import { ManageExamCycleViewComponent } from './manage-exam-cycle-view/manage-exam-cycle-view.component';
 import { FeeManagementInstituteComponent } from './fee-management-institute/fee-management-institute.component';
@@ -19,6 +18,11 @@ import { StudentEnrollmentAdminComponent } from './student-enrollment-admin/stud
 import { FeeManagementAdminComponent } from './fee-management-admin/fee-management-admin.component';
 import { CctvManagementAdminComponent } from './cctv-management-admin/cctv-management-admin.component';
 import { ManageHallTicketsAdminListComponent } from './manage-hall-tickets-admin-list/manage-hall-tickets-admin-list.component';
+import { ManageTrackDispatchesComponent } from './manage-track-dispatches/manage-track-dispatches.component';
+import { ManageResultAdminComponent } from './manage-result-admin/manage-result-admin.component';
+import { FeeManagementListInstituteComponent } from './fee-management-list-institute/fee-management-list-institute.component';
+import { AttendanceRecordListComponent } from './attendance-record-list/attendance-record-list.component';
+import { AttendanceRecordUploadListComponent } from './attendance-record-upload-list/attendance-record-upload-list.component';
 
 // import { SharedTableComponent } from './shared-table/shared-table.component';
 
@@ -38,13 +42,17 @@ import { ManageHallTicketsAdminListComponent } from './manage-hall-tickets-admin
     FeeManagementAdminComponent,
     CctvManagementAdminComponent,
     ManageHallTicketsAdminListComponent,
+    ManageTrackDispatchesComponent,
+    ManageResultAdminComponent,
+    FeeManagementListInstituteComponent,
+    AttendanceRecordListComponent,
+    AttendanceRecordUploadListComponent,
   ],
   imports: [
     BrowserModule,
     MaterialModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatTimepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

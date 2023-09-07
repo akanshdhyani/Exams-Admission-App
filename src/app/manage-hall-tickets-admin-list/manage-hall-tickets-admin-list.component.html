@@ -9,7 +9,7 @@
         margin-top: 24px;
       "
     >
-      <mat-form-field appearance="outline">
+      <mat-form-field class="exam-form" appearance="outline">
         <mat-label class="label">Hall Ticket Type</mat-label>
         <mat-select>
           <mat-option
@@ -43,7 +43,7 @@
       </div>
     </div>
     <div class="selector">
-      <mat-form-field appearance="outline">
+      <mat-form-field class="exam-form" appearance="outline">
         <mat-label class="label">Course</mat-label>
         <mat-select>
           <mat-option *ngFor="let course of courses" [value]="course.value">
@@ -51,7 +51,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field class="exam-form" appearance="outline">
         <mat-label class="label">Exam cycle</mat-label>
         <mat-select>
           <mat-option *ngFor="let year of years" [value]="year.value">
@@ -59,7 +59,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field class="exam-form" appearance="outline">
         <mat-label>Institute</mat-label>
         <mat-select>
           <mat-option

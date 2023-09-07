@@ -102,7 +102,7 @@
               <mat-label class="label"> Start time </mat-label>
               <mat-form-field appearance="outline" style="width: 16.5rem">
                 <mat-label>hh:mm</mat-label>
-                <input
+                <!-- <input
                   class="custom-timepicker"
                   style="border: none"
                   matTimepicker
@@ -111,7 +111,7 @@
                   id="timepicker-example"
                   mode="12h"
                   formControlName="starttime"
-                />
+                /> -->
                 <!-- <mat-icon matSuffix (click)="t.showDialog()"
                   >access_time</mat-icon
                 > -->
@@ -121,7 +121,9 @@
               <mat-label class="label"> End time </mat-label>
               <mat-form-field appearance="outline" style="width: 16.5rem">
                 <mat-label>hh:mm</mat-label>
-                <input
+                <!-- <input [ngxTimepicker]="picker">
+                <ngx-material-timepicker #picker></ngx-material-timepicker> -->
+                <!-- <input
                   class="custom-timepicker"
                   style="border: none"
                   matTimepicker
@@ -131,7 +133,7 @@
                   mode="12h"
                   formControlName="endtime"
                   (mouseleave)="endTimeValidator()"
-                />
+                /> -->
                 <!-- <mat-icon
                   matSuffix
                   (click)="t1.showDialog()"

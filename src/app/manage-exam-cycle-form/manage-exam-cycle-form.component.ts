@@ -1,6 +1,7 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, inject} from '@angular/core';
 import { FormGroup ,AbstractControl, FormControl} from '@angular/forms';
+// import { DateTime } from 'luxon';
 
 
 
@@ -62,39 +63,39 @@ export class ManageExamCycleFormComponent {
    }
  
  }
- getFormattedTime(timestamp: string): string {
-   const date = new Date(timestamp);
-   const hours = date.getHours();
-   const minutes = date.getMinutes();
-   const ampm = hours >= 12 ? 'PM' : 'AM';
-   const twelveHourFormat = (hours % 12) || 12;
+//  getFormattedTime(timestamp: string): string {
+//    const date = new Date(timestamp);
+//    const hours = date.getHours();
+//    const minutes = date.getMinutes();
+//    const ampm = hours >= 12 ? 'PM' : 'AM';
+//    const twelveHourFormat = (hours % 12) || 12;
  
-   return `${twelveHourFormat}:${minutes.toString().padStart(2, '0')} ${ampm}`;
- }
+//    return `${twelveHourFormat}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+//  }
  
- endTimeValidator() {
-   console.log("Working");
+//  endTimeValidator() {
+//    console.log("Working");
    
-   const starttime = this.createExamCycle.controls['starttime'].value;
-   const endtime = this.createExamCycle.controls['endtime'].value;
+//    const starttime = this.createExamCycle.controls['starttime'].value;
+//    const endtime = this.createExamCycle.controls['endtime'].value;
  
-   const startTime = new Date(starttime);
-   startTime.setHours(starttime.getHours(), starttime.getMinutes());
+//    const startTime = new Date(starttime);
+//    startTime.setHours(starttime.getHours(), starttime.getMinutes());
  
-   const endTime = new Date(endtime);
-   endTime.setHours(endtime.getHours(), endtime.getMinutes());
-   console.log(endtime.getHours());
-   console.log(starttime.getHours());
+//    const endTime = new Date(endtime);
+//    endTime.setHours(endtime.getHours(), endtime.getMinutes());
+//    console.log(endtime.getHours());
+//    console.log(starttime.getHours());
  
  
-   if (endTime <= startTime) {
-     this.createExamCycle.controls['endtime'].setErrors({ endTimeInvalid: true });
-   } else {
-     this.createExamCycle.controls['endtime'].setErrors(null);
-   }
+//    if (endTime <= startTime) {
+//      this.createExamCycle.controls['endtime'].setErrors({ endTimeInvalid: true });
+//    } else {
+//      this.createExamCycle.controls['endtime'].setErrors(null);
+//    }
    
    
- }
+//  }
   
  }
 

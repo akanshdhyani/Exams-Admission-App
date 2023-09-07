@@ -1,7 +1,7 @@
 <div class="main-container">
   <div class="secondary-container">
     <div class="selector">
-      <mat-form-field appearance="outline">
+      <mat-form-field class="exam-form" appearance="outline">
         <mat-label class="label">Select Institute</mat-label>
         <mat-select>
           <mat-option
@@ -12,7 +12,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field class="exam-form" appearance="outline">
         <mat-label class="label">Select Course</mat-label>
         <mat-select>
           <mat-option *ngFor="let course of courses" [value]="course.value">
@@ -20,7 +20,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field class="exam-form" appearance="outline">
         <mat-label>Select Academic Year</mat-label>
         <mat-select>
           <mat-option *ngFor="let year of years" [value]="year.value">
@@ -30,7 +30,7 @@
       </mat-form-field>
     </div>
     <div>
-      <mat-form-field appearance="outline">
+      <mat-form-field class="exam-form" appearance="outline">
         <input matInput placeholder="Search" />
       </mat-form-field>
     </div>

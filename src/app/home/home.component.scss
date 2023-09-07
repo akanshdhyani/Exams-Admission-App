@@ -17,11 +17,12 @@
 }
 .cards-boxes {
     display: flex;
-    flex-direction: row;
+   //  flex-direction: row;
     flex-wrap: wrap;
     row-gap: 16px;
     column-gap: 16px;
     height: fit-content;
+    width:fit-content;
 }
 
 .example-card {
