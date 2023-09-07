@@ -18,7 +18,16 @@ export interface Exam {
 })
 export class ManageExamCycleFormComponent {
   pickerMinDate = new Date(new Date().setHours(0, 0, 0, 0));
-  createExamCycle!: FormGroup;
+  createExamCycle = new FormGroup({
+    'examcycle':new FormControl(),
+    'coursename':new FormControl(),
+    'startdate':new FormControl(),
+    'enddate':new FormControl(),
+    'examname':new FormControl(),
+    'examdate':new FormControl(),
+    'starttime':new FormControl(),
+    'endtime':new FormControl(),
+  });
  
   
   ngOnInit(){
@@ -26,22 +35,12 @@ export class ManageExamCycleFormComponent {
  }
  
  initForm(){
-   this.createExamCycle = new FormGroup({
-     'examcycle':new FormControl(),
-     'coursename':new FormControl(),
-     'startdate':new FormControl(),
-     'enddate':new FormControl(),
-     'examname':new FormControl(),
-     'examdate':new FormControl(),
-     'starttime':new FormControl(),
-     'endtime':new FormControl(),
-   });
  }
  
  
  addExamCycle() {
    const examCycleValue = this.createExamCycle.value;
-   this.exams.push(examCycleValue);
+  //  this.exams.push(examCycleValue);
    this.createExamCycle.reset();
  }
   onSubmit(){

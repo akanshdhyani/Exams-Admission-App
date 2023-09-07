@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { SharedTableComponent } from './components/shared-table/shared-table.component';
 import {MaterialModule} from '../../material/material.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationPopupComponent } from './components/confirmation-popup/confirmation-popup.component';
 import { CommonLayoutComponent } from './components/common-layout/common-layout.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
@@ -28,7 +28,9 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
   exports :
   [
     // SharedSkeletonLoadingComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: []
 })

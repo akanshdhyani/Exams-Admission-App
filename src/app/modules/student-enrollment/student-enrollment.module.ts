@@ -7,6 +7,11 @@ import { CommonModule } from '@angular/common';
 
 //#region (created modules && components)
 import { StudentEnrollmentRoutingModule } from './student-enrollment-routing.module';
+import { AddNewStudentEnrolmentComponent } from './add-new-student-enrolment/add-new-student-enrolment.component';
+import { EducationalDetailsComponent } from './educational-details/educational-details.component';
+import { StudentEnrollmentAdminComponent } from './student-enrollment-admin/student-enrollment-admin.component';
+import { StudentEnrollmentComponent } from './student-enrollment/student-enrollment.component';
+import { MaterialModule } from 'src/material/material.module';
 //#endregion
 
 //#endregion
@@ -14,10 +19,16 @@ import { StudentEnrollmentRoutingModule } from './student-enrollment-routing.mod
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AddNewStudentEnrolmentComponent,
+    EducationalDetailsComponent,
+    StudentEnrollmentAdminComponent,
+    StudentEnrollmentComponent
+  ],
   imports: [
     CommonModule,
-    StudentEnrollmentRoutingModule
+    StudentEnrollmentRoutingModule,
+    MaterialModule
   ]
 })
 export class StudentEnrollmentModule { }

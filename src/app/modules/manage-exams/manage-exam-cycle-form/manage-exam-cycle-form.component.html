@@ -8,7 +8,7 @@
     </div>
 
     <div class="body">
-      <form class="examcycleform" (ngSubmit)="onSubmit()">
+      <form class="examcycleform" [formGroup]="createExamCycle" (ngSubmit)="onSubmit()">
         <div class="outer-container">
           <div class="form-section">
             <div class="form-inputs">
@@ -98,8 +98,8 @@
               </mat-form-field>
             </div>
             <div>
-              <mat-label class="label"> Start time </mat-label>
-              <mat-form-field appearance="outline" style="width: 16.5rem">
+              <!-- <mat-label class="label"> Start time </mat-label> -->
+              <!-- <mat-form-field appearance="outline" style="width: 16.5rem">
                 <mat-label>hh:mm</mat-label>
                 <!-- <input
                   class="custom-timepicker"
@@ -113,12 +113,12 @@
                 /> -->
                 <!-- <mat-icon matSuffix (click)="t.showDialog()"
                   >access_time</mat-icon
-                > -->
-              </mat-form-field>
+                >
+              </mat-form-field> -->
             </div>
             <div>
-              <mat-label class="label"> End time </mat-label>
-              <mat-form-field appearance="outline" style="width: 16.5rem">
+              <!-- <mat-label class="label"> End time </mat-label> -->
+              <!-- <mat-form-field appearance="outline" style="width: 16.5rem">
                 <mat-label>hh:mm</mat-label>
                 <!-- <input
                   class="custom-timepicker"
@@ -136,8 +136,8 @@
                   (click)="t1.showDialog()"
                   (mouseleave)="endTimeValidator()"
                   >access_time</mat-icon
-                > -->
-              </mat-form-field>
+                >
+              </mat-form-field> -->
               <div
                 class="sb-color-red pt-0"
                 style="color: red"
