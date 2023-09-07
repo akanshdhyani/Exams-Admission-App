@@ -58,6 +58,10 @@ const routes: Routes = [
         loadChildren: () => import('../app/modules/manage-results/manage-results.module').then(m => m.ManageResultsModule)
       },
       {
+        path: 'candidate-portal',
+        loadChildren: () => import('../app/modules/candidate-portal/candidate-portal-routing.module').then(m => m.CandidatePortalRoutingModule)
+      },
+      {
         path: "**",
         redirectTo:"/"
       }
