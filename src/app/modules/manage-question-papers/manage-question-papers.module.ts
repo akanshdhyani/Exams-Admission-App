@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 
 //#region (created modules && components)
 import { ManageQuestionPapersRoutingModule } from './manage-question-papers-routing.module';
+import { MaterialModule } from 'src/material/material.module';
 //#endregion
 
 //#endregion
@@ -17,7 +18,8 @@ import { ManageQuestionPapersRoutingModule } from './manage-question-papers-rout
   declarations: [],
   imports: [
     CommonModule,
-    ManageQuestionPapersRoutingModule
+    ManageQuestionPapersRoutingModule,
+    MaterialModule
   ]
 })
 export class ManageQuestionPapersModule { }

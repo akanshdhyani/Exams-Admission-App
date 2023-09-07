@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 
 //#region (created modules && components)
 import { ManageHallTicketsRoutingModule } from './manage-hall-tickets-routing.module';
+import { ManageHallTicketsAdminListComponent } from './manage-hall-tickets-admin-list/manage-hall-tickets-admin-list.component';
+import { MaterialModule } from 'src/material/material.module';
 //#endregion
 
 //#endregion
@@ -14,10 +16,13 @@ import { ManageHallTicketsRoutingModule } from './manage-hall-tickets-routing.mo
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ManageHallTicketsAdminListComponent,
+  ],
   imports: [
     CommonModule,
-    ManageHallTicketsRoutingModule
+    ManageHallTicketsRoutingModule,
+    MaterialModule
   ]
 })
 export class ManageHallTicketsModule { }

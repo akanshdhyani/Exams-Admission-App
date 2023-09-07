@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 
 //#region (created modules && components)
 import { TrackDispatchesRoutingModule } from './track-dispatches-routing.module';
+import { MaterialModule } from 'src/material/material.module';
 //#endregion
 
 //#endregion
@@ -17,7 +18,8 @@ import { TrackDispatchesRoutingModule } from './track-dispatches-routing.module'
   declarations: [],
   imports: [
     CommonModule,
-    TrackDispatchesRoutingModule
+    TrackDispatchesRoutingModule,
+    MaterialModule
   ]
 })
 export class TrackDispatchesModule { }

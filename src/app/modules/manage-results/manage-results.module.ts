@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 
 //#region (created modules && components)
 import { ManageResultsRoutingModule } from './manage-results-routing.module';
+import { MaterialModule } from 'src/material/material.module';
 //#endregion
 
 //#endregion
@@ -17,7 +18,8 @@ import { ManageResultsRoutingModule } from './manage-results-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    ManageResultsRoutingModule
+    ManageResultsRoutingModule,
+    MaterialModule
   ]
 })
 export class ManageResultsModule { }

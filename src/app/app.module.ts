@@ -8,48 +8,44 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthModulesModule } from './modules/auth-modules/auth-modules.module';
 import { ToastrModule } from 'ngx-toastr';
 import { MaterialModule } from 'src/material/material.module';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './home/home.component';
-import { StudentEnrollmentComponent } from './modules/student-enrollment/student-enrollment/student-enrollment.component';
-import { RegisterStudentsComponent } from './modules/student-registration/register-students/register-students.component';
-import { AddNewStudentEnrolmentComponent } from './modules/student-enrollment/add-new-student-enrolment/add-new-student-enrolment.component';
-import { EducationalDetailsComponent } from './modules/student-enrollment/educational-details/educational-details.component';
-import { ManageExamCycleFormComponent } from './modules/manage-exams/manage-exam-cycle-form/manage-exam-cycle-form.component';
-// import { MatTimepickerModule } from 'mat-timepicker';
-import { ManageExamCycleListComponent } from './modules/manage-exams/manage-exam-cycle-list/manage-exam-cycle-list.component';
-import { ManageExamCycleViewComponent } from './modules/manage-exams/manage-exam-cycle-view/manage-exam-cycle-view.component';
-import { FeeManagementInstituteComponent } from './modules/fee-management/fee-management-institute/fee-management-institute.component';
-import { StudentEnrollmentAdminComponent } from './modules/student-enrollment/student-enrollment-admin/student-enrollment-admin.component';
-import { FeeManagementAdminComponent } from './modules/fee-management/fee-management-admin/fee-management-admin.component';
-import { CctvManagementAdminComponent } from './modules/cctv-verification/cctv-management-admin/cctv-management-admin.component';
-import { ManageHallTicketsAdminListComponent } from './modules/manage-hall-tickets/manage-hall-tickets-admin-list/manage-hall-tickets-admin-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared';
+import { CctvVerificationModule } from './modules/cctv-verification/cctv-verification.module';
+import { FeeManagementModule } from './modules/fee-management/fee-management.module';
+import { ManageExamsModule } from './modules/manage-exams/manage-exams.module';
+import { ManageHallTicketsModule } from './modules/manage-hall-tickets/manage-hall-tickets.module';
+import { ManageQuestionPapersModule } from './modules/manage-question-papers/manage-question-papers.module';
+import { ManageResultsModule } from './modules/manage-results/manage-results.module';
+import { StudentEnrollmentModule } from './modules/student-enrollment/student-enrollment.module';
+import { StudentRegistrationModule } from './modules/student-registration/student-registration.module';
+import { TrackDispatchesModule } from './modules/track-dispatches/track-dispatches.module';
+import { HomeComponent } from './home/home.component';
 
 // import { SharedTableComponent } from './shared-table/shared-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    StudentEnrollmentComponent,
-    RegisterStudentsComponent,
-    AddNewStudentEnrolmentComponent,
-    EducationalDetailsComponent,
-    ManageExamCycleFormComponent,
-    ManageExamCycleListComponent,
-    ManageExamCycleViewComponent,
-    FeeManagementInstituteComponent,
-    StudentEnrollmentAdminComponent,
-    FeeManagementAdminComponent,
-    CctvManagementAdminComponent,
-    ManageHallTicketsAdminListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    MaterialModule,
-    AppRoutingModule,
-    SharedModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
+    MaterialModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CctvVerificationModule,
+    AuthModulesModule,
+    FeeManagementModule,
+    ManageExamsModule,
+    ManageHallTicketsModule,
+    ManageQuestionPapersModule,
+    ManageResultsModule,
+    StudentEnrollmentModule,
+    StudentRegistrationModule,
+    TrackDispatchesModule,
     ToastrModule.forRoot(),
   ],
   providers: [],
