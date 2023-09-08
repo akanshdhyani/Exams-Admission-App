@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ManageQuestionPapersComponent } from './manage-question-papers/manage-question-papers.component';
 
-const routes: Routes = [];
-
+const routes: Routes = [
+  {path: '', component: ManageQuestionPapersComponent }
+];
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forChild(routes)
   ],
   exports: [
     RouterModule
