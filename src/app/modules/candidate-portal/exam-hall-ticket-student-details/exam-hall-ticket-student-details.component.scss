@@ -1,0 +1,26 @@
+.hallticket-details-header {
+    margin-top: 0px
+}
+
+.details-row {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+
+    .lable {
+        margin-bottom: 10px;
+        color: #00000075;
+        font-size: 13px;
+    }
+
+    .value {
+        letter-spacing: 0.5px;
+        font-weight: 600;
+    }
+
+    .value-right {
+        width: 100px;
+    }
+}
+

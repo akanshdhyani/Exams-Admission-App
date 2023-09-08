@@ -20,8 +20,7 @@ import { StudentEnrollmentModule } from './modules/student-enrollment/student-en
 import { StudentRegistrationModule } from './modules/student-registration/student-registration.module';
 import { TrackDispatchesModule } from './modules/track-dispatches/track-dispatches.module';
 import { HomeComponent } from './home/home.component';
-
-// import { SharedTableComponent } from './shared-table/shared-table.component';
+import { CandidatePortalModule } from './modules/candidate-portal/candidate-portal.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +45,7 @@ import { HomeComponent } from './home/home.component';
     StudentEnrollmentModule,
     StudentRegistrationModule,
     TrackDispatchesModule,
+    CandidatePortalModule,
     ToastrModule.forRoot(),
   ],
   providers: [],

@@ -12,7 +12,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 @NgModule({
   declarations: [
     HeaderComponent,
-    // SharedTableComponent,
+    SharedTableComponent,
     // SharedSkeletonLoadingComponent,
     // SharedDialogOverlayComponent,
     ConfirmationPopupComponent,
@@ -31,6 +31,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     BreadcrumbComponent,
     ReactiveFormsModule,
     FormsModule,
+    SharedTableComponent,
   ],
   providers: []
 })

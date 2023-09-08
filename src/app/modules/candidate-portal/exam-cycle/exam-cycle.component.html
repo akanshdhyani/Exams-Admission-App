@@ -1,0 +1,18 @@
+<mat-card class="container">
+    <mat-card-content>
+        <div>
+            <app-exam-hall-ticket-student-details
+            [hallTicketDetails]="hallTicketDetails"></app-exam-hall-ticket-student-details>
+        </div>
+        <div>
+            <app-shared-table [tableColumns]="examTableHeader" 
+            [tableData]="examTableData" [isHallTicket]="isHallTicket" ></app-shared-table>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <div class="footer">
+            <button class="cancel-btn" (click)="cancel()">Cancel</button>
+            <button class="download-btn">Download</button>
+        </div>
+    </mat-card-actions>
+</mat-card>
