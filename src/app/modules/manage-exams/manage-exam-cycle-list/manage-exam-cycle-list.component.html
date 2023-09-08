@@ -1,0 +1,26 @@
+<div class="secondary-container">
+    <mat-label class="title-header"> Manage Exam Cycles & Exams </mat-label>
+    <div style="display: flex; flex-direction: row; justify-content: space-between  ; margin-top: 24px;">
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Search" />
+      </mat-form-field>
+      <div class="buttons">
+        <div >
+          <button class="btn-1" style="display: flex; flex-direction: row; gap: 4px;align-items: center;">Bulk Upload <mat-icon>arrow_upward</mat-icon></button>
+        </div>
+        <div >
+          <button class="btn-2" (click)="goToCreate()">Add Exam Cycle</button>
+        </div>
+      </div>
+    </div>
+    <div class="btn-tab">
+      <div class="tab">
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+          <mat-tab label="Pending">Pending</mat-tab>
+          <mat-tab label="Approved">Approved</mat-tab>
+          <mat-tab label="Rejected">Rejected</mat-tab>
+          <mat-tab label="Closed">Closed</mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>

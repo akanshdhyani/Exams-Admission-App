@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <div *ngIf="hasFilterOptions" class="filter-content">
         <div>
             <mat-form-field>
@@ -60,13 +60,13 @@
         sortActionDescription="Sort by number">
         <ng-container matColumnDef="position" *ngFor="let disCol of tableColumns let colIndex = index;"
             matColumnDef="{{disCol.columnDef}}">
-            <!-- if sortable column header -->
+            <!-- if sortable column header 
             <ng-container *ngIf="disCol.isSortable; else notSortable">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     {{disCol.header}}
                 </th>
             </ng-container>
-            <!-- else not sortable -->
+            <!-- else not sortable 
             <ng-template #notSortable>
                 <th mat-header-cell *matHeaderCellDef>
                     {{disCol.header}}
@@ -106,10 +106,6 @@
                                 Deactivate
                             </mat-slide-toggle>
                         </button>
-                        <!-- <button mat-menu-item (click)="onClickDelete(element)">
-                            <mat-icon>delete</mat-icon>
-                            <span>Delete</span> 
-                         </button> -->
                       </mat-menu>
 
 
@@ -139,4 +135,4 @@
                [pageIndex]="pageIndex"
                aria-label="Select page">
 </mat-paginator>
-</div>
+</div> -->
