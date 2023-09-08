@@ -12,6 +12,7 @@ import { EducationalDetailsComponent } from './educational-details/educational-d
 import { StudentEnrollmentAdminComponent } from './student-enrollment-admin/student-enrollment-admin.component';
 import { StudentEnrollmentComponent } from './student-enrollment/student-enrollment.component';
 import { MaterialModule } from 'src/material/material.module';
+import { StudentEnrollmentFormComponent } from './student-enrollment-form/student-enrollment-form.component';
 //#endregion
 
 //#endregion
@@ -23,7 +24,8 @@ import { MaterialModule } from 'src/material/material.module';
     AddNewStudentEnrolmentComponent,
     EducationalDetailsComponent,
     StudentEnrollmentAdminComponent,
-    StudentEnrollmentComponent
+    StudentEnrollmentComponent,
+    StudentEnrollmentFormComponent
   ],
   imports: [
     CommonModule,
