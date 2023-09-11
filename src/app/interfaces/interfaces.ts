@@ -78,3 +78,17 @@ export interface GrievancesTableData {
     responseNotNeeded: string,
     duplicate: string
   }
+
+  export interface QuestionPaper {
+    courseName: string,
+    examDate: string,
+    examStartTime: string,
+    marks: string,
+    examName: string,
+    questionPaperList: QuestionPaperList[]
+  }
+
+  export interface QuestionPaperList{
+    id: number,
+    name: string
+  }
