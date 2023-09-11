@@ -13,6 +13,7 @@ import { StudentEnrollmentAdminComponent } from './student-enrollment-admin/stud
 import { StudentEnrollmentComponent } from './student-enrollment/student-enrollment.component';
 import { MaterialModule } from 'src/material/material.module';
 import { StudentEnrollmentFormComponent } from './student-enrollment-form/student-enrollment-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 //#endregion
 
 //#endregion
@@ -29,6 +30,7 @@ import { StudentEnrollmentFormComponent } from './student-enrollment-form/studen
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     StudentEnrollmentRoutingModule,
     MaterialModule
   ]

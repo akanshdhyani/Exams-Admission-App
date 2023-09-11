@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  loggedInUserRole = 'exams_admin';
+  loggedInUserRole = 'exams_institute';
   constructor(private router: Router){}
   cardList: any[] = [
     {

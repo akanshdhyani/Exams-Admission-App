@@ -32,6 +32,6 @@ constructor(private router: Router){}
   ];
 
   addNewEnrollment() {
-    this.router.navigate(['/institute/add-enrollment']);
+    this.router.navigate(['student-enrollment/add-enrollment']);
   }
 }

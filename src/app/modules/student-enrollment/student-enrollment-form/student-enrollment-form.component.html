@@ -1,6 +1,278 @@
-<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-    <mat-tab label="First">Content 1</mat-tab>
-    <mat-tab label="Second">Content 2</mat-tab>
-    <mat-tab label="Third">Content 3</mat-tab>
-  </mat-tab-group>
-  
+<div class="secondary-container" id="student-enrollment-form">
+    <mat-label class="title-header"> Add New Student Enrollment </mat-label>
+    <div class="certificate-details">
+    <mat-drawer-container>
+        <mat-drawer  #drawer class="drawer" mode="side" opened="true">
+                <mat-nav-list>
+                    <mat-list-item *ngFor="let link of links" [activated]="link.isActive" [ngClass]="{ 'active-link': selectedLink === link }" (click)="showInfo(link)">
+                        <span>
+                            <a routerLinkActive="active-list-item">{{ link }}</a>
+                        </span>
+                    </mat-list-item>
+                </mat-nav-list>
+        </mat-drawer>
+        <div class="px2 py2">
+        <div class="" style="padding: 0 !important; min-height: 98vh;">
+            <div class="content-details">
+                <form [formGroup]="basicDetailsForm" *ngIf="basicDetails">
+                   <div class="clearfix">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                        <h4 class="w-full mat-label">First Name *</h4>
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input matInput placeholder="Type here" formControlName="firstName">
+                            <mat-error *ngIf="basicDetailsForm.controls['firstName'].invalid">
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    </div>
+                    <div class="clearfix">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                        <h4 class="w-full mat-label">Last Name *</h4>
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input matInput placeholder="Type here" formControlName="lastName">
+                            <mat-error *ngIf="basicDetailsForm.controls['lastName'].invalid">
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                   </div>
+                   <div class="clearfix">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                        <h4 class="w-full mat-label">Mothers Name *</h4>
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input matInput placeholder="Type here" formControlName="mothersName">
+                            <mat-error *ngIf="basicDetailsForm.controls['mothersName'].invalid">
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                   </div>
+                   <div class="clearfix">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                        <h4 class="w-full mat-label">Fathers Name *</h4>
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input matInput placeholder="Type here" formControlName="fathersName">
+                            <mat-error *ngIf="basicDetailsForm.controls['fathersName'].invalid">
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                   </div>
+                   <div class="clearfix">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                        <h4 class="w-full mat-label">Date of Birth *</h4>
+                        <mat-form-field appearance="outline" class="w-full">
+                            <mat-label>Select your date</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+                            <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                    </div>
+                   </div>
+                   <div class="clearfix">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-12">
+                    <h4 class="w-full mat-label">Gender</h4>
+                    <mat-radio-group class="custom-radio-group w-full" formControlName="gender">
+                        <mat-radio-button class="" *ngFor="let item of genderList" [value]="item">
+                          {{item}}
+                        </mat-radio-button>
+                      </mat-radio-group>
+                   </div>
+                   </div>
+                   <div class="clearfix mt2">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-12">
+                    <h4 class="w-full mat-label">Caste</h4>
+                    <mat-radio-group class="custom-radio-group w-full" formControlName="caste">
+                        <mat-radio-button class="" *ngFor="let item of casteList" [value]="item">
+                          {{item}}
+                        </mat-radio-button>
+                      </mat-radio-group>
+                      </div>
+                   </div>
+                   <div class="clearfix mt2">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-12">
+                    <h4 class="w-full mat-label">Category</h4>
+                    <mat-radio-group class="custom-radio-group w-full" formControlName="category">
+                      <mat-radio-button class="" *ngFor="let item of categoryList" [value]="item">
+                        {{item}}
+                      </mat-radio-button>
+                    </mat-radio-group>
+                    </div>
+                   </div>
+                   <div class="clearfix mt2">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                    <h4 class="w-full mat-label">Mobile Number*</h4>
+                    <mat-form-field appearance="outline" class="w-full">
+                      <input matInput maxlength="10" placeholder="Type here" formControlName="mobileNumber">
+                      <mat-error *ngIf="basicDetailsForm.controls['mobileNumber'].invalid">
+                      </mat-error>
+                  </mat-form-field>
+                  </div>
+                   </div>
+                   <div class="clearfix">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                    <h4 class="w-full mat-label">Email Id</h4>
+                    <mat-form-field appearance="outline" class="w-full">
+                      <input matInput placeholder="Type here" formControlName="emailId">
+                      <mat-error *ngIf="basicDetailsForm.controls['emailId'].invalid">
+                      </mat-error>
+                  </mat-form-field>
+                  </div>
+                   </div>
+                   <div class="clearfix">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                    <h4 class="w-full mat-label">Aadhar No</h4>
+                    <mat-form-field appearance="outline" class="w-full">
+                      <input matInput placeholder="Type here" formControlName="aadharNo">
+                      <mat-error *ngIf="basicDetailsForm.controls['aadharNo'].invalid">
+                      </mat-error>
+                  </mat-form-field>
+                    </div>
+                   </div>
+                   <div formGroupName="address">
+                   <div class="clearfix">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                    <h4 class="w-full mat-label">Address line 1*</h4>
+                    <mat-form-field appearance="outline" class="w-full">
+                      <input matInput placeholder="Type here" formControlName="addressLine1">
+                      <mat-error *ngIf="basicDetailsForm.controls['address'].controls['addressLine1'].invalid"> 
+                    </mat-error>
+                  </mat-form-field>
+                    </div>
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6 pl2">
+                      <h4 class="w-full mat-label">Address line 2*</h4>
+                      <mat-form-field appearance="outline" class="w-full">
+                        <input matInput placeholder="Type here" formControlName="addressLine2">
+                        <mat-error *ngIf="basicDetailsForm.controls['address'].controls['addressLine2'].invalid"> 
+                        </mat-error>
+                    </mat-form-field>
+                      </div>
+                   </div>
+                   <div class="clearfix">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                    <h4 class="w-full mat-label">District*</h4>
+                    <mat-form-field appearance="outline" class="w-full">
+                      <input matInput placeholder="Type here" formControlName="district">
+                      <mat-error *ngIf="basicDetailsForm.controls['address'].controls['district'].invalid"> 
+                      </mat-error>
+                  </mat-form-field>
+                    </div>
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6 pl2">
+                      <h4 class="w-full mat-label">State*</h4>
+                      <mat-form-field appearance="outline" class="w-full">
+                        <input matInput placeholder="Type here" formControlName="state">
+                        <mat-error *ngIf="basicDetailsForm.controls['address'].controls['state'].invalid"> 
+                        </mat-error> 
+                    </mat-form-field>
+                      </div>
+                   </div>
+                   <div class="clearfix">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                    <h4 class="w-full mat-label">Country*</h4>
+                    <mat-form-field appearance="outline" class="w-full">
+                      <input matInput placeholder="Type here" formControlName="country">
+                      <mat-error *ngIf="basicDetailsForm.controls['address'].controls['country'].invalid">
+                      </mat-error>
+                  </mat-form-field>
+                    </div>
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6 pl2">
+                      <h4 class="w-full mat-label">Pincode*</h4>
+                      <mat-form-field appearance="outline" class="w-full">
+                        <input matInput placeholder="Type here" formControlName="pincode">
+                        <mat-error *ngIf="basicDetailsForm.controls['address'].controls['pincode'].invalid">
+                        </mat-error>
+                    </mat-form-field>
+                      </div>
+                   </div>
+                   </div>
+                   <div class="clearfix">
+                    <div class="sm-col sm-col-12 md-col-4 lg-col-12">
+                      <div class="w-full flex" style="justify-content: space-between;">
+                        <div>
+                          <button class="text-class action-btns px2" [disabled]="!educationalDetails" type="button" mat-raised-button color="primary"><mat-icon>keyboard_backspace</mat-icon>Previous</button>
+                        </div>
+                      <div>
+                      <button class="text-class action-btns mr2" type="cancel" mat-raised-button color="primary">Cancel</button>
+                      <button class="text-class action-btns" [disabled]="!basicDetailsForm.valid" type="submit" mat-raised-button color="primary" (click)="next()">Next<mat-icon>arrow_right_alt</mat-icon></button>
+                      </div>
+                      </div>
+                    </div>
+                   </div>
+                </form>
+                <form [formGroup]="educationalDetailsForm" *ngIf="educationalDetails">
+                  <div class="clearfix">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                        <h4 class="w-full mat-label">Center code and Name</h4>   
+                        <mat-form-field appearance="outline" class="w-full">
+                          <mat-select [compareWith]="compareFn" [(value)]="centerCode" formControlName="centerCode" placeholder="Select here">
+                            <span *ngFor='let center of centersList;let i = index'>
+                              <mat-option [value]="center.id">{{center.name}}</mat-option>
+                            </span>
+                          </mat-select>
+                        </mat-form-field>
+                    </div>
+                    </div>
+                    <div class="clearfix">
+                      <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                          <h4 class="w-full mat-label">Course code and Name</h4>   
+                          <mat-form-field appearance="outline" class="w-full">
+                            <mat-select [compareWith]="compareFn" [(value)]="courseCode" formControlName="courseCode" placeholder="Select here">
+                              <span *ngFor='let course of courseList;let i = index'>
+                                <mat-option [value]="course.id">{{course.name}}</mat-option>
+                              </span>
+                            </mat-select>
+                          </mat-form-field>
+                      </div>
+                      </div>
+                      <div class="clearfix">
+                        <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                            <h4 class="w-full mat-label">Exam-Batch*</h4>   
+                            <mat-form-field appearance="outline" class="w-full">
+                              <mat-select [compareWith]="compareFn" [(value)]="examBatch" formControlName="examBatch" placeholder="Select here">
+                                <span *ngFor='let course of courseList;let i = index'>
+                                  <mat-option [value]="course.id">{{course.name}}</mat-option>
+                                </span>
+                              </mat-select>
+                            </mat-form-field>
+                        </div>
+                        </div>
+                        <div class="clearfix">
+                          <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                              <h4 class="w-full mat-label">Admission Date *</h4>
+                              <mat-form-field appearance="outline" class="w-full">
+                                  <mat-label>Select your date</mat-label>
+                                  <input matInput [matDatepicker]="picker" formControlName="admissionDate">
+                                  <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                          </div>
+                         </div>
+                        <div class="clearfix">
+                          <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                              <h4 class="w-full mat-label">Intermediate Passed board</h4>   
+                              <mat-form-field appearance="outline" class="w-full">
+                                <mat-select [compareWith]="compareFn" [(value)]="intermediatePassedBoard" formControlName="intermediatePassedBoard" placeholder="Select here">
+                                  <span *ngFor='let course of courseList;let i = index'>
+                                    <mat-option [value]="course.id">{{course.name}}</mat-option>
+                                  </span>
+                                </mat-select>
+                              </mat-form-field>
+                          </div>
+                          </div>
+                          <div class="clearfix">
+                            <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                                <h4 class="w-full mat-label">Intermediate Subjects</h4>   
+                                <mat-form-field appearance="outline" class="w-full">
+                                  <mat-select [compareWith]="compareFn" [(value)]="intermediateSubjects" formControlName="intermediateSubjects" placeholder="Select here">
+                                    <span *ngFor='let course of courseList;let i = index'>
+                                      <mat-option [value]="course.id">{{course.name}}</mat-option>
+                                    </span>
+                                  </mat-select>
+                                </mat-form-field>
+                            </div>
+                            </div>
+               </form>
+            </div>
+        </div>
+        </div>
+        </mat-drawer-container>
+  </div>
