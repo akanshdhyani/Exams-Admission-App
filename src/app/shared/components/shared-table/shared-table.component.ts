@@ -1,10 +1,8 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {MatSort, Sort} from '@angular/material/sort';
-import { ConfigService, getRole } from '../..';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/core';
 export interface TableProps {
   id?: string;
   code?: string;
@@ -32,6 +30,8 @@ export interface TableColumn {
   isAction?: boolean;
   url?: string;
   isSortable?: boolean;
+  isMenuOption?: any;
+  cellStyle?: string;
 }
 
 @Component({
@@ -46,119 +46,119 @@ export class SharedTableComponent implements AfterViewInit {
   cols!: TableColumn[];
 
   displayedColumns: Array<string> = [];
-  isFilter:boolean = false;
+  isFilter: boolean = false;
   grievancesTypes: any[] = [];
-  userRole:string;
-  filterForm:FormGroup;
-  isClient:boolean = false;
-  accumulatedSearchTerm:string = '';
+  userRole: string = '';
+  filterForm: FormGroup;
+  isClient: boolean = false;
+  accumulatedSearchTerm: string = '';
   //dataSource: MatTableDataSource<[any]> = new MatTableDataSource();
   public dataSource = new MatTableDataSource([]);
- // dataSource = new MatTableDataSource([])
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort ;
+  // dataSource = new MatTableDataSource([])
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  @ViewChild(MatSort) sort: MatSort | undefined;
 
-  @Input() isPageable = true;
-  @Input() tableColumns: TableColumn[] ;
+  @Input() isPageable = false;
+  @Input() tableColumns: TableColumn[] = [];
   @Input() set tableData(data: any[]) {
     this.setTableDataSource(data);
   }
-  @Input() pageLength: number;
-  @Input() pageSize: number;
-  @Input() pageIndex: number;
-  @Input() isServerSidePagination: boolean;
+  @Input() pageLength: number = 0;
+  @Input() pageSize: number = 0;
+  @Input() pageIndex: number = 0;
+  @Input() isServerSidePagination: boolean = false;
 
   @Output() rowAction: EventEmitter<any> = new EventEmitter<any>();
-  @Output() editData: EventEmitter<any>= new EventEmitter<any>();
-  @Input() hasFilterOptions = true;
-  @Output() toggleData: EventEmitter<any>= new EventEmitter<any>();
+  @Output() editData: EventEmitter<any> = new EventEmitter<any>();
+  @Input() hasFilterOptions = false;
+  @Input() isHallTicket = false
+  @Output() toggleData: EventEmitter<any> = new EventEmitter<any>();
   @Output() pageChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() searchParmas: EventEmitter<any> = new EventEmitter<any>();
-  pageEvent: PageEvent;
+  pageEvent: PageEvent | undefined;
   private timeoutId: any;
 
 
-  constructor( private configService: ConfigService,
-    private authService: AuthService) {
-    this.grievancesTypes = this.configService.dropDownConfig.GRIEVANCE_TYPES;
+  constructor() {
+    // this.grievancesTypes = this.configService.dropDownConfig.GRIEVANCE_TYPES;
     this.filterForm = new FormGroup({
-      grievanceType: new FormControl('',Validators.required),
+      grievanceType: new FormControl('', Validators.required),
       startDate: new FormControl(''),
-      endDate:new FormControl('')
+      endDate: new FormControl('')
     })
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator ? this.paginator : null;
+    this.dataSource.sort = this.sort ? this.sort : null;
   }
 
   ngOnInit(): void {
-    this.displayedColumns = this.tableColumns?.map((tableColumn:any) => tableColumn.columnDef);
-    this.userRole = this.authService.getUserRoles()[0];
+    this.displayedColumns = this.tableColumns?.map((tableColumn: any) => tableColumn.columnDef);
+    // this.userRole = this.authService.getUserRoles()[0];
   }
 
-    applyFilter(filterValue: string) {
-      if(this.isClient){
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-        console.log(this.dataSource.filter);
-        if (this.dataSource.paginator) {
-          this.dataSource.paginator.firstPage();
-        }
+  applyFilter(filterValue: string) {
+    if (this.isClient) {
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+      console.log(this.dataSource.filter);
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
       }
-      else {
-        clearTimeout(this.timeoutId)
+    }
+    else {
+      clearTimeout(this.timeoutId)
 
-        this.accumulatedSearchTerm  = filterValue
-         this.timeoutId= setTimeout(()=>{
-          this.searchParmas.emit(this.accumulatedSearchTerm)
-        },1000
-        )  
-      }
-      
+      this.accumulatedSearchTerm = filterValue
+      this.timeoutId = setTimeout(() => {
+        this.searchParmas.emit(this.accumulatedSearchTerm)
+      }, 1000
+      )
     }
 
-    toggleFilter(){
+  }
+
+  toggleFilter() {
     this.isFilter = !this.isFilter
-    }
+  }
 
-    onRowClick(e: Event){
-      console.log(e);
-    }
+  onRowClick(e: Event) {
+    console.log(e);
+  }
 
-    setTableDataSource(data : any) {
-     
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }
+  setTableDataSource(data: any) {
 
-    emitRowAction(row: any) {
-      this.rowAction.emit(row);
-    }
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.paginator = this.paginator ? this.paginator : null;
+    this.dataSource.sort = this.sort ? this.sort : null;
+  }
 
-    onClickEdit(row:any){
-     this.editData.emit(row);
-    }
+  emitRowAction(row: any) {
+    this.rowAction.emit(row);
+  }
 
-    onClickDelete(e:any){
-      
-    }
+  onClickEdit(row: any) {
+    this.editData.emit(row);
+  }
 
-    onToggleChange(e:any){
-      this.toggleData.emit(e);
-    }
-    getUserRole(roleName: string) {
-      return getRole(roleName);
-     }
+  onClickDelete(e: any) {
 
-    handlePageEvent(e: PageEvent) {
-      this.pageChange.emit(e);
-    }
+  }
 
-     grievanceSelected(e:any){
-     }
-     ApplyFilter(value:any){
-      console.log(value)
-     }
+  onToggleChange(e: any) {
+    this.toggleData.emit(e);
+  }
+  // getUserRole(roleName: string) {
+  //   return getRole(roleName);
+  //  }
+
+  handlePageEvent(e: PageEvent) {
+    this.pageChange.emit(e);
+  }
+
+  grievanceSelected(e: any) {
+  }
+  ApplyFilter(value: any) {
+    console.log(value)
+  }
 }

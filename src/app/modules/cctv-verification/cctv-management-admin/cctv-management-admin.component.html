@@ -1,0 +1,39 @@
+<!-- <div class="main-container"> -->
+  <div class="secondary-container">
+    <mat-label class="title-header"> CCTV Management </mat-label>
+    <div
+      style="
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 24px;
+      "
+    >
+    <form [formGroup]="examCycleForm">
+      <mat-form-field appearance="outline" >
+        <mat-label class="label">Exam cycle</mat-label>
+        <mat-select formControlName="course">
+          <mat-option *ngFor="let course of courses" [value]="course.value">
+            {{ course.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="buttons">
+        <div>
+          <button class="btn-1">Cancel</button>
+        </div>
+      </div>
+    </form>
+    </div>
+ 
+    <div class="btn-tab">
+      <div class="tab">
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+          <mat-tab label="Pending">Pending</mat-tab>
+          <mat-tab label="Approved">Verified</mat-tab>
+          <mat-tab label="Rejected">Rejected</mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+<!-- </div> -->
