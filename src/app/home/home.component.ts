@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  loggedInUserRole = 'exams_admin';
+  loggedInUserRole = 'exams_institute';
   constructor(private router: Router){}
   cardList: any[] = [
     {
@@ -40,6 +40,19 @@ export class HomeComponent {
       type: 'feeManagementAdmin',
       url: '/fee-management/admin',
       visibility: 'exams_admin'
+    },
+
+    {
+      title: 'Register Student to Exam Cycles and Exams',
+      type: 'registerStudentInstitute',
+      url: '/register-student/institute',
+      visibility: 'exams_institute'
+    },
+    {
+      title: 'Download Question Papers',
+      type: 'downloadQuestionPapers',
+      url: 'manage-question-papers/institute',
+      visibility: 'exams_institute'
     },
     {
       title: 'Fee Management',
