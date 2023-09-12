@@ -22,7 +22,7 @@ import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loa
     ConfirmationPopupComponent,
     CommonLayoutComponent,
     BreadcrumbComponent,
-    ConformationDialogComponent,
+    ConformationDialogComponent
   ],
   imports: [
     CommonModule,
