@@ -1,23 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterStudentsComponent } from './register-students/register-students.component';
-import { MaterialModule } from 'src/material/material.module';
-
+import { RegdStudentsComponent } from './regd-students/regd-students.component';
 
 const routes: Routes = [
-  {path: '', component: RegisterStudentsComponent}
+  {
+    path: 'institute', component: RegisterStudentsComponent, pathMatch: 'full'
+},
+{path: 'view-regd-students', component: RegdStudentsComponent, pathMatch: 'full'},
 ];
 
 @NgModule({
-  declarations: [
-    RegisterStudentsComponent
-  ],
-  imports: [
-    MaterialModule,
-    RouterModule.forChild(routes)
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class StudentRegistrationRoutingModule { }
+
+

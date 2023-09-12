@@ -19,14 +19,7 @@
     height: fit-content;
 }
 
-.example-card {
-   width:90%;
-   height: 256px;
-   background-color: white;
-   box-shadow: rgba(0, 0, 0, 0.20) 0px 1px 3px 0px !important;
-   border-radius: 6px;
-    height: fit-content;
-  }
+
   .content-container {
     display: flex;
     flex-direction: column;
@@ -106,22 +99,28 @@ width: 50%;
     flex-direction: column;
     row-gap: 4px; 
 }
-.upload-background{
-    display: flex; 
-    flex-direction: row;
-    justify-content: space-between ;
-    background-color: rgb(235, 235, 235);
-    padding: 12px;
-    border-radius: 4px;
-    }
-    ::ng-deep .exam-form {
-        margin-top: 5px;
-        width: 276px;
-        .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
-        padding: 13px 0px;
-    }
-    .mat-mdc-text-field-wrapper {
-        background-color: white;
-        }
-    
-    }
+.full-container{
+    width:100%;
+    height:fit-content;
+    background-color:#F0F3F4;
+  }
+  .certificate-container{
+    padding: 4rem;
+    margin-left: 4rem;
+  }
+  .certificate-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+  .buttons{
+    display: flex;
+    justify-content: space-between;
+    background-color: #F0F3F4;
+    height: 4rem;
+    padding-top: 2rem;
+  }
+  .download-buttons{
+    justify-content: end;
+    align-items: end !important;
+}

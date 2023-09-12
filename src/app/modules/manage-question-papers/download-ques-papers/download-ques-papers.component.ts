@@ -12,6 +12,7 @@ export class DownloadQuesPapersComponent {
 
   examDetails: QuestionPaper[] = [
     {
+      examId:2,
       courseName: 'One',
       examDate: 'One',
       examStartTime: '10.00 A.M.',
@@ -29,6 +30,7 @@ export class DownloadQuesPapersComponent {
       ]
     },
     {
+      examId:2,
       courseName: 'Two',
       examDate: 'Some date',
       marks: '100',
@@ -46,6 +48,7 @@ export class DownloadQuesPapersComponent {
       ]
     },
     {
+      examId:2,
       courseName: 'Three',
       examDate: 'Some date',
       examStartTime: '10.00 A.M.',
@@ -64,6 +67,7 @@ export class DownloadQuesPapersComponent {
 
     },
     {
+      examId:2,
       courseName: 'Four',
       examDate: 'Some date',
       examStartTime: '10.00 A.M.',
