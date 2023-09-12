@@ -17,7 +17,6 @@ import { ManageHallTicketsModule } from './modules/manage-hall-tickets/manage-ha
 import { ManageQuestionPapersModule } from './modules/manage-question-papers/manage-question-papers.module';
 import { ManageResultsModule } from './modules/manage-results/manage-results.module';
 import { StudentEnrollmentModule } from './modules/student-enrollment/student-enrollment.module';
-import { StudentRegistrationModule } from './modules/student-registration/student-registration.module';
 import { TrackDispatchesModule } from './modules/track-dispatches/track-dispatches.module';
 import { HomeComponent } from './home/home.component';
 import { CandidatePortalModule } from './modules/candidate-portal/candidate-portal.module';
@@ -43,7 +42,6 @@ import { CandidatePortalModule } from './modules/candidate-portal/candidate-port
     ManageQuestionPapersModule,
     ManageResultsModule,
     StudentEnrollmentModule,
-    StudentRegistrationModule,
     TrackDispatchesModule,
     CandidatePortalModule,
     ToastrModule.forRoot(),

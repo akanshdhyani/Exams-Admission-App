@@ -45,7 +45,7 @@ export class HomeComponent {
     {
       title: 'Register Student to Exam Cycles and Exams',
       type: 'registerStudentInstitute',
-      url: '/register-student/institute',
+      url: '/student-registration/institute',
       visibility: 'exams_institute'
     },
     {

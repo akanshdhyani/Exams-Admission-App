@@ -21,17 +21,17 @@
             </mat-form-field>
         </div>
 
-        <mat-card style="margin-top: 38px;" class="example-card " *ngFor="let exam of examDetails">
-            <mat-card-header>
+        <mat-card style="margin-top: 38px;" *ngFor="let exam of examDetails">
+            <p>
+                <mat-card-content>
 
-                <mat-card-subtitle>Exam Name</mat-card-subtitle>
-
-
-                <mat-card-title> {{ exam.examName | uppercase }}</mat-card-title>
+                    <mat-card-subtitle>Exam Name</mat-card-subtitle>
 
 
+                    <mat-card-title> {{ exam.examName | uppercase }}</mat-card-title>
 
-            </mat-card-header>
+                </mat-card-content>
+            </p>
             <mat-divider></mat-divider>
             <p>
                 <mat-grid-list cols="4" rowHeight="20px">
@@ -93,8 +93,9 @@
                     </mat-list>
                     <ng-template #notYetexamTime>
                         <p>
-                            <mat-hint style="color: red;"> *Question Paper will appear 30 mins before exam for download</mat-hint>
-                           
+                            <mat-hint style="color: red;"> *Question Paper will appear 30 mins before exam for
+                                download</mat-hint>
+
                         </p>
 
                     </ng-template>
