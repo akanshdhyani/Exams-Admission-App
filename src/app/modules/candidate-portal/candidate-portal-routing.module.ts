@@ -5,6 +5,7 @@ import { ResultsComponent } from './results/results.component';
 import { HallTicketComponent } from './hall-ticket/hall-ticket.component';
 import { ModifyHallTicketComponent } from './modify-hall-ticket/modify-hall-ticket.component';
 import { RequestRevalutionComponent } from './request-revalution/request-revalution.component';
+import { StudentGuard } from 'src/app/core/guards/role-guard/role.guard';
 
 const routes: Routes = [
   { path: '', component: CandidatePortalComponent },
