@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { CandidatePortalService } from '../services/candidate-portal.service';
 
 @Component({
-  selector: 'app-results',
-  templateUrl: './results.component.html',
-  styleUrls: ['./results.component.scss']
+  selector: 'app-request-revalution',
+  templateUrl: './request-revalution.component.html',
+  styleUrls: ['./request-revalution.component.scss']
 })
-export class ResultsComponent implements OnInit {
+export class RequestRevalutionComponent implements OnInit {
 
   //#region (global variables)
   hallTicketDetails = {
@@ -105,6 +105,7 @@ export class ResultsComponent implements OnInit {
   ]
 
   isHallTicket = true
+  examSelected = false
   //#endregion
 
   //#region (constructor)
@@ -132,17 +133,31 @@ export class ResultsComponent implements OnInit {
     // }
   }
 
-  // formateResultDetails(examData: any) {
-  //   let formatedData = examData
+  // formateResultDetails(results: any) {
+  //   let formatedData = results
   //   return formatedData;
   // }
 
   //#endregion
 
-  //#region (navigate to modify)
-  redirectToRequestRevalution() {
-    this.router.navigateByUrl('/candidate-portal/request-revalution')
+  //#region (navigate to results view)
+  redirectToViewResults() {
+    this.router.navigateByUrl('/candidate-portal/view-results')
   }
+  //#endregion
+
+  //#region (Request revalution)
+  requestRevalution() {
+    const formatedData = this.formateRevaluationData()
+    this.candidatePortalService.requestRevolution(formatedData)
+    // .subscribe((response: any) => {
+    //   if(response) {
+      this.router.navigateByUrl('/candidate-portal')
+    //   }
+    // })
+  }
+
+  formateRevaluationData() {}
   //#endregion
 
 }

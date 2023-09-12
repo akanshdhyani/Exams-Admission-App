@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CandidatePortalService } from '../services/candidate-portal.service';
 
 @Component({
   selector: 'app-candidate-portal',
   templateUrl: './candidate-portal.component.html',
   styleUrls: ['./candidate-portal.component.scss']
 })
-export class CandidatePortalComponent {
+export class CandidatePortalComponent implements OnInit {
   cardList: any[] = [
     {
       title: 'Hall Ticket',
@@ -40,8 +41,30 @@ export class CandidatePortalComponent {
   examCycle = new FormControl('');
 
   constructor(
-    private router: Router
+    private router: Router,
+    private candidatePortalService: CandidatePortalService
   ) {}
+
+  ngOnInit(): void {
+    this.intialisation()
+  }
+
+  intialisation() {
+    this.getExamCycles()
+  }
+
+  getExamCycles() {
+    this.candidatePortalService.getExamCycles()
+    // .pipe(mergeMap((res: any) => {
+    //   return this.formateExamCycleDetails(res)
+    // })).subscribe((examDetails: any)) {
+    // }
+  }
+
+  // formateExamCycleDetails(examData: any) {
+  //   let formatedData = examData
+  //   return formatedData;
+  // }
 
   navigateToView(navigateUrl: string) {
     this.router.navigateByUrl(navigateUrl)
