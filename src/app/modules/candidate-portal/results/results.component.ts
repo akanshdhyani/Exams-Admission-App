@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CandidatePortalService } from '../services/candidate-portal.service';
 
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss']
 })
-export class ResultsComponent {
+export class ResultsComponent implements OnInit {
+
+  //#region (global variables)
   hallTicketDetails = {
     exmaCycleName: 'Exam Cycle 1',
     studentDetails: {
@@ -101,5 +105,44 @@ export class ResultsComponent {
   ]
 
   isHallTicket = true
+  //#endregion
+
+  //#region (constructor)
+  constructor(
+    private router: Router,
+    private candidatePortalService: CandidatePortalService
+  ) {}
+  //#endregion
+
+  ngOnInit(): void {
+    this.intialisation()
+  }
+
+  //#region (intialisation)
+  intialisation() {
+    this.getExamResults()
+  }
+
+  getExamResults() {
+    this.candidatePortalService.getResults()
+    // .pipe(mergeMap((res: any) => {
+    //   return this.formateResultDetails(res)
+    // })).subscribe((results: any)) {
+
+    // }
+  }
+
+  // formateResultDetails(examData: any) {
+  //   let formatedData = examData
+  //   return formatedData;
+  // }
+
+  //#endregion
+
+  //#region (navigate to modify)
+  redirectToRequestRevalution() {
+    this.router.navigateByUrl('/candidate-portal/request-revalution')
+  }
+  //#endregion
 
 }

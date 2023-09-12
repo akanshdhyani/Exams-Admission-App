@@ -18,6 +18,7 @@ export class RegisterStudentsComponent {
   examCycleControl: any;
   examDetails: QuestionPaper[] = [
     {
+
       examId: 1,
       courseName: 'One',
       examDate: 'One',
@@ -52,6 +53,7 @@ export class RegisterStudentsComponent {
           name: 'Question paper set 2'
         }
       ]
+
     },
     {
       examId: 1,
@@ -73,6 +75,7 @@ export class RegisterStudentsComponent {
 
     },
     {
+
       examId: 1,
       courseName: 'Four',
       examDate: 'Some date',
@@ -111,6 +114,7 @@ export class RegisterStudentsComponent {
     if (this.examCycleControl.valid) {
       this.router.navigate(['student-registration/view-regd-students'], { state: { examId: exam.examId, examCycle: this.examCycle, examName: exam.examName } });
  
+
     }
 
   }

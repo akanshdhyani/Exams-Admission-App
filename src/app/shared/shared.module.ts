@@ -8,7 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationPopupComponent } from './components/confirmation-popup/confirmation-popup.component';
 import { CommonLayoutComponent } from './components/common-layout/common-layout.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+
+import { HttpClientModule } from '@angular/common/http';
+import { ConformationDialogComponent } from './components/conformation-dialog/conformation-dialog.component';
+import { ConfigService } from './services/config/config.service';
 import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loading/shared-skeleton-loading.component';
+
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -18,12 +24,14 @@ import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loa
     ConfirmationPopupComponent,
     CommonLayoutComponent,
     BreadcrumbComponent,
+    ConformationDialogComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
     RouterModule,
+    HttpClientModule,
   ],
   exports :
   [
@@ -33,7 +41,8 @@ import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loa
     FormsModule,
     HeaderComponent,
     SharedTableComponent,
+    HttpClientModule,
   ],
-  providers: []
+  providers: [ConfigService]
 })
 export class SharedModule { }

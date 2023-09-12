@@ -1,0 +1,27 @@
+<div class="main-container">
+    <div class="secondary-container">
+      <div class="body-header">
+        <h2 class="title-header">Result management</h2>
+      </div>
+      <mat-card class="container">
+        <mat-card-content>
+            <div>
+                <app-exam-hall-ticket-student-details
+                [hallTicketDetails]="hallTicketDetails"></app-exam-hall-ticket-student-details>
+            </div>
+            <div>
+                <app-shared-table [tableColumns]="examTableHeader" 
+                [tableData]="examTableData" [isHallTicket]="isHallTicket" ></app-shared-table>
+                <p *ngIf="!examSelected" class="examSelectNote">Please select exams where you want revaluation.</p>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="footer">
+                <button class="cancel-btn" (click)="redirectToViewResults()">Cancel</button>
+                <button class="revalution-btn" (click)="requestRevalution()">Request revalution</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+    </div>
+</div>
+
