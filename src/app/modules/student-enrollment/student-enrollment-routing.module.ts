@@ -7,7 +7,7 @@ import { StudentEnrollmentFormComponent } from './student-enrollment-form/studen
 
 const routes: Routes = [
   {path: 'institute', component: StudentEnrollmentComponent, canActivate: [InstituteGuard]},
-  {path: 'add-enrollment', component: StudentEnrollmentFormComponent, pathMatch: 'full'},
+  {path: 'add-enrollment', component: StudentEnrollmentFormComponent, pathMatch: 'full', canActivate: [InstituteGuard]},
   { path: 'admin', component: StudentEnrollmentAdminComponent, canActivate: [AdminGuard]}
 ];
 

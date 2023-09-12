@@ -101,11 +101,9 @@ export class HomeComponent {
 
   ngOnInit() {
     this.loggedInUserRole = this.authService.getUserRoles()[0];
-    console.log(this.cardList[1].visibility === this.loggedInUserRole);
   }
 
   navigateTo(item: any) {
-    console.log(item.url);
     this.router.navigate([item.url]);
   }
 }
