@@ -7,13 +7,11 @@ import { CommonModule } from '@angular/common';
 
 //#region (created modules && components)
 import { StudentEnrollmentRoutingModule } from './student-enrollment-routing.module';
-import { AddNewStudentEnrolmentComponent } from './add-new-student-enrolment/add-new-student-enrolment.component';
-import { EducationalDetailsComponent } from './educational-details/educational-details.component';
-import { StudentEnrollmentAdminComponent } from './student-enrollment-admin/student-enrollment-admin.component';
 import { StudentEnrollmentComponent } from './student-enrollment/student-enrollment.component';
 import { MaterialModule } from 'src/material/material.module';
 import { StudentEnrollmentFormComponent } from './student-enrollment-form/student-enrollment-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared';
 //#endregion
 
 //#endregion
@@ -22,9 +20,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AddNewStudentEnrolmentComponent,
-    EducationalDetailsComponent,
-    StudentEnrollmentAdminComponent,
     StudentEnrollmentComponent,
     StudentEnrollmentFormComponent
   ],
@@ -32,7 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ReactiveFormsModule,
     StudentEnrollmentRoutingModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ]
 })
 export class StudentEnrollmentModule { }

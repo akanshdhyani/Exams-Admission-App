@@ -40,9 +40,9 @@ export class StudentEnrollmentFormComponent {
       gender: new FormControl('', Validators.required),
       caste: new FormControl('', Validators.required),
       category: new FormControl(''),
-      mobileNumber: new FormControl('', Validators.required),
-      emailId: new FormControl(''),
-      aadharNo: new FormControl(''),
+      mobileNumber: new FormControl('', [Validators.required, Validators.pattern(`^[0-9]*$`)]),
+      emailId: new FormControl('', Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")),
+      aadharNo: new FormControl('', Validators.pattern(`^[0-9]*$`)),
       address: this.formBuilder.group({
         addressLine1: new FormControl('', Validators.required),
         addressLine2: new FormControl('', Validators.required),
@@ -78,29 +78,6 @@ export class StudentEnrollmentFormComponent {
       })
     })
   }
-
-  // handleCertificateUpload(event: any) {
-  //   this.fileUploadError = '';
-  //   for (let i = 0; i <= event.target.files.length - 1; i++) {
-  //     let selectedFile = event.target.files[i];
-  //     const extension = selectedFile.name.split('.').pop();
-  //     const fileSize = selectedFile.size;
-  //     const allowedExtensions = ['pdf', 'jpeg', 'jpg', 'png'];
-  //     if (allowedExtensions.includes(extension)) {
-  //       // validate file size to be less than 5mb if the file has a valid extension
-  //       if (fileSize < 5000000) {
-  //         this.educationalDetailsForm.controls[''
-  //         } else {
-  //           //console.log('file already exists');
-  //         }
-  //       } else {
-  //         this.fileUploadError = 'Please upload files with size less than 5MB';
-  //       }
-  //     } else {
-  //       this.fileUploadError = `Please upload ${allowedExtensions.join(', ')} files`;
-  //     }
-  //   }
-  // }
 
   selectLink(link: string) {
     this.selectedLink = link;

@@ -17,15 +17,36 @@
     width: 6rem;
   }
   mat-drawer{
-    background-color:#F0F3F4 ;
+    background-color:#F0F3F4 !important;
   }
   
   .content{
     border-radius: 4px;
     height  : fit-content;
-    background-color: #F0F3F4;
-  
-    
+    background-color: #F0F3F4; 
+  }
+
+  .content-container {
+    padding: 0 !important; 
+    min-height: 98vh;
+  }
+
+  .fileUpload-container {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 0.5rem;
+  }
+
+  .fileupload-bg {
+    background-color: rgba(0, 0, 0, 0.04);
+    padding: 0.5rem;
+  }
+
+  .file-preview {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
   
   
@@ -113,6 +134,11 @@
   }
   .full-details{
     background-color: #fafafa;
+  }
+
+  .attachment-label {
+    cursor: pointer; 
+    color: rgb(0, 116, 182);
   }
   
   

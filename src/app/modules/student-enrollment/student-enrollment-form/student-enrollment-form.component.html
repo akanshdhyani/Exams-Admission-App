@@ -1,427 +1,1011 @@
 <div class="secondary-container" id="student-enrollment-form">
-    <mat-label class="title-header"> Add New Student Enrollment </mat-label>
-    <div class="certificate-details">
+  <mat-label class="title-header"> Add New Student Enrollment </mat-label>
+  <div class="certificate-details">
     <mat-drawer-container>
-        <mat-drawer  #drawer class="drawer" mode="side" opened="true">
-                <mat-nav-list>
-                    <mat-list-item *ngFor="let link of links" [ngClass]="{ 'active-link': selectedLink === link }" (click)="showInfo(link)">
-                        <span>
-                            <a routerLinkActive="active-list-item">{{ link }}</a>
-                        </span>
-                    </mat-list-item>
-                </mat-nav-list>
-        </mat-drawer>
-        <div class="px2 py2">
-        <div class="" style="padding: 0 !important; min-height: 98vh;">
-            <div class="content-details">
-                <form [formGroup]="basicDetailsForm" *ngIf="basicDetails">
-                   <div class="clearfix">
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                        <h4 class="w-full mat-label">First Name *</h4>
-                        <mat-form-field appearance="outline" class="w-full">
-                            <input matInput placeholder="Type here" formControlName="firstName">
-                            <mat-error *ngIf="basicDetailsForm.controls['firstName'].invalid">
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                    </div>
-                    <div class="clearfix">
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                        <h4 class="w-full mat-label">Last Name *</h4>
-                        <mat-form-field appearance="outline" class="w-full">
-                            <input matInput placeholder="Type here" formControlName="lastName">
-                            <mat-error *ngIf="basicDetailsForm.controls['lastName'].invalid">
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                   </div>
-                   <div class="clearfix">
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                        <h4 class="w-full mat-label">Mothers Name *</h4>
-                        <mat-form-field appearance="outline" class="w-full">
-                            <input matInput placeholder="Type here" formControlName="mothersName">
-                            <mat-error *ngIf="basicDetailsForm.controls['mothersName'].invalid">
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                   </div>
-                   <div class="clearfix">
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                        <h4 class="w-full mat-label">Fathers Name *</h4>
-                        <mat-form-field appearance="outline" class="w-full">
-                            <input matInput placeholder="Type here" formControlName="fathersName">
-                            <mat-error *ngIf="basicDetailsForm.controls['fathersName'].invalid">
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                   </div>
-                   <div class="clearfix">
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                        <h4 class="w-full mat-label">Date of Birth *</h4>
-                        <mat-form-field appearance="outline" class="w-full">
-                            <mat-label>Select your date</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
-                            <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
-                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                          </mat-form-field>
-                    </div>
-                   </div>
-                   <div class="clearfix">
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-12">
-                    <h4 class="w-full mat-label">Gender</h4>
-                    <mat-radio-group class="custom-radio-group w-full" formControlName="gender">
-                        <mat-radio-button class="" *ngFor="let item of genderList" [value]="item">
-                          {{item}}
-                        </mat-radio-button>
-                      </mat-radio-group>
-                   </div>
-                   </div>
-                   <div class="clearfix mt2">
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-12">
-                    <h4 class="w-full mat-label">Caste</h4>
-                    <mat-radio-group class="custom-radio-group w-full" formControlName="caste">
-                        <mat-radio-button class="" *ngFor="let item of casteList" [value]="item">
-                          {{item}}
-                        </mat-radio-button>
-                      </mat-radio-group>
-                      </div>
-                   </div>
-                   <div class="clearfix mt2">
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-12">
-                    <h4 class="w-full mat-label">Category</h4>
-                    <mat-radio-group class="custom-radio-group w-full" formControlName="category">
-                      <mat-radio-button class="" *ngFor="let item of categoryList" [value]="item">
-                        {{item}}
-                      </mat-radio-button>
-                    </mat-radio-group>
-                    </div>
-                   </div>
-                   <div class="clearfix mt2">
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                    <h4 class="w-full mat-label">Mobile Number*</h4>
-                    <mat-form-field appearance="outline" class="w-full">
-                      <input matInput maxlength="10" placeholder="Type here" formControlName="mobileNumber">
-                      <mat-error *ngIf="basicDetailsForm.controls['mobileNumber'].invalid">
-                      </mat-error>
-                  </mat-form-field>
-                  </div>
-                   </div>
-                   <div class="clearfix">
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                    <h4 class="w-full mat-label">Email Id</h4>
-                    <mat-form-field appearance="outline" class="w-full">
-                      <input matInput placeholder="Type here" formControlName="emailId">
-                      <mat-error *ngIf="basicDetailsForm.controls['emailId'].invalid">
-                      </mat-error>
-                  </mat-form-field>
-                  </div>
-                   </div>
-                   <div class="clearfix">
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                    <h4 class="w-full mat-label">Aadhar No</h4>
-                    <mat-form-field appearance="outline" class="w-full">
-                      <input matInput placeholder="Type here" formControlName="aadharNo">
-                      <mat-error *ngIf="basicDetailsForm.controls['aadharNo'].invalid">
-                      </mat-error>
-                  </mat-form-field>
-                    </div>
-                   </div>
-                   <div formGroupName="address">
-                   <div class="clearfix">
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                    <h4 class="w-full mat-label">Address line 1*</h4>
-                    <mat-form-field appearance="outline" class="w-full">
-                      <input matInput placeholder="Type here" formControlName="addressLine1">
-                      <mat-error *ngIf="basicDetailsForm.controls['address'].controls['addressLine1'].invalid"> 
+      <mat-drawer #drawer class="drawer" mode="side" opened="true">
+        <mat-nav-list>
+          <mat-list-item
+            *ngFor="let link of links"
+            [ngClass]="{ 'active-link': selectedLink === link }"
+            (click)="showInfo(link)"
+          >
+            <span>
+              <a routerLinkActive="active-list-item">{{ link }}</a>
+            </span>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-drawer>
+      <div class="px2 py2">
+        <div class="content-container">
+          <div class="content-details">
+            <form [formGroup]="basicDetailsForm" *ngIf="basicDetails">
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">First Name*</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <input
+                      matInput
+                      placeholder="Type here"
+                      formControlName="firstName"
+                    />
+                    <mat-error
+                      *ngIf="basicDetailsForm.controls['firstName'].invalid"
+                    >
+                      Firstname is required
                     </mat-error>
                   </mat-form-field>
-                    </div>
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-6 pl2">
-                      <h4 class="w-full mat-label">Address line 2*</h4>
-                      <mat-form-field appearance="outline" class="w-full">
-                        <input matInput placeholder="Type here" formControlName="addressLine2">
-                        <mat-error *ngIf="basicDetailsForm.controls['address'].controls['addressLine2'].invalid"> 
-                        </mat-error>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Last Name*</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <input
+                      matInput
+                      placeholder="Type here"
+                      formControlName="lastName"
+                    />
+                    <mat-error
+                      *ngIf="basicDetailsForm.controls['lastName'].invalid"
+                    >
+                      Lastname is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Mothers Name*</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <input
+                      matInput
+                      placeholder="Type here"
+                      formControlName="mothersName"
+                    />
+                    <mat-error
+                      *ngIf="basicDetailsForm.controls['mothersName'].invalid"
+                    >
+                      Mother's name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Fathers Name*</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <input
+                      matInput
+                      placeholder="Type here"
+                      formControlName="fathersName"
+                    />
+                    <mat-error
+                      *ngIf="basicDetailsForm.controls['fathersName'].invalid"
+                    >
+                      Father's name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Date of Birth*</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Select your date</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="picker"
+                      formControlName="dateOfBirth"
+                    />
+                    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                    <mat-datepicker-toggle
+                      matIconSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error
+                      *ngIf="basicDetailsForm.controls['dateOfBirth'].invalid"
+                    >
+                      Date of birth is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-12">
+                  <h4 class="w-full mat-label">Gender*</h4>
+                  <mat-radio-group
+                    class="custom-radio-group w-full"
+                    formControlName="gender"
+                  >
+                    <mat-radio-button
+                      class=""
+                      *ngFor="let item of genderList"
+                      [value]="item"
+                    >
+                      {{ item }}
+                    </mat-radio-button>
+                    <mat-error
+                      *ngIf="basicDetailsForm.controls['gender'].invalid"
+                    >
+                      Gender is required
+                    </mat-error>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <div class="clearfix mt2">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-12">
+                  <h4 class="w-full mat-label">Caste*</h4>
+                  <mat-radio-group
+                    class="custom-radio-group w-full"
+                    formControlName="caste"
+                  >
+                    <mat-radio-button
+                      class=""
+                      *ngFor="let item of casteList"
+                      [value]="item"
+                    >
+                      {{ item }}
+                    </mat-radio-button>
+                    <mat-error
+                      *ngIf="basicDetailsForm.controls['caste'].invalid"
+                    >
+                      Caste is required
+                    </mat-error>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <div class="clearfix mt2">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-12">
+                  <h4 class="w-full mat-label">Category</h4>
+                  <mat-radio-group
+                    class="custom-radio-group w-full"
+                    formControlName="category"
+                  >
+                    <mat-radio-button
+                      class=""
+                      *ngFor="let item of categoryList"
+                      [value]="item"
+                    >
+                      {{ item }}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <div class="clearfix mt2">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Mobile Number*</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <input
+                      matInput
+                      maxlength="10"
+                      placeholder="Type here"
+                      formControlName="mobileNumber"
+                    />
+                    <mat-error
+                      *ngIf="
+                        basicDetailsForm.controls['mobileNumber'].hasError(
+                          'required'
+                        ) &&
+                        (basicDetailsForm.controls['mobileNumber'].dirty ||
+                          basicDetailsForm.controls['mobileNumber'].touched)
+                      "
+                    >
+                      Mobile Number is required
+                    </mat-error>
+                    <mat-error
+                      *ngIf="
+                        basicDetailsForm.controls['mobileNumber'].hasError(
+                          'pattern'
+                        ) &&
+                        (basicDetailsForm.controls['mobileNumber'].dirty ||
+                          basicDetailsForm.controls['mobileNumber'].touched)
+                      "
+                    >
+                      Mobile Number should contain digits only
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Email Id</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <input
+                      matInput
+                      placeholder="Type here"
+                      formControlName="emailId"
+                    />
+                    <mat-error
+                      *ngIf="
+                        basicDetailsForm.controls['emailId'].hasError(
+                          'pattern'
+                        ) &&
+                        (basicDetailsForm.controls['emailId'].dirty ||
+                          basicDetailsForm.controls['emailId'].touched)
+                      "
+                    >
+                      Enter a valid email Id
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Aadhar No</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <input
+                      matInput
+                      maxlength="12"
+                      placeholder="Type here"
+                      formControlName="aadharNo"
+                    />
+                    <mat-error
+                      *ngIf="
+                        basicDetailsForm.controls['aadharNo'].hasError(
+                          'pattern'
+                        ) &&
+                        (basicDetailsForm.controls['aadharNo'].dirty ||
+                          basicDetailsForm.controls['aadharNo'].touched)
+                      "
+                    >
+                      Aadhar Number should contain digits only
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div formGroupName="address">
+                <div class="clearfix">
+                  <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                    <h4 class="w-full mat-label">Address line 1*</h4>
+                    <mat-form-field appearance="outline" class="w-full">
+                      <input
+                        matInput
+                        placeholder="Type here"
+                        formControlName="addressLine1"
+                      />
+                      <mat-error
+                        *ngIf="
+                          basicDetailsForm.controls['address'].controls[
+                            'addressLine1'
+                          ].invalid
+                        "
+                      >
+                        Address is required
+                      </mat-error>
                     </mat-form-field>
-                      </div>
-                   </div>
-                   <div class="clearfix">
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  </div>
+                  <div class="sm-col sm-col-12 md-col-12 lg-col-6 pl2">
+                    <h4 class="w-full mat-label">Address line 2*</h4>
+                    <mat-form-field appearance="outline" class="w-full">
+                      <input
+                        matInput
+                        placeholder="Type here"
+                        formControlName="addressLine2"
+                      />
+                      <mat-error
+                        *ngIf="
+                          basicDetailsForm.controls['address'].controls[
+                            'addressLine2'
+                          ].invalid
+                        "
+                      >
+                        Address is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="clearfix">
+                  <div class="sm-col sm-col-12 md-col-12 lg-col-6">
                     <h4 class="w-full mat-label">District*</h4>
                     <mat-form-field appearance="outline" class="w-full">
-                      <input matInput placeholder="Type here" formControlName="district">
-                      <mat-error *ngIf="basicDetailsForm.controls['address'].controls['district'].invalid"> 
+                      <input
+                        matInput
+                        placeholder="Type here"
+                        formControlName="district"
+                      />
+                      <mat-error
+                        *ngIf="
+                          basicDetailsForm.controls['address'].controls[
+                            'district'
+                          ].invalid
+                        "
+                      >
+                        District is required
                       </mat-error>
-                  </mat-form-field>
-                    </div>
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-6 pl2">
-                      <h4 class="w-full mat-label">State*</h4>
-                      <mat-form-field appearance="outline" class="w-full">
-                        <input matInput placeholder="Type here" formControlName="state">
-                        <mat-error *ngIf="basicDetailsForm.controls['address'].controls['state'].invalid"> 
-                        </mat-error> 
                     </mat-form-field>
-                      </div>
-                   </div>
-                   <div class="clearfix">
-                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  </div>
+                  <div class="sm-col sm-col-12 md-col-12 lg-col-6 pl2">
+                    <h4 class="w-full mat-label">State*</h4>
+                    <mat-form-field appearance="outline" class="w-full">
+                      <input
+                        matInput
+                        placeholder="Type here"
+                        formControlName="state"
+                      />
+                      <mat-error
+                        *ngIf="
+                          basicDetailsForm.controls['address'].controls['state']
+                            .invalid
+                        "
+                      >
+                        State is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="clearfix">
+                  <div class="sm-col sm-col-12 md-col-12 lg-col-6">
                     <h4 class="w-full mat-label">Country*</h4>
                     <mat-form-field appearance="outline" class="w-full">
-                      <input matInput placeholder="Type here" formControlName="country">
-                      <mat-error *ngIf="basicDetailsForm.controls['address'].controls['country'].invalid">
+                      <input
+                        matInput
+                        placeholder="Type here"
+                        formControlName="country"
+                      />
+                      <mat-error
+                        *ngIf="
+                          basicDetailsForm.controls['address'].controls[
+                            'country'
+                          ].invalid
+                        "
+                      >
+                        Country is required
                       </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="sm-col sm-col-12 md-col-12 lg-col-6 pl2">
+                    <h4 class="w-full mat-label">Pincode*</h4>
+                    <mat-form-field appearance="outline" class="w-full">
+                      <input
+                        matInput
+                        placeholder="Type here"
+                        formControlName="pincode"
+                      />
+                      <mat-error
+                        *ngIf="
+                          basicDetailsForm.controls['address'].controls[
+                            'pincode'
+                          ].invalid
+                        "
+                      >
+                        Pincode is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <form
+              [formGroup]="educationalDetailsForm"
+              *ngIf="educationalDetails"
+            >
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Center code and Name</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <mat-select
+                      [compareWith]="compareFn"
+                      [(value)]="centerCode"
+                      formControlName="centerCode"
+                      placeholder="Select here"
+                    >
+                      <span *ngFor="let center of centersList; let i = index">
+                        <mat-option [value]="center.name">{{
+                          center.name
+                        }}</mat-option>
+                      </span>
+                    </mat-select>
                   </mat-form-field>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Course code and Name</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <mat-select
+                      [compareWith]="compareFn"
+                      [(value)]="courseCode"
+                      formControlName="courseCode"
+                      placeholder="Select here"
+                    >
+                      <span *ngFor="let course of courseList; let i = index">
+                        <mat-option [value]="course.name">{{
+                          course.name
+                        }}</mat-option>
+                      </span>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Exam-Batch*</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <mat-select
+                      [compareWith]="compareFn"
+                      [(value)]="examBatch"
+                      formControlName="examBatch"
+                      placeholder="Select here"
+                    >
+                      <span *ngFor="let batch of examBatchList; let i = index">
+                        <mat-option [value]="batch.name">{{
+                          batch.name
+                        }}</mat-option>
+                      </span>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        educationalDetailsForm.controls['examBatch'].invalid
+                      "
+                    >
+                      Please select exam batch
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Admission Date *</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Select your date</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="picker"
+                      formControlName="admissionDate"
+                    />
+                    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                    <mat-datepicker-toggle
+                      matIconSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error
+                      *ngIf="
+                        educationalDetailsForm.controls['admissionDate'].invalid
+                      "
+                    >
+                      Admission date is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Intermediate Stream*</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <mat-select
+                      [compareWith]="compareFn"
+                      [(value)]="intermediateStream"
+                      formControlName="intermediateStream"
+                      placeholder="Select here"
+                    >
+                      <span
+                        *ngFor="
+                          let stream of intermediateStreamList;
+                          let i = index
+                        "
+                      >
+                        <mat-option [value]="stream.name">{{
+                          stream.name
+                        }}</mat-option>
+                      </span>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        educationalDetailsForm.controls['intermediateStream']
+                          .invalid
+                      "
+                    >
+                      Please select Intermediate Stream
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Intermediate Passed board</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <mat-select
+                      [compareWith]="compareFn"
+                      [(value)]="intermediatePassedBoard"
+                      formControlName="intermediatePassedBoard"
+                      placeholder="Select here"
+                    >
+                      <span
+                        *ngFor="
+                          let board of intermediatePassedBoardList;
+                          let i = index
+                        "
+                      >
+                        <mat-option [value]="board.name">{{
+                          board.name
+                        }}</mat-option>
+                      </span>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        educationalDetailsForm.controls[
+                          'intermediatePassedBoard'
+                        ].invalid
+                      "
+                    >
+                      Please select Intermediate Passed Board
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Intermediate Subjects</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <mat-select
+                      [compareWith]="compareFn"
+                      [(value)]="intermediateSubjects"
+                      formControlName="intermediateSubjects"
+                      placeholder="Select here"
+                    >
+                      <span
+                        *ngFor="
+                          let subject of intermediateSubjectsList;
+                          let i = index
+                        "
+                      >
+                        <mat-option [value]="subject.name">{{
+                          subject.name
+                        }}</mat-option>
+                      </span>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        educationalDetailsForm.controls['intermediateSubjects']
+                          .invalid
+                      "
+                    >
+                      Please select Intermediate Subjects
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                  <h4 class="w-full mat-label">Intermediate Percentage*</h4>
+                  <mat-form-field appearance="outline" class="w-full">
+                    <input
+                      matInput
+                      placeholder="Type here"
+                      formControlName="intermediatePercentage"
+                    />
+                    <mat-error
+                      *ngIf="
+                        educationalDetailsForm.controls[
+                          'intermediatePercentage'
+                        ].invalid
+                      "
+                    >
+                      Please enter Intermediate Percentage
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div formGroupName="highSchoolDocuments">
+                <div class="clearfix">
+                  <h4 class="w-full mat-label">
+                    Upload scan documents of high school*
+                  </h4>
+                  <div class="sm-col sm-col-12 md-col-12 lg-col-12">
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
+                      <h4 class="w-full mat-label">Roll No*</h4>
+                      <mat-form-field appearance="outline" class="w-full">
+                        <input
+                          matInput
+                          placeholder="Type here"
+                          formControlName="rollNo"
+                        />
+                        <mat-error
+                          *ngIf="
+                            educationalDetailsForm.controls[
+                              'highSchoolDocuments'
+                            ].controls['rollNo'].invalid
+                          "
+                        >
+                          Please enter Roll Number
+                        </mat-error>
+                      </mat-form-field>
                     </div>
                     <div class="sm-col sm-col-12 md-col-12 lg-col-6 pl2">
-                      <h4 class="w-full mat-label">Pincode*</h4>
+                      <h4 class="w-full mat-label">Year of Passing*</h4>
                       <mat-form-field appearance="outline" class="w-full">
-                        <input matInput placeholder="Type here" formControlName="pincode">
-                        <mat-error *ngIf="basicDetailsForm.controls['address'].controls['pincode'].invalid">
+                        <input
+                          matInput
+                          placeholder="Type here"
+                          formControlName="yearOfPassing"
+                        />
+                        <mat-error
+                          *ngIf="
+                            educationalDetailsForm.controls[
+                              'highSchoolDocuments'
+                            ].controls['yearOfPassing'].invalid
+                          "
+                        >
+                          Please Enter Year of Passing
                         </mat-error>
-                    </mat-form-field>
-                      </div>
-                   </div>
-                   </div>
-                   <div class="clearfix">
-                    <div class="sm-col sm-col-12 md-col-4 lg-col-12">
-                      <div class="w-full flex" style="justify-content: space-between;">
-                        <div>
-                          <button class="text-class action-btns px2" [disabled]="!educationalDetails" type="button" mat-raised-button color="primary"><mat-icon>keyboard_backspace</mat-icon>Previous</button>
-                        </div>
-                      <div>
-                      <button class="text-class action-btns mr2" type="cancel" mat-raised-button color="primary">Cancel</button>
-                      <button class="text-class action-btns" [disabled]="!basicDetailsForm.valid" type="submit" mat-raised-button color="primary" (click)="next()">Next<mat-icon>arrow_right_alt</mat-icon></button>
-                      </div>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix">
+                  <div class="sm-col sm-col-12 md-col-12 lg-col-12">
+                    <h4 class="w-full mat-label">Marksheet*</h4>
+                    <div
+                      class="fileUpload-container"
+                      *ngIf="
+                        educationalDetailsForm.get('highSchoolDocuments')
+                          .controls['marksSheet'].value == ''
+                      "
+                    >
+                      <mat-label class=""
+                        >No file choosen</mat-label
+                      >
+                      <mat-label
+                        class="attachment-label"  
+                        (click)="fileupload.click()"
+                        >Browse</mat-label
+                      >
+                      <input
+                        hidden
+                        id="fileUpload"
+                        #fileupload
+                        type="file"
+                        (change)="
+                          handleFileUpload('highschool_marksheet', $event)
+                        "
+                        multiple
+                        accept=".pdf, .jpeg, .png, .jpg"
+                      />
+                    </div>
+                    <div
+                      class="
+                      fileupload-bg
+                      "
+                      *ngIf="
+                        educationalDetailsForm.get('highSchoolDocuments')
+                          .controls['marksSheet'].value !== ''
+                      "
+                    >
+                      <div
+                        class="file-preview"
+                      >
+                        <span>{{
+                          educationalDetailsForm.get("highSchoolDocuments")
+                            .controls["marksSheet"].value
+                        }}</span>
+                        <span
+                          class="attachment-label"
+                          (click)="
+                            removeSelectedFiles('highschool_marksheet', index)
+                          "
+                          >Delete</span
+                        >
                       </div>
                     </div>
-                   </div>
-                </form>
-                <form [formGroup]="educationalDetailsForm" *ngIf="educationalDetails">
-                  <div class="clearfix">
+                    <mat-error
+                      *ngIf="
+                        educationalDetailsForm.controls['highSchoolDocuments']
+                          .controls['marksSheet'].hasError('required') && ( educationalDetailsForm.controls['highSchoolDocuments']
+                          .controls['marksSheet'].touched ||  educationalDetailsForm.controls['highSchoolDocuments']
+                          .controls['marksSheet'].dirty)
+                      "
+                    >
+                      Please Upload Marks Sheet
+                    </mat-error>
+                  </div>
+                </div>
+                <div class="clearfix">
+                  <div class="sm-col sm-col-12 md-col-12 lg-col-12">
+                    <h4 class="w-full mat-label">Certificate*</h4>
+                    <div
+                      class="fileUpload-container"
+                      *ngIf="
+                        educationalDetailsForm.get('highSchoolDocuments')
+                          .controls['certificate'].value == ''
+                      "
+                    >
+                      <mat-label class=""
+                        >No file choosen</mat-label
+                      >
+                      <mat-label
+                        class="attachment-label"
+                        (click)="fileupload1.click()"
+                        >Browse</mat-label
+                      >
+                      <input
+                        hidden
+                        id="fileUpload1"
+                        #fileupload1
+                        type="file"
+                        (change)="
+                          handleFileUpload('highschool_certificate', $event)
+                        "
+                        multiple
+                        accept=".pdf, .jpeg, .png, .jpg"
+                      />
+                    </div>
+                    <div
+                      class="
+                      fileupload-bg
+                      "
+                      *ngIf="
+                        educationalDetailsForm.get('highSchoolDocuments')
+                          .controls['certificate'].value !== ''
+                      "
+                    >
+                      <div
+                       class="file-preview"
+                      >
+                        <span>{{
+                          educationalDetailsForm.get("highSchoolDocuments")
+                            .controls["certificate"].value
+                        }}</span>
+                        <span
+                          class="attachment-label"
+                          (click)="
+                            removeSelectedFiles('highschool_certificate', index)
+                          "
+                          >Delete</span
+                        >
+                      </div>
+                    </div>
+                    <mat-error
+                      *ngIf="
+                        educationalDetailsForm.controls['highSchoolDocuments']
+                          .controls['certificate'].hasError('required') && (educationalDetailsForm.controls['highSchoolDocuments']
+                          .controls['marksSheet'].dirty ||  educationalDetailsForm.controls['highSchoolDocuments']
+                          .controls['marksSheet'].touched)
+                      "
+                    >
+                      Please Upload Certificate
+                    </mat-error>
+                  </div>
+                </div>
+              </div>
+              <div formGroupName="intermediateDocuments">
+                <div class="clearfix">
+                  <h4 class="w-full mat-label">
+                    Upload scan documents of Intermediate*
+                  </h4>
+                  <div class="sm-col sm-col-12 md-col-12 lg-col-12">
                     <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                        <h4 class="w-full mat-label">Center code and Name</h4>   
-                        <mat-form-field appearance="outline" class="w-full">
-                          <mat-select [compareWith]="compareFn" [(value)]="centerCode" formControlName="centerCode" placeholder="Select here">
-                            <span *ngFor='let center of centersList;let i = index'>
-                              <mat-option [value]="center.name">{{center.name}}</mat-option>
-                            </span>
-                          </mat-select>
-                        </mat-form-field>
+                      <h4 class="w-full mat-label">Roll No*</h4>
+                      <mat-form-field appearance="outline" class="w-full">
+                        <input
+                          matInput
+                          placeholder="Type here"
+                          formControlName="rollNo"
+                        />
+                        <mat-error
+                          *ngIf="
+                            educationalDetailsForm.controls[
+                              'intermediateDocuments'
+                            ].controls['rollNo'].invalid
+                          "
+                        >
+                          Please enter Roll Number
+                        </mat-error>
+                      </mat-form-field>
                     </div>
+                    <div class="sm-col sm-col-12 md-col-12 lg-col-6 pl2">
+                      <h4 class="w-full mat-label">Year of Passing*</h4>
+                      <mat-form-field appearance="outline" class="w-full">
+                        <input
+                          matInput
+                          placeholder="Type here"
+                          formControlName="yearOfPassing"
+                        />
+                        <mat-error
+                          *ngIf="
+                            educationalDetailsForm.controls[
+                              'intermediateDocuments'
+                            ].controls['yearOfPassing'].invalid
+                          "
+                        >
+                          Please enter Year of Passing
+                        </mat-error>
+                      </mat-form-field>
                     </div>
-                    <div class="clearfix">
-                      <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                          <h4 class="w-full mat-label">Course code and Name</h4>   
-                          <mat-form-field appearance="outline" class="w-full">
-                            <mat-select [compareWith]="compareFn" [(value)]="courseCode" formControlName="courseCode" placeholder="Select here">
-                              <span *ngFor='let course of courseList;let i = index'>
-                                <mat-option [value]="course.name">{{course.name}}</mat-option>
-                              </span>
-                            </mat-select>
-                          </mat-form-field>
+                  </div>
+                </div>
+                <div class="clearfix">
+                  <div class="sm-col sm-col-12 md-col-12 lg-col-12">
+                    <h4 class="w-full mat-label">Marksheet*</h4>
+                    <div
+                     class="fileUpload-container"
+                      *ngIf="
+                        educationalDetailsForm.get('intermediateDocuments')
+                          .controls['marksSheet'].value == ''
+                      "
+                    >
+                      <mat-label class=""
+                        >No file choosen</mat-label
+                      >
+                      <mat-label
+                        class="attachment-label"
+                        (click)="fileupload2.click()"
+                        >Browse</mat-label
+                      >
+                      <input
+                        hidden
+                        id="fileUpload"
+                        #fileupload2
+                        type="file"
+                        (change)="
+                          handleFileUpload('intermediate_marksheet', $event)
+                        "
+                        multiple
+                        accept=".pdf, .jpeg, .png, .jpg"
+                      />
+                    </div>
+                    <div
+                      class="
+                      fileupload-bg
+                      "
+                      *ngIf="
+                        educationalDetailsForm.get('intermediateDocuments')
+                          .controls['marksSheet'].value !== ''
+                      "
+                    >
+                      <div
+                       class="file-preview"
+                      >
+                        <span>{{
+                          educationalDetailsForm.get("intermediateDocuments")
+                            .controls["marksSheet"].value
+                        }}</span>
+                        <span
+                          class="attachment-label"
+                          (click)="
+                            removeSelectedFiles('intermediate_marksheet', index)
+                          "
+                          >Delete</span
+                        >
                       </div>
+                    </div>
+                    <mat-error
+                      *ngIf="
+                        educationalDetailsForm.controls['intermediateDocuments']
+                          .controls['marksSheet'].hasError('required') && ( educationalDetailsForm.controls['intermediateDocuments']
+                          .controls['marksSheet'].touched ||  educationalDetailsForm.controls['intermediateDocuments']
+                          .controls['marksSheet'].dirty)"
+                      
+                    >
+                      Please Upload Marks Sheet
+                    </mat-error>
+                  </div>
+                </div>
+                <div class="clearfix">
+                  <div class="sm-col sm-col-12 md-col-12 lg-col-12">
+                    <h4 class="w-full mat-label">Certificate*</h4>
+                    <div
+                      class="fileUpload-container"
+                      *ngIf="
+                        educationalDetailsForm.get('intermediateDocuments')
+                          .controls['certificate'].value == ''
+                      "
+                    >
+                      <mat-label class=""
+                        >No file choosen</mat-label
+                      >
+                      <mat-label
+                        class="attachment-label"
+                        (click)="fileupload3.click()"
+                        >Browse</mat-label
+                      >
+                      <input
+                        hidden
+                        id="fileUpload"
+                        #fileupload3
+                        type="file"
+                        (change)="
+                          handleFileUpload('intermediate_certificate', $event)
+                        "
+                        multiple
+                        accept=".pdf, .jpeg, .png, .jpg"
+                      />
+                    </div>
+                    <div
+                      class="
+                      fileupload-bg
+                      "
+                      *ngIf="
+                        educationalDetailsForm.get('intermediateDocuments')
+                          .controls['certificate'].value !== ''
+                      "
+                    >
+                      <div
+                       class="file-preview"
+                      >
+                        <span>{{
+                          educationalDetailsForm.get("intermediateDocuments")
+                            .controls["certificate"].value
+                        }}</span>
+                        <span
+                          class="attachment-label"
+                          (click)="
+                            removeSelectedFiles(
+                              'intermediate_certificate',
+                              index
+                            )
+                          "
+                          >Delete</span
+                        >
                       </div>
-                      <div class="clearfix">
-                        <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                            <h4 class="w-full mat-label">Exam-Batch*</h4>   
-                            <mat-form-field appearance="outline" class="w-full">
-                              <mat-select [compareWith]="compareFn" [(value)]="examBatch" formControlName="examBatch" placeholder="Select here">
-                                <span *ngFor='let batch of examBatchList;let i = index'>
-                                  <mat-option [value]="batch.name">{{batch.name}}</mat-option>
-                                </span>
-                              </mat-select>
-                            </mat-form-field>
-                        </div>
-                        </div>
-                        <div class="clearfix">
-                          <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                              <h4 class="w-full mat-label">Admission Date *</h4>
-                              <mat-form-field appearance="outline" class="w-full">
-                                  <mat-label>Select your date</mat-label>
-                                  <input matInput [matDatepicker]="picker" formControlName="admissionDate">
-                                  <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
-                                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                                  <mat-datepicker #picker></mat-datepicker>
-                                </mat-form-field>
-                          </div>
-                         </div>
-                         <div class="clearfix">
-                          <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                              <h4 class="w-full mat-label">Intermediate Stream*</h4>   
-                              <mat-form-field appearance="outline" class="w-full">
-                                <mat-select [compareWith]="compareFn" [(value)]="intermediateStream" formControlName="intermediateStream" placeholder="Select here">
-                                  <span *ngFor='let stream of intermediateStreamList;let i = index'>
-                                    <mat-option [value]="stream.name">{{stream.name}}</mat-option>
-                                  </span>
-                                </mat-select>
-                              </mat-form-field>
-                          </div>
-                          </div>
-                        <div class="clearfix">
-                          <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                              <h4 class="w-full mat-label">Intermediate Passed board</h4>   
-                              <mat-form-field appearance="outline" class="w-full">
-                                <mat-select [compareWith]="compareFn" [(value)]="intermediatePassedBoard" formControlName="intermediatePassedBoard" placeholder="Select here">
-                                  <span *ngFor='let board of intermediatePassedBoardList;let i = index'>
-                                    <mat-option [value]="board.name">{{board.name}}</mat-option>
-                                  </span>
-                                </mat-select>
-                              </mat-form-field>
-                          </div>
-                          </div>
-                          <div class="clearfix">
-                            <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                                <h4 class="w-full mat-label">Intermediate Subjects</h4>   
-                                <mat-form-field appearance="outline" class="w-full">
-                                  <mat-select [compareWith]="compareFn" [(value)]="intermediateSubjects" formControlName="intermediateSubjects" placeholder="Select here">
-                                    <span *ngFor='let subject of intermediateSubjectsList;let i = index'>
-                                      <mat-option [value]="subject.name">{{subject.name}}</mat-option>
-                                    </span>
-                                  </mat-select>
-                                </mat-form-field>
-                            </div>
-                            </div>
-                            <div class="clearfix">
-                              <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                                  <h4 class="w-full mat-label">Intermediate Percentage*</h4>
-                                  <mat-form-field appearance="outline" class="w-full">
-                                      <input matInput placeholder="Type here" formControlName="intermediatePercentage">
-                                      <mat-error *ngIf="educationalDetailsForm.controls['intermediatePercentage'].invalid">
-                                      </mat-error>
-                                  </mat-form-field>
-                              </div>
-                              </div>
-                              <div formGroupName="highSchoolDocuments">
-                              <div class="clearfix">
-                                <h4 class="w-full mat-label">Upload scan documents of high school*</h4>
-                                <div class="sm-col sm-col-12 md-col-12 lg-col-12">
-                                    <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                                        <h4 class="w-full mat-label">Roll No*</h4>
-                                        <mat-form-field appearance="outline" class="w-full">
-                                            <input matInput placeholder="Type here" formControlName="rollNo">
-                                            <mat-error *ngIf="educationalDetailsForm.controls['highSchoolDocuments'].controls['rollNo'].invalid">
-                                            </mat-error>
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="sm-col sm-col-12 md-col-12 lg-col-6 pl2">
-                                      <h4 class="w-full mat-label">Year of Passing*</h4>
-                                      <mat-form-field appearance="outline" class="w-full">
-                                          <input matInput placeholder="Type here" formControlName="yearOfPassing">
-                                          <mat-error *ngIf="educationalDetailsForm.controls['highSchoolDocuments'].controls['yearOfPassing'].invalid">
-                                          </mat-error>
-                                      </mat-form-field>
-                                    </div>
-                                </div>
-                              </div>
-                              <div class="clearfix">
-                                <div class="sm-col sm-col-12 md-col-12 lg-col-12">
-                                  <h4 class="w-full mat-label">Marksheet*</h4>
-                                    <div style="display: flex; justify-content: space-between; background: rgba(0, 0, 0, 0.04); padding: 0.5rem"  *ngIf="educationalDetailsForm.get('highSchoolDocuments').controls['marksSheet'].value == ''">
-                                    <mat-label class="attachment-label">No file choosen</mat-label>
-                                    <mat-label class="attachment-label" style="cursor: pointer; color: rgb(0, 116, 182)" (click)="fileupload.click()">Browse</mat-label>
-                                    <input hidden id="fileUpload" #fileupload type="file"
-                                      (change)="handleFileUpload('highschool_marksheet',$event)" multiple accept=".pdf, .jpeg, .png, .jpg" />
-                                      </div>
-                                      <div style="background-color:rgba(0, 0, 0, 0.04); padding: 0.5rem"  *ngIf="educationalDetailsForm.get('highSchoolDocuments').controls['marksSheet'].value !== ''">
-                                        <div style="display: flex; justify-content: space-between; width: 100%;">
-                                            <span>{{ educationalDetailsForm.get('highSchoolDocuments').controls['marksSheet'].value }}</span>
-                                              <span class="attachment-label" style="cursor: pointer; color: rgb(0, 116, 182)" (click)="removeSelectedFiles('highschool_marksheet', index)">Delete</span>
-                                        </div>
-                                      </div>
-                                </div>
-                              </div>
-                              <div class="clearfix">
-                                <div class="sm-col sm-col-12 md-col-12 lg-col-12">
-                                  <h4 class="w-full mat-label">Certificate*</h4>
-                                  <div style="display: flex; justify-content: space-between; background: rgba(0, 0, 0, 0.04); padding: 0.5rem" *ngIf="educationalDetailsForm.get('highSchoolDocuments').controls['certificate'].value == ''">
-                                    <mat-label class="attachment-label">No file choosen</mat-label>
-                                    <mat-label class="attachment-label" style="cursor: pointer; color: rgb(0, 116, 182)" (click)="fileupload1.click()">Browse</mat-label>
-                                    <input hidden id="fileUpload1" #fileupload1 type="file"
-                                      (change)="handleFileUpload('highschool_certificate', $event)" multiple accept=".pdf, .jpeg, .png, .jpg" />
-                                      </div>
-                                      <div style="background-color:rgba(0, 0, 0, 0.04); padding: 0.5rem" *ngIf="educationalDetailsForm.get('highSchoolDocuments').controls['certificate'].value !== ''">
-                                        <div style="display: flex; justify-content: space-between; width: 100%;">
-                                            <span>{{ educationalDetailsForm.get('highSchoolDocuments').controls['certificate'].value }}</span>
-                                              <span class="attachment-label" style="cursor: pointer; color: rgb(0, 116, 182)" (click)="removeSelectedFiles('highschool_certificate', index)">Delete</span>
-                                        </div>
-                                      </div>
-                                </div>
-                              </div>
-                              </div>
-                              <div formGroupName="intermediateDocuments">
-                                <div class="clearfix">
-                                  <h4 class="w-full mat-label">Upload scan documents of Intermediate*</h4>
-                                  <div class="sm-col sm-col-12 md-col-12 lg-col-12">
-                                      <div class="sm-col sm-col-12 md-col-12 lg-col-6">
-                                          <h4 class="w-full mat-label">Roll No*</h4>
-                                          <mat-form-field appearance="outline" class="w-full">
-                                              <input matInput placeholder="Type here" formControlName="rollNo">
-                                              <mat-error *ngIf="educationalDetailsForm.controls['intermediateDocuments'].controls['rollNo'].invalid">
-                                              </mat-error>
-                                          </mat-form-field>
-                                      </div>
-                                      <div class="sm-col sm-col-12 md-col-12 lg-col-6 pl2">
-                                        <h4 class="w-full mat-label">Year of Passing*</h4>
-                                        <mat-form-field appearance="outline" class="w-full">
-                                            <input matInput placeholder="Type here" formControlName="yearOfPassing">
-                                            <mat-error *ngIf="educationalDetailsForm.controls['intermediateDocuments'].controls['yearOfPassing'].invalid">
-                                            </mat-error>
-                                        </mat-form-field>
-                                      </div>
-                                  </div>
-                                </div>
-                                <div class="clearfix">
-                                  <div class="sm-col sm-col-12 md-col-12 lg-col-12">
-                                    <h4 class="w-full mat-label">Marksheet*</h4>
-                                      <div style="display: flex; justify-content: space-between; background: rgba(0, 0, 0, 0.04); padding: 0.5rem" *ngIf="educationalDetailsForm.get('intermediateDocuments').controls['marksSheet'].value == ''">
-                                      <mat-label class="attachment-label">No file choosen</mat-label>
-                                      <mat-label class="attachment-label" style="cursor: pointer; color: rgb(0, 116, 182)" (click)="fileupload2.click()">Browse</mat-label>
-                                      <input hidden id="fileUpload" #fileupload2 type="file"
-                                        (change)="handleFileUpload('intermediate_marksheet', $event)" multiple accept=".pdf, .jpeg, .png, .jpg" />
-                                        </div>
-                                        <div style="background-color:rgba(0, 0, 0, 0.04); padding: 0.5rem" *ngIf="educationalDetailsForm.get('intermediateDocuments').controls['marksSheet'].value !== ''">
-                                          <div style="display: flex; justify-content: space-between; width: 100%;">
-                                              <span>{{ educationalDetailsForm.get('intermediateDocuments').controls['marksSheet'].value }}</span>
-                                                <span class="attachment-label" style="cursor: pointer; color: rgb(0, 116, 182)" (click)="removeSelectedFiles('intermediate_marksheet', index)">Delete</span>
-                                          </div>
-                                        </div>
-                                  </div>
-                                </div>
-                                <div class="clearfix">
-                                  <div class="sm-col sm-col-12 md-col-12 lg-col-12">
-                                    <h4 class="w-full mat-label">Certificate*</h4>
-                                    <div style="display: flex; justify-content: space-between; background: rgba(0, 0, 0, 0.04); padding: 0.5rem"  *ngIf="educationalDetailsForm.get('intermediateDocuments').controls['certificate'].value == ''">
-                                      <mat-label class="attachment-label">No file choosen</mat-label>
-                                      <mat-label class="attachment-label" style="cursor: pointer; color: rgb(0, 116, 182)" (click)="fileupload3.click()">Browse</mat-label>
-                                      <input hidden id="fileUpload" #fileupload3 type="file"
-                                        (change)="handleFileUpload('intermediate_certificate', $event)" multiple accept=".pdf, .jpeg, .png, .jpg" />
-                                        </div>
-                                        <div style="background-color:rgba(0, 0, 0, 0.04); padding: 0.5rem"  *ngIf="educationalDetailsForm.get('intermediateDocuments').controls['certificate'].value !== ''">
-                                          <div style="display: flex; justify-content: space-between; width: 100%;">
-                                            <span>{{ educationalDetailsForm.get('intermediateDocuments').controls['certificate'].value }}</span>
-                                              <span class="attachment-label" style="cursor: pointer; color: rgb(0, 116, 182)" (click)="removeSelectedFiles('intermediate_certificate', index)">Delete</span>
-                                        </div>
-                                        </div>
-                                  </div>
-                                </div>
-                                </div>
-                                <div class="clearfix">
-                                  <div class="sm-col sm-col-12 md-col-4 lg-col-12">
-                                    <div class="w-full flex" style="justify-content: space-between;">
-                                      <div>
-                                        <button class="text-class action-btns px2" type="button" mat-raised-button color="primary"><mat-icon>keyboard_backspace</mat-icon>Previous</button>
-                                      </div>
-                                    <div>
-                                    <button class="text-class action-btns mr2" type="cancel" mat-raised-button color="primary">Cancel</button>
-                                    <button class="text-class action-btns" type="submit" mat-raised-button color="primary" [disabled]="!educationalDetailsForm.valid" (click)="createEnrollment()">Submit</button>
-                                    </div>
-                                    </div>
-                                  </div>
-                                 </div>
-               </form>
+                    </div>
+                    <mat-error
+                      *ngIf="
+                          educationalDetailsForm.controls['intermediateDocuments']
+                            .controls['certificate'].hasError('required') && ( educationalDetailsForm.get('intermediateDocuments')
+                            .controls['certificate'].touched ||  educationalDetailsForm.get('intermediateDocuments')
+                            .controls['certificate'].dirty)"
+                    >
+                      Please Upload Certificate
+                    </mat-error>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="clearfix pt2">
+          <div class="sm-col sm-col-12 md-col-4 lg-col-12">
+            <div class="w-full flex" style="justify-content: space-between">
+              <div>
+                <button
+                  class="text-class action-btns px2"
+                  type="button"
+                  *ngIf="selectedLink === 'Educational Details'"
+                  mat-raised-button
+                  color="primary"
+                  (click)="previous()"
+                >
+                  <mat-icon>keyboard_backspace</mat-icon>Previous
+                </button>
+              </div>
+              <div>
+                <button
+                  class="text-class action-btns mr2"
+                  type="cancel"
+                  mat-raised-button
+                  color="primary"
+                >
+                  Cancel
+                </button>
+                <button
+                  class="text-class action-btns"
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  *ngIf="selectedLink === 'Basic Details'"
+                  [disabled]="!basicDetailsForm.valid"
+                  (click)="next()"
+                >
+                  Next<mat-icon>arrow_right_alt</mat-icon>
+                </button>
+                <button
+                  class="text-class action-btns"
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  *ngIf="selectedLink === 'Educational Details'"
+                  [disabled]="!educationalDetailsForm.valid"
+                  (click)="createEnrollment()"
+                >
+                  Submit
+                </button>
+              </div>
             </div>
+          </div>
         </div>
-        </div>
-        </mat-drawer-container>
+      </div>
+    </mat-drawer-container>
   </div>
+</div>
