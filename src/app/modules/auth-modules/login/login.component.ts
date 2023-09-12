@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthServiceService } from 'src/app/core/services';
 import { ToastrServiceService } from 'src/app/shared/services/toastr/toastr.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class LoginComponent {
   otpForm:FormGroup;
   isEnableOtpLogin:boolean = false;
   isOtpForm:boolean = false;
-    constructor(private router:Router, private toastrService: ToastrServiceService){
+    constructor(private router:Router, private toastrService: ToastrServiceService, private authService: AuthServiceService){
       this.loginForm = new FormGroup({
         emailId: new FormControl('', [Validators.email, Validators.required]),
         password: new FormControl('',Validators.required)
@@ -29,34 +30,27 @@ export class LoginComponent {
   
     ngOnInit() {
       // Check if the user is already logged in
-      // if (this.authService.isLoggedIn()) {
-      //   // Redirect to the home page if logged in
-      //   this.router.navigate(['home']);
-      // }
+      if (this.authService.isLoggedIn()) {
+        // Redirect to the home page if logged in
+        this.router.navigate(['home']);
+      }
     }
   
     signInForm(){
       const {emailId, password} = this.loginForm.value;
       console.log(this.loginForm.value);
-      // this.authService.login(emailId, password).subscribe({
-      //   next: (res) => {
-      //     this.authService.saveUserData(res.responseData);
-      //     this.getAllRoles();
-      //     this.getUserDetails();
-      //    this.router.navigate(['home'])
-      //   },
-      //   error: (err) => {
-      //     if(err.status === 200) {
-      //    this.getAllRoles();
-      //    this.router.navigate(['home']);
-      //     }
-      //     else {
-  
-      //     }
-      //     this.toastrService.showToastr(err, 'Error', 'error', '');
-      //     // Handle the error here in case of login failure
-      //   }
-      // });
+      this.authService.login(emailId, password).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.authService.saveUserData(res.responseData);
+          this.getAllRoles();
+          // this.getUserDetails();
+         this.router.navigate(['home'])
+        },
+        error: (err) => {
+            this.toastrService.showToastr(err.error, 'Error', 'error', '');
+        }
+      });
     }
   
     getAllRoles(){

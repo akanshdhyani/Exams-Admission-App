@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { ManageQuestionPapersRoutingModule } from './manage-question-papers-routing.module';
 import { MaterialModule } from 'src/material/material.module';
 import { ManageQuestionPapersComponent } from './manage-question-papers/manage-question-papers.component';
+import { DownloadQuesPapersComponent } from './download-ques-papers/download-ques-papers.component';
 //#endregion
 
 //#endregion
@@ -17,7 +18,8 @@ import { ManageQuestionPapersComponent } from './manage-question-papers/manage-q
 
 @NgModule({
   declarations: [
-    ManageQuestionPapersComponent
+    ManageQuestionPapersComponent,
+    DownloadQuesPapersComponent
   ],
   imports: [
     CommonModule,

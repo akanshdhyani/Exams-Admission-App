@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonLayoutComponent } from './shared/components/common-layout/common-layout.component';
 import { HomeComponent } from './home/home.component';
-import { FeeManagementModule } from '../app/modules/fee-management/fee-management.module';
+import { AuthGuard } from './core/guards/auth-guard/auth.guard';
+import { AdminGuard, InstituteGuard, StudentGuard } from './core/guards/role-guard/role.guard';
+
 
 const routes: Routes = [
   {
@@ -15,47 +17,58 @@ const routes: Routes = [
       {
         path: 'home', 
         component: HomeComponent, 
-        // canActivate: [AuthGuard, RoleContentGuard],
-        // data: {
-        //   allowedRoles: [Roles.GRIEVANCEADMIN, Roles.NODALOFFICER, Roles.SUPERADMIN, Roles.ADMIN],
-        // },
+        canActivate: [AuthGuard],
         pathMatch: 'full',
       },
       {
         path: 'student-enrollment',
-        loadChildren:()=> import('../app/modules/student-enrollment/student-enrollment.module').then(m=>m.StudentEnrollmentModule)
+        loadChildren:()=> import('../app/modules/student-enrollment/student-enrollment.module').then(m=>m.StudentEnrollmentModule),
+        canActivate: [AuthGuard, AdminGuard, InstituteGuard]
       },
       {
         path: 'student-registration',
-        loadChildren: () => import('../app/modules/student-registration/student-registration.module').then(m=>m.StudentRegistrationModule)
+        loadChildren: () => import('../app/modules/student-registration/student-registration.module').then(m=>m.StudentRegistrationModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'fee-management',
-        loadChildren: () => import('../app/modules/fee-management/fee-management.module').then(m => m.FeeManagementModule)
+        loadChildren: () => import('../app/modules/fee-management/fee-management.module').then(m => m.FeeManagementModule),
+        canActivate: [AuthGuard, AdminGuard, InstituteGuard]
       },
       {
         path: 'manage-exam-cycle',
-        loadChildren: () => import('../app/modules/manage-exams/manage-exams.module').then(m => m.ManageExamsModule)
+        loadChildren: () => import('../app/modules/manage-exams/manage-exams.module').then(m => m.ManageExamsModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'cctv-management',
-        loadChildren: () => import('../app/modules/cctv-verification/cctv-verification.module').then(m => m.CctvVerificationModule)
+        loadChildren: () => import('../app/modules/cctv-verification/cctv-verification.module').then(m => m.CctvVerificationModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'hall-ticket-management',
-        loadChildren: () => import('../app/modules/manage-hall-tickets/manage-hall-tickets.module').then(m => m.ManageHallTicketsModule) 
+        loadChildren: () => import('../app/modules/manage-hall-tickets/manage-hall-tickets.module').then(m => m.ManageHallTicketsModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'manage-question-papers',
-        loadChildren: () => import('../app/modules/manage-question-papers/manage-question-papers.module').then(m => m.ManageQuestionPapersModule)
+        loadChildren: () => import('../app/modules/manage-question-papers/manage-question-papers.module').then(m => m.ManageQuestionPapersModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'dispatches',
-        loadChildren: () => import('../app/modules/track-dispatches/track-dispatches.module').then(m => m.TrackDispatchesModule)
+        loadChildren: () => import('../app/modules/track-dispatches/track-dispatches.module').then(m => m.TrackDispatchesModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'manage-results',
-        loadChildren: () => import('../app/modules/manage-results/manage-results.module').then(m => m.ManageResultsModule)
+        loadChildren: () => import('../app/modules/manage-results/manage-results.module').then(m => m.ManageResultsModule),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'candidate-portal',
+        loadChildren: () => import('../app/modules/candidate-portal/candidate-portal-routing.module').then(m => m.CandidatePortalRoutingModule),
+        canActivate: [AuthGuard, StudentGuard]
       },
       {
         path: 'manage-attendance',

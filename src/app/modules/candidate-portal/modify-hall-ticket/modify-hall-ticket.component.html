@@ -1,0 +1,36 @@
+<div class="main-container">
+    <div class="secondary-container">
+      <div class="body-header">
+        <h2 class="title-header">Hall Ticket management</h2>
+      </div>
+      <form [formGroup]="studentDetails">
+        <mat-card class="container">
+            <mat-card-content>
+                <div>
+                    <h2 class="examName">{{hallTicketDetails?.exmaCycleName}}</h2>
+                    <app-edit-hallticket [examName]="hallTicketDetails.exmaCycleName"
+                    [studentDetails]="studentDetails"></app-edit-hallticket>
+                </div>
+                <div>
+                    <app-shared-table [tableColumns]="examTableHeader" 
+                    [tableData]="examTableData" [isHallTicket]="isHallTicket" ></app-shared-table>
+                </div>
+                <div class="attachments">
+                    <div class="attachment-header">
+                        <span>Attachment</span>
+                    </div>
+                    <div class="attachment-file-card">
+                        <button class="attachment-btn" (click)="browseFile()">Browse file</button>
+                    </div>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="footer">
+                    <button class="cancel-btn" (click)="cancel()">Cancel</button>
+                    <button class="request-modify-btn" type="submit" (click)="submitDetails()">Request modify</button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+    </div>
+</div>

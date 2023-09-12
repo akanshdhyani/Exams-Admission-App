@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthServiceService } from '../core/services';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  loggedInUserRole = 'exams-institute';
-  // loggedInUserRole = 'exams_admin';
-
-  constructor(private router: Router){}
+  loggedInUserRole: any;
+  constructor(private router: Router, private authService: AuthServiceService){}
   cardList: any[] = [
     {
       title: 'Student Enrollment',
@@ -42,6 +41,19 @@ export class HomeComponent {
       type: 'feeManagementAdmin',
       url: '/fee-management/admin',
       visibility: 'exams_admin'
+    },
+
+    {
+      title: 'Register Student to Exam Cycles and Exams',
+      type: 'registerStudentInstitute',
+      url: '/register-student/institute',
+      visibility: 'exams_institute'
+    },
+    {
+      title: 'Download Question Papers',
+      type: 'downloadQuestionPapers',
+      url: 'manage-question-papers/institute',
+      visibility: 'exams_institute'
     },
     {
       title: 'Fee Management',
@@ -89,9 +101,13 @@ export class HomeComponent {
       title: 'Manage Attendance',
       type: 'manageAttendance',
       url: '/manage-attendance',
-      visibility: 'exams-institute' // has to be added for both admin and institute
+      visibility: 'exams_institute' // has to be added for both admin and institute
     },
   ];
+
+  ngOnInit() {
+    this.loggedInUserRole = this.authService.getUserRoles()[0];
+  }
 
   navigateTo(item: any) {
     this.router.navigate([item.url]);

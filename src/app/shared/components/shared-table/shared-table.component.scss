@@ -5,12 +5,14 @@
     flex-direction: row;
     gap: 3%;
 }
+
 .filter-ui {
     position: absolute;
     // top: 35%;
     // left: 24%;
     left: 3%;
 }
+
 .filter-ui-container {
     width: 35vw;
     height: auto;
@@ -22,6 +24,7 @@
     flex-direction: column;
     padding: 2%;
 }
+
 .filter-inputs {
     display: flex;
     flex-direction: row;
@@ -38,7 +41,8 @@
     display: flex;
     justify-content: end;
 }
-.icon-class{
+
+.icon-class {
     font-size: 32px;
     overflow: visible;
 }
@@ -47,4 +51,38 @@
     width: 100vw;
     margin-top: 9px;
     position: relative;
+}
+
+.mat-mdc-table {
+    padding-left: 0px !important;
+}
+
+.hall-ticket-table,
+.mat-mdc-table {
+    box-shadow: none !important;
+}
+
+.hall-ticket-table,
+.mat-mdc-table .mdc-data-table__header-row {
+    height: 40px;
+}
+
+.hall-ticket-table,
+th.mdc-data-table__cell,
+.mdc-data-table__header-cell {
+    border-bottom: none !important;
+}
+
+.hall-ticket-table,
+.mdc-data-table__cell,
+.mdc-button {
+    font-weight: 600;
+    padding-left: 9px !important;
+    justify-content: start !important;
+
+}
+
+.hall-ticket-table,
+.mdc-data-table__row:last-child .mdc-data-table__cell {
+    border-bottom: 1px solid #0000001f !important;
 }
