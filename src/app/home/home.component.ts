@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthServiceService } from '../core/services';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  loggedInUserRole = 'exams_institute';
-  constructor(private router: Router){}
+  loggedInUserRole: string;
+  constructor(private router: Router, private authService: AuthServiceService){}
   cardList: any[] = [
     {
       title: 'Student Enrollment',
@@ -40,6 +41,19 @@ export class HomeComponent {
       type: 'feeManagementAdmin',
       url: '/fee-management/admin',
       visibility: 'exams_admin'
+    },
+
+    {
+      title: 'Register Student to Exam Cycles and Exams',
+      type: 'registerStudentInstitute',
+      url: '/register-student/institute',
+      visibility: 'exams_institute'
+    },
+    {
+      title: 'Download Question Papers',
+      type: 'downloadQuestionPapers',
+      url: 'manage-question-papers/institute',
+      visibility: 'exams_institute'
     },
     {
       title: 'Fee Management',
@@ -85,7 +99,13 @@ export class HomeComponent {
     },
   ];
 
+  ngOnInit() {
+    this.loggedInUserRole = this.authService.getUserRoles()[0];
+    console.log(this.cardList[1].visibility === this.loggedInUserRole);
+  }
+
   navigateTo(item: any) {
+    console.log(item.url);
     this.router.navigate([item.url]);
   }
 }
