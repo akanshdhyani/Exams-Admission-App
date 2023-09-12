@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+    apiUrl: 'https://exams.uphrh.in/api',
+    userManagementURL: 'https://uphrh.in/api'
 };

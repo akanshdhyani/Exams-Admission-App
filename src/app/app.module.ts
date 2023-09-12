@@ -25,7 +25,7 @@ import { CandidatePortalModule } from './modules/candidate-portal/candidate-port
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +46,7 @@ import { CandidatePortalModule } from './modules/candidate-portal/candidate-port
     StudentRegistrationModule,
     TrackDispatchesModule,
     CandidatePortalModule,
+    HttpClientModule,
     ToastrModule.forRoot(),
   ],
   providers: [],
