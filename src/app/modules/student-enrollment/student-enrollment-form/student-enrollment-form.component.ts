@@ -11,13 +11,18 @@ export class StudentEnrollmentFormComponent {
   genderList = ['Male', 'Female', 'Others'];
   casteList = ['General', 'SC', 'ST', 'OBC', 'None'];
   categoryList = ['General', 'Freedom Fighter', 'Handicapped'];
-  centersList = [{id: 430, name: 'Lucknow Centre'}, {id: 220, name: 'Varanasi center'}];
-  courseList = [{id: 1, name: 'Physiotherapy'}]
+  centersList = [{id: 434, name: 'Lucknow Centre'}];
+  courseList = [{id: 31, name: 'AUXILIARY NURSE AND MIDWIFE'}];
+  examBatchList = [{id: 1, name: '2023-2024'}];
+  intermediateStreamList = [{id: '1', name: 'U.P BOARD'}];
+  intermediatePassedBoardList = [{id: 1, name: 'U.P. BOARD OF HIGH SCHOOL, ALLAHABAD'}];
+  intermediateSubjectsList = [{id: 1, name: 'Chemistry'}]
   selectedLink: string = 'Basic Details';
   basicDetailsForm: FormGroup;
   educationalDetailsForm: FormGroup;
   basicDetails: boolean = true;
   educationalDetails: boolean = false;
+  fileUploadError: string;
   constructor(private formBuilder: FormBuilder) {
   }
   ngOnInit() {
@@ -74,6 +79,29 @@ export class StudentEnrollmentFormComponent {
     })
   }
 
+  // handleCertificateUpload(event: any) {
+  //   this.fileUploadError = '';
+  //   for (let i = 0; i <= event.target.files.length - 1; i++) {
+  //     let selectedFile = event.target.files[i];
+  //     const extension = selectedFile.name.split('.').pop();
+  //     const fileSize = selectedFile.size;
+  //     const allowedExtensions = ['pdf', 'jpeg', 'jpg', 'png'];
+  //     if (allowedExtensions.includes(extension)) {
+  //       // validate file size to be less than 5mb if the file has a valid extension
+  //       if (fileSize < 5000000) {
+  //         this.educationalDetailsForm.controls[''
+  //         } else {
+  //           //console.log('file already exists');
+  //         }
+  //       } else {
+  //         this.fileUploadError = 'Please upload files with size less than 5MB';
+  //       }
+  //     } else {
+  //       this.fileUploadError = `Please upload ${allowedExtensions.join(', ')} files`;
+  //     }
+  //   }
+  // }
+
   selectLink(link: string) {
     this.selectedLink = link;
   }
@@ -100,5 +128,113 @@ export class StudentEnrollmentFormComponent {
 
   next() {
     this.selectedLink = 'Educational Details';
+    this.educationalDetails = true;
+    this.basicDetails = false;
   }
-}
+
+  previous() {
+    this.selectedLink = 'Basic details';
+    this.educationalDetails = false;
+    this.basicDetails = true;
+  }
+
+  formatBytes(bytes: any, decimals = 2) {
+    if (!+bytes) return '0 Bytes';
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+  }
+
+  handleFileUpload(param: string, event: any) {
+    this.fileUploadError = '';
+    for (let i = 0; i <= event.target.files.length - 1; i++) {
+      let selectedFile = event.target.files[i];
+      const extension = selectedFile.name.split('.').pop();
+      const fileSize = selectedFile.size;
+      const allowedExtensions = ['pdf', 'jpeg', 'jpg', 'png'];
+      if (allowedExtensions.includes(extension)) {
+        // validate file size to be less than 5mb if the file has a valid extension
+        if (fileSize < 5000000) { 
+        switch(param) {
+          case 'highschool_marksheet': 
+            this.educationalDetailsForm.patchValue({
+            highSchoolDocuments: {
+             marksSheet: selectedFile.name
+            }
+            })
+          break;
+          case 'highschool_certificate':
+           this.educationalDetailsForm.patchValue({
+            highSchoolDocuments: {
+             certificate: selectedFile.name
+            }
+            })
+          break;
+          case 'intermediate_marksheet':
+            this.educationalDetailsForm.patchValue({
+              intermediateDocuments: {
+                marksSheet: selectedFile.name
+              }
+              })
+          break;
+          case 'intermediate_certificate': 
+          this.educationalDetailsForm.patchValue({
+            intermediateDocuments: {
+             certificate: selectedFile.name
+            }
+            })
+          break;
+          }
+          }
+           else {
+            //console.log('file already exists');
+            this.fileUploadError = 'Please upload files with size less than 5MB';
+          }
+        } else {
+          this.fileUploadError = `Please upload ${allowedExtensions.join(', ')} files`;
+        }
+        console.log(this.educationalDetailsForm.value);
+      }
+    }
+
+  removeSelectedFiles(param: string, index: number) {
+    switch(param) {
+      case 'highschool_marksheet': 
+        this.educationalDetailsForm.patchValue({
+        highSchoolDocuments: {
+         marksSheet: ''
+        }
+        })
+      break;
+      case 'highschool_certificate':
+       this.educationalDetailsForm.patchValue({
+        highSchoolDocuments: {
+         certificate: ''
+        }
+        })
+      break;
+      case 'intermediate_marksheet':
+        this.educationalDetailsForm.patchValue({
+          intermediateDocuments: {
+           marksheet: ''
+          }
+          })
+      break;
+      case 'intermediate_certificate': 
+      this.educationalDetailsForm.patchValue({
+        intermediateDocuments: {
+         certificate: ''
+        }
+        })
+      break;
+      }
+    }
+
+    createEnrollment() {
+      console.log(this.basicDetailsForm.value);
+      console.log(this.educationalDetailsForm.value);
+    }
+  }
+
