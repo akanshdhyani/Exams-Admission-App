@@ -9,7 +9,7 @@ import { ConfirmationPopupComponent } from './components/confirmation-popup/conf
 import { CommonLayoutComponent } from './components/common-layout/common-layout.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
-// import { ConformationDialogComponent } from './components/conformation-dialog/conformation-dialog.component';
+import { ConformationDialogComponent } from './components/conformation-dialog/conformation-dialog.component';
 import { ConfigService } from './services/config/config.service';
 import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loading/shared-skeleton-loading.component';
 
@@ -22,7 +22,7 @@ import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loa
     ConfirmationPopupComponent,
     CommonLayoutComponent,
     BreadcrumbComponent,
-    // ConformationDialogComponent,
+    ConformationDialogComponent
   ],
   imports: [
     CommonModule,
