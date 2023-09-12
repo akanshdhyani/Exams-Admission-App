@@ -10,12 +10,14 @@ import { CommonLayoutComponent } from './components/common-layout/common-layout.
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ConformationDialogComponent } from './components/conformation-dialog/conformation-dialog.component';
+import { ConfigService } from './services/config/config.service';
+import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loading/shared-skeleton-loading.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     SharedTableComponent,
-    // SharedSkeletonLoadingComponent,
+    SharedSkeletonLoadingComponent,
     // SharedDialogOverlayComponent,
     ConfirmationPopupComponent,
     CommonLayoutComponent,
@@ -31,13 +33,13 @@ import { ConformationDialogComponent } from './components/conformation-dialog/co
   ],
   exports :
   [
-    // SharedSkeletonLoadingComponent,
+    SharedSkeletonLoadingComponent,
     BreadcrumbComponent,
     ReactiveFormsModule,
     FormsModule,
     SharedTableComponent,
     HttpClientModule,
   ],
-  providers: []
+  providers: [ConfigService]
 })
 export class SharedModule { }
