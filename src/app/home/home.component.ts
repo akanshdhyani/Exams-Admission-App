@@ -7,7 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  loggedInUserRole = 'exams_admin';
+  loggedInUserRole = 'exams-institute';
+  // loggedInUserRole = 'exams_admin';
+
   constructor(private router: Router){}
   cardList: any[] = [
     {
@@ -82,6 +84,12 @@ export class HomeComponent {
       type: 'manageResult',
       url: '/manage-result',
       visibility: '' // has to be added for both admin and institute
+    },
+    {
+      title: 'Manage Attendance',
+      type: 'manageAttendance',
+      url: '/manage-attendance',
+      visibility: 'exams-institute' // has to be added for both admin and institute
     },
   ];
 

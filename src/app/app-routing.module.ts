@@ -58,6 +58,10 @@ const routes: Routes = [
         loadChildren: () => import('../app/modules/manage-results/manage-results.module').then(m => m.ManageResultsModule)
       },
       {
+        path: 'manage-attendance',
+        loadChildren: () => import('../app/modules/manage-attendance-record/manage-attendance-record.module').then(m => m.ManageAttendanceRecordModule)
+      },
+      {
         path: "**",
         redirectTo:"/"
       }

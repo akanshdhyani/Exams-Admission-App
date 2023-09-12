@@ -12,7 +12,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 @NgModule({
   declarations: [
     HeaderComponent,
-    // SharedTableComponent,
+    SharedTableComponent,
     // SharedSkeletonLoadingComponent,
     // SharedDialogOverlayComponent,
     ConfirmationPopupComponent,
