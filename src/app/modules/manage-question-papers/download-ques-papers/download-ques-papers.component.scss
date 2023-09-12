@@ -1,0 +1,25 @@
+.full-container{
+    width:100%;
+    height:fit-content;
+    background-color:#F0F3F4;
+  }
+  .certificate-container{
+    padding: 4rem;
+    margin-left: 4rem;
+  }
+  .certificate-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+  .buttons{
+    display: flex;
+    justify-content: space-between;
+    background-color: #F0F3F4;
+    height: 4rem;
+    padding-top: 2rem;
+  }
+  .download-buttons{
+    justify-content: end;
+    align-items: end !important;
+}

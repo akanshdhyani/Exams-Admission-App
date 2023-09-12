@@ -42,6 +42,19 @@ export class HomeComponent {
       url: '/fee-management/admin',
       visibility: 'exams_admin'
     },
+
+    {
+      title: 'Register Student to Exam Cycles and Exams',
+      type: 'registerStudentInstitute',
+      url: '/register-student/institute',
+      visibility: 'exams_institute'
+    },
+    {
+      title: 'Download Question Papers',
+      type: 'downloadQuestionPapers',
+      url: 'manage-question-papers/institute',
+      visibility: 'exams_institute'
+    },
     {
       title: 'Fee Management',
       type: 'feeManagementInstitute',
