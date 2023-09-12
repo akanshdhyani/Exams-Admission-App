@@ -1,4 +1,4 @@
-export interface GrievancesTableData {
+export interface attendanceTableData {
     id: string,
     ticketId: number,
     firstName: string,

@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
 
-
 interface Course {
   value: string;
   viewValue: string;
 }
-
 @Component({
-  selector: 'app-register-students',
-  templateUrl: './register-students.component.html',
-  styleUrls: ['./register-students.component.scss']
+  selector: 'app-manage-question-papers',
+  templateUrl: './manage-question-papers.component.html',
+  styleUrls: ['./manage-question-papers.component.scss']
 })
-export class RegisterStudentsComponent {
+export class ManageQuestionPapersComponent {
   courses: Course[] = [
     {value: 'bsc', viewValue: 'BSc'},
     {value: 'msc', viewValue: 'MSc'},

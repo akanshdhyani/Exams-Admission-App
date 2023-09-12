@@ -1,5 +1,6 @@
+<!-- <div class="main-container"> -->
 <div class="secondary-container">
-  <h2 class="title-header">{{'Register student to Exam Cycles & Exams'}}</h2>
+  <h2 class="title-header">{{ "Register student to Exam Cycles & Exams" }}</h2>
   <div class="selector">
     <mat-form-field class="exam-form" appearance="outline">
       <mat-label class="label">Select Course</mat-label>
@@ -19,7 +20,7 @@
             </div>
             <div class="buttons">
               <!-- <button class="btn-1">View regestered students</button>
-              <button class="btn-2">Register new students</button> -->
+                <button class="btn-2">Register new students</button> -->
               <button class="btn-2">Upload question paper</button>
             </div>
           </div>
@@ -41,25 +42,38 @@
               <span style="color: gray">Maximum mark</span>
               <span class="desc-section">{{ item.Maximum_marks }}</span>
             </div>
-          </div>   
+          </div>
         </mat-card-content>
-        <div style=" border: 2px solid rgb(175, 173, 173);padding: 8px;margin:8px;display: flex;flex-direction: column;justify-content: space-between;gap: 8px; margin-bottom: 20px;margin-top: 20px; ;">
+        <div
+          style="
+            border: 2px solid rgb(175, 173, 173);
+            padding: 8px;
+            margin: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+          "
+        >
           <div class="upload-background">
-              <span>Question paper set 1</span>
-              <div style="display: flex; flex-direction: row; gap: 8px">
+            <span>Question paper set 1</span>
+            <div style="display: flex; flex-direction: row; gap: 8px">
               <a href="" style="color: #045dad">View</a>
               <a href="" style="color: #045dad">Delete</a>
-              </div>
+            </div>
           </div>
           <div class="upload-background">
-              <span>Question paper set 1</span>
-              <div style="display: flex; flex-direction: row; gap: 8px">
+            <span>Question paper set 1</span>
+            <div style="display: flex; flex-direction: row; gap: 8px">
               <a href="" style="color: #045dad">View</a>
               <a href="" style="color: #045dad">Delete</a>
-              </div>
+            </div>
           </div>
         </div>
       </mat-card>
     </div>
   </div>
 </div>
+<!-- </div> -->

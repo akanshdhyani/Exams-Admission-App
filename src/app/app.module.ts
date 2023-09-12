@@ -11,6 +11,7 @@ import { MaterialModule } from 'src/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared';
 import { CctvVerificationModule } from './modules/cctv-verification/cctv-verification.module';
+import { ManageAttendanceRecordModule } from './modules/manage-attendance-record/manage-attendance-record.module';
 import { FeeManagementModule } from './modules/fee-management/fee-management.module';
 import { ManageExamsModule } from './modules/manage-exams/manage-exams.module';
 import { ManageHallTicketsModule } from './modules/manage-hall-tickets/manage-hall-tickets.module';
@@ -29,6 +30,7 @@ import { CandidatePortalModule } from './modules/candidate-portal/candidate-port
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
@@ -45,6 +47,7 @@ import { CandidatePortalModule } from './modules/candidate-portal/candidate-port
     StudentEnrollmentModule,
     StudentRegistrationModule,
     TrackDispatchesModule,
+    ManageAttendanceRecordModule,
     CandidatePortalModule,
     HttpClientModule,
     ToastrModule.forRoot(),

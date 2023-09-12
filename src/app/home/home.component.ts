@@ -76,8 +76,8 @@ export class HomeComponent {
     {
       title: 'Manage Question Papers',
       type: 'manageQp',
-      url: '',
-      visibility: '' // has to be added for both admin and institute
+      url: 'manage-question-papers',
+      visibility: 'exams_admin' // has to be added for both admin and institute
     },
     {
       title: 'Track Dispatches',
@@ -96,6 +96,12 @@ export class HomeComponent {
       type: 'manageResult',
       url: '/manage-result',
       visibility: '' // has to be added for both admin and institute
+    },
+    {
+      title: 'Manage Attendance',
+      type: 'manageAttendance',
+      url: '/manage-attendance',
+      visibility: 'exams_institute' // has to be added for both admin and institute
     },
   ];
 

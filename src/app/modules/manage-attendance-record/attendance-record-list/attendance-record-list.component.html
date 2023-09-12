@@ -1,0 +1,41 @@
+]
+<div class="secondary-container">
+  <mat-label class="title-header"> Attendance Record </mat-label>
+  <div
+    style="
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 24px;
+    "
+  >
+    <mat-form-field class="exam-form" appearance="outline">
+      <mat-label class="label">Exam cycle</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let course of courses" [value]="course.value">
+          {{ course.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="buttons">
+      <div>
+        <button class="btn-2" (click)="goToUpload()">
+          Upload Attendance Record
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- <app-shared-table
+    [tableColumns]="attendanceTableColumns"
+    [tableData]="attendance"
+    [isPageable]="true"
+    [length]="responseLength"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    (rowAction)="onClickItem($event)"
+    [isServerSidePagination]="true"
+    (pageChange)="handlePageChange($event)"
+    (searchParmas)="getSearchParams($event)"
+  >
+  </app-shared-table> -->
+</div>
