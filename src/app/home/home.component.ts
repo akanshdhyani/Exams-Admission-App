@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthServiceService } from '../core/services';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  loggedInUserRole = 'exams_admin';
-  constructor(private router: Router){}
+  loggedInUserRole: any;
+  constructor(private router: Router, private authService: AuthServiceService){}
   cardList: any[] = [
     {
       title: 'Student Enrollment',
@@ -84,6 +85,10 @@ export class HomeComponent {
       visibility: '' // has to be added for both admin and institute
     },
   ];
+
+  ngOnInit() {
+    this.loggedInUserRole = this.authService.getUserRoles()[0];
+  }
 
   navigateTo(item: any) {
     this.router.navigate([item.url]);
