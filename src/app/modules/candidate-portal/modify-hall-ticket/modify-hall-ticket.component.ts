@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CandidatePortalService } from '../services/candidate-portal.service';
 
 @Component({
-  selector: 'app-hall-ticket',
-  templateUrl: './hall-ticket.component.html',
-  styleUrls: ['./hall-ticket.component.scss']
+  selector: 'app-modify-hall-ticket',
+  templateUrl: './modify-hall-ticket.component.html',
+  styleUrls: ['./modify-hall-ticket.component.scss']
 })
-export class HallTicketComponent implements OnInit {
-
+export class ModifyHallTicketComponent implements OnInit {
   //#region (global variables)
   hallTicketDetails = {
     exmaCycleName: 'Exam Cycle 1',
@@ -16,14 +16,13 @@ export class HallTicketComponent implements OnInit {
       firstName: 'Rajash',
       lastName: 'Kumaravel',
       roolNumber: '12345 89078',
-      DOB: '24-01-1998',
+      DOB: '01-24-1998',
     }, 
     hallTicketDetqails: {
       courseName: 'M. Sc. Nursing',
       courseYear: '2022 - 2023'
     }
   }
-
   examTableHeader = [
     {
       header: 'Name of exam',
@@ -56,7 +55,6 @@ export class HallTicketComponent implements OnInit {
       }
     },
   ]
-
   examTableData= [
     {
       examName: 'Exam 1', 
@@ -75,22 +73,31 @@ export class HallTicketComponent implements OnInit {
       examDuration: '3 Hours',
     },
   ]
-
   isHallTicket = true
+
+  studentDetails: FormGroup
   //#endregion
 
   //#region (constructor)
   constructor(
     private router: Router,
-    private candidatePortalService: CandidatePortalService
-  ) {}
+    private candidatePortalService: CandidatePortalService,
+  ) {
+    this.studentDetails = new FormGroup({
+      firstName: new FormControl(null, [Validators.required]),
+      lastName: new FormControl(null, [Validators.required]),
+      roolNumber: new FormControl(null, [Validators.required]),
+      DOB: new FormControl(null, [Validators.required]),
+      courseName: new FormControl(null, [Validators.required]),
+      courseYear: new FormControl(null, [Validators.required]),
+    })
+  }
   //#endregion
 
   ngOnInit(): void {
     this.intialisation()
   }
 
-  //#region (intialisation)
   intialisation() {
     this.getHallTicketDetails()
   }
@@ -99,22 +106,49 @@ export class HallTicketComponent implements OnInit {
     this.candidatePortalService.getHallTicketDetails()
     // .pipe(mergeMap((res: any) => {
     //   return this.formateExamDetails(res)
-    // })).subscribe((examDetails: any)) {
-
+    // })).subscribe((hallTicketDetails: any)) {
+        this.patchHallticketDetails(this.hallTicketDetails.studentDetails)
     // }
   }
 
-  // formateExamDetails(examData: any) {
+  // formateHallTicketDetails(examData: any) {
   //   let formatedData = examData
   //   return formatedData;
   // }
 
-  //#endregion
-
-  //#region (navigate to modify)
-  redirectToModifyHallticket() {
-    this.router.navigateByUrl('/candidate-portal/modify-hallticket')
+  patchHallticketDetails(hallTicketDetails: any) {
+    if (hallTicketDetails) {
+      const dob = new Date(hallTicketDetails.DOB);
+      this.studentDetails.setValue({
+        firstName: hallTicketDetails.firstName,
+        lastName: hallTicketDetails.lastName,
+        roolNumber: hallTicketDetails.roolNumber,
+        DOB: dob,
+        courseName: this.hallTicketDetails.hallTicketDetqails.courseName,
+        courseYear: this.hallTicketDetails.hallTicketDetqails.courseYear
+      })
+    }
   }
-  //#endregion
 
+  browseFile() {}
+
+  submitDetails() {
+    // if (this.studentDetails.valid) {
+      const formatedDetails = this.formateStudentDetails(this.studentDetails.value);
+      // this.candidatePortalService.requestHallTicketModification(formatedDetails)
+      // .subscribe((result: any) => {
+      //   if (result) {
+          this.router.navigateByUrl('/candidate-portal/view-hallticket')
+      //   }
+      // })
+    // }
+  }
+
+  formateStudentDetails(studentDetails: any) {
+    return studentDetails
+  }
+
+  cancel() {
+    this.router.navigateByUrl('/candidate-portal/view-hallticket')
+  }
 }

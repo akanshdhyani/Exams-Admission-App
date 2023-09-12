@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationPopupComponent } from './components/confirmation-popup/confirmation-popup.component';
 import { CommonLayoutComponent } from './components/common-layout/common-layout.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { HttpClientModule } from '@angular/common/http';
+// import { ConformationDialogComponent } from './components/conformation-dialog/conformation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +20,14 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     ConfirmationPopupComponent,
     CommonLayoutComponent,
     BreadcrumbComponent,
+    // ConformationDialogComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
     RouterModule,
+    HttpClientModule,
   ],
   exports :
   [
@@ -32,6 +36,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     ReactiveFormsModule,
     FormsModule,
     SharedTableComponent,
+    HttpClientModule,
   ],
   providers: []
 })
