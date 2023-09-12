@@ -71,6 +71,10 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'manage-attendance',
+        loadChildren: () => import('../app/modules/manage-attendance-record/manage-attendance-record.module').then(m => m.ManageAttendanceRecordModule)
+      },
+      {
         path: "**",
         redirectTo:"/"
       }

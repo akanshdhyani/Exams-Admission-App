@@ -1,4 +1,4 @@
-export interface GrievancesTableData {
+export interface attendanceTableData {
     id: string,
     ticketId: number,
     firstName: string,
@@ -80,6 +80,7 @@ export interface GrievancesTableData {
   }
 
   export interface QuestionPaper {
+    examId: number,
     courseName: string,
     examDate: string,
     examStartTime: string,
@@ -89,6 +90,28 @@ export interface GrievancesTableData {
   }
 
   export interface QuestionPaperList{
-    id: number,
-    name: string
+    id: number;
+    name: string;
   }
+
+  export interface TableColumn {
+    columnDef: string;
+    header: string;
+    cell: Function;
+    isLink?: boolean;
+    isAction?: boolean;
+    url?: string;
+    isMenuOption?: boolean;
+    isSortable?: boolean;
+  }
+
+
+  export interface RegdStudentsTableData {
+    name: string;
+    rollNo: string;
+    course: string;
+    admissionYr: string;
+    noOfExam: string;
+    examName: string[];
+  }
+

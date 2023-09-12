@@ -1,7 +1,9 @@
-<!-- <div class="main-container"> -->
-  <div class="secondary-container">
+<div class="secondary-container">
+  <div>
     <mat-label class="title-header"> CCTV Management </mat-label>
-    <div
+    
+    <form [formGroup]="examCycleForm">
+      <div
       style="
         display: flex;
         flex-direction: row;
@@ -9,7 +11,6 @@
         margin-top: 24px;
       "
     >
-    <form [formGroup]="examCycleForm">
       <mat-form-field appearance="outline" >
         <mat-label class="label">Exam cycle</mat-label>
         <mat-select formControlName="course">
@@ -23,8 +24,8 @@
           <button class="btn-1">Cancel</button>
         </div>
       </div>
-    </form>
     </div>
+    </form>
  
     <div class="btn-tab">
       <div class="tab">
@@ -36,4 +37,4 @@
       </div>
     </div>
   </div>
-<!-- </div> -->
+</div>
