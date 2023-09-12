@@ -9,7 +9,7 @@ import { ConfirmationPopupComponent } from './components/confirmation-popup/conf
 import { CommonLayoutComponent } from './components/common-layout/common-layout.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
-// import { ConformationDialogComponent } from './components/conformation-dialog/conformation-dialog.component';
+import { ConformationDialogComponent } from './components/conformation-dialog/conformation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     ConfirmationPopupComponent,
     CommonLayoutComponent,
     BreadcrumbComponent,
-    // ConformationDialogComponent,
+    ConformationDialogComponent,
   ],
   imports: [
     CommonModule,
