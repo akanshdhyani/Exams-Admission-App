@@ -25,17 +25,9 @@
       </div>
     </div>
   </div>
-  <!-- <app-shared-table
-    [tableColumns]="attendanceTableColumns"
-    [tableData]="attendance"
-    [isPageable]="true"
-    [length]="responseLength"
-    [pageSize]="pageSize"
-    [pageIndex]="pageIndex"
-    (rowAction)="onClickItem($event)"
-    [isServerSidePagination]="true"
-    (pageChange)="handlePageChange($event)"
-    (searchParmas)="getSearchParams($event)"
-  >
-  </app-shared-table> -->
+  <app-shared-table
+      [tableColumns]="examTableHeader"
+      [tableData]="examTableData"
+      [isHallTicket]="isHallTicket"
+    ></app-shared-table>
 </div>

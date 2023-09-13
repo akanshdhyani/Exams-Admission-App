@@ -28,7 +28,7 @@ export class ExamCycleComponent {
       const dialogRef = this.dialog.open(ConformationDialogComponent, {
         data: {
           dialogType: 'success',
-          description: ['Hall ticket downloaded Sucessfully'],
+          description: ['Hall ticket downloaded successfully'],
           buttons: [
             {
               btnText: 'Ok',
