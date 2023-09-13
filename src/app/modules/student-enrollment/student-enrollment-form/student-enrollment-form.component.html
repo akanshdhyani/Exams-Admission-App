@@ -1,3 +1,4 @@
+<div class="main-container">
 <div class="secondary-container" id="student-enrollment-form">
   <mat-label class="title-header"> Add New Student Enrollment </mat-label>
   <div class="certificate-details">
@@ -125,12 +126,12 @@
                     >
                       {{ item }}
                     </mat-radio-button>
-                    <mat-error
-                      *ngIf="basicDetailsForm.controls['gender'].invalid"
+                  </mat-radio-group>
+                  <mat-error
+                      *ngIf="basicDetailsForm.controls['gender'].hasError('required') && (basicDetailsForm.controls['gender'].dirty || basicDetailsForm.controls['gender'].touched )"
                     >
                       Gender is required
                     </mat-error>
-                  </mat-radio-group>
                 </div>
               </div>
               <div class="clearfix mt2">
@@ -148,7 +149,7 @@
                       {{ item }}
                     </mat-radio-button>
                     <mat-error
-                      *ngIf="basicDetailsForm.controls['caste'].invalid"
+                      *ngIf="basicDetailsForm.controls['caste'].hasError('required') && (basicDetailsForm.controls['caste'].dirty || basicDetailsForm.controls['caste'].touched )"
                     >
                       Caste is required
                     </mat-error>
@@ -1008,4 +1009,5 @@
       </div>
     </mat-drawer-container>
   </div>
+</div>
 </div>

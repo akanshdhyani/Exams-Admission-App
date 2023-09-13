@@ -78,9 +78,6 @@
             </ng-template>
 
             <td mat-cell *matCellDef="let element" [id]="rowAction" (click)="emitRowAction(element)">
-
-
-
                 <span *ngIf="(!disCol?.isAction); else action">
 
                     <ng-container

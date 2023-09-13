@@ -48,6 +48,13 @@ constructor(private router: Router, private authService: AuthServiceService){}
     this.initializeTabs();
   }
 
+  onClickItem(e: any) {
+    // e.tabName= this.selectedTab.name
+    // let id = parseInt(e?.ticketId)
+    // //console.log("Line 251", this.grievanceType);
+    // this.router.navigate(['/grievance/manage-tickets/'+ id],{ queryParams: {tabName:this.selectedTab.name}});
+  }
+
   initializeTabs() {
     this.tabs = Tabs['student_enrollment'];
     this.initializeColumns();
