@@ -33,6 +33,8 @@ export interface attendanceTableData {
     url?: string;
     isSortable?: boolean;
     isMenuOption?:boolean;
+    isCheckBox?:boolean;
+    isDropdown?: boolean;
 
   }
 
@@ -112,6 +114,6 @@ export interface attendanceTableData {
     course: string;
     admissionYr: string;
     noOfExam: string;
-    examName: string[];
+    examName?: string[];
   }
 

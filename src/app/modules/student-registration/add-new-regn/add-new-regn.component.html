@@ -9,7 +9,9 @@
     </app-shared-skeleton-loading>
     <app-shared-table *ngIf="!isDataLoading" 
     [tableColumns]="viewStudentsTableColumns" 
+
     [tableData]="regdStudents"
+    [examList] = "examList"
     [isPageable]="true" 
     (checkBoxAction)="onSelectedRows($event)">
     </app-shared-table>

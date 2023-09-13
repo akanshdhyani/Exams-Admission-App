@@ -1,5 +1,5 @@
 <div>
-    <ng-container *ngIf="hasFilterOptions">
+    <!--    <ng-container *ngIf="hasFilterOptions">
         <div class="filter-content">
             <div>
                 <mat-form-field>
@@ -57,32 +57,68 @@
 
 
         </div>
-    </ng-container>
+    </ng-container> -->
 
-    <table [ngClass]="{'hall-ticket-table': isHallTicket}" mat-table [dataSource]="dataSource"
-        class="mat-elevation-z1" matSort sortActionDescription="Sort by number">
-        <ng-container matColumnDef="position" *ngFor="let disCol of tableColumns let colIndex = index;"
+    <table [ngClass]="{'hall-ticket-table': isHallTicket}" mat-table [dataSource]="dataSource" class="mat-elevation-z1"
+        matSort sortActionDescription="Sort by number">
+        <ng-container matColumnDef *ngFor="let disCol of tableColumns let colIndex = index;"
             matColumnDef="{{disCol?.columnDef}}">
+
+
             <!-- if sortable column header -->
             <ng-container *ngIf="disCol?.isSortable; else notSortable">
+
                 <th [ngStyle]="disCol?.cellStyle" mat-header-cell *matHeaderCellDef mat-sort-header>
                     {{disCol?.header}}
+
                 </th>
             </ng-container>
             <!-- else not sortable -->
             <ng-template #notSortable>
-                <th [ngStyle]="disCol?.cellStyle" mat-header-cell *matHeaderCellDef>
-                    {{disCol?.header}}
-                </th>
+
+                <ng-container *ngIf="disCol?.isCheckBox" else default>
+
+                    <th [ngStyle]="disCol?.cellStyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{disCol?.header}}
+                        <!-- Checkbox Column -->
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+                        </mat-checkbox>
+                    </th>
+                </ng-container>
+                <ng-template #default>
+                    <th [ngStyle]="disCol?.cellStyle" mat-header-cell *matHeaderCellDef>
+                        {{disCol?.header}}
+                    </th>
+
+
+                </ng-template>
+                <ng-container *ngIf="disCol?.isDropdown">
+
+                    <th [ngStyle]="disCol?.cellStyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        {{disCol?.header}}
+
+                    </th>
+                </ng-container>
+
 
             </ng-template>
 
             <td mat-cell *matCellDef="let element" [id]="rowAction" (click)="emitRowAction(element)">
+                <!-- Checkbox Column -->
+                <span *ngIf="disCol?.isCheckBox">
+                    <mat-checkbox (click)="logSelection()" (change)="$event ? selection.toggle(element) : null"
+                        [checked]="selection.isSelected(element)">
+                    </mat-checkbox>
+                </span>
+
                 <span *ngIf="(!disCol?.isAction); else action">
 
                     <ng-container
                         *ngIf="element?.hasStyle && element?.cellStyle[disCol?.columnDef]; else styleLessCell">
                         <a mat-button [ngStyle]="element?.cellStyle[disCol?.columnDef]">{{ disCol?.cell(element) }}</a>
+
                     </ng-container>
 
                     <ng-template #styleLessCell>
@@ -115,12 +151,27 @@
                         </button>
                     </mat-menu>
                 </span>
+                <span *ngIf="disCol?.isDropdown">
+                    <mat-form-field floatLabel="never">
+                        <mat-select [formControl]="examControl" multiple 
+                         (selectionChange)="onExamChange($event)" required>
+                            <mat-option *ngFor="let exam of examList;let i = index" [value]="exam"
+                            selected>
+                                {{ exam }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </span>
             </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns">
+            <mat-checkbox (change)="toggleAllSelection($event)"></mat-checkbox>
+        </tr>
 
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+
+        </tr>
     </table>
 
     <mat-paginator *ngIf="isPageable && !isServerSidePagination" [pageSizeOptions]="[10,20,50]" showFirstLastButtons
