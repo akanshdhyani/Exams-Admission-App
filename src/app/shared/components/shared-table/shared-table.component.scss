@@ -74,15 +74,18 @@ th.mdc-data-table__cell,
 }
 
 .hall-ticket-table,
-.mdc-data-table__cell,
 .mdc-button {
     font-weight: 600;
-    padding-left: 9px !important;
-    justify-content: start !important;
-
+    justify-content: start;
+    padding-left: 0px;
 }
 
 .hall-ticket-table,
 .mdc-data-table__row:last-child .mdc-data-table__cell {
     border-bottom: 1px solid #0000001f !important;
+}
+
+.removeTbodyColor,
+.mdc-data-table__content {
+    background-color: #f0f3f4;
 }
