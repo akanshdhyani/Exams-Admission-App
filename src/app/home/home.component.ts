@@ -8,7 +8,7 @@ import { AuthServiceService } from '../core/services';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  loggedInUserRole: any;
+  loggedInUserRole: string;
   constructor(private router: Router, private authService: AuthServiceService){}
   cardList: any[] = [
     {

@@ -4,7 +4,7 @@
 @import 'ngx-toastr/toastr';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Lato', sans-serif; }
 
 .content {
     flex: 1;
@@ -23,4 +23,73 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     width: 100%;
 }
 
+.custom-radio-group {
+    .mdc-form-field {
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    padding-right: 12px;
+    padding-left: 4px;
+    border-radius: 4px;
+    margin-right: 1rem;
+    }
+  }
 
+  .mat-label {
+    font-family: 'Lato' sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+
+.hall-ticket-table,
+.mat-mdc-table {
+    box-shadow: none !important;
+}
+
+.hall-ticket-table,
+.mat-mdc-table .mdc-data-table__header-row {
+    height: 40px;
+}
+
+.hall-ticket-table,
+th.mdc-data-table__cell,
+.mdc-data-table__header-cell {
+    border-bottom: none !important;
+}
+
+.hall-ticket-table
+.mdc-data-table__cell
+.mdc-button {
+    font-weight: 600;
+    padding-left: 9px !important;
+    justify-content: start !important;
+
+}
+
+.hall-ticket-table,
+.mdc-data-table__row:last-child .mdc-data-table__cell {
+    border-bottom: 1px solid #0000001f !important;
+}
+
+.title-header {
+    font-size: 24px;
+    letter-spacing: 0.12px;
+    font-weight: 550;
+    line-height: 36px;
+    color: #000000;
+    margin-bottom: 24px;
+ }
+
+ .main-container {
+    background-color: #F0F3F4;
+    height: 100%;
+    width: 100%;
+ }
+
+//  #enrollment {
+//     .mat-mdc-tab-labels {
+//         border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+//     }
+//     .mat-mdc-header-row {
+//         background-color: rgba(0, 0, 0, 0.08);
+//     }
+//  }
