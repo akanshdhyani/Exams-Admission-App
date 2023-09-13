@@ -33,6 +33,8 @@ export interface attendanceTableData {
     url?: string;
     isSortable?: boolean;
     isMenuOption?:boolean;
+    isCheckBox?:boolean;
+    isDropdown?: boolean;
 
   }
 
@@ -80,6 +82,7 @@ export interface attendanceTableData {
   }
 
   export interface QuestionPaper {
+    examId: number,
     courseName: string,
     examDate: string,
     examStartTime: string,
@@ -89,6 +92,28 @@ export interface attendanceTableData {
   }
 
   export interface QuestionPaperList{
-    id: number,
-    name: string
+    id: number;
+    name: string;
   }
+
+  export interface TableColumn {
+    columnDef: string;
+    header: string;
+    cell: Function;
+    isLink?: boolean;
+    isAction?: boolean;
+    url?: string;
+    isMenuOption?: boolean;
+    isSortable?: boolean;
+  }
+
+
+  export interface RegdStudentsTableData {
+    name: string;
+    rollNo: string;
+    course: string;
+    admissionYr: string;
+    noOfExam: string;
+    examName?: string[];
+  }
+

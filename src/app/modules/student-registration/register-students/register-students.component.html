@@ -1,65 +1,98 @@
-<div class="secondary-container">
-  <h2 class="title-header">{{'Register student to Exam Cycles & Exams'}}</h2>
-  <div class="selector">
-    <mat-form-field class="exam-form" appearance="outline">
-      <mat-label class="label">Select Course</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let course of courses" [value]="course.value">
-          {{ course.viewValue }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <div class="cards-boxes">
-      <mat-card class="example-card" *ngFor="let item of cardList">
-        <mat-card-content class="content-container">
-          <div class="head">
-            <div class="content">
-              <span style="color: gray">Name</span>
-              <span class="title-section">{{ item.Name }}</span>
-            </div>
-            <div class="buttons">
-              <!-- <button class="btn-1">View regestered students</button>
-              <button class="btn-2">Register new students</button> -->
-              <button class="btn-2">Upload question paper</button>
-            </div>
-          </div>
-          <div style="border: 0.5px solid rgb(205, 210, 210)"></div>
-          <div class="data-container">
-            <div class="content" col>
-              <span style="color: gray">Course name</span>
-              <span class="desc-section">{{ item.Course_name }}</span>
-            </div>
-            <div class="content" col>
-              <span style="color: gray">Start data</span>
-              <span class="desc-section">{{ item.Start_date }}</span>
-            </div>
-            <div class="content" col>
-              <span style="color: gray">End date</span>
-              <span class="desc-section">{{ item.End_date }}</span>
-            </div>
-            <div class="content" col>
-              <span style="color: gray">Maximum mark</span>
-              <span class="desc-section">{{ item.Maximum_marks }}</span>
-            </div>
-          </div>   
-        </mat-card-content>
-        <div style=" border: 2px solid rgb(175, 173, 173);padding: 8px;margin:8px;display: flex;flex-direction: column;justify-content: space-between;gap: 8px; margin-bottom: 20px;margin-top: 20px; ;">
-          <div class="upload-background">
-              <span>Question paper set 1</span>
-              <div style="display: flex; flex-direction: row; gap: 8px">
-              <a href="" style="color: #045dad">View</a>
-              <a href="" style="color: #045dad">Delete</a>
-              </div>
-          </div>
-          <div class="upload-background">
-              <span>Question paper set 1</span>
-              <div style="display: flex; flex-direction: row; gap: 8px">
-              <a href="" style="color: #045dad">View</a>
-              <a href="" style="color: #045dad">Delete</a>
-              </div>
-          </div>
+
+<div class="full-container">
+    <div class="certificate-container">
+        <div class="certificate-header">
+            <h2>Register Student to exam cycle and exams</h2>
         </div>
-      </mat-card>
+        <span>
+            Exam cycle
+
+        </span>
+        <div>
+           
+             <!--     <form 
+                [formGroup]="regStudentformGroup" >  -->
+                <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Select exam cycle</mat-label>
+                    <!--     <input matInput placeholder="" formControlName="state"> -->
+                    <mat-select (selectionChange)="examCycleSelected($event)" autofocus="true"
+                    [formControl]="examCycleControl">
+                        <span *ngFor='let examCycle of examCycleList;'>
+                            <mat-option [value]="examCycle">{{examCycle}}</mat-option>
+                        </span>
+                    </mat-select>
+                    <mat-error *ngIf="examCycleControl.invalid">
+                    </mat-error>
+                </mat-form-field>
+            </p>
+     <!--        </form> -->
+            
+       
+           
+        </div>
+
+        <mat-card style="margin-top: 38px;" *ngFor="let exam of examDetails">
+            <div class="button-group" >
+                <button type="submit" class="button" mat-stroked-button color="primary" (click)="viewRegdStdnts(exam)">View registered students</button>
+                <button  class="button" mat-raised-button color="primary" (click)="regNewStdnts(exam)"  ><mat-icon matSuffix>arrow_right_alt</mat-icon>Register New Students</button>
+            </div>
+            <p>
+                <mat-card-content>
+
+                    <mat-card-subtitle>Exam Name</mat-card-subtitle>
+
+
+                    <mat-card-title> {{ exam.examName | uppercase }}</mat-card-title>
+
+                </mat-card-content>
+            </p>
+            <mat-divider></mat-divider>
+            <p>
+                <mat-grid-list cols="4" rowHeight="20px">
+                    <mat-grid-tile>
+
+                        <mat-card-subtitle> Course Name</mat-card-subtitle>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+
+                        <mat-card-subtitle> Exam Date</mat-card-subtitle>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+
+                        <mat-card-subtitle> Exam Start Time </mat-card-subtitle>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+
+                        <mat-card-subtitle> Maximum Marks</mat-card-subtitle>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="4" rowHeight="20px">
+                    <mat-grid-tile>
+
+                        <div> {{exam.courseName}}</div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+
+                        <div> {{exam.examDate}} </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+
+                        <div> {{exam.examStartTime}} </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+
+                        <div> {{exam.marks}} Marks</div>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+            </p>
+           
+
+        </mat-card>
+
+
     </div>
-  </div>
+
 </div>
