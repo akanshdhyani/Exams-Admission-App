@@ -61,7 +61,7 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'manage-results',
+        path: 'manage-result',
         loadChildren: () => import('../app/modules/manage-results/manage-results.module').then(m => m.ManageResultsModule),
         canActivate: [AuthGuard]
       },
