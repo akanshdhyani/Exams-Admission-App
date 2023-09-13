@@ -112,15 +112,17 @@
   }
   .drawer {
       min-width: 25%;
+      padding-right: 24px;
     }
     .drawer .contents {
       padding: 16px;
     }
-    .active-list-item {
+    .active-list-item { 
       color: yellow !important; /* Note: You could also use a custom theme */
     }
     
     .active-link {
+      border-left: 4px solid #0074B6;
       background-color:rgba(201, 197, 197, 0.305);
      
       /* Add more styles as needed */
