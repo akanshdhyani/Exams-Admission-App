@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { StudentEnrollmentService } from '../services/student-enrollment.service';
+import { ConfigService } from 'src/app/shared';
 
 @Component({
   selector: 'app-student-enrollment-form',
@@ -23,7 +25,7 @@ export class StudentEnrollmentFormComponent {
   basicDetails: boolean = true;
   educationalDetails: boolean = false;
   fileUploadError: string;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private studentEnrollmentService: StudentEnrollmentService) {
   }
   ngOnInit() {
     this.initBasicDetailsForm();
@@ -81,6 +83,12 @@ export class StudentEnrollmentFormComponent {
 
   selectLink(link: string) {
     this.selectedLink = link;
+  }
+
+  convertDateFormat(date: any) {
+    const dateString = new Date(date);
+    const formattedDate = dateString.getFullYear() + '-' + dateString.getMonth() + '-' + dateString.getDate();
+    return formattedDate;
   }
 
   compareFn(cmp1: any,cmp2: any){
@@ -210,8 +218,53 @@ export class StudentEnrollmentFormComponent {
     }
 
     createEnrollment() {
-      console.log(this.basicDetailsForm.value);
-      console.log(this.educationalDetailsForm.value);
+      if(this.basicDetailsForm.valid && this.educationalDetailsForm.valid) {
+        const request = {
+          centerCode: this.educationalDetailsForm.value.centerCode.id,
+          centerName: this.educationalDetailsForm.value.centerCode.name,
+          courseCode: this.educationalDetailsForm.value.courseCode.id,
+          courseName: this.educationalDetailsForm.value.courseCode.name,
+          session: 'Spring 2023',
+          examBatch: this.educationalDetailsForm.value.examBatch,
+          admissionDate: this.convertDateFormat(this.educationalDetailsForm.value.admissionDate),
+           // has to be modified for format yyyy-mm-dddd 2023-08-15
+          firstName: this.basicDetailsForm.value.firstName,
+          surname: this.basicDetailsForm.value.lastName, // surname probably reporesent lastname,
+          motherName: this.basicDetailsForm.value.mothersName,
+          fatherName: this.basicDetailsForm.value.fathersName,
+          dateOfBirth: this.convertDateFormat(this.basicDetailsForm.value.dateOfBirth),
+          gender: this.basicDetailsForm.value.gender,
+          caste: this.basicDetailsForm.value.caste,
+          category: this.basicDetailsForm.value.category,
+          intermediatePassedBoard: this.educationalDetailsForm.value.intermediatePassedBoard,
+          intermediateSubjects: this.educationalDetailsForm.value.intermediateSubjects,
+          mobileNo: this.basicDetailsForm.value.mobileNumber,
+          emailId: this.basicDetailsForm.value.emailId,
+          aadhaarNo: this.basicDetailsForm.value.aadharNo,
+          address: this.basicDetailsForm.controls['address'].value.addressLine1 + this.basicDetailsForm.controls['address'].value.addressLine2,
+          pinCode: this.basicDetailsForm.controls['address'].value.pincode,
+          country: this.basicDetailsForm.controls['address'].value.country,
+          state: this.basicDetailsForm.controls['address'].value.state,
+          district: this.basicDetailsForm.controls['address'].value.district,
+          highSchoolRollNo: this.educationalDetailsForm.controls['highSchoolDocuments'].value.rollNo,
+          highSchoolYearOfPassing: this.educationalDetailsForm.controls['highSchoolDocuments'].value.yearOfPassing,
+          intermediateRollNo: this.educationalDetailsForm.controls['intermediateDocuments'].value.rollNo,
+          intermediateYearOfPassing: this.educationalDetailsForm.controls['intermediateDocuments'].value.yearOfPassing,
+          highSchoolMarksheet:this.educationalDetailsForm.controls['highSchoolDocuments'].value.marksSheet,
+          highSchoolCertificate: this.educationalDetailsForm.controls['highSchoolDocuments'].value.certificate,
+          intermediateMarksheet:this.educationalDetailsForm.controls['intermediateDocuments'].value.marksSheet,
+          intermediateCertificate: this.educationalDetailsForm.controls['intermediateDocuments'].value.certificate,
+        }
+        const formData = new FormData();
+        for (let [key, value] of Object.entries(request)) {
+          formData.append(`${key}`, `${value}`)
+          }
+        this.studentEnrollmentService.enrollStudent(formData).subscribe({
+          next: (res => {
+            console.log("res =>", res);
+          })
+        })
+      }
     }
   }
 
