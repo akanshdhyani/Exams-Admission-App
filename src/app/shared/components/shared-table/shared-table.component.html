@@ -59,9 +59,9 @@
         </div>
     </ng-container> -->
 
-    <table [ngClass]="{'hall-ticket-table': isHallTicket}" mat-table [dataSource]="dataSource" class="mat-elevation-z1"
-        matSort sortActionDescription="Sort by number">
-        <ng-container matColumnDef *ngFor="let disCol of tableColumns let colIndex = index;"
+    <table [ngClass]="{'hall-ticket-table': isHallTicket, 'removeTbodyColor': removeTbodyColor}" mat-table [dataSource]="dataSource"
+        class="mat-elevation-z1" matSort sortActionDescription="Sort by number">
+        <ng-container matColumnDef="position" *ngFor="let disCol of tableColumns let colIndex = index;"
             matColumnDef="{{disCol?.columnDef}}">
 
 
@@ -78,9 +78,7 @@
 
                 <ng-container *ngIf="disCol?.isCheckBox" else default>
 
-                    <th [ngStyle]="disCol?.cellStyle" mat-header-cell *matHeaderCellDef mat-sort-header>
-                        {{disCol?.header}}
-                        <!-- Checkbox Column -->
+                    <th [ngStyle]="disCol?.cellStyle" mat-header-cell *matHeaderCellDef>
                         <mat-checkbox (change)="$event ? masterToggle() : null"
                             [checked]="selection.hasValue() && isAllSelected()"
                             [indeterminate]="selection.hasValue() && !isAllSelected()">
@@ -164,9 +162,9 @@
                 </span>
             </td>
         </ng-container>
-
+        
         <tr mat-header-row *matHeaderRowDef="displayedColumns">
-            <mat-checkbox (change)="toggleAllSelection($event)"></mat-checkbox>
+            <!-- <mat-checkbox (change)="toggleAllSelection($event)"></mat-checkbox> -->
         </tr>
 
         <tr mat-row *matRowDef="let row; columns: displayedColumns;">

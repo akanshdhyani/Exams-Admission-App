@@ -1,33 +1,71 @@
 <div class="main-container">
-  <div class="secondary-container">
-    <mat-label class="title-header"> Pending </mat-label>
-    <div style="display: flex; flex-direction: row; justify-content: space-between  ; margin-top: 24px;">
-      <mat-form-field class="exam-form" appearance="outline">
-        <input matInput placeholder="Search" />
-      </mat-form-field>
-      <div class="buttons">
-          <div class="label" >Student selected
-            <mat-form-field class="exam-form-one" appearance="outline">
-            <input matInput />
-          </mat-form-field>
-        </div>
-            <div class="label" >Amount to be paid 
-              <mat-form-field class="exam-form-one" appearance="outline">
-              <input matInput />
-            </mat-form-field>
-          </div>
-        <div >
-          <button class="btn-2">Pay fee</button>
-        </div>
-      </div>
+  <div class="pt3 py0 secondary-container">
+    <div class="mb3">
+      <mat-label class="title-header"> {{tabHeader}} </mat-label>
     </div>
-    <div class="btn-tab">
-      <div class="tab">
-        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-          <mat-tab label="Pending">Pending</mat-tab>
-          <mat-tab label="Paid">Paid</mat-tab>
-        </mat-tab-group>
-      </div>
+    <div>
+      <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start"
+      (selectedTabChange)="selectTab($event)">
+        <mat-tab label="Pending">
+          <div class="container clearfix form-field mt3">
+            <form [formGroup]="filterForm" class="px1">
+              <div class="sm-col md-col-4 lg-col-5">
+                <mat-form-field appearance="outline" class="search">
+                  <mat-icon matPrefix class="search-icon">search</mat-icon>
+                  <input matInput formControlName="search" placeholder="Search" >
+                </mat-form-field>
+              </div>
+              <div class="sm-col md-col-8 lg-col-7 container clearfix flex filters">
+                <div class="sm-col md-col-5 flex">
+                    <div class="lable" style="width: 260px;">
+                        <span>Student selected</span>
+                    </div>
+                    <mat-form-field appearance="outline" class="filterField">
+                        <input matInput formControlName="selectedStudent" placeholder="Type here">
+                    </mat-form-field>
+                </div>
+                <div class="sm-col md-col-5 flex">
+                    <div class="lable" style="width: 300px;">
+                        <span>Amount to be paid</span>
+                    </div>
+                    <mat-form-field appearance="outline" class="filterField">
+                        <input matInput formControlName="amount" placeholder="Type here">
+                    </mat-form-field>
+                </div>
+                <div class="sm-col md-col-2 flex pay-fee-div">
+                  <button class="btn-pay-fee" (click)="payFee()">Pay fee</button>
+                </div>
+              </div>
+              <div>
+                <app-shared-table 
+                  [tableColumns]="pendingFeeTableHeader" 
+                  [tableData]="pendingFeeTableData" 
+                  [isHallTicket]="isHallTicket" 
+                  [removeTbodyColor]="removeTbodyColor" 
+                  [isPageable]="true" 
+                  (checkBoxAction)="onSelectedRows($event)"
+                ></app-shared-table>
+              </div>
+            </form>
+          </div>
+        </mat-tab>
+        <mat-tab label="Paid">
+          <div class="container clearfix form-field mt3">
+            <form [formGroup]="filterForm" class="px1">
+              <div class="sm-col md-col-5">
+                <mat-form-field appearance="outline" class="search">
+                  <mat-icon matPrefix class="search-icon">search</mat-icon>
+                  <input matInput formControlName="search" placeholder="Search" >
+                </mat-form-field>
+              </div>
+              <div>
+                <app-shared-table [tableColumns]="paidFeeTableHeader" [tableData]="paidFeeTableData" 
+                [isHallTicket]="isHallTicket" [removeTbodyColor]="removeTbodyColor"></app-shared-table>
+              </div>
+            </form>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </div>
