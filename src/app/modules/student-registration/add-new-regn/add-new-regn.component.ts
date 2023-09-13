@@ -37,36 +37,41 @@ export class AddNewRegnComponent {
     this.isDataLoading = false;
     this.regdStudents = [
       {
+        id: 0,
         name: "Vidhu",
         rollNo: "1234",
         course:"BSC GNM",
         admissionYr:"2020",
         noOfExam:"3",
-
+        examName: []
       },
       {
+        id: 1,
         name: "Vidhu",
         rollNo: "1234",
         course:"BSC GNM",
         admissionYr:"2020",
         noOfExam:"3",
+        examName: []
 
       },
       {
+        id: 2,
         name: "Adhi",
         rollNo: "12345",
         course:"BSC GNM",
         admissionYr:"2020",
         noOfExam:"3",
-
+        examName: []
       },
       {
+        id: 3,
         name: "Vidhu",
         rollNo: "1234",
         course:"BSC GNM",
         admissionYr:"2020",
         noOfExam:"3",
-
+        examName: []
       }
     ]
   }
