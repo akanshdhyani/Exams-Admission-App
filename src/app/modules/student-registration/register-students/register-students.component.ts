@@ -99,7 +99,6 @@ export class RegisterStudentsComponent {
 
   ngOnInit(): void {
     this.examCycleControl = new FormControl('', [Validators.required]);
-    console.log(this.examCycle)
 
   }
 
@@ -109,18 +108,18 @@ export class RegisterStudentsComponent {
   }
 
 
-  viewRegdStdnts(exam: any) {
+  viewRegdStdnts(exam: QuestionPaper) {
 
     if (this.examCycleControl.valid) {
       this.router.navigate(['student-registration/view-regd-students'], { state: { examId: exam.examId, examCycle: this.examCycle, examName: exam.examName } });
- 
-
     }
 
   }
 
-  regNewStdnts() {
-
+  regNewStdnts(exam: QuestionPaper) {
+    if (this.examCycleControl.valid) {
+    this.router.navigate(['student-registration/add-new-students-regn'], { state: { examId: exam.examId, examCycle: this.examCycle, examName: exam.examName } });
+    }
   }
 
 }

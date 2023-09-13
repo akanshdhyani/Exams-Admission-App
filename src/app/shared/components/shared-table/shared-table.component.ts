@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SelectionModel } from '@angular/cdk/collections';
 export interface TableProps {
   id?: string;
   code?: string;
@@ -78,7 +79,13 @@ export class SharedTableComponent implements AfterViewInit {
   pageEvent: PageEvent | undefined;
   private timeoutId: any;
 
-
+  selection = new SelectionModel<any>(true, []);
+  @Output() checkBoxAction: EventEmitter<any> = new EventEmitter<any>();
+  
+  userId = new FormControl('');
+  //users: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  examControl: any;
+  @Input() examList: string[] = [];
   constructor() {
     // this.grievancesTypes = this.configService.dropDownConfig.GRIEVANCE_TYPES;
     this.filterForm = new FormGroup({
@@ -96,6 +103,7 @@ export class SharedTableComponent implements AfterViewInit {
   ngOnInit(): void {
     this.displayedColumns = this.tableColumns?.map((tableColumn: any) => tableColumn.columnDef);
     // this.userRole = this.authService.getUserRoles()[0];
+    this.examControl = new FormControl('', [Validators.required]);
   }
 
   applyFilter(filterValue: string) {
@@ -125,6 +133,11 @@ export class SharedTableComponent implements AfterViewInit {
   onRowClick(e: Event) {
     console.log(e);
   }
+  onExamChange(e: any){
+   // e.preventDefault()
+    console.log(e.value);
+   // console.log(elem);
+  }
 
   setTableDataSource(data: any) {
 
@@ -134,7 +147,17 @@ export class SharedTableComponent implements AfterViewInit {
   }
 
   emitRowAction(row: any) {
+    console.log("clickedrow------",row)
     this.rowAction.emit(row);
+  }
+  logSelection() {
+    let selectedRows:any = [];
+    this.selection.selected.forEach(s =>{
+      selectedRows.push(s)
+    }
+       );
+       console.log(selectedRows)
+       this.checkBoxAction.emit(selectedRows);
   }
 
   onClickEdit(row: any) {
@@ -161,4 +184,27 @@ export class SharedTableComponent implements AfterViewInit {
   ApplyFilter(value: any) {
     console.log(value)
   }
+    /** Whether the number of selected elements matches the total number of rows. */
+    isAllSelected() {
+      const numSelected = this.selection.selected.length;
+      const numRows = this.dataSource.data.length;
+      return numSelected === numRows;
+    }
+  
+    /** Selects all rows if they are not all selected; otherwise clear selection. */
+    masterToggle() {
+      console.log("masterTogglemasterToggle")
+      this.isAllSelected() ?
+          this.selection.clear() :
+          this.dataSource.data.forEach(row =>
+            {
+              this.selection.select(row);
+              this.logSelection()
+            } );
+    }
+    isSelected(optionValue: string) {
+      // Return true for options that you want to select by default
+      return "All Exams" ;
+    }
+    
 }
