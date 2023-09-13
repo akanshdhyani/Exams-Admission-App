@@ -77,7 +77,8 @@ export class SharedTableComponent implements AfterViewInit {
   @Output() rowAction: EventEmitter<any> = new EventEmitter<any>();
   @Output() editData: EventEmitter<any> = new EventEmitter<any>();
   @Input() hasFilterOptions = false;
-  @Input() isHallTicket = false
+  @Input() isHallTicket = false;
+  @Input() removeTbodyColor = false;
   @Output() toggleData: EventEmitter<any> = new EventEmitter<any>();
   @Output() pageChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() searchParmas: EventEmitter<any> = new EventEmitter<any>();
