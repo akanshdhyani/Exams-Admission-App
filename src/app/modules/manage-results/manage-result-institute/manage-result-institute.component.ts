@@ -19,13 +19,15 @@ export class ManageResultInstituteComponent {
       lable: 'Last date for Upload',
       date: '25 Mar 2023',
       status: 'Pending',
-      navigateUrl: '/manage-result/institute/upload',
+      navigateUrlSecond: '/manage-result/institute/upload',
     }, {
       title: 'Exam 2',
       lable: 'Last date for Upload',
       date: '25 Mar 2023',
       status: 'Uploaded',
       navigateUrl: '/manage-result/institute/list',
+      navigateUrlSecond: '/manage-result/institute/upload',
+
     },
   ];
 
