@@ -76,7 +76,7 @@
             <!-- else not sortable -->
             <ng-template #notSortable>
 
-                <ng-container *ngIf="disCol?.isCheckBox" else default>
+                <!-- <ng-container *ngIf="disCol?.isCheckBox" else default>
 
                     <th [ngStyle]="disCol?.cellStyle" mat-header-cell *matHeaderCellDef>
                         <mat-checkbox (change)="$event ? masterToggle() : null"
@@ -85,13 +85,13 @@
                         </mat-checkbox>
                     </th>
                 </ng-container>
-                <ng-template #default>
+                <ng-template #default> -->
                     <th [ngStyle]="disCol?.cellStyle" mat-header-cell *matHeaderCellDef>
                         {{disCol?.header}}
                     </th>
 
 
-                </ng-template>
+                <!-- </ng-template> -->
                 <ng-container *ngIf="disCol?.isDropdown">
 
                     <th [ngStyle]="disCol?.cellStyle" mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -164,7 +164,7 @@
         </ng-container>
         
         <tr mat-header-row *matHeaderRowDef="displayedColumns">
-            <!-- <mat-checkbox (change)="toggleAllSelection($event)"></mat-checkbox> -->
+            <mat-checkbox (change)="toggleAllSelection($event)"></mat-checkbox>
         </tr>
 
         <tr mat-row *matRowDef="let row; columns: displayedColumns;">

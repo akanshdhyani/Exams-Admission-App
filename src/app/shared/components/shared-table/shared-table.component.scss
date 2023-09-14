@@ -87,5 +87,11 @@ th.mdc-data-table__cell,
 
 .removeTbodyColor,
 .mdc-data-table__content {
-    background-color: #f0f3f4;
+    // background-color: #f0f3f4;
+    background: unset;
+}
+
+.removeTbodyColor,
+.mat-mdc-paginator {
+    background: unset;
 }
