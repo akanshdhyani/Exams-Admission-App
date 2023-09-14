@@ -96,18 +96,6 @@ export interface attendanceTableData {
     name: string;
   }
 
-  export interface TableColumn {
-    columnDef: string;
-    header: string;
-    cell: Function;
-    isLink?: boolean;
-    isAction?: boolean;
-    url?: string;
-    isMenuOption?: boolean;
-    isSortable?: boolean;
-  }
-
-
   export interface RegdStudentsTableData {
     name: string;
     rollNo: string;
