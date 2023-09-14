@@ -6,7 +6,7 @@
                     <span class="title-section">{{item.title}}</span>
                     <span class="desc-section">{{item.type}}</span>
             </mat-card-content>
-            <button class="btn-1" >Pay exam fee</button>
+            <button class="btn-1" (click)="reDirectToFeemanagement(item.examId)">Pay exam fee</button>
             </mat-card>
     </div>
 </div>
