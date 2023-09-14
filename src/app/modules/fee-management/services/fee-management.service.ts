@@ -11,6 +11,34 @@ export class FeeManagementService {
     private httpService: HttpService
   ) { }
 
+  getExamCycles() {
+    // return this.httpService.get()
+  }
+
+  getInstitutesData(searcKey: string) {
+    // return this.httpService.get().pipe(
+    //   mergeMap(response => {
+    //     return this.formateInstitutesFeeDetails(response)
+    //   })
+    // )
+  }
+
+  formateInstitutesFeeDetails(institutesData: any) {
+    return institutesData
+  }
+
+  getExamsOfInstitute(instituteId: string) {
+    // return this.httpService.get().pipe(
+    //   mergeMap(response => {
+    //     return this.foramteInstituteExamsFeeDetails(response)
+    //   })
+    // )
+  }
+
+  foramteInstituteExamsFeeDetails(response: any) {
+    return response
+  }
+
   getExamFeeDetails(requestData: any) {
     // return this.httpService.get().pipe(
     //   mergeMap(response => {
