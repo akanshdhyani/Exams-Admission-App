@@ -23,7 +23,7 @@ const routes: Routes = [
       {
         path: 'student-enrollment',
         loadChildren:()=> import('../app/modules/student-enrollment/student-enrollment.module').then(m=>m.StudentEnrollmentModule),
-        canActivate: [AuthGuard, AdminGuard, InstituteGuard]
+        canActivate: [AuthGuard]
       },
       {
         path: 'student-registration',
@@ -33,7 +33,7 @@ const routes: Routes = [
       {
         path: 'fee-management',
         loadChildren: () => import('../app/modules/fee-management/fee-management.module').then(m => m.FeeManagementModule),
-        canActivate: [AuthGuard, AdminGuard, InstituteGuard]
+        canActivate: [AuthGuard]
       },
       {
         path: 'manage-exam-cycle',
@@ -68,7 +68,7 @@ const routes: Routes = [
       {
         path: 'candidate-portal',
         loadChildren: () => import('../app/modules/candidate-portal/candidate-portal-routing.module').then(m => m.CandidatePortalRoutingModule),
-        canActivate: [AuthGuard, StudentGuard]
+        canActivate: [AuthGuard]
       },
       {
         path: 'manage-attendance',

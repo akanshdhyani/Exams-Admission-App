@@ -53,10 +53,12 @@ export class SharedTableComponent implements AfterViewInit {
   filterForm: FormGroup;
   isClient: boolean = false;
   accumulatedSearchTerm: string = '';
+  selectedExamNames: { [key: string]: string[] } = {};
   //dataSource: MatTableDataSource<[any]> = new MatTableDataSource();
   public dataSource = new MatTableDataSource([]);
   // dataSource = new MatTableDataSource([])
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  @ViewChild(MatPaginator, {read: true}) customPaginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort | undefined;
 
   @Input() isPageable = false;
@@ -68,16 +70,23 @@ export class SharedTableComponent implements AfterViewInit {
   @Input() pageSize: number = 0;
   @Input() pageIndex: number = 0;
   @Input() isServerSidePagination: boolean = false;
+  @Input() showFirstLastButtons: boolean = true;
+  @Input() showPageSizeOptions: boolean = true;
+  @Input() hidePageSize: boolean = false;
 
   @Output() rowAction: EventEmitter<any> = new EventEmitter<any>();
   @Output() editData: EventEmitter<any> = new EventEmitter<any>();
   @Input() hasFilterOptions = false;
-  @Input() isHallTicket = false
+  @Input() isHallTicket = false;
+  @Input() removeTbodyColor = false;
   @Output() toggleData: EventEmitter<any> = new EventEmitter<any>();
   @Output() pageChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() searchParmas: EventEmitter<any> = new EventEmitter<any>();
+  @Output() filteredvalue: EventEmitter<any> = new EventEmitter<any>();
   pageEvent: PageEvent | undefined;
   private timeoutId: any;
+  @Output() sortChange: EventEmitter<any> = new EventEmitter<any>();
+  @Input() isServerSideSorting: boolean = false;
 
   selection = new SelectionModel<any>(true, []);
   @Output() checkBoxAction: EventEmitter<any> = new EventEmitter<any>();
@@ -109,7 +118,6 @@ export class SharedTableComponent implements AfterViewInit {
   applyFilter(filterValue: string) {
     if (this.isClient) {
       this.dataSource.filter = filterValue.trim().toLowerCase();
-      console.log(this.dataSource.filter);
       if (this.dataSource.paginator) {
         this.dataSource.paginator.firstPage();
       }
@@ -133,31 +141,39 @@ export class SharedTableComponent implements AfterViewInit {
   onRowClick(e: Event) {
     console.log(e);
   }
-  onExamChange(e: any){
-   // e.preventDefault()
-    console.log(e.value);
-   // console.log(elem);
+
+  onExamChange(event: any, row: any) {
+    this.selectedExamNames[row.id] = event.value;
+    console.log(event.value);
+    this.logSelection();
   }
 
   setTableDataSource(data: any) {
-
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.paginator = this.paginator ? this.paginator : null;
     this.dataSource.sort = this.sort ? this.sort : null;
   }
 
   emitRowAction(row: any) {
-    console.log("clickedrow------",row)
     this.rowAction.emit(row);
   }
-  logSelection() {
-    let selectedRows:any = [];
-    this.selection.selected.forEach(s =>{
-      selectedRows.push(s)
-    }
-       );
-       console.log(selectedRows)
-       this.checkBoxAction.emit(selectedRows);
+
+  updateExamNames() {
+    this.selection.selected.forEach((s) => {
+      const selectedExamNamesForRow = this.selectedExamNames[s.id] || [];
+      s.examName = selectedExamNamesForRow; // Update the examName array
+    });
+  }
+
+  logSelection() {    
+    const selectedRows: any[] = [];
+    this.updateExamNames();
+    this.selection.selected.forEach((s) => {
+      selectedRows.push(s);
+    });
+    console.log(selectedRows);
+    this.checkBoxAction.emit(selectedRows);
+    
   }
 
   onClickEdit(row: any) {
@@ -183,6 +199,11 @@ export class SharedTableComponent implements AfterViewInit {
   }
   ApplyFilter(value: any) {
     console.log(value)
+  }
+  onSortChange(e: any) {
+    if(this.isServerSideSorting) {
+    this.sortChange.emit(e);
+    }
   }
     /** Whether the number of selected elements matches the total number of rows. */
     isAllSelected() {
