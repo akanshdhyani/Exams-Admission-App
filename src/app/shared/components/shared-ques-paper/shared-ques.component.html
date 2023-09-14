@@ -1,0 +1,99 @@
+        <span>
+            Exam cycle
+
+        </span>
+        <div>
+           
+             <!--     <form 
+                [formGroup]="regStudentformGroup" >  -->
+                <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Select exam cycle</mat-label>
+                    <!--     <input matInput placeholder="" formControlName="state"> -->
+                    <mat-select (selectionChange)="examCycleSelected($event)" autofocus="true"
+                    [formControl]="examCycleControl">
+                        <span *ngFor='let examCycle of examCycleList;'>
+                            <mat-option [value]="examCycle">{{examCycle}}</mat-option>
+                        </span>
+                    </mat-select>
+                    <mat-error *ngIf="examCycleControl.invalid">
+                    </mat-error>
+                </mat-form-field>
+            </p>
+     <!--        </form> -->
+           
+        </div>
+
+        <mat-card style="margin-top: 38px;" *ngFor="let questionPpr of questionPapersList">
+           
+            <mat-card-content>
+                <ng-container *ngIf="loggedInUserRole ==='exams_admin' ; else instituteRole">
+                    <div class="button-group">
+                        <button class="button" mat-raised-button color="primary" (click)="emitUploadQuesPaper(questionPpr)">Upload
+                            Question Paper</button>
+                    </div>
+                </ng-container>
+                <ng-template #instituteRole>
+                    <div class="button-group">
+                        <button type="submit" class="button" mat-stroked-button color="primary"
+                            (click)="emitViewRegdStdnts(questionPpr)">View registered students</button>
+                        <button class="button" mat-raised-button color="primary" (click)="emitRegNewStdnts(questionPpr)"><mat-icon
+                                matSuffix>arrow_right_alt</mat-icon>Register New Students</button>
+                    </div>
+                </ng-template>
+            </mat-card-content> 
+            <p>
+                <mat-card-content>
+
+                    <mat-card-subtitle>Exam Name</mat-card-subtitle>
+
+                    <mat-card-title> {{ questionPpr.examName | uppercase }}</mat-card-title>
+
+                </mat-card-content>
+            </p>
+            <mat-divider></mat-divider>
+            <p>
+                <mat-grid-list cols="4" rowHeight="20px">
+                    <mat-grid-tile>
+
+                        <mat-card-subtitle> Course Name</mat-card-subtitle>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+
+                        <mat-card-subtitle> Exam Date</mat-card-subtitle>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+
+                        <mat-card-subtitle> Exam Start Time </mat-card-subtitle>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+
+                        <mat-card-subtitle> Maximum Marks</mat-card-subtitle>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="4" rowHeight="20px">
+                    <mat-grid-tile>
+
+                        <div> {{questionPpr.courseName}}</div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+
+                        <div> {{questionPpr.examDate}} </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+
+                        <div> {{questionPpr.examStartTime}} </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+
+                        <div> {{questionPpr.marks}} Marks</div>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+            </p>
+           
+
+        </mat-card>
+
+

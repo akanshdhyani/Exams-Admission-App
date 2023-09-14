@@ -14,6 +14,7 @@ import { ConformationDialogComponent } from './components/conformation-dialog/co
 import { ConfigService } from './services/config/config.service';
 import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loading/shared-skeleton-loading.component';
 import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.component';
+import { SharedQuestionPaperComponent } from './components/shared-ques-paper/shared-ques.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.
     CommonLayoutComponent,
     BreadcrumbComponent,
     ConformationDialogComponent,
-    UploadDialogComponent
+    UploadDialogComponent,
+    SharedQuestionPaperComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.
     HeaderComponent,
     SharedTableComponent,
     HttpClientModule,
+    SharedQuestionPaperComponent
   ],
   providers: [ConfigService]
 })
