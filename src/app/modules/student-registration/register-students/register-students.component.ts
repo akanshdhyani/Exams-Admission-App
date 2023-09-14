@@ -16,7 +16,7 @@ export class RegisterStudentsComponent {
 
   examCycleList: string[] = ['examCycle1', 'examCycle2', 'examCycle3'];
   examCycleControl: any;
-  examDetails: QuestionPaper[] = [
+  questionPapersList: QuestionPaper[] = [
     {
 
       examId: 1,
