@@ -7,7 +7,8 @@ import { StudentEnrollmentFormComponent } from './student-enrollment-form/studen
 const routes: Routes = [
   {path: 'institute', component: StudentEnrollmentComponent, canActivate: [InstituteGuard]},
   {path: 'add-enrollment', component: StudentEnrollmentFormComponent, pathMatch: 'full', canActivate: [InstituteGuard]},
-  { path: 'admin', component: StudentEnrollmentComponent, canActivate: [AdminGuard]}
+  { path: 'admin', component: StudentEnrollmentComponent, canActivate: [AdminGuard]},
+  {path: 'view-enrollment/:id', component: StudentEnrollmentFormComponent}
 ];
 
 @NgModule({

@@ -49,6 +49,8 @@ constructor(private router: Router, private authService: AuthServiceService){}
   }
 
   onClickItem(e: any) {
+    const id = e?.id;
+    this.router.navigate(['/student-enrollment/view-enrollment/'+id])
     // e.tabName= this.selectedTab.name
     // let id = parseInt(e?.ticketId)
     // //console.log("Line 251", this.grievanceType);
@@ -69,7 +71,7 @@ constructor(private router: Router, private authService: AuthServiceService){}
       provisionalEnrollmentNumber: '9876543210',
       courseName: 'B.SC Nursing',
       admissionYear: '2019',
-      marks: '80'
+      marks: '80',
     },
     {
       id: 1,
@@ -77,7 +79,7 @@ constructor(private router: Router, private authService: AuthServiceService){}
       provisionalEnrollmentNumber: '9876543210',
       courseName: 'B.SC Nursing',
       admissionYear: '2019',
-      marks: '90'
+      marks: '90',
     }
   ]
   setTimeout(() => {

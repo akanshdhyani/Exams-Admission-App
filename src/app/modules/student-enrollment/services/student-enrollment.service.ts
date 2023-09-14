@@ -25,4 +25,19 @@ export class StudentEnrollmentService extends HttpService {
     }
     return this.multipartPost(requestParam);
   }
+
+  /** institute login */
+  getStudentDetailsById(id: any) {
+    const requestParam: RequestParam = {
+      url: `${this.baseUrl}${this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_DETAILS_BY_ID}/${id}`,
+      data: {},
+    }
+    return this.get(requestParam);
+  }
+
+  /** verify student(Approve/reject) */
+  updateStudentEnrollmentStatus() {
+    
+  }
+  
 }

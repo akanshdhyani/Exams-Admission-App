@@ -972,7 +972,7 @@
                 </button>
               </div>
               <div>
-                <button
+                <button *ngIf="(loggedInUserRole === 'exams_institute' || (selectedLink === 'Basic Details' && loggedInUserRole === 'exams_admin'))"
                   class="text-class action-btns mr2"
                   type="cancel"
                   mat-raised-button
@@ -996,11 +996,29 @@
                   type="submit"
                   mat-raised-button
                   color="primary"
-                  *ngIf="selectedLink === 'Educational Details'"
+                  *ngIf="selectedLink === 'Educational Details' && loggedInUserRole === 'exams_institute'"
                   [disabled]="!educationalDetailsForm.valid"
                   (click)="createEnrollment()"
                 >
                   Submit
+                </button>
+                <button *ngIf="selectedLink === 'Educational Details' && loggedInUserRole === 'exams_admin'"
+                class="text-class action-btns"
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  (click)="updateEnrollmentStatus()"
+                >
+                Approve
+                </button>
+                <button *ngIf="selectedLink === 'Educational Details' && loggedInUserRole === 'exams_admin'"
+                class="text-class action-btns"
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  (click)="updateEnrollmentStatus()"
+                >
+                Reject
                 </button>
               </div>
             </div>

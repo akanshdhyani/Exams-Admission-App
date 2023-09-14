@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StudentEnrollmentService } from '../services/student-enrollment.service';
 import { ConfigService } from 'src/app/shared';
+import { AuthServiceService } from 'src/app/core/services';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-student-enrollment-form',
@@ -25,9 +27,17 @@ export class StudentEnrollmentFormComponent {
   basicDetails: boolean = true;
   educationalDetails: boolean = false;
   fileUploadError: string;
-  constructor(private formBuilder: FormBuilder, private studentEnrollmentService: StudentEnrollmentService) {
+  loggedInUserRole: any;
+  enrollmentId: any;
+  constructor(private formBuilder: FormBuilder, private studentEnrollmentService: StudentEnrollmentService, private authService: AuthServiceService, private route: ActivatedRoute) {
+    this.route.params.subscribe((param) => {
+      if(param['id']) {
+        this.enrollmentId = param['id'];
+      } 
+    })
   }
   ngOnInit() {
+    this.loggedInUserRole = this.authService.getUserRoles()[0];
     this.initBasicDetailsForm();
     this.initEducationalDetailsForm();
   }
