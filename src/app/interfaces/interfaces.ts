@@ -1,27 +1,27 @@
 export interface attendanceTableData {
-    id: string,
-    ticketId: number,
-    firstName: string,
-    lastName: string,
-    phone: string,
-    email: string,
-    requesterType: string,
-    assignedToId: any,
-    assignedToName: string,
-    description: string,
-    junk: boolean,
-    createdDate: string,
-    updatedDate: string,
-    createdDateTS: number,
-    updatedDateTS: number,
-    lastUpdatedBy: number,
-    escalated: boolean,
-    escalatedDate: string,
-    escalatedDateTS: number,
-    escalatedTo: number,
-    status: string,
-    requestType: any,
-    priority: string,
+    id: string;
+    ticketId: number;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    email: string;
+    requesterType: string;
+    assignedToId: any;
+    assignedToName: string;
+    description: string;
+    junk: boolean;
+    createdDate: string;
+    updatedDate: string;
+    createdDateTS: number;
+    updatedDateTS: number;
+    lastUpdatedBy: number;
+    escalated: boolean;
+    escalatedDate: string;
+    escalatedDateTS: number;
+    escalatedTo: number;
+    status: string;
+    requestType: any;
+    priority: string;
     escalatedBy: number
 }
   export interface TableColumn {
@@ -49,45 +49,45 @@ export interface attendanceTableData {
   }
 
   export interface userTableData {
-    id: number,
-    name:string,
-    username:string,
-    phone:number,
-    role:string,
-    status:string,
-    isMenuOption?:boolean,
-    isActive?: boolean,
+    id: number;
+    name:string;
+    username:string;
+    phone:number;
+    role:string;
+    status:string;
+    isMenuOption?:boolean;
+    isActive?: boolean;
     roles?: any
   }
 
   export interface DashboardTableData {
-    id: string,
-    bucket: string,
-    responsibleOfficer: string,
-    number: string,
-    pending: string,
-    inProcess: string,
-    resolved: string,
-    responseNotNeeded: string,
-    duplicate: string,
+    id: string;
+    bucket: string;
+    responsibleOfficer: string;
+    number: string;
+    pending: string;
+    inProcess: string;
+    resolved: string;
+    responseNotNeeded: string;
+    duplicate: string;
   }
 
   export interface DashboardAnalytics {
     status: ''
-    pending: string,
-    inProcess: string,
-    resolved: string,
-    responseNotNeeded: string,
+    pending: string;
+    inProcess: string;
+    resolved: string;
+    responseNotNeeded: string;
     duplicate: string
   }
 
   export interface QuestionPaper {
-    examId: number,
-    courseName: string,
-    examDate: string,
-    examStartTime: string,
-    marks: string,
-    examName: string,
+    examId: number;
+    courseName: string;
+    examDate: string;
+    examStartTime: string;
+    marks: string;
+    examName: string;
     questionPaperList: QuestionPaperList[]
   }
 
@@ -97,12 +97,33 @@ export interface attendanceTableData {
   }
 
   export interface RegdStudentsTableData {
-    id?: number, //make it a mandatory field during api integration
+    id?: number; //make it a mandatory field during api integration
     name: string;
     rollNo: string;
     course: string;
     admissionYr: string;
     noOfExam: string;
     examName?: string[];
+  }
+
+  export interface HallTicket {
+    id: number;
+    name: string;
+    course: string;
+    rollNo: string;
+    attendanCePercentage: string;
+  }
+  
+  export interface Institute {
+    value: string;
+    viewValue: string;
+  }
+  export interface Course {
+    value: string;
+    viewValue: string;
+  }
+  export interface Year {
+    value: string;
+    viewValue: string;
   }
 
