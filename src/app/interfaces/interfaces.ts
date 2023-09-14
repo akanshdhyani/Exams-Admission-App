@@ -109,6 +109,7 @@ export interface attendanceTableData {
 
 
   export interface RegdStudentsTableData {
+    id?: number, //make it a mandatory field during api integration
     name: string;
     rollNo: string;
     course: string;
