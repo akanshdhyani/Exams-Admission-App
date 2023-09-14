@@ -1,6 +1,6 @@
 <div class="main-container">
     <div class="secondary-container">
-        <h2 class="title-header">Manage Results</h2>
+        <h2 class="title-header">Track Dispatches</h2>
         <div>
             <div>
                 <span class="exam-lable">Exam Cycle</span>
@@ -24,8 +24,8 @@
                         </div>
                 </mat-card-content>
                 <div style="display: flex; flex-direction: row; column-gap: 2px;">
-                <button class="view-btn" (click)="navigateToView(item.navigateUrlSecond)">{{ (item.status === "Uploaded" ? "Re-upload" : "Upload Internal Marks") }}</button>
-                <button class="btn-2" (click)="navigateToView(item.navigateUrl)" *ngIf="item.status !== 'Pending'">View</button>
+                <button class="view-btn" (click)="uploadProof()">{{ (item.status === "Dispatched" ? "View Proof" : "Upload Proof") }}</button>
+                <!-- <button class="btn-2" (click)="navigateToView(item.navigateUrl)" *ngIf="item.status !== 'Pending'">View</button> -->
                 </div>
             </mat-card>
         </div>

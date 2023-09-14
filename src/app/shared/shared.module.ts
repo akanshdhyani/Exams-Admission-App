@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConformationDialogComponent } from './components/conformation-dialog/conformation-dialog.component';
 import { ConfigService } from './services/config/config.service';
 import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loading/shared-skeleton-loading.component';
+import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loa
     ConfirmationPopupComponent,
     CommonLayoutComponent,
     BreadcrumbComponent,
-    ConformationDialogComponent
+    ConformationDialogComponent,
+    UploadDialogComponent
   ],
   imports: [
     CommonModule,
