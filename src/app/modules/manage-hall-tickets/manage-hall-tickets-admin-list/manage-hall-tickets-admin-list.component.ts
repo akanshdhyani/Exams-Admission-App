@@ -1,54 +1,224 @@
-import { Component } from '@angular/core';
-
-interface HallTicket {
-  value: string;
-  viewValue: string;
-}
-
-interface Institute {
-  value: string;
-  viewValue: string;
-}
-interface Course {
-  value: string;
-  viewValue: string;
-}
-interface Year {
-  value: string;
-  viewValue: string;
-}
+import { Component, ViewChild } from '@angular/core';
+import { HallTicket, Institute, Course, Year, TableColumn } from '../../../interfaces/interfaces';
+import { BaseService } from '../../../service/base.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatTabGroup } from '@angular/material/tabs';
 @Component({
   selector: 'app-manage-hall-tickets-admin-list',
   templateUrl: './manage-hall-tickets-admin-list.component.html',
   styleUrls: ['./manage-hall-tickets-admin-list.component.scss']
 })
 export class ManageHallTicketsAdminListComponent {
+  @ViewChild(MatTabGroup) tabGroup: MatTabGroup;
 
-  halltickets: HallTicket[] = [
-    {
-      value:'new hall ticket',viewValue:"New Hall Tikcet"
-    },
-    {
-      value:'modification hall ticket',viewValue:"Modification Hall Ticket"
+  isDataLoading: boolean = false;
 
-    }
-  ]
-  institutes: Institute[] = [
-    {
-      value:'abc institute',viewValue:"ABC , Institute"
-    },
-    {
-      value:'xyz institute',viewValue:"XYZ , Institute"
+  halltickets: any;
+  institutes: Institute[];
+  courses: Course[];
+  years: Year[];
+  hallTicketsData: HallTicket[];
+  //generatedHallTickets: HallTicket[];
+  pendingHallTicketsTableColumns: TableColumn[] = [];
+  generatedHallTicketsTableColumns: TableColumn[] = [];
 
-    }
-  ]
-  courses: Course[] = [
-    {value: 'bsc', viewValue: 'BSc'},
-    {value: 'msc', viewValue: 'MSc'},
-  ];
-  years: Year[] = [
-    {value: 'sem-1', viewValue: '2020'},
-    {value: 'sem-2', viewValue: '2021'},
-    {value: 'sem-3', viewValue: '2022'},
-  ];
+  filters = ["Attendance > 75", "Attendance < 75"]
+  constructor(
+    private baseService: BaseService,
+  ) {
+
+  }
+  ngOnInit(): void {
+
+    this.initializeTableColumns();
+    this.initializePageData();
+    this.getHallTickets();
+    //this.getGeneratedHallTickets();
+  }
+
+
+
+
+  initializeTableColumns(): void {
+
+    this.pendingHallTicketsTableColumns = [
+      {
+        columnDef: 'select',
+        header: '',
+        isSortable: false,
+        isCheckBox: true,
+        cell: (element: Record<string, any>) => ``
+      },
+      {
+        columnDef: 'name',
+        header: 'Name',
+        isSortable: true,
+        cell: (element: Record<string, any>) => `${element['name']}`
+      },
+      {
+        columnDef: 'course',
+        header: 'Course',
+        isSortable: true,
+        cell: (element: Record<string, any>) => `${element['course']}`
+        /*   cell: (element: Record<string, any>) => {
+            const timestamp = element['createdAt'];
+            const date = new Date(timestamp);
+            const month = this.monthNames[date.getMonth()];
+            const day = date.getDate();
+            const year = date.getFullYear();
+            return `${month} ${day}, ${year}`;
+          } */
+      },
+      {
+        columnDef: 'rollNo',
+        header: 'Roll No',
+        isSortable: true,
+        cell: (element: Record<string, any>) => `${element['rollNo']}`
+
+      },
+      {
+        columnDef: 'attendancePercentage',
+        header: 'Attendance',
+        isSortable: false,
+        isLink: true,
+        cell: (element: Record<string, any>) => `${element['attendancePercentage']}`
+      },
+      {
+        columnDef: 'paymentStatus',
+        header: '',
+        isSortable: false,
+        isLink: true,
+        cell: (element: Record<string, any>) => `Paid`
+      },
+      {
+        columnDef: 'viewHallTicket',
+        header: '',
+        isSortable: false,
+        isLink: true,
+        cell: (element: Record<string, any>) => `View `
+      }
+
+    ];
+
+    this.generatedHallTicketsTableColumns = [
+      {
+        columnDef: 'name',
+        header: 'Name',
+        isSortable: true,
+        cell: (element: Record<string, any>) => `${element['name']}`
+      },
+      {
+        columnDef: 'course',
+        header: 'Course',
+        isSortable: true,
+        cell: (element: Record<string, any>) => `${element['course']}`
+        /*   cell: (element: Record<string, any>) => {
+            const timestamp = element['createdAt'];
+            const date = new Date(timestamp);
+            const month = this.monthNames[date.getMonth()];
+            const day = date.getDate();
+            const year = date.getFullYear();
+            return `${month} ${day}, ${year}`;
+          } */
+      },
+      {
+        columnDef: 'rollNo',
+        header: 'Roll No',
+        isSortable: true,
+        cell: (element: Record<string, any>) => `${element['rollNo']}`
+
+      },
+      {
+        columnDef: 'attendancePercentage',
+        header: 'Attendance',
+        isSortable: false,
+        isLink: true,
+        cell: (element: Record<string, any>) => `${element['attendancePercentage']}`
+      },
+      {
+        columnDef: 'viewHallTicket',
+        header: '',
+        isSortable: false,
+        isLink: true,
+        cell: (element: Record<string, any>) => `View `
+      }
+
+    ];
+
+  }
+
+  getHallTickets() {
+    this.isDataLoading = true;
+    this.baseService.getHallTickets$().subscribe({
+      next: (res: any) => {
+        console.log(res)
+        this.hallTicketsData = res
+        setTimeout(() => {
+          this.isDataLoading = false;
+        }, 1000);
+
+      },
+      error: (error: HttpErrorResponse) => {
+        this.isDataLoading = false;
+        console.log(error)
+      }
+
+    })
+
+  }
+
+  initializePageData() {
+    this.halltickets = [
+      {
+        value: 'new hall ticket', viewValue: "New Hall Tikcet"
+      },
+      {
+        value: 'modification hall ticket', viewValue: "Modification Hall Ticket"
+
+      }
+    ]
+    this.institutes = [
+      {
+        value: 'abc institute', viewValue: "ABC , Institute"
+      },
+      {
+        value: 'xyz institute', viewValue: "XYZ , Institute"
+
+      }
+    ]
+    this.courses = [
+      { value: 'bsc', viewValue: 'BSc' },
+      { value: 'msc', viewValue: 'MSc' },
+    ];
+    this.years = [
+      { value: 'sem-1', viewValue: '2020' },
+      { value: 'sem-2', viewValue: '2021' },
+      { value: 'sem-3', viewValue: '2022' },
+    ];
+  }
+
+  onSelectedRows(value: any) {
+    console.log(value)
+  }
+
+  generateHallTkt() {
+    this.isDataLoading = true;
+
+    this.baseService.generateHallTkt$().subscribe({
+      next: (res: any) => {
+        setTimeout(() => {
+          this.isDataLoading = false;
+        }, 1000);
+        this.tabGroup.selectedIndex = 1;
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message)
+      }
+    })
+
+  }
+
+  onAttendanceFilterClick(e: any) {
+    console.log(e)
+  }
 }
