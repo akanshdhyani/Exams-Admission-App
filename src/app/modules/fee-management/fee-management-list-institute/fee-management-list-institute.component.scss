@@ -5,8 +5,7 @@
     width: screen;
 }
 .secondary-container{
-    padding: 3%;
-    margin: 8%;
+    margin: 0px 5%;
 }
 .title-header {
     font-size: 26px;
@@ -16,66 +15,57 @@
     color: #000000;
     margin-bottom: 36px;
  }
-.selector{
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-       
-}
-.tab{
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-.btn-tab{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.buttons{
-    display: flex;
-    flex-direction: row;
-    gap:16px;
-}
-.btn-2{
-    background-color: #045DAD;
-    color:#fff;
-    width: fit;
-    padding:12px;
-    border-radius: 4px;
-    font-weight: 600;
-    border: 1.5px solid rgba(4,93,173, 1);
-    opacity: 1;
-    cursor: pointer;
-    padding-top: 18px;
-    padding-bottom: 18px;
-    margin-top: 5px;
 
+ .search {
+    width: 350px;
+    max-width: 70%;
+ }
+
+.search-icon {
+    color: #00000099;
+    padding-top: 0px !important;
 }
-::ng-deep .exam-form {
-    margin-top: 5px;
-    width: 276px;
-    .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
-    padding: 16px 0px;
+
+.filters {
+    gap: 8px;
+
+    .lable {
+        font-weight: 600;
+        font-size: 15px;
+        padding-top: 13px;
+        max-width: fit-content;
+        margin-right: 10px;
+    }
 }
-.mat-mdc-text-field-wrapper {
-    background-color: white;
+
+
+.pay-fee-div {
+    justify-content: end;
+
+    .btn-pay-fee {
+        min-width: 90px;
+        background-color: #045dad;
+        color: white;
+        height: 40px;
+        border-radius: 5px;
+        font-size: 15px;
+        cursor: pointer;
+    }
+}
+
+ ::ng-deep .form-field {
+ 
+    .mat-mdc-text-field-wrapper {
+       background-color: white;
+       height: 40px;
     }
 
-}
-::ng-deep .exam-form-one {
-    margin-top: 5px;
-    width: 150px;
     .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
-    padding: 13px 0px;
-}
-.mat-mdc-text-field-wrapper {
-    background-color: white;
+        padding-top: 10px;
     }
-
+ 
 }
-.label{
-    font-weight: 550; 
-    font-size: 16px;
-   letter-spacing: 0.16px;    
+
+::ng-deep .mat-mdc-tab-header {
+    border-bottom: 1px solid #00000029;
 }

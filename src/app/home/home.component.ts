@@ -93,9 +93,16 @@ export class HomeComponent {
     },
     {
       title: 'Manage Result',
-      type: 'manageResult',
-      url: '/manage-result',
-      visibility: '' // has to be added for both admin and institute
+      type: 'manage-Result-admin',
+      url: '/manage-result/admin',
+      visibility: 'exams_admin'       // has to be added for both admin and institute
+
+    },
+    {
+      title: 'Manage Result',
+      type: 'manage-Result-Institute',
+      url: '/manage-result/institute',
+      visibility: 'exams_institute' // has to be added for both admin and institute
     },
     {
       title: 'Manage Attendance',

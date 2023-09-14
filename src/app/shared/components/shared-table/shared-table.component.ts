@@ -53,6 +53,7 @@ export class SharedTableComponent implements AfterViewInit {
   filterForm: FormGroup;
   isClient: boolean = false;
   accumulatedSearchTerm: string = '';
+  selectedExamNames: { [key: string]: string[] } = {};
   //dataSource: MatTableDataSource<[any]> = new MatTableDataSource();
   public dataSource = new MatTableDataSource([]);
   // dataSource = new MatTableDataSource([])
@@ -76,7 +77,8 @@ export class SharedTableComponent implements AfterViewInit {
   @Output() rowAction: EventEmitter<any> = new EventEmitter<any>();
   @Output() editData: EventEmitter<any> = new EventEmitter<any>();
   @Input() hasFilterOptions = false;
-  @Input() isHallTicket = false
+  @Input() isHallTicket = false;
+  @Input() removeTbodyColor = false;
   @Output() toggleData: EventEmitter<any> = new EventEmitter<any>();
   @Output() pageChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() searchParmas: EventEmitter<any> = new EventEmitter<any>();
@@ -139,14 +141,14 @@ export class SharedTableComponent implements AfterViewInit {
   onRowClick(e: Event) {
     console.log(e);
   }
-  onExamChange(e: any){
-   // e.preventDefault()
-    console.log(e.value);
-   // console.log(elem);
+
+  onExamChange(event: any, row: any) {
+    this.selectedExamNames[row.id] = event.value;
+    console.log(event.value);
+    this.logSelection();
   }
 
   setTableDataSource(data: any) {
-
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.paginator = this.paginator ? this.paginator : null;
     this.dataSource.sort = this.sort ? this.sort : null;
@@ -155,14 +157,23 @@ export class SharedTableComponent implements AfterViewInit {
   emitRowAction(row: any) {
     this.rowAction.emit(row);
   }
-  logSelection() {
-    let selectedRows:any = [];
-    this.selection.selected.forEach(s =>{
-      selectedRows.push(s)
-    }
-       );
-       console.log(selectedRows)
-       this.checkBoxAction.emit(selectedRows);
+
+  updateExamNames() {
+    this.selection.selected.forEach((s) => {
+      const selectedExamNamesForRow = this.selectedExamNames[s.id] || [];
+      s.examName = selectedExamNamesForRow; // Update the examName array
+    });
+  }
+
+  logSelection() {    
+    const selectedRows: any[] = [];
+    this.updateExamNames();
+    this.selection.selected.forEach((s) => {
+      selectedRows.push(s);
+    });
+    console.log(selectedRows);
+    this.checkBoxAction.emit(selectedRows);
+    
   }
 
   onClickEdit(row: any) {

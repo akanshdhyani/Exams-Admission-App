@@ -42,12 +42,12 @@
         <div class="form-section">
           <div class="side-heading">
             Upload new list
-            <button class="btn-4">Back</button>
+            <button class="btn-4" *ngIf="files.length > 0" (click)="files.length=0">Back</button>
           </div>
           <div
             style="
               justify-content: center;
-              width: 80%;
+              width: 56%;
               display: flex;
               justify-content: center;
               align-items: center;
@@ -103,8 +103,8 @@
               column-gap: 8px;
             "
           >
-            <button class="btn-4">Re-upload list</button>
-            <button class="btn-2" (click)="goToList()">Ok</button>
+            <button class="btn-4" *ngIf="files.length > 0" (click)="files.length=0">Re-upload list</button>
+            <button class="btn-2" (click)="goToList()" *ngIf="files.length > 0">Ok</button>
           </div>
         </div>
       </div>
