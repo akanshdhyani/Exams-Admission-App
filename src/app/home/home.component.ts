@@ -24,16 +24,10 @@ export class HomeComponent {
       visibility: 'exams_institute'
     },
     {
-      title: 'Student Registration',
-      type: 'student-registration',
-      url: '/student-registration',
-      visibility: 'exams_student',
-    },
-    {
-      title: 'Register Student to Exam Cycles and Exams',
-      type: 'registerStudentInstitute',
-      url: '/student-registration/institute',
-      visibility: 'exams_institute'
+      title: 'Manage Exam Cycles & Exams',
+      type: 'manageCycle',
+      url: '/manage-exam-cycle',
+      visibility: 'exams_admin',
     },
     {
       title: 'Fee Management',
@@ -42,56 +36,6 @@ export class HomeComponent {
       visibility: 'exams_admin'
     },
     {
-      title: 'Fee Management',
-      type: 'feeManagementInstitute',
-      url: '/fee-management/institute',
-      visibility: 'exams_institute'
-    },
-    {
-      title: 'Manage Attendance',
-      type: 'manageAttendance',
-      url: '/manage-attendance',
-      visibility: 'exams_institute' // has to be added for both admin and institute
-    },
-    {
-      title: 'Download Question Papers',
-      type: 'downloadQuestionPapers',
-      url: 'manage-question-papers/institute',
-      visibility: 'exams_institute'
-    },
-    {
-      title: 'Track Dispatches',
-      type: 'trackDispatches',
-      url: '/dispatches/track',
-      visibility: 'exams_admin'
-    },
-    {
-      title: 'Update Dispatches',
-      type: 'updateDispatches',
-      url: '/dispatches/update',
-      visibility: 'exams_institute'
-    },
-    {
-      title: 'Manage Result',
-      type: 'manage-Result-admin',
-      url: '/manage-result/admin',
-      visibility: 'exams_admin'       // has to be added for both admin and institute
-
-    },
-    {
-      title: 'Manage Result',
-      type: 'manage-Result-Institute',
-      url: '/manage-result/institute',
-      visibility: 'exams_institute' // has to be added for both admin and institute
-    },
-    {
-      title: 'Manage Exam Cycles & Exams',
-      type: 'manageCycle',
-      url: '/manage-exam-cycle',
-      visibility: 'exams_admin',
-    },
-    
-   {
       title: 'Update CCTV Verification Status',
       type: 'cctvVerification',
       url: '/cctv-management',
@@ -109,6 +53,70 @@ export class HomeComponent {
       url: 'manage-question-papers',
       visibility: 'exams_admin' // has to be added for both admin and institute
     },
+    {
+      title: 'Track Dispatches',
+      type: 'trackDispatches',
+      url: '/dispatches/track',
+      visibility: 'exams_admin'
+    },
+    {
+      title: 'Manage Result',
+      type: 'manage-Result-admin',
+      url: '/manage-result/admin',
+      visibility: 'exams_admin'       // has to be added for both admin and institute
+
+    },
+    {
+      title: 'Student Registration',
+      type: 'student-registration',
+      url: '/student-registration',
+      visibility: 'exams_student',
+    },
+    {
+      title: 'Register Student to Exam Cycles and Exams',
+      type: 'registerStudentInstitute',
+      url: '/student-registration/institute',
+      visibility: 'exams_institute'
+    },
+    
+    {
+      title: 'Fee Management',
+      type: 'feeManagementInstitute',
+      url: '/fee-management/institute',
+      visibility: 'exams_institute'
+    },
+    
+    {
+      title: 'Manage Attendance',
+      type: 'manageAttendance',
+      url: '/manage-attendance',
+      visibility: 'exams_institute' // has to be added for both admin and institute
+    },
+    {
+      title: 'Download Question Papers',
+      type: 'downloadQuestionPapers',
+      url: 'manage-question-papers/institute',
+      visibility: 'exams_institute'
+    },
+    
+    {
+      title: 'Update Dispatches',
+      type: 'updateDispatches',
+      url: '/dispatches/update',
+      visibility: 'exams_institute'
+    },
+    
+    {
+      title: 'Manage Result',
+      type: 'manage-Result-Institute',
+      url: '/manage-result/institute',
+      visibility: 'exams_institute' // has to be added for both admin and institute
+    },
+    
+    
+   
+    
+    
   ];
 
   ngOnInit() {
