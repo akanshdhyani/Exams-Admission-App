@@ -1,14 +1,14 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, inject} from '@angular/core';
-import { FormGroup ,AbstractControl, FormControl} from '@angular/forms';
+import { FormGroup ,AbstractControl, FormControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 // import { DateTime } from 'luxon';
 
 export interface Exam {
-  examname: string;
-  examdate:string;
-  starttime:string;
-  endtime:string
+  examname: string | undefined | null;
+  examdate:string | undefined | null;
+  starttime:string | undefined | null;
+  endtime:string | undefined | null;
 }
 @Component({
   selector: 'app-manage-exam-cycle-form',
@@ -16,18 +16,18 @@ export interface Exam {
   styleUrls: ['./manage-exam-cycle-form.component.scss']
 })
 export class ManageExamCycleFormComponent {
-  exams: Exam[]=[]
+  exams: Exam[]=[];
   announcer = inject(LiveAnnouncer);
   pickerMinDate = new Date(new Date().setHours(0, 0, 0, 0));
   createExamCycle = new FormGroup({
-    'examcycle':new FormControl(),
-    'coursename':new FormControl(),
-    'startdate':new FormControl(),
-    'enddate':new FormControl(),
-    'examname':new FormControl(),
-    'examdate':new FormControl(),
-    'starttime':new FormControl(),
-    'endtime':new FormControl(),
+    'examcycle':new FormControl('', Validators.required),
+    'coursename':new FormControl('', Validators.required),
+    'startdate':new FormControl('', Validators.required),
+    'enddate':new FormControl('',Validators.required),
+    'examname':new FormControl('', Validators.required),
+    'examdate':new FormControl('', Validators.required),
+    'starttime':new FormControl('', Validators.required),
+    'endtime':new FormControl('', Validators.required),
   });
   constructor(private router: Router) {}
  
