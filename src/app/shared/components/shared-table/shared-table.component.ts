@@ -75,6 +75,7 @@ export class SharedTableComponent implements AfterViewInit {
   @Input() hidePageSize: boolean = false;
 
   @Output() rowAction: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteAction: EventEmitter<any> = new EventEmitter<any>();
   @Output() editData: EventEmitter<any> = new EventEmitter<any>();
   @Input() hasFilterOptions = false;
   @Input() isHallTicket = false;
@@ -156,6 +157,10 @@ export class SharedTableComponent implements AfterViewInit {
 
   emitRowAction(row: any) {
     this.rowAction.emit(row);
+  }
+
+  emitDeleteAction(row: any) {
+    this.deleteAction.emit(row);
   }
 
   updateExamNames() {

@@ -12,6 +12,7 @@ import { ManageExamCycleListComponent } from './manage-exam-cycle-list/manage-ex
 import { ManageExamCycleViewComponent } from './manage-exam-cycle-view/manage-exam-cycle-view.component';
 import { MaterialModule } from 'src/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared';
 //#endregion
 
 //#endregion
@@ -28,7 +29,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ManageExamsRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class ManageExamsModule { }
