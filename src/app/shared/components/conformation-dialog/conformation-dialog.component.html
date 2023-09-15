@@ -10,10 +10,18 @@
                     <mat-icon aria-hidden="false" class="fail-icon">priority_high</mat-icon>
                 </div>
             </ng-container>
+            <ng-container *ngSwitchCase="'confirmation'">
+                <div class="px2">
+                <p class="w-full">{{dialogDetails?.header}}</p>
+                <p class="">{{dialogDetails?.description}}</p>
+                </div>
+            </ng-container>
         </ng-container>
+        <ng-container *ngIf="dialogDetails.dialogType !== 'confirmation'">
         <div *ngFor="let description of dialogDetails?.description" class="description">
             <span>{{description}}</span>
         </div>
+        </ng-container>
 </div>
 <div class="px2 clearfix footer">
     <ng-container *ngFor="let btn of dialogDetails?.buttons">

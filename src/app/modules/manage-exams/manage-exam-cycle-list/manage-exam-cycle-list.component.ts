@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TableColumn } from 'src/app/interfaces/interfaces';
 import { Tabs } from 'src/app/shared/config/tabs.config';
-
+import { ConformationDialogComponent } from 'src/app/shared/components/conformation-dialog/conformation-dialog.component';
 
 interface Course {
   value: string;
@@ -25,7 +26,7 @@ export class ManageExamCycleListComponent {
   pageIndex = 0;
   pageSize = 10;
   length = 10;
-  constructor(private router: Router){}
+  constructor(private router: Router, private dialog: MatDialog){}
   courses: Course[] = [
     {value: 'bsc', viewValue: 'BSc'},
     {value: 'msc', viewValue: 'MSc'},
@@ -111,6 +112,14 @@ export class ManageExamCycleListComponent {
           isLink: false,
           cell: (element: Record<string, any>) => `View`
         },
+        {
+          columnDef: 'isAction',
+          header: '',
+          isSortable: false,
+          isLink: false,
+          isAction: true,
+          cell: (element: Record<string, any>) => ``
+        },
       ]
     }
 
@@ -120,6 +129,39 @@ export class ManageExamCycleListComponent {
 
   onClickItem(event: any) {
 
+  }
+
+  onDeleteClick(event: any) {
+    const dialogRef = this.dialog.open(ConformationDialogComponent, {
+      data: {
+        dialogType: 'confirmation',
+        header: 'Want to delete?',
+        description: ["Are you sure you want to delete the exam cycle? Once deleted you can't revert back the action"],
+        buttons: [
+          {
+            btnText: 'Delete',
+            positionClass: 'right',
+            btnClass: 'btn-full',
+            response: true
+          },
+          {
+            btnText: 'Cancel',
+            positionClass: 'right',
+            btnClass: 'btn-outline mr2',
+            response: false
+          },
+        ],
+      },
+      width: '700px',
+      height: '300px',
+      maxWidth: '90vw',
+      maxHeight: '30vh'
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+       this.router.navigateByUrl('/candidate-portal')
+      }
+    })
   }
 
   getSearchParams(event: any) {

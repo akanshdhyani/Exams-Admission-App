@@ -35,6 +35,7 @@
             [isServerSidePagination]="false"
             (pageChange)="handlePageChange($event)"
             (searchParmas)="getSearchParams($event)"
+            (deleteAction)="onDeleteClick($event)"
           >
           </app-shared-table>
         </mat-tab>
