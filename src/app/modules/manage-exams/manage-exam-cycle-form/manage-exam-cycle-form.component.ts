@@ -1,10 +1,8 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, inject} from '@angular/core';
 import { FormGroup ,AbstractControl, FormControl} from '@angular/forms';
+import { Router } from '@angular/router';
 // import { DateTime } from 'luxon';
-
-
-
 
 export interface Exam {
   examname: string;
@@ -18,6 +16,8 @@ export interface Exam {
   styleUrls: ['./manage-exam-cycle-form.component.scss']
 })
 export class ManageExamCycleFormComponent {
+  exams: Exam[]=[]
+  announcer = inject(LiveAnnouncer);
   pickerMinDate = new Date(new Date().setHours(0, 0, 0, 0));
   createExamCycle = new FormGroup({
     'examcycle':new FormControl(),
@@ -29,6 +29,7 @@ export class ManageExamCycleFormComponent {
     'starttime':new FormControl(),
     'endtime':new FormControl(),
   });
+  constructor(private router: Router) {}
  
   
   ngOnInit(){
@@ -37,21 +38,31 @@ export class ManageExamCycleFormComponent {
  
  initForm(){
  }
+
+ convertDateFormat(date: any) {
+  const dateString = new Date(date);
+  console.log(dateString);
+  const formattedDate = dateString.getFullYear() + '-' + dateString.getMonth() + '-' + dateString.getDate();
+  return formattedDate;
+}
  
  
- addExamCycle() {
+ addNewExam() {
    const examCycleValue = this.createExamCycle.value;
-  //  this.exams.push(examCycleValue);
-   this.createExamCycle.reset();
+   console.log(examCycleValue);
+   this.exams.push({
+    examname: this.createExamCycle.value.examname,
+    examdate: this.convertDateFormat(this.createExamCycle.value.examdate),
+    starttime: this.createExamCycle.value.starttime ? this.createExamCycle.value.starttime : '10:00 AM',
+    endtime: this.createExamCycle.value.endtime ? this.createExamCycle.value.endtime: '10:00 PM',
+   })
+   console.log(this.exams);
  }
   onSubmit(){
    console.log(this.createExamCycle)
  }
       
- 
- exams: Exam[]=[]
- announcer = inject(LiveAnnouncer);
- 
+
  remove(exams:Exam): void{
    const index = this.exams.indexOf(exams);
  
@@ -95,6 +106,10 @@ export class ManageExamCycleFormComponent {
    
    
 //  }
+
+goBack() {
+  this.router.navigate(['/manage-exam-cycle']);
+}
   
  }
 
