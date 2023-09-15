@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ManageTrackDispatchesComponent } from './manage-track-dispatches/manage-track-dispatches.component';
+import { UpdateTrackDispatchesInstituteComponent } from './update-track-dispatches-institute/update-track-dispatches-institute.component';
 
 const routes: Routes = [
-  {path: '', component: ManageTrackDispatchesComponent}
+  {path: 'track', component: ManageTrackDispatchesComponent},
+  {path: 'update', component:   UpdateTrackDispatchesInstituteComponent}
 
 ];
 

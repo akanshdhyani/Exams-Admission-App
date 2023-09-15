@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConformationDialogComponent } from './components/conformation-dialog/conformation-dialog.component';
 import { ConfigService } from './services/config/config.service';
 import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loading/shared-skeleton-loading.component';
+import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.component';
+import { SharedQuestionPaperComponent } from './components/shared-ques-paper/shared-ques.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loa
     ConfirmationPopupComponent,
     CommonLayoutComponent,
     BreadcrumbComponent,
-    ConformationDialogComponent
+    ConformationDialogComponent,
+    UploadDialogComponent,
+    SharedQuestionPaperComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +46,7 @@ import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loa
     HeaderComponent,
     SharedTableComponent,
     HttpClientModule,
+    SharedQuestionPaperComponent
   ],
   providers: [ConfigService]
 })
