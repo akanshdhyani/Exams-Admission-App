@@ -11,7 +11,7 @@ import { MaterialModule } from 'src/material/material.module';
 import { ManageQuestionPapersComponent } from './manage-question-papers/manage-question-papers.component';
 import { DownloadQuesPapersComponent } from './download-ques-papers/download-ques-papers.component';
 //#endregion
-
+import { SharedModule } from '../../shared/shared.module';
 //#endregion
 
 
@@ -24,7 +24,8 @@ import { DownloadQuesPapersComponent } from './download-ques-papers/download-que
   imports: [
     CommonModule,
     ManageQuestionPapersRoutingModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ]
 })
 export class ManageQuestionPapersModule { }

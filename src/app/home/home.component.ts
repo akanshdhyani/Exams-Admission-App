@@ -30,30 +30,16 @@ export class HomeComponent {
       visibility: 'exams_student',
     },
     {
-      title: 'Manage Exam Cycles & Exams',
-      type: 'manageCycle',
-      url: '/manage-exam-cycle',
-      visibility: 'exams_admin',
-    },
-
-    {
-      title: 'Fee Management',
-      type: 'feeManagementAdmin',
-      url: '/fee-management/admin',
-      visibility: 'exams_admin'
-    },
-
-    {
       title: 'Register Student to Exam Cycles and Exams',
       type: 'registerStudentInstitute',
       url: '/student-registration/institute',
       visibility: 'exams_institute'
     },
     {
-      title: 'Download Question Papers',
-      type: 'downloadQuestionPapers',
-      url: 'manage-question-papers/institute',
-      visibility: 'exams_institute'
+      title: 'Fee Management',
+      type: 'feeManagementAdmin',
+      url: '/fee-management/admin',
+      visibility: 'exams_admin'
     },
     {
       title: 'Fee Management',
@@ -62,22 +48,16 @@ export class HomeComponent {
       visibility: 'exams_institute'
     },
     {
-      title: 'Update CCTV Verification Status',
-      type: 'cctvVerification',
-      url: '/cctv-management',
-      visibility: 'exams_admin'
+      title: 'Manage Attendance',
+      type: 'manageAttendance',
+      url: '/manage-attendance',
+      visibility: 'exams_institute' // has to be added for both admin and institute
     },
     {
-      title: 'Manage Hall Tickets',
-      type: 'hallTickets',
-      url: '/hall-ticket-management',
-      visibility: 'exams_admin'
-    },
-    {
-      title: 'Manage Question Papers',
-      type: 'manageQp',
-      url: 'manage-question-papers',
-      visibility: 'exams_admin' // has to be added for both admin and institute
+      title: 'Download Question Papers',
+      type: 'downloadQuestionPapers',
+      url: 'manage-question-papers/institute',
+      visibility: 'exams_institute'
     },
     {
       title: 'Track Dispatches',
@@ -105,10 +85,29 @@ export class HomeComponent {
       visibility: 'exams_institute' // has to be added for both admin and institute
     },
     {
-      title: 'Manage Attendance',
-      type: 'manageAttendance',
-      url: '/manage-attendance',
-      visibility: 'exams_institute' // has to be added for both admin and institute
+      title: 'Manage Exam Cycles & Exams',
+      type: 'manageCycle',
+      url: '/manage-exam-cycle',
+      visibility: 'exams_admin',
+    },
+    
+   {
+      title: 'Update CCTV Verification Status',
+      type: 'cctvVerification',
+      url: '/cctv-management',
+      visibility: 'exams_admin'
+    },
+    {
+      title: 'Manage Hall Tickets',
+      type: 'hallTickets',
+      url: '/hall-ticket-management',
+      visibility: 'exams_admin'
+    },
+    {
+      title: 'Manage Question Papers',
+      type: 'manageQp',
+      url: 'manage-question-papers',
+      visibility: 'exams_admin' // has to be added for both admin and institute
     },
   ];
 

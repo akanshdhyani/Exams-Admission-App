@@ -14,6 +14,8 @@ import { ConformationDialogComponent } from './components/conformation-dialog/co
 import { ConfigService } from './services/config/config.service';
 import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loading/shared-skeleton-loading.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.component';
+import { SharedQuestionPaperComponent } from './components/shared-ques-paper/shared-ques.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     ConfirmationPopupComponent,
     CommonLayoutComponent,
     BreadcrumbComponent,
-    ConformationDialogComponent
+    ConformationDialogComponent,
+    UploadDialogComponent,
+    SharedQuestionPaperComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +48,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     HeaderComponent,
     SharedTableComponent,
     HttpClientModule,
-    NgxMaterialTimepickerModule
+  NgxMaterialTimepickerModule,
+    SharedQuestionPaperComponent
   ],
   providers: [ConfigService]
 })

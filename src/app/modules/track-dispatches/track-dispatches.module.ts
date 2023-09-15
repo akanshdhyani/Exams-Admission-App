@@ -10,6 +10,7 @@ import { MaterialModule } from 'src/material/material.module';
 //#region (created modules && components)
 import { TrackDispatchesRoutingModule } from './track-dispatches-routing.module';
 import { ManageTrackDispatchesComponent } from './manage-track-dispatches/manage-track-dispatches.component';
+import { UpdateTrackDispatchesInstituteComponent } from './update-track-dispatches-institute/update-track-dispatches-institute.component';
 //#endregion
 
 //#endregion
@@ -18,7 +19,8 @@ import { ManageTrackDispatchesComponent } from './manage-track-dispatches/manage
 
 @NgModule({
   declarations: [
-    ManageTrackDispatchesComponent
+    ManageTrackDispatchesComponent,
+    UpdateTrackDispatchesInstituteComponent
   ],
   imports: [
     CommonModule,
