@@ -5,6 +5,7 @@ import { RequestParam, ServerResponse } from 'src/app/shared';
 import { ConfigService } from 'src/app/shared/services/config/config.service';
 import { environment } from 'src/environments/environment';
 import { HttpService } from '../http-service/http.service';
+import { JwtTokenService } from '../jwt-token-service/jwt-token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,9 @@ export class AuthServiceService extends HttpService {
   private readonly USER_DATA = "user_data";
   private readonly ALL_ROLES = "all_roles";
 
-  constructor(http: HttpClient, private configService: ConfigService) {
-    super(http);
+  constructor(http: HttpClient, private configService: ConfigService,
+    jwtTokenService: JwtTokenService) {
+    super(http,jwtTokenService);
     this.baseUrl = environment.apiUrl;
     this.userManagementURL = environment.userManagementURL;
   }
@@ -106,11 +108,14 @@ export class AuthServiceService extends HttpService {
   }
 
   saveToken(token: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token);
+    console.log(token)
+    this.jwtTokenService.setAccessToken(token);
+   // localStorage.setItem(this.TOKEN_KEY, token);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    return this.jwtTokenService.getAccessToken();
+   // return localStorage.getItem(this.TOKEN_KEY);
   }
 
   logout(): void {

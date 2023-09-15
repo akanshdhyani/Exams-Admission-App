@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
+import { JwtTokenService } from '../core/services/jwt-token-service/jwt-token.service';
 
 
 @Injectable({
@@ -17,9 +18,9 @@ export class BaseService extends HttpService {
     'Authorization': `Bearer ${localStorage.getItem("token")}`
   };
 
-  constructor(private httpClient: HttpClient,
+  constructor(private httpClient: HttpClient,jwtTokenService: JwtTokenService
   ) {
-    super(httpClient);
+    super(httpClient,jwtTokenService);
     this.baseUrl = environment.apiUrl;
   }
 
