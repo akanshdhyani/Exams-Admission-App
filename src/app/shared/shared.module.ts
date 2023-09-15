@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConformationDialogComponent } from './components/conformation-dialog/conformation-dialog.component';
 import { ConfigService } from './services/config/config.service';
 import { SharedSkeletonLoadingComponent } from './components/shared-skeleton-loading/shared-skeleton-loading.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { UploadDialogComponent } from './components/upload-dialog/upload-dialog.component';
 import { SharedQuestionPaperComponent } from './components/shared-ques-paper/shared-ques.component';
 
@@ -36,6 +37,7 @@ import { SharedQuestionPaperComponent } from './components/shared-ques-paper/sha
     ReactiveFormsModule,
     RouterModule,
     HttpClientModule,
+    NgxMaterialTimepickerModule
   ],
   exports :
   [
@@ -46,6 +48,7 @@ import { SharedQuestionPaperComponent } from './components/shared-ques-paper/sha
     HeaderComponent,
     SharedTableComponent,
     HttpClientModule,
+  NgxMaterialTimepickerModule,
     SharedQuestionPaperComponent
   ],
   providers: [ConfigService]

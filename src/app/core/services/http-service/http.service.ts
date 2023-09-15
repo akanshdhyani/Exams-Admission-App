@@ -40,11 +40,8 @@ export class HttpService {
     }));
 }
 
- /**
-   * for making post api calls
-   * @param {RequestParam} requestParam interface
-  */
- uploadFilepost(requestParam: RequestParam): Observable<any> {
+
+multipartPost(requestParam: RequestParam): Observable<any> {
   const httpOptions: HttpOptions = {
     headers: requestParam.header,
     params: requestParam.param
@@ -69,6 +66,28 @@ export class HttpService {
    * @param {RequestParam} requestParam interface
   */
    post(requestParam: RequestParam): Observable<ServerResponse> {
+    const httpOptions: HttpOptions = {
+      headers: requestParam.header ? this.getHeader(requestParam.header) : this.getHeader(),
+      params: requestParam.param
+    };
+    return this.http.post<Response>(requestParam.url, requestParam.data, httpOptions).pipe(
+      mergeMap((data: Response) => {
+        if (data.status && data.status !== 200) {
+          return throwError(() => new Error(data.error));
+        }
+        const serverRes: ServerResponse ={
+          statusInfo: {statusCode: 200, statusMessage: "success"},
+          responseData: data.body? data.body : data
+        }
+        return observableOf(serverRes);
+      }));
+  }
+
+  /**
+   * for making post api calls
+   * @param {RequestParam} requestParam interface
+  */
+  formDataPost(requestParam: RequestParam): Observable<ServerResponse> {
     const httpOptions: HttpOptions = {
       headers: requestParam.header ? this.getHeader(requestParam.header) : this.getHeader(),
       params: requestParam.param

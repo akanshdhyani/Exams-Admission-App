@@ -392,7 +392,7 @@
                       placeholder="Select here"
                     >
                       <span *ngFor="let center of centersList; let i = index">
-                        <mat-option [value]="center.name">{{
+                        <mat-option [value]="center">{{
                           center.name
                         }}</mat-option>
                       </span>
@@ -411,7 +411,7 @@
                       placeholder="Select here"
                     >
                       <span *ngFor="let course of courseList; let i = index">
-                        <mat-option [value]="course.name">{{
+                        <mat-option [value]="course">{{
                           course.name
                         }}</mat-option>
                       </span>
@@ -972,7 +972,7 @@
                 </button>
               </div>
               <div>
-                <button
+                <button *ngIf="(loggedInUserRole === 'exams_institute' || (selectedLink === 'Basic Details' && loggedInUserRole === 'exams_admin'))"
                   class="text-class action-btns mr2"
                   type="cancel"
                   mat-raised-button
@@ -996,11 +996,29 @@
                   type="submit"
                   mat-raised-button
                   color="primary"
-                  *ngIf="selectedLink === 'Educational Details'"
+                  *ngIf="selectedLink === 'Educational Details' && loggedInUserRole === 'exams_institute'"
                   [disabled]="!educationalDetailsForm.valid"
                   (click)="createEnrollment()"
                 >
                   Submit
+                </button>
+                <button *ngIf="selectedLink === 'Educational Details' && loggedInUserRole === 'exams_admin'"
+                class="text-class action-btns"
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  (click)="updateEnrollmentStatus()"
+                >
+                Approve
+                </button>
+                <button *ngIf="selectedLink === 'Educational Details' && loggedInUserRole === 'exams_admin'"
+                class="text-class action-btns"
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  (click)="updateEnrollmentStatus()"
+                >
+                Reject
                 </button>
               </div>
             </div>
