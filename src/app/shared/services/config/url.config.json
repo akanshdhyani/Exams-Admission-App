@@ -1,6 +1,14 @@
 {
     "URLS": {
         "LOGIN": "/v1/user/login",
-        "KEYCLOAK_LOGIN": "/api/v1/user/keycloak/usrlogin"
+        "KEYCLOAK_LOGIN": "/api/v1/user/keycloak/usrlogin",
+        "QUESTION_PAPER": {
+            "GET_ALL": "/api/questionPaper/list",
+            "UPLOAD": "/api/questionPaper/upload",
+            "DOWNLOAD": "/api/questionPaper/download",
+            "GET_BY_ID": "/api/questionPaper",
+            "GET_PREVIEW_URL": "/api/questionPaper/preview",
+            "DELETE": "/api/questionPaper/delete"
+        }
     }
 }

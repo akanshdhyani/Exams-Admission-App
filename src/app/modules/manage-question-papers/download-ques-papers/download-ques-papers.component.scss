@@ -23,3 +23,11 @@
     justify-content: end;
     align-items: end !important;
 }
+
+ .question-paper-item-container {
+   button.next-button {
+    margin-left: 2rem;
+  }
+  display: flex;
+  justify-content: space-between;
+ }

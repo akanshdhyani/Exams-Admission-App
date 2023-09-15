@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { QuestionPaper } from 'src/app/interfaces/interfaces';
+import { ManageQuestionPaperService } from '../services/manage-question-paper.service';
 
 @Component({
   selector: 'app-download-ques-papers',
@@ -7,6 +8,12 @@ import { QuestionPaper } from 'src/app/interfaces/interfaces';
   styleUrls: ['./download-ques-papers.component.scss']
 })
 export class DownloadQuesPapersComponent {
+  selectedExamCycleId: any;
+  constructor(
+    private questionPaperService: ManageQuestionPaperService,
+  ) {
+
+  }
 
   examCycleList: string[] = ['examCycle1', 'examCycle2', 'examCycle3'];
 
@@ -91,7 +98,37 @@ export class DownloadQuesPapersComponent {
   examCycleSelected(e: Event) {
 
   }
-  downloadQuesPpr(e: any) {
-console.log(e)
+
+  downloadQuestionPaper(questionPaperId: any) {
+    this.questionPaperService.downloadQuestionPaper(questionPaperId).subscribe({
+      next: (response) => {
+        console.log("Download question paper response", response);
+      },
+      error: (error) => {
+        console.log("Download question paper error", error);
+      }
+    });
+  }
+
+  getQuestionPapers(examCycleId: any, examId: any) {
+    this.questionPaperService.getAllQuestionPapers(examCycleId, examId).subscribe({
+      next: (response) => {
+        console.log("All Question Papers response", response);
+      },
+      error: (error) => {
+        console.log("get all question paper error", error);
+      }
+    })
+  }
+
+  viewQuestionPaper(questionPaperId: any) {
+    this.questionPaperService.getQuestionPaperPreviewUrl(questionPaperId).subscribe({
+      next: (response) => {
+        console.log("question paper preview url response", response);
+      },
+      error: (error) => {
+        console.log("question paper preview url error", error);
+      }
+    });
   }
 }
