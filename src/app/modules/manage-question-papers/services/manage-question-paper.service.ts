@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from 'src/app/core/services';
+import { JwtTokenService } from 'src/app/core/services/jwt-token-service/jwt-token.service';
 import { RequestParam, ServerResponse, ConfigService } from 'src/app/shared';
 
 @Injectable({
@@ -9,8 +10,9 @@ import { RequestParam, ServerResponse, ConfigService } from 'src/app/shared';
 })
 export class ManageQuestionPaperService extends HttpService {
   override baseUrl: string;
-  constructor( http: HttpClient, private configService: ConfigService) { 
-    super(http);
+  constructor( http: HttpClient, private configService: ConfigService,
+    jwtTokenService: JwtTokenService) { 
+    super(http,jwtTokenService);
     this.baseUrl= "https://exams.uphrh.in"
   }
 
