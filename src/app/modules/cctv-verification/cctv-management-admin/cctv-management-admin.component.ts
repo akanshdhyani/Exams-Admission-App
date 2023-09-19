@@ -394,14 +394,14 @@ export class CctvManagementAdminComponent {
         controls: [
           {
             controlLable: 'Enter IP address',
-            contolName: 'IPaddress',
+            controlName: 'IPaddress',
             controlType: 'input',
             placeholder: 'Type here',
             value: '',
             validators: ['required'],
           },{
             controlLable: 'Enter remarks',
-            contolName: 'remarks',
+            controlName: 'remarks',
             controlType: 'textArea',
             placeholder: 'Type here',
             value: '',
@@ -446,14 +446,14 @@ export class CctvManagementAdminComponent {
         controls: [
           {
             controlLable: 'Enter IP address',
-            contolName: 'IPaddress',
+            controlName: 'IPaddress',
             controlType: 'input',
             placeholder: 'Type here',
             value: '',
             validators: ['required'],
           },{
             controlLable: 'Enter remarks',
-            contolName: 'remarks',
+            controlName: 'remarks',
             controlType: 'textArea',
             placeholder: 'Type here',
             value: '',
@@ -507,7 +507,7 @@ export class CctvManagementAdminComponent {
         controls: [
           {
             controlLable: 'Institute District',
-            contolName: 'instituteDistrict',
+            controlName: 'instituteDistrict',
             controlType: 'input',
             placeholder: 'Type here',
             value: 'Agra',
@@ -515,10 +515,10 @@ export class CctvManagementAdminComponent {
             readonly: true
           },{
             controlLable: 'Near Institute List',
-            contolName: 'institute',
+            controlName: 'institute',
             controlType: 'select',
             optionsList: nearestInstitutesList,
-            value: 0,
+            value: null,
             placeholder: 'Select the Institute',
             validators: ['required'],
           },

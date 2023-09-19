@@ -9,7 +9,7 @@
                         </div>
                         <div class="mb1">
                             <mat-form-field appearance="outline" class="w-full text-class">
-                                <input matInput [placeholder]="control.placeholder" [formControlName]="control.contolName" >
+                                <input matInput [placeholder]="control.placeholder" [formControlName]="control.controlName" >
                             </mat-form-field>
                         </div>
                     </ng-container>
@@ -19,7 +19,7 @@
                         </div>
                         <div class="mb1">
                             <mat-form-field appearance="outline" class="w-full text-class">
-                                <mat-select [placeholder]="control.placeholder" [formControlName]="control.contolName" >
+                                <mat-select [placeholder]="control.placeholder" [formControlName]="control.controlName" >
                                     <ng-container *ngFor="let option of control.optionsList">
                                         <mat-option [value]="option.id">{{option.displayName}}</mat-option>
                                     </ng-container>
@@ -33,7 +33,7 @@
                         </div>
                         <div class="mb1">
                             <mat-form-field appearance="outline" class="w-full text-class">
-                                <textarea matInput [placeholder]="control.placeholder" [formControlName]="control.contolName" >
+                                <textarea matInput [placeholder]="control.placeholder" [formControlName]="control.controlName" >
                                 </textarea>
                             </mat-form-field>
                         </div>

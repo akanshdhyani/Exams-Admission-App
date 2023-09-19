@@ -29,7 +29,7 @@
           <span class="lable">{{ data.labelOne }}</span>
         </div>
         <mat-form-field appearance="outline" class="selectInput">
-          <mat-select formControlName="selectCycle">
+          <mat-select formControlName="idType" placeholder="Select here">
             <ng-container
               *ngFor="let selectCycle of data.select.selectCycleList"
             >
@@ -37,7 +37,6 @@
                 selectCycle.displayValue
               }}</mat-option>
             </ng-container>
-            <mat-option style="display: none" value="">Select here</mat-option>
           </mat-select>
         </mat-form-field>
       </ng-container>
@@ -58,7 +57,9 @@
         <div class="outline">
           <div *ngIf="files.length > 0" class="file-container">
             <span>{{files[0].name}}</span> <!-- File name will come  -->
-            <a href="" >Preview</a> <!-- Preview will only work when file.length -->
+            <ng-container *ngIf="!data.hidePreview">
+              <a href="" >Preview</a> <!-- Preview will only work when file.length -->
+            </ng-container>
           </div>
         </div>
       </div>
