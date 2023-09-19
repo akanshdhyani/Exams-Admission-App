@@ -29,6 +29,7 @@ export interface attendanceTableData {
     header: string;
     cell: Function;
     isLink?: boolean;
+    showDeleteIcon?: boolean;
     isAction?: boolean;
     url?: string;
     isSortable?: boolean;

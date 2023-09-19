@@ -90,6 +90,8 @@ export class FeeManagementAdminComponent implements OnInit {
       cellStyle: {
         'background-color': '#0000000a', 'width': '160px', 'color': '#00000099'
       },
+      isAction: true,
+      showDeleteIcon: false,
     },
   ]
 
