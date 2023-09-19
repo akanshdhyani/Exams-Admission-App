@@ -18,6 +18,7 @@ interface Course {
   styleUrls: ['./manage-result-admin.component.scss']
 })
 export class ManageResultAdminComponent {
+  selectedCellDetails: any;
   courses: Course[] = [
     {value: 'bsc', viewValue: 'BSc'},
     {value: 'msc', viewValue: 'MSc'},
@@ -502,12 +503,14 @@ export class ManageResultAdminComponent {
   internalMarksHandler(cellDetails: any) {
     if(cellDetails.row.internalMarks === 'View & download'){
       this.showInstitutesTable = false;
+      this.selectedCellDetails  = cellDetails;
     }
   }
 
   finalMarksHandler(cellDetails:any) {
     if(cellDetails.row.finalMarks === 'View & delete'){
       this.showInstitutesTable = false;
+      this.selectedCellDetails  = cellDetails;
     } else if(cellDetails.row.finalMarks === 'Upload') {
       this.openUploadModal(cellDetails);
     }
@@ -640,6 +643,14 @@ export class ManageResultAdminComponent {
         console.log("Confirmation result", result);
       }
     })
+  }
+
+  deleteMarksHander() {
+
+  }
+
+  downloadMarksHandler() {
+
   }
 
 
