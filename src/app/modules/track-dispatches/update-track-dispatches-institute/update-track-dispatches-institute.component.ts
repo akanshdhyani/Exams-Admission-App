@@ -52,57 +52,57 @@ export class UpdateTrackDispatchesInstituteComponent {
 
   
   uploadProof(){
-const dialogRef = this.dialog.open(UploadDialogComponent, {
-data: {
-          heading:'Upload proof',     
-          labelOne: 'Select Dispatch Date',
-          labelTwo:'Attach file(s)',
-          dateSelect: 'dateSelect',  
+    const dialogRef = this.dialog.open(UploadDialogComponent, {
+    data: {
+              heading:'Upload proof',     
+              labelOne: 'Select Dispatch Date',
+              labelTwo:'Attach file(s)',
+              dateSelect: 'dateSelect',  
 
-          // select: {
-          //   selectCycleList: [
-          //     {
-          //       displayValue: 'Exam 1',
-          //       value: 'Exam 1'
-          //     },
-          //     {
-          //       displayValue: 'Exam 2',
-          //       value: 'Exam 2'
-          //     }
-          //   ]
-          // },
+              // select: {
+              //   selectCycleList: [
+              //     {
+              //       displayValue: 'Exam 1',
+              //       value: 'Exam 1'
+              //     },
+              //     {
+              //       displayValue: 'Exam 2',
+              //       value: 'Exam 2'
+              //     }
+              //   ]
+              // },
 
 
-          description: ['Hall ticket downloaded successfully'],
-          buttons: [
-            {
-              btnText: 'Browse',
-              positionClass: 'right ml2',
-              btnClass: 'btn-full',
-              showBtn: 1,
-              hideButton: false,
-              btnType: 'browse'
+              description: ['Hall ticket downloaded successfully'],
+              buttons: [
+                {
+                  btnText: 'Browse',
+                  positionClass: 'right ml2',
+                  btnClass: 'btn-full',
+                  showBtn: 1,
+                  hideButton: false,
+                  btnType: 'browse'
 
+                },
+                {
+                  btnText: 'Upload',
+                  positionClass: 'right ml2',
+                  btnClass: 'btn-full',
+                  btnType: 'submit',
+                  hideButton: true,
+                },
+                {
+                  btnText: 'Cancel',
+                  positionClass: 'right',
+                  btnClass: 'btn-outline',
+                  hideButton: false,
+                  btnType: 'close'
+                },
+                
+              ],
             },
-            {
-              btnText: 'Upload',
-              positionClass: 'right ml2',
-              btnClass: 'btn-full',
-              btnType: 'submit',
-              hideButton: true,
-            },
-            {
-              btnText: 'Cancel',
-              positionClass: 'right',
-              btnClass: 'btn-outline',
-              hideButton: false,
-              btnType: 'close'
-            },
-            
-          ],
-        },
-})
-  dialogRef.afterClosed().subscribe(result => {
+    })
+    dialogRef.afterClosed().subscribe(result => {
     console.log("file",result)
         if (result) {
           const dialogRef = this.dialog.open(ConformationDialogComponent, {
@@ -130,7 +130,7 @@ data: {
              this.router.navigateByUrl('/dispatches/update')
             }
           })        }
-      })
+    })
   }
 
 }
