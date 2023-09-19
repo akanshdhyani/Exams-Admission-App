@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { AuthServiceService } from 'src/app/core/services';
 @Component({
   selector: 'app-fee-management-institute',
   templateUrl: './fee-management-institute.component.html',
@@ -27,12 +27,21 @@ export class FeeManagementInstituteComponent {
   ];
 
   constructor(
-    private router: Router,
+    private router: Router, private authService: AuthServiceService
   ) {}
 
   reDirectToFeemanagement(examId: any) {
     if (examId) {
       this.router.navigateByUrl('/fee-management/manage-fee');
+    }
+  }
+    
+  ngOnInit() {
+    // Check if the user is already logged in
+    if (this.authService.isLoggedIn()) {
+      // Redirect to the home page if logged in
+      console.log("User is logged in !!")
+    //  this.router.navigate(['home']);
     }
   }
 

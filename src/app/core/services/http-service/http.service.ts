@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { of as observableOf, Observable, throwError } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { HttpOptions, RequestParam, ServerResponse, Response } from 'src/app/shared';
-
+import { JwtTokenService } from '../jwt-token-service/jwt-token.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +15,7 @@ export class HttpService {
    */
   baseUrl: string;
   
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public jwtTokenService: JwtTokenService) {}
 
  /**
    * for making get api calls
@@ -178,7 +178,8 @@ multipartPost(requestParam: RequestParam): Observable<any> {
    * for preparing headers
    */
     private getHeader(headers?: HttpOptions['headers']): HttpOptions['headers'] {
-      const access_token = localStorage.getItem('access_token');
+      //const access_token = localStorage.getItem('access_token');
+      const access_token =  this.jwtTokenService.getAccessToken();
       const default_headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',

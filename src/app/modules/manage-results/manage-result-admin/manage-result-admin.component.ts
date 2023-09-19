@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FeeManagementService } from '../../fee-management/services/fee-management.service';
 import { FormControl } from '@angular/forms';
+import { UploadDialogComponent } from 'src/app/shared/components/upload-dialog/upload-dialog.component';
+import { ConformationDialogComponent } from 'src/app/shared/components/conformation-dialog/conformation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 interface Course {
@@ -15,6 +18,7 @@ interface Course {
   styleUrls: ['./manage-result-admin.component.scss']
 })
 export class ManageResultAdminComponent {
+  selectedCellDetails: any;
   courses: Course[] = [
     {value: 'bsc', viewValue: 'BSc'},
     {value: 'msc', viewValue: 'MSc'},
@@ -61,37 +65,41 @@ export class ManageResultAdminComponent {
     },{
       header: 'Internal marks',
       columnDef: 'internalMarks',
-      isSortable: true,
+      isSortable: false,
       cell: (element: Record<string, any>) => `${element['internalMarks']}`,
       cellStyle: {
         'background-color': '#0000000a', 'width': '160px', 'color': '#00000099'
       },
+      isAction: true,
     },{
       header: 'Final marks',
       columnDef: 'finalMarks',
-      isSortable: true,
+      isSortable: false,
       cell: (element: Record<string, any>) => `${element['finalMarks']}`,
       cellStyle: {
         'background-color': '#0000000a', 'width': '145px', 'color': '#00000099'
       },
+      isAction: true,
     },
     {
       header: 'Revised final marks',
       columnDef: 'revisedFinalMarks',
-      isSortable: true,
+      isSortable: false,
       cell: (element: Record<string, any>) => `${element['revisedFinalMarks']}`,
       cellStyle: {
         'background-color': '#0000000a', 'width': '145px', 'color': '#00000099'
       },
+      isAction: true,
     },    
     {
       header: '',
       columnDef: 'publish',
-      isSortable: true,
+      isSortable: false,
       cell: (element: Record<string, any>) => `${element['publish']}`,
       cellStyle: {
         'background-color': '#0000000a', 'width': '145px', 'color': '#00000099'
       },
+      isAction: true,
     }
   ]
 
@@ -420,8 +428,11 @@ export class ManageResultAdminComponent {
   //#endregion
 
   constructor(
-    private feeManagementService: FeeManagementService
-  ) {}
+    private feeManagementService: FeeManagementService,
+    private dialog: MatDialog,
+  ) {
+   
+  }
 
   ngOnInit(): void {
     this.intialisation()
@@ -468,5 +479,179 @@ export class ManageResultAdminComponent {
     this.showInstitutesTable = false
 
   }
+
+  onCellClick(event: any) {
+    console.log("Cell Data", event);
+    switch(event.columnDef) {
+      case "internalMarks":
+        this.internalMarksHandler(event);
+        break;
+      case "finalMarks": 
+        this.finalMarksHandler(event);
+        break;
+      case "revisedFinalMarks": 
+        this.revisedFinalMarksHandler(event);
+        break;
+      case "publish":
+        this.publishHandler(event);
+        break;
+
+    }
+  }
+
+
+  internalMarksHandler(cellDetails: any) {
+    if(cellDetails.row.internalMarks === 'View & download'){
+      this.showInstitutesTable = false;
+      this.selectedCellDetails  = cellDetails;
+    }
+  }
+
+  finalMarksHandler(cellDetails:any) {
+    if(cellDetails.row.finalMarks === 'View & delete'){
+      this.showInstitutesTable = false;
+      this.selectedCellDetails  = cellDetails;
+    } else if(cellDetails.row.finalMarks === 'Upload') {
+      this.openUploadModal(cellDetails);
+    }
+
+  }
+
+  revisedFinalMarksHandler(cellDetails:any) {
+    if(cellDetails.row.revisedFinalMarks === 'Upload') {
+      this.openUploadModal(cellDetails);
+    }
+  }
+
+  openUploadModal(cellDetails: any){
+    const heading= cellDetails.columnDef === "finalMarks" ? "Upoad final marks" : "Upload revised marks";
+    const dialogRef = this.dialog.open(UploadDialogComponent, {
+    data: {
+              heading: heading,     
+              // labelOne: 'Select Dispatch Date',
+              labelTwo:'Attach file(s)',
+              // dateSelect: 'dateSelect',  
+
+              // select: {
+              //   selectCycleList: [
+              //     {
+              //       displayValue: 'Exam 1',
+              //       value: 'Exam 1'
+              //     },
+              //     {
+              //       displayValue: 'Exam 2',
+              //       value: 'Exam 2'
+              //     }
+              //   ]
+              // },
+
+
+              description: ['Hall ticket downloaded successfully'],
+              buttons: [
+                {
+                  btnText: 'Browse',
+                  positionClass: 'right ml2',
+                  btnClass: 'btn-full',
+                  showBtn: 1,
+                  hideButton: false,
+                  btnType: 'browse'
+
+                },
+                {
+                  btnText: 'Upload',
+                  positionClass: 'right ml2',
+                  btnClass: 'btn-full',
+                  btnType: 'submit',
+                  hideButton: true,
+                },
+                {
+                  btnText: 'Cancel',
+                  positionClass: 'right',
+                  btnClass: 'btn-outline',
+                  hideButton: false,
+                  btnType: 'close'
+                },
+                
+              ],
+            },
+    })
+    dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          const dialogRef = this.dialog.open(ConformationDialogComponent, {
+            data: {
+              dialogType: 'success',
+              description: ['Markes uploaded successfully'],
+              buttons: [
+                {
+                  btnText: 'Ok',
+                  positionClass: 'center',
+                  btnClass: 'btn-full',
+                  response: true,
+                  // click:this.router.navigateByUrl('/manage-result/institute'),
+    
+                },
+              ],
+            },
+            width: '700px',
+            height: '400px',
+            maxWidth: '90vw',
+            maxHeight: '90vh'
+          })
+          dialogRef.afterClosed().subscribe(files => {
+            if (files) {
+             
+            }
+          })        
+        }
+    })
+  }
+
+  publishHandler(cellDetails: any) {
+    if(cellDetails.row.publish === 'Publish') {
+      this.openPublishConfirmation(cellDetails);;
+    }
+  }
+
+  openPublishConfirmation(cellDetails: any) {
+    const dialogRef = this.dialog.open(ConformationDialogComponent, {
+      data: {
+        dialogType: 'confirmation',
+        header: 'Publish marks ?',
+        description: [`Are you sure you want to publish marks of ${cellDetails.row.instituteName} `],
+        buttons: [
+          {
+            btnText: 'Publish',
+            positionClass: 'right',
+            btnClass: 'btn-full',
+            response: true
+          },
+          {
+            btnText: 'Cancel',
+            positionClass: 'right',
+            btnClass: 'btn-outline mr2',
+            response: false
+          },
+        ],
+      },
+      width: '700px',
+      height: '300px',
+      maxWidth: '90vw',
+      maxHeight: '30vh'
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log("Confirmation result", result);
+      }
+    })
+  }
+
+  deleteMarksHander() {
+
+  }
+
+  downloadMarksHandler() {
+
+  }
+
 
 }
