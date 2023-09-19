@@ -32,7 +32,7 @@ export class UploadDialogComponent implements OnInit {
     this.dialogDetails = data
     this.uploadForm = new FormGroup({
       dispatchDate: new FormControl(),
-      selectCycle: new FormControl()
+      idType: new FormControl()
     })
   }
 
@@ -89,8 +89,7 @@ export class UploadDialogComponent implements OnInit {
       if (this.files.length > 0) {
         const data = {
           files : this.files,
-          // data: ,
-          // select: ,
+          idType: this.uploadForm.value.idType
         }
         this.dialogRef.close(data)
       }

@@ -20,7 +20,6 @@ export class CctvApprovalPopupComponent {
   ) {
     this.dialogDetails = data
     this.dynamicFormGroup = this.createFormControls(data.controls);
-    console.log(this.dynamicFormGroup);
   }
 
   createFormControls(controls: any[]) {
@@ -36,7 +35,7 @@ export class CctvApprovalPopupComponent {
           })
         }
 
-        formGroup[control.contolName] = new FormControl(control.value, validators)
+        formGroup[control.controlName] = new FormControl(control.value, validators)
       })
     }
     return new FormGroup(formGroup);
@@ -51,7 +50,6 @@ export class CctvApprovalPopupComponent {
   }
 
   submit() {
-    console.log(this.dynamicFormGroup.value);
     if (this.dynamicFormGroup.valid) {
       this.dialogRef.close(this.dynamicFormGroup.value)
     }

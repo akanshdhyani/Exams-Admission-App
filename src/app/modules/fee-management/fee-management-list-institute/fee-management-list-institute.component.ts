@@ -321,7 +321,6 @@ export class FeeManagementListInstituteComponent implements OnInit {
   tabHeader = 'Pending'
 
   payingExams:any = []
-  totalAmountToPay: string;
 
   constructor(
     private dialog: MatDialog,
@@ -360,7 +359,7 @@ export class FeeManagementListInstituteComponent implements OnInit {
       mandatoryFields: {
         referenceNo: '', //generate random number (this.baseService.generate_uuidv4())
         submerchantId: "45",
-        transactionAmount: this.totalAmountToPay,
+        transactionAmount: this.filterForm.get('amount')?.value,
         invoiceId: "x1",
         invoiceDate: "x",
         invoiceTime: "x",
@@ -395,12 +394,21 @@ export class FeeManagementListInstituteComponent implements OnInit {
   }
 
   onSelectedRows(event: any) {
-    this.payingExams.push(event)
+    this.payingExams = event;
     this.calculateAmount();
   }
 
   calculateAmount() {
-    let amount = 0
-    this.totalAmountToPay = amount.toString()
+    let amount = 0;
+    let numberOfStudents = 0;
+    this.payingExams.forEach((exam: any) => {
+      amount = amount + Number(exam.fee);
+      numberOfStudents = numberOfStudents + 1
+    });
+    if (this.filterForm) {
+      this.filterForm.get('amount')?.setValue(amount)
+      this.filterForm.get('selectedStudent')?.setValue(numberOfStudents)
+    }
+
   }
 }
