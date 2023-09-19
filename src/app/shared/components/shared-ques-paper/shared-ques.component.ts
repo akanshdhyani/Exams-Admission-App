@@ -16,7 +16,7 @@ export class SharedQuestionPaperComponent {
   ) { }
 
   @Input() examCycleList : string[] ;
-  @Input() examCycleControl: any;
+  @Input() examCycleControl: FormControl;
   @Input() questionPapersList : QuestionPaper[];
 
   @Output() viewRegdStdnts: EventEmitter<any> = new EventEmitter<any>();//view regd students
@@ -26,8 +26,7 @@ export class SharedQuestionPaperComponent {
   ngOnInit(): void {
     this.loggedInUserRole = this.authService.getUserRoles()[0];
     console.log( this.loggedInUserRole )
-    this.examCycleControl = new FormControl('', [Validators.required]);
-
+    // this.examCycleControl = new FormControl('', [Validators.required]);
   }
 
   examCycleSelected(e: any) {
@@ -37,7 +36,6 @@ export class SharedQuestionPaperComponent {
 
 
   emitViewRegdStdnts(questionPaper: QuestionPaper) {
-
     if (this.examCycleControl.valid) {
       this.viewRegdStdnts.emit(questionPaper);
      // this.router.navigate(['student-registration/view-regd-students'], { state: { examId: exam.examId, examCycle: this.examCycle, examName: exam.examName } });
