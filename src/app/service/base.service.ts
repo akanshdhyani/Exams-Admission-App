@@ -15,7 +15,7 @@ export class BaseService extends HttpService {
   override baseUrl: string;
   headers = {
     'Accept': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem("token")}`
+    'Authorization': `Bearer ${this.jwtTokenService.getAccessToken()}`
   };
 
   constructor(private httpClient: HttpClient,jwtTokenService: JwtTokenService

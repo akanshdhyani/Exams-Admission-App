@@ -44,7 +44,7 @@ export class AuthServiceService extends HttpService {
     if (token) {
       const userData= this.getUserData();
       console.log("userData =>", userData);
-      const userRole = userData.userRepresentation?.attributes?.Role[0];
+      const userRole = userData.Role[0];
       switch(userRole) {
         case 'exams_superadmin':
           role= this.configService.rolesConfig.ROLES.SUPERADMIN;
@@ -99,7 +99,7 @@ export class AuthServiceService extends HttpService {
 
   saveUserData(userData: any):void {
     this.saveToken(userData?.accessToken);
-    localStorage.setItem(this.USER_DATA,JSON.stringify(userData));
+    localStorage.setItem(this.USER_DATA,JSON.stringify(userData.userRepresentation?.attributes));
   }
 
   getUserData() {
@@ -114,6 +114,8 @@ export class AuthServiceService extends HttpService {
   }
 
   getToken(): string | null {
+    let tokenFromService = this.jwtTokenService.getAccessToken()
+    console.log(tokenFromService)
     return this.jwtTokenService.getAccessToken();
    // return localStorage.getItem(this.TOKEN_KEY);
   }
