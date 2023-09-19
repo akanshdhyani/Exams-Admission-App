@@ -29,19 +29,19 @@
           </mat-form-field>
         </div>
       </div>
-      <ng-container *ngIf="showInstitutesTable; else istitueExamsFeeDetails">
+      <ng-container *ngIf="showInstitutesTable; else institueExamsFeeDetails">
         <div>
           <app-shared-table 
             [tableColumns]="instituteTableHeader" 
             [tableData]="instituteTableData" 
             [isHallTicket]="true" 
             [removeTbodyColor]="true" 
-            [isPageable]="true" 
-            (cellClickAction)="onSelecteInstitute($event)"
+            [isPageable]="true"
+            (cellClickAction)="onCellClick($event)"
           ></app-shared-table>
         </div>
       </ng-container>
-      <ng-template #istitueExamsFeeDetails>
+      <ng-template #institueExamsFeeDetails>
         <div>
           <app-shared-table 
             [tableColumns]="studentExamsTableHeader" 
