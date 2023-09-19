@@ -76,6 +76,7 @@ export class SharedTableComponent implements AfterViewInit {
 
   @Output() rowAction: EventEmitter<any> = new EventEmitter<any>();
   @Output() deleteAction: EventEmitter<any> = new EventEmitter<any>();
+  @Output() cellClickAction: EventEmitter<any> = new EventEmitter<any>();
   @Output() editData: EventEmitter<any> = new EventEmitter<any>();
   @Input() hasFilterOptions = false;
   @Input() isHallTicket = false;
@@ -163,6 +164,13 @@ export class SharedTableComponent implements AfterViewInit {
     this.deleteAction.emit(row);
   }
 
+  emitCellClickAction(row: any, columnDef: string) {
+    const data = {
+      row: row,
+      columnDef: columnDef
+    }
+    this.cellClickAction.emit(data);
+  }
   updateExamNames() {
     this.selection.selected.forEach((s) => {
       const selectedExamNamesForRow = this.selectedExamNames[s.id] || [];
