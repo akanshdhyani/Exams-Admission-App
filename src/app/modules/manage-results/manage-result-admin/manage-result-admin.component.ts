@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FeeManagementService } from '../../fee-management/services/fee-management.service';
+import { FormControl } from '@angular/forms';
 
 
 interface Course {
@@ -17,4 +19,454 @@ export class ManageResultAdminComponent {
     {value: 'bsc', viewValue: 'BSc'},
     {value: 'msc', viewValue: 'MSc'},
   ];
+  examCycleList = [
+    {
+      examName: 'Exam Cycle 1',
+      value: '1'
+    },{
+      examName: 'Exam Cycle 2',
+      value: '2'
+    },{
+      examName: 'Exam Cycle 3',
+      value: '3'
+    },
+  ]
+
+  instituteTableHeader = [
+    {
+      header: 'Institute name',
+      columnDef: 'instituteName',
+      isSortable: true,
+      cell: (element: Record<string, any>) => `${element['instituteName']}`,
+      cellStyle: {
+        'background-color': '#0000000a',
+        'color': '#00000099'
+      },
+    },{
+      header: 'Institute ID',
+      columnDef: 'instituteId',
+      isSortable: true,
+      cell: (element: Record<string, any>) => `${element['instituteId']}`,
+      cellStyle: {
+        'background-color': '#0000000a', 'width': '160px', 'color': '#00000099'
+      },
+    },{
+      header: 'Course',
+      columnDef: 'course',
+      isSortable: true,
+      cell: (element: Record<string, any>) => `${element['course']}`,
+      cellStyle: {
+        'background-color': '#0000000a', 'width': '160px', 'color': '#00000099'
+      },
+    },{
+      header: 'Internal marks',
+      columnDef: 'internalMarks',
+      isSortable: true,
+      cell: (element: Record<string, any>) => `${element['internalMarks']}`,
+      cellStyle: {
+        'background-color': '#0000000a', 'width': '160px', 'color': '#00000099'
+      },
+    },{
+      header: 'Final marks',
+      columnDef: 'finalMarks',
+      isSortable: true,
+      cell: (element: Record<string, any>) => `${element['finalMarks']}`,
+      cellStyle: {
+        'background-color': '#0000000a', 'width': '145px', 'color': '#00000099'
+      },
+    },
+    {
+      header: 'Revised final marks',
+      columnDef: 'revisedFinalMarks',
+      isSortable: true,
+      cell: (element: Record<string, any>) => `${element['revisedFinalMarks']}`,
+      cellStyle: {
+        'background-color': '#0000000a', 'width': '145px', 'color': '#00000099'
+      },
+    },    
+    {
+      header: '',
+      columnDef: 'publish',
+      isSortable: true,
+      cell: (element: Record<string, any>) => `${element['publish']}`,
+      cellStyle: {
+        'background-color': '#0000000a', 'width': '145px', 'color': '#00000099'
+      },
+    }
+  ]
+
+  instituteTableData = [
+    {
+      instituteName: 'NEW COLLEGE OF NURSING',
+      instituteId: '123',
+      course: 'xxxx',
+      internalMarks: 'Pending',
+      finalMarks: '-',
+      revisedFinalMarks: '-',
+      publish:'-',
+      hasStyle: true,
+      cellStyle: {
+        publish: {
+          'color': '#0074B6'
+        },
+        internalMarks :{
+          'color' : '#E99E38' 
+        },
+        finalMarks:{
+          'color': '#1D8923'
+        },
+        
+        revisedFinalMarks :{
+          'color' : '#E99E38'
+        }
+      }
+    },
+    {
+      instituteName: 'NEW COLLEGE OF NURSING',
+      instituteId: '123',
+      course: 'xxxx',
+      internalMarks: 'View & download',
+      finalMarks: 'Upload',
+      revisedFinalMarks: '-',
+      publish:'-',
+      hasStyle: true,
+      cellStyle: {
+        publish: {
+          'color': '#0074B6'
+        },
+        internalMarks :{
+          'color' : '#1D8923' 
+        },
+        finalMarks:{
+          'color': '#0074B6'
+        },
+        
+        revisedFinalMarks :{
+          'color' : '#E99E38'
+        }
+      }
+    },
+    {
+      instituteName: 'NEW COLLEGE OF NURSING',
+      instituteId: '123',
+      course: 'xxxx',
+      internalMarks: 'View & download',
+      finalMarks: 'View & delete',
+      revisedFinalMarks: 'Upload',
+      publish:'Publish',
+      hasStyle: true,
+      cellStyle: {
+        publish: {
+          'color': '#0074B6'
+        },
+        internalMarks :{
+          'color' : '#1D8923' 
+        },
+        finalMarks:{
+          'color': '#1D8923'
+        },
+        
+        revisedFinalMarks :{
+          'color' : '#0074B6'
+        }
+      }
+    },
+    {
+      instituteName: 'NEW COLLEGE OF NURSING',
+      instituteId: '123',
+      course: 'xxxx',
+      internalMarks: 'View & download',
+      finalMarks: 'View & delete',
+      revisedFinalMarks: 'Upload',
+      publish:'Publish',
+      hasStyle: true,
+      cellStyle: {
+        publish: {
+          'color': '#0074B6'
+        },
+        internalMarks :{
+          'color' : '#1D8923' 
+        },
+        finalMarks:{
+          'color': '#1D8923'
+        },
+        
+        revisedFinalMarks :{
+          'color' : '#0074B6'
+        }
+      }
+    },
+    {
+      instituteName: 'NEW COLLEGE OF NURSING',
+      instituteId: '123',
+      course: 'xxxx',
+      internalMarks: 'View & download',
+      finalMarks: 'View & delete',
+      revisedFinalMarks: 'Upload',
+      publish:'Publish',
+      hasStyle: true,
+      cellStyle: {
+        publish: {
+          'color': '#0074B6'
+        },
+        internalMarks :{
+          'color' : '#1D8923' 
+        },
+        finalMarks:{
+          'color': '#1D8923'
+        },
+        
+        revisedFinalMarks :{
+          'color' : '#0074B6'
+        }
+      }
+    },
+    {
+      instituteName: 'NEW COLLEGE OF NURSING',
+      instituteId: '123',
+      course: 'xxxx',
+      internalMarks: 'View & download',
+      finalMarks: 'View & delete',
+      revisedFinalMarks: 'Upload',
+      publish:'Publish',
+      hasStyle: true,
+      cellStyle: {
+        publish: {
+          'color': '#0074B6'
+        },
+        internalMarks :{
+          'color' : '#1D8923' 
+        },
+        finalMarks:{
+          'color': '#1D8923'
+        },
+        
+        revisedFinalMarks :{
+          'color' : '#0074B6'
+        }
+      }
+    },
+    {
+      instituteName: 'NEW COLLEGE OF NURSING',
+      instituteId: '123',
+      course: 'xxxx',
+      internalMarks: 'View & download',
+      finalMarks: 'View & delete',
+      revisedFinalMarks: 'Upload',
+      publish:'Publish',
+      hasStyle: true,
+      cellStyle: {
+        publish: {
+          'color': '#0074B6'
+        },
+        internalMarks :{
+          'color' : '#1D8923' 
+        },
+        finalMarks:{
+          'color': '#1D8923'
+        },
+        
+        revisedFinalMarks :{
+          'color' : '#0074B6'
+        }
+      }
+    },
+    {
+      instituteName: 'NEW COLLEGE OF NURSING',
+      instituteId: '123',
+      course: 'xxxx',
+      internalMarks: 'View & download',
+      finalMarks: 'View & delete',
+      revisedFinalMarks: 'Upload',
+      publish:'Publish',
+      hasStyle: true,
+      cellStyle: {
+        publish: {
+          'color': '#0074B6'
+        },
+        internalMarks :{
+          'color' : '#1D8923' 
+        },
+        finalMarks:{
+          'color': '#1D8923'
+        },
+        
+        revisedFinalMarks :{
+          'color' : '#0074B6'
+        }
+      }
+    },
+    {
+      instituteName: 'NEW COLLEGE OF NURSING',
+      instituteId: '123',
+      course: 'xxxx',
+      internalMarks: 'Pending',
+      finalMarks: '-',
+      revisedFinalMarks: '-',
+      publish:'-',
+      hasStyle: true,
+      cellStyle: {
+        publish: {
+          'color': '#0074B6'
+        },
+        internalMarks :{
+          'color' : '#E99E38' 
+        },
+        finalMarks:{
+          'color': '#1D8923'
+        },
+        
+        revisedFinalMarks :{
+          'color' : '#E99E38'
+        }
+      }
+    },
+  ]
+
+  studentExamsTableHeader = [
+    {
+      header: 'Full name',
+      columnDef: 'studentName',
+      isSortable: true,
+      cell: (element: Record<string, any>) => `${element['studentName']}`,
+      cellStyle: {
+        'background-color': '#0000000a',
+        'color': '#00000099'
+      },
+    },{
+      header: 'Course name',
+      columnDef: 'courseName',
+      cell: (element: Record<string, any>) => `${element['courseName']}`,
+      cellStyle: {
+        'background-color': '#0000000a', 'width': '120px', 'color': '#00000099'
+      },
+    },{
+      header: 'Exam',
+      columnDef: 'exams',
+      cell: (element: Record<string, any>) => `${element['exams']}`,
+      cellStyle: {
+        'background-color': '#0000000a', 'width': '120px', 'color': '#00000099'
+      },
+    },{
+      header: 'Internal marks',
+      columnDef: 'internalMarks',
+      cell: (element: Record<string, any>) => `${element['internalMarks']}`,
+      cellStyle: {
+        'background-color': '#0000000a', 'width': '120px', 'color': '#00000099'
+      },
+    }
+  ]
+
+  studentExamsTableData = [
+    {
+      studentName: 'Devaprathap Nagendra',
+      courseName: 'XXXX',
+      exams: 'Exam 1',
+      internalMarks: '45',
+      
+    },
+    {
+      studentName: 'Madison',
+      courseName: 'XXXX',
+      exams: 'Exam 1',
+      internalMarks: '48',
+      
+    },
+    {
+      studentName: 'Ravi',
+      courseName: 'XXXX',
+      exams: 'Exam 1',
+      internalMarks: '47',
+      
+    },
+    {
+      studentName: 'Kanaka Rao',
+      courseName: 'XXXX',
+      exams: 'Exam 1',
+      internalMarks: '49',
+      
+    },
+    {
+      studentName: 'Arun',
+      courseName: 'XXXX',
+      exams: 'Exam 1',
+      internalMarks: '49',
+      
+    },
+    {
+      studentName: 'Aman',
+      courseName: 'XXXX',
+      exams: 'Exam 1',
+      internalMarks: '45',
+      
+    },
+    {
+      studentName: 'Devaprathap N.',
+      courseName: 'XXXX',
+      exams: 'Exam 1',
+      internalMarks: '44',
+      
+    },
+
+  ];
+  
+  examCycleControl = new FormControl('');
+  examControl = new FormControl('');
+
+  // searcControl = '';
+  // searchKey = ''
+  showInstitutesTable = true
+
+  //#endregion
+
+  constructor(
+    private feeManagementService: FeeManagementService
+  ) {}
+
+  ngOnInit(): void {
+    this.intialisation()
+  }
+
+  intialisation() {
+    this.getExamCycles()
+    this.getInstitutesData()
+  }
+
+  getExamCycles() {
+    this.feeManagementService.getExamCycles()
+    // .subscribe((examCucles: any) => {
+    //   this.examCycleList = examCucles
+    // })
+  }
+
+  getInstitutesData(searchKey: string = '') {
+    // this.feeManagementService.getInstitutesData(searchKey)
+    // .subscribe((InstitutesData: any) => {
+    //   this.instituteTableData = InstitutesData
+    // })
+  }
+
+  getExamsOfInstitute(instituteId: string) {
+    // .subscribe((examsFeeDetails: any) => {
+    //   this.studentExamsTableData = examsFeeDetails
+    // })
+  }
+
+  // search() {
+  //   this.searchKey = this.searcControl
+  //   this.showInstitutesTable = true
+  // }
+
+  onSelecteInstitute(event: any) {
+    if (event) {
+      // this.instituteTableData = []
+      // this.feeManagementService.getExamsOfInstitute('')
+      // .subscribe((exams: any) => {
+      //   this.instituteTableData = exams
+      // })
+    }
+    this.showInstitutesTable = false
+
+  }
+
 }
