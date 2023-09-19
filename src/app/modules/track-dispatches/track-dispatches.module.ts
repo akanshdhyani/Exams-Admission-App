@@ -11,6 +11,7 @@ import { MaterialModule } from 'src/material/material.module';
 import { TrackDispatchesRoutingModule } from './track-dispatches-routing.module';
 import { ManageTrackDispatchesComponent } from './manage-track-dispatches/manage-track-dispatches.component';
 import { UpdateTrackDispatchesInstituteComponent } from './update-track-dispatches-institute/update-track-dispatches-institute.component';
+import { ViewProofModalAdminComponent } from './view-proof-modal-admin/view-proof-modal-admin.component';
 //#endregion
 
 //#endregion
@@ -20,7 +21,8 @@ import { UpdateTrackDispatchesInstituteComponent } from './update-track-dispatch
 @NgModule({
   declarations: [
     ManageTrackDispatchesComponent,
-    UpdateTrackDispatchesInstituteComponent
+    UpdateTrackDispatchesInstituteComponent,
+    ViewProofModalAdminComponent
   ],
   imports: [
     CommonModule,
