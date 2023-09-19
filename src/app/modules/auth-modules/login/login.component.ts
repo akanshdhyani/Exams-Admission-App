@@ -32,6 +32,7 @@ export class LoginComponent {
       // Check if the user is already logged in
       if (this.authService.isLoggedIn()) {
         // Redirect to the home page if logged in
+        console.log("User is logged in !!")
         this.router.navigate(['home']);
       }
     }
