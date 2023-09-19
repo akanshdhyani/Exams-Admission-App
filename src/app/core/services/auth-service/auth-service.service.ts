@@ -5,6 +5,7 @@ import { RequestParam, ServerResponse } from 'src/app/shared';
 import { ConfigService } from 'src/app/shared/services/config/config.service';
 import { environment } from 'src/environments/environment';
 import { HttpService } from '../http-service/http.service';
+import { JwtTokenService } from '../jwt-token-service/jwt-token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,9 @@ export class AuthServiceService extends HttpService {
   private readonly USER_DATA = "user_data";
   private readonly ALL_ROLES = "all_roles";
 
-  constructor(http: HttpClient, private configService: ConfigService) {
-    super(http);
+  constructor(http: HttpClient, private configService: ConfigService,
+    jwtTokenService: JwtTokenService) {
+    super(http,jwtTokenService);
     this.baseUrl = environment.apiUrl;
     this.userManagementURL = environment.userManagementURL;
   }
@@ -42,7 +44,7 @@ export class AuthServiceService extends HttpService {
     if (token) {
       const userData= this.getUserData();
       console.log("userData =>", userData);
-      const userRole = userData.userRepresentation?.attributes?.Role[0];
+      const userRole = userData.Role[0];
       switch(userRole) {
         case 'exams_superadmin':
           role= this.configService.rolesConfig.ROLES.SUPERADMIN;
@@ -97,7 +99,7 @@ export class AuthServiceService extends HttpService {
 
   saveUserData(userData: any):void {
     this.saveToken(userData?.accessToken);
-    localStorage.setItem(this.USER_DATA,JSON.stringify(userData));
+    localStorage.setItem(this.USER_DATA,JSON.stringify(userData.userRepresentation?.attributes));
   }
 
   getUserData() {
@@ -106,11 +108,16 @@ export class AuthServiceService extends HttpService {
   }
 
   saveToken(token: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token);
+    console.log(token)
+    this.jwtTokenService.setAccessToken(token);
+   // localStorage.setItem(this.TOKEN_KEY, token);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    let tokenFromService = this.jwtTokenService.getAccessToken()
+    console.log(tokenFromService)
+    return this.jwtTokenService.getAccessToken();
+   // return localStorage.getItem(this.TOKEN_KEY);
   }
 
   logout(): void {
