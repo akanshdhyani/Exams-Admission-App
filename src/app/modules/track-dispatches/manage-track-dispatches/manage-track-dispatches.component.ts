@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FeeManagementService } from '../../fee-management/services/fee-management.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewProofModalAdminComponent } from '../view-proof-modal-admin/view-proof-modal-admin.component';
 
 interface Course {
   value: string;
@@ -82,6 +84,8 @@ export class ManageTrackDispatchesComponent {
       cellStyle: {
         'background-color': '#0000000a', 'width': '145px', 'color': '#00000099'
       },
+      isAction: true,
+      showDeleteIcon: false,
     }
   ]
 
@@ -428,153 +432,46 @@ export class ManageTrackDispatchesComponent {
     },
   ]
 
-  // studentExamsTableHeader = [
-  //   {
-  //     header: 'Full name',
-  //     columnDef: 'studentName',
-  //     isSortable: true,
-  //     cell: (element: Record<string, any>) => `${element['studentName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a',
-  //       'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'Enrolement Number',
-  //     columnDef: 'enrolementNumber',
-  //     cell: (element: Record<string, any>) => `${element['enrolementNumber']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '100px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'Course name',
-  //     columnDef: 'courseName',
-  //     cell: (element: Record<string, any>) => `${element['courseName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '100px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'Exam',
-  //     columnDef: 'exams',
-  //     cell: (element: Record<string, any>) => `${element['exams']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '100px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'No. of Exams',
-  //     columnDef: 'numberOfExams',
-  //     cell: (element: Record<string, any>) => `${element['numberOfExams']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '100px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'Fee',
-  //     columnDef: 'fee',
-  //     cell: (element: Record<string, any>) => `${element['fee']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '100px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: '',
-  //     columnDef: 'status',
-  //     cell: (element: Record<string, any>) => `${element['status']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '100px', 'color': '#00000099'
-  //     },
-  //   },
-  // ]
+  viewProof(event: any) {
+    const dialogRef = this.dialog.open(ViewProofModalAdminComponent, {
+      data: {
+        // controls: [
+        //   {
+        //     controlLable: 'Enter IP address',
+        //     contolName: 'IPaddress',
+        //     controlType: 'input',
+        //     placeholder: 'Type here',
+        //     value: '',
+        //     validators: ['required'],
+        //   },{
+        //     controlLable: 'Enter remarks',
+        //     contolName: 'remarks',
+        //     controlType: 'textArea',
+        //     placeholder: 'Type here',
+        //     value: '',
+        //     validators: []
+        //   },
+        // ],
+        buttons: [
+          {
+            btnText: 'Cancel',
+            positionClass: 'left',
+            btnClass: 'btn-outline-gray',
+            type: 'close'
+          }
+        ],
+      },
+      width: '700px',
+      maxWidth: '90vw',
+      maxHeight: '90vh'
+    })
 
-  // studentExamsTableData = [
-  //   {
-  //     studentName: '',
-  //     enrolementNumber: 'XXXX',
-  //     courseName: 'XXXX',
-  //     exams: 'Exam ',
-  //     numberOfExams: '',
-  //     fee: '000',
-  //     status: 'Paid',
-  //     hasStyle: true,
-  //     cellStyle: {
-  //       status: {
-  //         'color': '#1D8923'
-  //       },
-  //     }
-  //   },
-  //   {
-  //     studentName: 'Madison Tran',
-  //     enrolementNumber: 'XXXX',
-  //     courseName: 'XXXX',
-  //     exams: 'Exam 1,Exam 2,Exam 3 ',
-  //     numberOfExams: '3',
-  //     fee: '3000',
-  //     status: 'Paid',
-  //     hasStyle: true,
-  //     cellStyle: {
-  //       status: {
-  //         'color': '#1D8923'
-  //       },
-  //     }
-  //   },
-  //   {
-  //     studentName: 'Raci Verma',
-  //     enrolementNumber: 'XXXX',
-  //     courseName: 'XXXX',
-  //     exams: 'Exam 2',
-  //     numberOfExams: '1',
-  //     fee: '1000',
-  //     status: 'Paid',
-  //     hasStyle: true,
-  //     cellStyle: {
-  //       status: {
-  //         'color': '#1D8923'
-  //       },
-  //     }
-  //   },
-  //   {
-  //     studentName: 'Sumalatha Krishna',
-  //     enrolementNumber: 'XXXX',
-  //     courseName: 'XXXX',
-  //     exams: 'Exam 3',
-  //     numberOfExams: '1',
-  //     fee: '1000',
-  //     status: 'Paid',
-  //     hasStyle: true,
-  //     cellStyle: {
-  //       status: {
-  //         'color': '#1D8923'
-  //       },
-  //     }
-  //   },
-  //   {
-  //     studentName: 'Kanaka Rao',
-  //     enrolementNumber: 'XXXX',
-  //     courseName: 'XXXX',
-  //     exams: 'Exam 1,Exam 2',
-  //     numberOfExams: '2',
-  //     fee: '2000',
-  //     status: 'Paid',
-  //     hasStyle: true,
-  //     cellStyle: {
-  //       status: {
-  //         'color': '#1D8923'
-  //       },
-  //     }
-  //   },
-  //   {
-  //     studentName: 'Ravi Verma',
-  //     enrolementNumber: 'XXXX',
-  //     courseName: 'XXXX',
-  //     exams: 'Exam 2',
-  //     numberOfExams: '1',
-  //     fee: '1000',
-  //     status: 'Paid',
-  //     hasStyle: true,
-  //     cellStyle: {
-  //       status: {
-  //         'color': '#1D8923'
-  //       },
-  //     }
-  //   },
-  // ];
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response) {
+      }
+    })
+  }
+
   
   examCycleControl = new FormControl('');
   examControl = new FormControl('');
@@ -586,7 +483,8 @@ export class ManageTrackDispatchesComponent {
   //#endregion
 
   constructor(
-    private feeManagementService: FeeManagementService
+    private feeManagementService: FeeManagementService,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -623,16 +521,16 @@ export class ManageTrackDispatchesComponent {
   //   this.showInstitutesTable = true
   // }
 
-  onSelecteInstitute(event: any) {
-    if (event) {
-      // this.instituteTableData = []
-      // this.feeManagementService.getExamsOfInstitute('')
-      // .subscribe((exams: any) => {
-      //   this.instituteTableData = exams
-      // })
-    }
-    this.showInstitutesTable = false
+  // onSelecteInstitute(event: any) {
+  //   if (event) {
+  //     this.instituteTableData = []
+  //     this.feeManagementService.getExamsOfInstitute('')
+  //     .subscribe((exams: any) => {
+  //       this.instituteTableData = exams
+  //     })
+  //   }
+  //   this.showInstitutesTable = false
 
-  }
+  // }
 
 }
