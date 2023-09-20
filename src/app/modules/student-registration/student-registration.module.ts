@@ -8,13 +8,15 @@ import { RegdStudentsComponent } from './regd-students/regd-students.component';
 //#endregion
 import { SharedModule } from '../../shared/shared.module';
 import { AddNewRegnComponent } from './add-new-regn/add-new-regn.component';
+import { ConfirmStudentRegistrationComponent } from './dialogs/confirm-student-registration/confirm-student-registration.component';
 
 
 @NgModule({
   declarations: [
     RegisterStudentsComponent,
     RegdStudentsComponent,
-    AddNewRegnComponent
+    AddNewRegnComponent,
+    ConfirmStudentRegistrationComponent,
   ],
   imports: [
     CommonModule,

@@ -121,6 +121,8 @@
 
             </ng-template>
 
+            
+
             <td mat-cell *matCellDef="let element" [id]="rowAction" (click)="emitRowAction(element)">
 
                 <!-- Checkbox Column -->
@@ -136,32 +138,34 @@
                 </span>
 
                 <span *ngIf="(!disCol?.isAction); else action">
-
                     <ng-container
-
                         *ngIf="element?.hasStyle && element?.cellStyle[disCol?.columnDef]; else styleLessCell">
-
-                        <a mat-button [ngStyle]="element?.cellStyle[disCol?.columnDef]">{{ disCol?.cell(element) }}</a>
-
+                        <a [ngStyle]="element?.cellStyle[disCol?.columnDef]">{{ disCol?.cell(element) }}</a>
                     </ng-container>
 
                     <ng-template #styleLessCell>
-
-                        <a mat-button>{{ disCol?.cell(element) }}</a>
-
+                        <a >{{ disCol?.cell(element) }}</a>
                     </ng-template>
 
                 </span>
 
                 <ng-template #action>
 
- 
-                    <button mat-button id="rowActionIcon" (click)="emitDeleteAction(element)">
-
-                        <mat-icon>delete</mat-icon>
-
-                    </button>
-
+                    <ng-container *ngIf="!disCol?.showDeleteIcon; else deleteIcon">
+                        <ng-container
+                            *ngIf="element?.hasStyle && element?.cellStyle[disCol?.columnDef]; else styleLessActionCell">
+                            <a mat-button [ngStyle]="element?.cellStyle[disCol?.columnDef]"
+                            (click)="emitCellClickAction(element, disCol.columnDef)" >{{ disCol?.cell(element) }}</a>
+                        </ng-container>
+                        <ng-template #styleLessActionCell>
+                            <a mat-button (click)="emitCellClickAction(element)" >{{ disCol?.cell(element) }}</a>
+                        </ng-template>
+                    </ng-container>
+                    <ng-template #deleteIcon>
+                        <button mat-button id="rowActionIcon" (click)="emitDeleteAction(element)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </ng-template>
                 </ng-template>
 
                 <span *ngIf="disCol?.isMenuOption">

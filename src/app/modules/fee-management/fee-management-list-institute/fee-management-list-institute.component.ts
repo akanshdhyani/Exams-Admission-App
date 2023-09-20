@@ -33,13 +33,106 @@ export class FeeManagementListInstituteComponent implements OnInit {
   isHallTicket = true;
   removeTbodyColor = true;
 
+  // allFeeTableHeader = [
+  //   {
+  //     header: '',
+  //     columnDef: 'select',
+  //     isSortable: false,
+  //     isCheckBox: true,
+  //     cell: (element: Record<string, any>) => ``,
+  //     cellStyle: {
+  //       'background-color': '#0000000a', 'width': '30px', 'color': '#00000099'
+  //     },
+  //   }, {
+  //     header: 'Full name',
+  //     columnDef: 'studentName',
+  //     isSortable: true,
+  //     cell: (element: Record<string, any>) => `${element['studentName']}`,
+  //     cellStyle: {
+  //       'background-color': '#0000000a',
+  //       'color': '#00000099'
+  //     },
+  //   },{
+  //     header: 'Exam',
+  //     columnDef: 'examName',
+  //     cell: (element: Record<string, any>) => `${element['examName']}`,
+  //     cellStyle: {
+  //       'background-color': '#0000000a', 'width': '300px', 'color': '#00000099'
+  //     },
+  //   },{
+  //     header: 'No. of Exams',
+  //     columnDef: 'noOfExams',
+  //     cell: (element: Record<string, any>) => `${element['noOfExams']}`,
+  //     cellStyle: {
+  //       'background-color': '#0000000a', 'width': '135px', 'color': '#00000099'
+  //     },
+  //   },{
+  //     header: 'Fee',
+  //     columnDef: 'fee',
+  //     cell: (element: Record<string, any>) => `${element['fee']}`,
+  //     cellStyle: {
+  //       'background-color': '#0000000a', 'width': '100px', 'color': '#00000099'
+  //     },
+  //   },{
+  //     header: '',
+  //     columnDef: 'status',
+  //     cell: (element: Record<string, any>) => `${element['status']}`,
+  //     cellStyle: {
+  //       'background-color': '#0000000a', 'width': '130px', 'color': '#00000099'
+  //     },
+  //   }
+  // ]
+
+  // allFeeTableData = [
+  //   {
+  //     studentName: 'Nancy Kurian',
+  //     examName: 'Exam 1',
+  //     noOfExams: '1',
+  //     fee: '1000',
+  //     status: 'Pending',
+  //     hasStyle: true,
+  //     cellStyle: {
+  //         status: {
+  //         'color': 'rgb(0, 116, 182)'
+  //       },
+  //     }
+  //   },{
+  //     studentName: 'Sumalatha Krishna',
+  //     examName: 'Exam 3',
+  //     noOfExams: '1',
+  //     fee: '1000',
+  //     status: 'Paid',
+  //     hasStyle: true,
+  //     cellStyle: {
+  //         status: {
+  //         'color': 'rgb(29, 137, 35)'
+  //       },
+  //     }
+  //   },{
+  //     studentName: 'Purandara Das',
+  //     examName: 'Exam 1, Exam 2',
+  //     noOfExams: '2',
+  //     fee: '2000',
+  //     status: 'Pending',
+  //     hasStyle: true,
+  //     cellStyle: {
+  //         status: {
+  //         'color': 'rgb(0, 116, 182)'
+  //       },
+  //     }
+  //   },
+  // ]
+
   pendingFeeTableHeader = [
     {
       header: '',
       columnDef: 'select',
       isSortable: false,
       isCheckBox: true,
-      cell: (element: Record<string, any>) => ``
+      cell: (element: Record<string, any>) => ``,
+      cellStyle: {
+        'background-color': '#0000000a', 'width': '30px', 'color': '#00000099'
+      },
     }, {
       header: 'Full name',
       columnDef: 'studentName',
@@ -228,7 +321,6 @@ export class FeeManagementListInstituteComponent implements OnInit {
   tabHeader = 'Pending'
 
   payingExams:any = []
-  totalAmountToPay: string;
 
   constructor(
     private dialog: MatDialog,
@@ -267,7 +359,7 @@ export class FeeManagementListInstituteComponent implements OnInit {
       mandatoryFields: {
         referenceNo: '', //generate random number (this.baseService.generate_uuidv4())
         submerchantId: "45",
-        transactionAmount: this.totalAmountToPay,
+        transactionAmount: this.filterForm.get('amount')?.value,
         invoiceId: "x1",
         invoiceDate: "x",
         invoiceTime: "x",
@@ -302,12 +394,21 @@ export class FeeManagementListInstituteComponent implements OnInit {
   }
 
   onSelectedRows(event: any) {
-    this.payingExams.push(event)
+    this.payingExams = event;
     this.calculateAmount();
   }
 
   calculateAmount() {
-    let amount = 0
-    this.totalAmountToPay = amount.toString()
+    let amount = 0;
+    let numberOfStudents = 0;
+    this.payingExams.forEach((exam: any) => {
+      amount = amount + Number(exam.fee);
+      numberOfStudents = numberOfStudents + 1
+    });
+    if (this.filterForm) {
+      this.filterForm.get('amount')?.setValue(amount)
+      this.filterForm.get('selectedStudent')?.setValue(numberOfStudents)
+    }
+
   }
 }

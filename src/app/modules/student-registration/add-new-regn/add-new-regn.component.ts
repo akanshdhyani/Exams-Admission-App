@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegdStudentsTableData, TableColumn } from 'src/app/interfaces/interfaces';
+import { ConfirmStudentRegistrationComponent } from '../dialogs/confirm-student-registration/confirm-student-registration.component';
 
 @Component({
   selector: 'app-add-new-regn',
@@ -12,10 +14,16 @@ export class AddNewRegnComponent {
 
 
   stateData : any;  
+  searcKey: string = '';
+  studentsToRegister: any = []
   constructor(
-    private router: Router){
+    private router: Router,
+    private dialog: MatDialog,
+    ){
       this.stateData = this.router?.getCurrentNavigation()?.extras.state;
-      console.log( this.stateData)
+      if (!this.stateData) {
+        this.router.navigateByUrl('/student-registration/institute')
+      }
   }
  
   viewStudentsTableColumns: TableColumn[] = [];
@@ -30,7 +38,7 @@ export class AddNewRegnComponent {
   }
 
   onSelectedRows(value: any) {
-    console.log(value)
+    this.studentsToRegister = value
   }
 
   getRegdStudents(examId: number, examCycle: string){
@@ -125,6 +133,110 @@ export class AddNewRegnComponent {
       }, 
 
     ];
+  }
+
+  openRegistrationPopup() {
+    const registrationPopupData = {
+      examDetails: this.stateData,
+      tableColumns: this.initializeRegistrationTableColumns(),
+      StudentsToRegister: this.getStudentsToRegister(),
+    }
+
+    if (registrationPopupData.StudentsToRegister.length > 0) {
+      const dialogRef = this.dialog.open(ConfirmStudentRegistrationComponent, {
+        data: registrationPopupData,
+        width: '900px',
+        maxWidth: '90vw',
+        maxHeight: '90vh'
+      })
+
+      dialogRef.afterClosed().subscribe((response: any) => {
+        if(response) {}
+      })
+    }
+  }
+
+  initializeRegistrationTableColumns() {
+    const tableColumns = [
+      {
+        columnDef: 'name',
+        header: 'Full name',
+        isSortable: true,
+        cell: (element: Record<string, any>) => `${element['name']}`,
+        cellStyle: {
+          'background-color': '#0000000a',
+          'color': '#00000099'
+        },
+      },
+      {
+        columnDef: 'rollNo',
+        header: 'Roll no',
+        isSortable: true,
+        cell: (element: Record<string, any>) => `${element['rollNo']}`,
+        cellStyle: {
+          'background-color': '#0000000a',
+          'color': '#00000099'
+        },
+      },
+      {
+        columnDef: 'course',
+        header: 'Course name',
+        isSortable: true,
+        cell: (element: Record<string, any>) => `${element['course']}`,
+        cellStyle: {
+          'background-color': '#0000000a',
+          'color': '#00000099'
+        },
+      },
+      {
+        columnDef: 'admissionYr',
+        header: 'Admission Year',
+        isSortable: true,
+        cell: (element: Record<string, any>) => `${element['admissionYr']}`,
+        cellStyle: {
+          'background-color': '#0000000a',
+          'color': '#00000099'
+        },
+      },
+      {
+        columnDef: 'noOfExam',
+        header: 'No of Exam',
+        isSortable: true,
+        cell: (element: Record<string, any>) => `${element['noOfExam']}`,
+        cellStyle: {
+          'background-color': '#0000000a',
+          'color': '#00000099'
+        },
+      },
+      {
+        columnDef: 'examNames',
+        header: 'Exam Name',
+        isSortable: true,
+        cell: (element: Record<string, any>) => `${element['examNames']}`,
+        cellStyle: {
+          'background-color': '#0000000a',
+          'color': '#00000099'
+        },
+      },
+    ]
+    return tableColumns;
+  }
+
+  getStudentsToRegister() {
+    const StudentsToRegisterList: { id: any; name: any; rollNo: any; course: any; admissionYr: any; noOfExam: any; examNames: any; }[] = []
+    this.studentsToRegister.forEach((studentDetails: any) => {
+      const details = {
+        id: studentDetails.id,
+        name: studentDetails.name,
+        rollNo: studentDetails.rollNo,
+        course: studentDetails.course,
+        admissionYr: studentDetails.admissionYr,
+        noOfExam: studentDetails.noOfExam,
+        examNames: studentDetails.examName.join(", "),
+      }
+      StudentsToRegisterList.push(details)
+    })
+    return StudentsToRegisterList
   }
 }
 

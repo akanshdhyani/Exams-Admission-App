@@ -118,6 +118,7 @@ export class ManageExamCycleListComponent {
           isSortable: false,
           isLink: false,
           isAction: true,
+          showDeleteIcon: false,
           cell: (element: Record<string, any>) => ``
         },
       ]

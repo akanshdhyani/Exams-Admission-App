@@ -8,7 +8,8 @@
 
         </span>
         <app-shared-ques-paper [examCycleList]="examCycleList" [examCycleControl]="examCycleControl"
-            [questionPapersList]="questionPapersList"></app-shared-ques-paper>
+            [questionPapersList]="questionPapersList" (addNewStdnts)="regNewStdnts($event)"
+            (viewRegdStdnts)="viewRegdStdnts($event)"></app-shared-ques-paper>
 
 
     </div>

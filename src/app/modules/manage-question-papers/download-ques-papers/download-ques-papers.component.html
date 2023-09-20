@@ -75,19 +75,19 @@
             </p>
             <mat-card-content>
                 <p>
-                    <mat-list role="list" *ngIf="exam.examStartTime !=='12.00 A.M.';  else notYetexamTime">
-                        <mat-list-item style="background-color: lightgray;" role="listitem"
-                            *ngFor="let qp of exam.questionPaperList">
+                    <mat-list role="list" *ngIf="exam.examStartTime !== '12.00 A.M.';  else notYetexamTime">
+                        <mat-list-item style="background-color: #f4f4f4; margin-bottom: 1rem;" role="listitem"
+                            *ngFor="let qp of exam.questionPaperList" >
+                            <div class="question-paper-item-container"> 
+                                <span>{{qp.name}}</span>
+                                <span class="button-group">
+                                    <button type="button" class="cancel-button" mat-stroked-button
+                                        color="primary" (click)="viewQuestionPaper(qp.id)">View</button>
+                                    <button class="next-button" mat-raised-button color="primary"
+                                        (click)="downloadQuestionPaper(qp.id)">Download</button>
+                                </span>
 
-                            {{qp.name}}
-                            <mat-divider></mat-divider>
-                            <span class="button-group ">
-                                <button type="button" class="cancel-button" mat-stroked-button
-                                    color="primary">View</button>
-                                <button class="next-button" mat-raised-button color="primary"
-                                    (click)="downloadQuesPpr(qp.id)">Download</button>
-                            </span>
-
+                            </div>
                         </mat-list-item>
                         <mat-divider></mat-divider>
                     </mat-list>
