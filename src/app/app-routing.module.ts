@@ -4,6 +4,7 @@ import { CommonLayoutComponent } from './shared/components/common-layout/common-
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './core/guards/auth-guard/auth.guard';
 import { AdminGuard, InstituteGuard, StudentGuard } from './core/guards/role-guard/role.guard';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 const routes: Routes = [
@@ -73,6 +74,15 @@ const routes: Routes = [
       {
         path: 'manage-attendance',
         loadChildren: () => import('../app/modules/manage-attendance-record/manage-attendance-record.module').then(m => m.ManageAttendanceRecordModule)
+      },
+      {
+        path: 'user-profile', 
+        component: UserProfileComponent, 
+        // canActivate: [AuthGuard],
+        // data: {
+        //   allowedRoles: [Roles.ADMIN, Roles.GRIEVANCE_NODAL, Roles.NODAL_OFFICER, Roles.SECRETARY],
+        // },
+        pathMatch: 'full',
       },
       {
         path: "**",
