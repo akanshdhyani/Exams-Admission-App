@@ -3,6 +3,11 @@
         <div class="certificate-header">
             <h2>Download Question Papers</h2>
         </div>
+
+        <mat-card  class="w-full cctv-verification-card flex py1 mb2">
+            <span [ngClass]="{'verified': cctvVerificationStatus === 'Verified'}">CCTV Verification Status: {{cctvVerificationStatus}}</span>
+        </mat-card >
+
         <span>
             Exam cycle
 
