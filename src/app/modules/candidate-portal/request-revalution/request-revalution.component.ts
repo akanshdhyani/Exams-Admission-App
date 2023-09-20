@@ -26,6 +26,15 @@ export class RequestRevalutionComponent implements OnInit {
 
   examTableHeader = [
     {
+      header: '',
+      columnDef: 'select',
+      isSortable: false,
+      isCheckBox: true,
+      cell: (element: Record<string, any>) => ``,
+      cellStyle: {
+        'background-color': '#0000000a', 'width': '30px', 'color': '#00000099'
+      },
+    },{
       header: 'Name of exam',
       columnDef: 'examName',
       cell: (element: Record<string, any>) => `${element['examName']}`,
@@ -159,5 +168,13 @@ export class RequestRevalutionComponent implements OnInit {
 
   formateRevaluationData() {}
   //#endregion
+
+  onSelectedRows(event: any[]) {
+    if(event.length > 0) {
+      this.examSelected = true;
+    } else {
+      this.examSelected = false;
+    }
+  }
 
 }
