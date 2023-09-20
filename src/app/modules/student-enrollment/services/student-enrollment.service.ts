@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from 'src/app/core/services';
-import { JwtTokenService } from 'src/app/core/services/jwt-token-service/jwt-token.service';
 import { ConfigService, RequestParam, ServerResponse } from 'src/app/shared';
 import { environment } from 'src/environments/environment';
 
@@ -11,9 +10,9 @@ import { environment } from 'src/environments/environment';
 })
 export class StudentEnrollmentService extends HttpService {
   override baseUrl: string;
-  constructor(http: HttpClient, private configService: ConfigService,
-    jwtTokenService: JwtTokenService) {
-    super(http,jwtTokenService);
+  constructor(http: HttpClient, private configService: ConfigService
+    ) {
+    super(http);
     this.baseUrl = environment.apiUrl;
    }
 

@@ -3,6 +3,7 @@ import { HallTicket, Institute, Course, Year, TableColumn } from '../../../inter
 import { BaseService } from '../../../service/base.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatTabGroup } from '@angular/material/tabs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-manage-hall-tickets-admin-list',
   templateUrl: './manage-hall-tickets-admin-list.component.html',
@@ -25,6 +26,7 @@ export class ManageHallTicketsAdminListComponent {
   filters = ["Attendance > 75", "Attendance < 75"]
   constructor(
     private baseService: BaseService,
+    private router: Router,
   ) {
 
   }
@@ -95,7 +97,11 @@ export class ManageHallTicketsAdminListComponent {
         header: '',
         isSortable: false,
         isLink: true,
-        cell: (element: Record<string, any>) => `View `
+        isAction: true,
+        cell: (element: Record<string, any>) => `View`,
+        cellStyle: {
+          'color': '#0074B6'
+        }
       }
 
     ];
@@ -140,7 +146,8 @@ export class ManageHallTicketsAdminListComponent {
         header: '',
         isSortable: false,
         isLink: true,
-        cell: (element: Record<string, any>) => `View `
+        isAction: true,
+        cell: (element: Record<string, any>) => `View`
       }
 
     ];
@@ -220,5 +227,10 @@ export class ManageHallTicketsAdminListComponent {
 
   onAttendanceFilterClick(e: any) {
     console.log(e)
+  }
+
+  onViewClick(event: any)  {
+    console.log(event);
+    this.router.navigateByUrl('/hall-ticket-management/ticket-details')
   }
 }

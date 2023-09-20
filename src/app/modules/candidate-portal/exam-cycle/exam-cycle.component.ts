@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CandidatePortalService } from '../services/candidate-portal.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConformationDialogComponent } from 'src/app/shared/components/conformation-dialog/conformation-dialog.component';
+import { AuthServiceService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-exam-cycle',
@@ -10,6 +11,7 @@ import { ConformationDialogComponent } from 'src/app/shared/components/conformat
   styleUrls: ['./exam-cycle.component.scss']
 })
 export class ExamCycleComponent {
+  loggedInUserRole: string;
 
   @Input() hallTicketDetails: any;
   @Input() examTableHeader: any;
@@ -19,8 +21,11 @@ export class ExamCycleComponent {
   constructor(
     private router: Router,
     private candidatePortalService: CandidatePortalService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private authService: AuthServiceService
+  ) {
+    this.loggedInUserRole = this.authService.getUserRoles()[0];
+  }
 
   downloadHallTicket() {
     this.candidatePortalService.downloadHallTicket('')
@@ -54,5 +59,14 @@ export class ExamCycleComponent {
   cancel() {
     this.router.navigateByUrl('/candidate-portal')
   }
+
+  onApprove() {
+    console.log("Approve details");
+  }
+
+  onReject() {
+    console.log("Reject details");
+  }
+
 
 }
