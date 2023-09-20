@@ -93,3 +93,25 @@ th.mdc-data-table__cell,
 //         background-color: rgba(0, 0, 0, 0.08);
 //     }
 //  }
+
+.mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-full {
+    background: #045dad;
+}
+
+.mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+    color: var(--mdc-theme-primary, #045dad);
+}
+
+.mat-mdc-checkbox.mat-accent {
+    --mdc-checkbox-selected-checkmark-color: #fff;
+    --mdc-checkbox-selected-focus-icon-color: #045dad;
+    --mdc-checkbox-selected-hover-icon-color: #045dad;
+    --mdc-checkbox-selected-icon-color: #045dad;
+    --mdc-checkbox-selected-pressed-icon-color: #045dad;
+    --mdc-checkbox-unselected-focus-icon-color: #212121;
+    --mdc-checkbox-unselected-hover-icon-color: #212121;
+    --mdc-checkbox-disabled-selected-icon-color: rgba(0, 0, 0, 0.38);
+    --mdc-checkbox-disabled-unselected-icon-color: rgba(0, 0, 0, 0.38);
+    --mdc-checkbox-unselected-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-checkbox-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+}
