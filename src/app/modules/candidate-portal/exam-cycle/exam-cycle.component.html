@@ -11,8 +11,10 @@
     </mat-card-content>
     <mat-card-actions>
         <div class="footer">
-            <button class="cancel-btn" (click)="cancel()">Cancel</button>
-            <button class="download-btn" (click)="downloadHallTicket()">Download</button>
+            <button *ngIf="loggedInUserRole === 'exams_student'" class="cancel-btn" (click)="cancel()">Cancel</button>
+            <button *ngIf="loggedInUserRole === 'exams_student'" class="download-btn" (click)="downloadHallTicket()">Download</button>
+            <button *ngIf="loggedInUserRole === 'exams_admin'" class="cancel-btn" (click)="onReject()">Reject</button>
+            <button *ngIf="loggedInUserRole === 'exams_admin'" class="download-btn" (click)="onApprove()">Approve</button>
         </div>
     </mat-card-actions>
 </mat-card>

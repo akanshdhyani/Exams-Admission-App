@@ -1,5 +1,5 @@
 <div class="secondary-container">
-    <mat-label class="title-header"> Manage Exam Cycles & Exams </mat-label>
+    <mat-label class="title-header"> Manage Hall Tickets </mat-label>
     <div
       style="
         display: flex;
@@ -94,7 +94,8 @@
             [tableData]="hallTicketsData"
             [examList] = "examList"
             [isPageable]="true" 
-            (checkBoxAction)="onSelectedRows($event)">
+            (checkBoxAction)="onSelectedRows($event)"
+            (cellClickAction)="onViewClick($event)">
             </app-shared-table>
 
 
@@ -108,7 +109,8 @@
             [tableData]="hallTicketsData"
             [examList] = "examList"
             [isPageable]="true" 
-            (checkBoxAction)="onSelectedRows($event)">
+            (checkBoxAction)="onSelectedRows($event)"
+            (cellClickAction)="onViewClick($event)">
             </app-shared-table>
 
 

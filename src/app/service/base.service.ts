@@ -35,6 +35,12 @@ export class BaseService extends HttpService {
           course: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
+          hasStyle: true,
+          cellStyle: {
+            viewHallTicket: {
+              'color': '#0074B6'
+            }
+          }
         },
         {
           id: 0,
@@ -42,6 +48,12 @@ export class BaseService extends HttpService {
           course: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
+          hasStyle: true,
+          cellStyle: {
+            viewHallTicket: {
+              'color': '#0074B6'
+            }
+          }
         },
         {
           id: 0,
@@ -49,6 +61,12 @@ export class BaseService extends HttpService {
           course: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
+          hasStyle: true,
+          cellStyle: {
+            viewHallTicket: {
+              'color': '#0074B6'
+            }
+          }
         },
         {
           id: 0,
@@ -56,6 +74,12 @@ export class BaseService extends HttpService {
           course: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
+          hasStyle: true,
+          cellStyle: {
+            viewHallTicket: {
+              'color': '#0074B6'
+            }
+          }
         },
       ]
     )
