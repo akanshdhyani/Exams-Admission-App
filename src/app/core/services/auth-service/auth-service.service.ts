@@ -15,6 +15,7 @@ export class AuthServiceService extends HttpService {
   userManagementURL: string;
   private readonly TOKEN_KEY = 'access_token';
   private readonly USER_DATA = "user_data";
+  private readonly USER_REPRESENTATION = "user_representation";
   private readonly ALL_ROLES = "all_roles";
 
   constructor(http: HttpClient, private configService: ConfigService,
@@ -101,11 +102,17 @@ export class AuthServiceService extends HttpService {
   saveUserData(userData: any):void {
     this.saveToken(userData?.accessToken);
     localStorage.setItem(this.USER_DATA,JSON.stringify(userData.userRepresentation?.attributes));
+    localStorage.setItem(this.USER_REPRESENTATION, JSON.stringify(userData.userRepresentation));
   }
 
   getUserData() {
     const userData = localStorage.getItem(this.USER_DATA);
     return userData ? JSON.parse(userData) : null;
+  }
+
+  getUserRepresentation() {
+    const userRepresentation = localStorage.getItem(this.USER_REPRESENTATION);
+    return userRepresentation ? JSON.parse(userRepresentation) : null;
   }
 
   saveToken(token: string): void {

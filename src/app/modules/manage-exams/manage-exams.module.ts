@@ -13,6 +13,7 @@ import { ManageExamCycleViewComponent } from './manage-exam-cycle-view/manage-ex
 import { MaterialModule } from 'src/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared';
+import { UploadFileComponent } from './upload-file/upload-file.component';
 //#endregion
 
 //#endregion
@@ -23,7 +24,8 @@ import { SharedModule } from 'src/app/shared';
   declarations: [
     ManageExamCycleFormComponent,
     ManageExamCycleListComponent,
-    ManageExamCycleViewComponent
+    ManageExamCycleViewComponent,
+    UploadFileComponent
   ],
   imports: [
     CommonModule,

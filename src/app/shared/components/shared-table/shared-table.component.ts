@@ -97,6 +97,7 @@ export class SharedTableComponent implements AfterViewInit {
   //users: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
   examControl: any;
   @Input() examList: string[] = [];
+  @Input() pageSizeOptions: string[] = [];
   constructor() {
     // this.grievancesTypes = this.configService.dropDownConfig.GRIEVANCE_TYPES;
     this.filterForm = new FormGroup({

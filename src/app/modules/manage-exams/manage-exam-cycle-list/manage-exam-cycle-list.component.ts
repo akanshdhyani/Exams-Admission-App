@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TableColumn } from 'src/app/interfaces/interfaces';
 import { Tabs } from 'src/app/shared/config/tabs.config';
 import { ConformationDialogComponent } from 'src/app/shared/components/conformation-dialog/conformation-dialog.component';
+import { UploadFileComponent } from 'src/app/modules/manage-exams/upload-file/upload-file.component';
 
 interface Course {
   value: string;
@@ -181,6 +182,77 @@ export class ManageExamCycleListComponent {
   getSearchParams(event: any) {
 
   }
+
+  openBulkUploadModal() {
+      const heading = "Upload Exam cycle/List"
+      const dialogRef = this.dialog.open(UploadFileComponent, {
+      data: {
+                heading: heading,     
+                // labelOne: 'Select Dispatch Date',
+                labelTwo:'Attach file(s)',
+                // dateSelect: 'dateSelect',  
+  
+                // select: {
+                //   selectCycleList: [
+                //     {
+                //       displayValue: 'Exam 1',
+                //       value: 'Exam 1'
+                //     },
+                //     {
+                //       displayValue: 'Exam 2',
+                //       value: 'Exam 2'
+                //     }
+                //   ]
+                // },
+  
+  
+                description: [''],
+                buttons: [
+                  {
+                    btnText: 'Browse',
+                    positionClass: 'right ml2',
+                    btnClass: 'btn-full',
+                    showBtn: 1,
+                    hideButton: false,
+                    btnType: 'browse'
+  
+                  },
+                  {
+                    btnText: 'Upload',
+                    positionClass: 'right ml2',
+                    btnClass: 'btn-full',
+                    btnType: 'submit',
+                    hideButton: true,
+                  },
+                  {
+                    btnText: 'Cancel',
+                    positionClass: 'right',
+                    btnClass: 'btn-outline',
+                    hideButton: false,
+                    btnType: 'close'
+                  },
+                  
+                ],
+              },
+      })
+      dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            const dialogRef = this.dialog.open(ConformationDialogComponent, {
+              data: {
+              },
+              width: '40vh',
+              height: '20vh',
+              maxWidth: '90vw',
+              maxHeight: '90vh'
+            })
+            dialogRef.afterClosed().subscribe(files => {
+              if (files) {
+               
+              }
+            })        
+          }
+      })
+    }
 
   onViewClick(event: any) {
     console.log(event);

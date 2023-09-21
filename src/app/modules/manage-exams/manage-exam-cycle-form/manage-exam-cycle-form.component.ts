@@ -17,6 +17,8 @@ export interface Exam {
 })
 export class ManageExamCycleFormComponent {
   exams: Exam[]=[];
+  startMinTime:"08:00";
+  startMaxTime: "24:00";
   announcer = inject(LiveAnnouncer);
   pickerMinDate = new Date(new Date().setHours(0, 0, 0, 0));
   createExamCycle = new FormGroup({
