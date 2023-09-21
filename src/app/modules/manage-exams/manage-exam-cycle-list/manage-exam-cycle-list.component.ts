@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { TableColumn } from 'src/app/interfaces/interfaces';
 import { Tabs } from 'src/app/shared/config/tabs.config';
 import { ConformationDialogComponent } from 'src/app/shared/components/conformation-dialog/conformation-dialog.component';
-import { UploadDialogComponent } from 'src/app/shared/components/upload-dialog/upload-dialog.component';
 import { UploadFileComponent } from 'src/app/modules/manage-exams/upload-file/upload-file.component';
 
 interface Course {
