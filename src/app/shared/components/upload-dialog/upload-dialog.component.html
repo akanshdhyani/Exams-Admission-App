@@ -56,9 +56,9 @@
         <span class="lable">{{ data.labelTwo }}</span>
         <div class="outline">
           <div *ngIf="files.length > 0" class="file-container">
-            <span>{{files[0].name}}</span> <!-- File name will come  -->
+            <span class="desc-section">{{files[0].name}}</span> <!-- File name will come  -->
             <ng-container *ngIf="!data.hidePreview">
-              <a href="" >Preview</a> <!-- Preview will only work when file.length -->
+              <a href="" style="color: #045DAD;">Preview</a> <!-- Preview will only work when file.length -->
             </ng-container>
           </div>
         </div>

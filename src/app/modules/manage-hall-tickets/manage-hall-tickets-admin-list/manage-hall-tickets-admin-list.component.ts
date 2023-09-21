@@ -49,19 +49,28 @@ export class ManageHallTicketsAdminListComponent {
         header: '',
         isSortable: false,
         isCheckBox: true,
-        cell: (element: Record<string, any>) => ``
+        cell: (element: Record<string, any>) => ``,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '160px', 'color': '#00000099'
+        },
       },
       {
         columnDef: 'name',
         header: 'Name',
         isSortable: true,
-        cell: (element: Record<string, any>) => `${element['name']}`
+        cell: (element: Record<string, any>) => `${element['name']}`,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '160px', 'color': '#00000099'
+        },
       },
       {
         columnDef: 'course',
         header: 'Course',
         isSortable: true,
-        cell: (element: Record<string, any>) => `${element['course']}`
+        cell: (element: Record<string, any>) => `${element['course']}`,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '160px', 'color': '#00000099'
+        },
         /*   cell: (element: Record<string, any>) => {
             const timestamp = element['createdAt'];
             const date = new Date(timestamp);
@@ -75,7 +84,10 @@ export class ManageHallTicketsAdminListComponent {
         columnDef: 'rollNo',
         header: 'Roll No',
         isSortable: true,
-        cell: (element: Record<string, any>) => `${element['rollNo']}`
+        cell: (element: Record<string, any>) => `${element['rollNo']}`,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '160px', 'color': '#00000099'
+        },
 
       },
       {
@@ -83,14 +95,20 @@ export class ManageHallTicketsAdminListComponent {
         header: 'Attendance',
         isSortable: false,
         isLink: true,
-        cell: (element: Record<string, any>) => `${element['attendancePercentage']}`
+        cell: (element: Record<string, any>) => `${element['attendancePercentage']}`,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '160px', 'color': '#00000099'
+        },
       },
       {
         columnDef: 'paymentStatus',
         header: '',
         isSortable: false,
         isLink: true,
-        cell: (element: Record<string, any>) => `Paid`
+        cell: (element: Record<string, any>) => `Paid`,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '145px', 'color': '#00000099'
+        },
       },
       {
         columnDef: 'viewHallTicket',
@@ -100,8 +118,10 @@ export class ManageHallTicketsAdminListComponent {
         isAction: true,
         cell: (element: Record<string, any>) => `View`,
         cellStyle: {
-          'color': '#0074B6'
-        }
+            'background-color': '#0000000a', 'width': '145px', 'color': '#0074B6'
+          },
+          
+        
       }
 
     ];
@@ -111,13 +131,19 @@ export class ManageHallTicketsAdminListComponent {
         columnDef: 'name',
         header: 'Name',
         isSortable: true,
-        cell: (element: Record<string, any>) => `${element['name']}`
+        cell: (element: Record<string, any>) => `${element['name']}`,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '180px', 'color': '#00000099'
+        },
       },
       {
         columnDef: 'course',
         header: 'Course',
         isSortable: true,
-        cell: (element: Record<string, any>) => `${element['course']}`
+        cell: (element: Record<string, any>) => `${element['course']}`,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
+        },
         /*   cell: (element: Record<string, any>) => {
             const timestamp = element['createdAt'];
             const date = new Date(timestamp);
@@ -131,7 +157,10 @@ export class ManageHallTicketsAdminListComponent {
         columnDef: 'rollNo',
         header: 'Roll No',
         isSortable: true,
-        cell: (element: Record<string, any>) => `${element['rollNo']}`
+        cell: (element: Record<string, any>) => `${element['rollNo']}`,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
+        },
 
       },
       {
@@ -139,7 +168,10 @@ export class ManageHallTicketsAdminListComponent {
         header: 'Attendance',
         isSortable: false,
         isLink: true,
-        cell: (element: Record<string, any>) => `${element['attendancePercentage']}`
+        cell: (element: Record<string, any>) => `${element['attendancePercentage']}`,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
+        },
       },
       {
         columnDef: 'viewHallTicket',
@@ -147,7 +179,10 @@ export class ManageHallTicketsAdminListComponent {
         isSortable: false,
         isLink: true,
         isAction: true,
-        cell: (element: Record<string, any>) => `View`
+        cell: (element: Record<string, any>) => `View`,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '180px', 'color': '#00000099'
+        },
       }
 
     ];

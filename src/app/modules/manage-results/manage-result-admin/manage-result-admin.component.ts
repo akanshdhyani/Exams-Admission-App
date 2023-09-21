@@ -101,8 +101,7 @@ export class ManageResultAdminComponent {
       },
       isAction: true,
     }
-  ]
-
+  ]  
   instituteTableData = [
     {
       instituteName: 'NEW COLLEGE OF NURSING',
