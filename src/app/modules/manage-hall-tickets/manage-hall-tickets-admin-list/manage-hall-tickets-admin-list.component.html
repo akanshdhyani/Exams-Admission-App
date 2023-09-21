@@ -1,4 +1,5 @@
-<div class="secondary-container">
+<div class="main-container">
+  <div class="secondary-container">
     <mat-label class="title-header"> Manage Hall Tickets </mat-label>
     <div
       style="
@@ -8,8 +9,11 @@
         margin-top: 24px;
       "
     >
+    <div style="display: flex;flex-direction: column;">
+      <div class="mb1">
+        <label class="examCycleLable">Hall Ticket Type</label>
+      </div>
       <mat-form-field class="exam-form" appearance="outline">
-        <mat-label class="label">Hall Ticket Type</mat-label>
         <mat-select>
           <mat-option
             *ngFor="let hallticket of halltickets"
@@ -19,6 +23,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+    </div>
       <!-- <mat-form-field appearance="outline">
           <input matInput placeholder="Search" />
         </mat-form-field> -->
@@ -42,24 +47,36 @@
       </div>
     </div>
     <div class="selector">
+      <div style="display: flex;flex-direction: column;">
+      <div class="mb1">
+        <label class="examCycleLable">Course</label>
+      </div>
       <mat-form-field class="exam-form" appearance="outline">
-        <mat-label class="label">Course</mat-label>
+        <!-- <mat-label class="label">Course</mat-label> -->
         <mat-select>
           <mat-option *ngFor="let course of courses" [value]="course.value">
             {{ course.viewValue }}
           </mat-option>
         </mat-select>
       </mat-form-field>
+      </div>
+      <div style="display: flex;flex-direction: column;">
+        <div class="mb1">
+          <label class="examCycleLable">Exam cycle</label>
+        </div>
       <mat-form-field class="exam-form" appearance="outline">
-        <mat-label class="label">Exam cycle</mat-label>
         <mat-select>
           <mat-option *ngFor="let year of years" [value]="year.value">
             {{ year.viewValue }}
           </mat-option>
         </mat-select>
       </mat-form-field>
+      </div>
+      <div style="display: flex;flex-direction: column;">
+        <div class="mb1">
+          <label class="examCycleLable">Institute</label>
+        </div>
       <mat-form-field class="exam-form" appearance="outline">
-        <mat-label>Institute</mat-label>
         <mat-select>
           <mat-option
             *ngFor="let institute of institutes"
@@ -68,9 +85,9 @@
             {{ institute.viewValue }}
           </mat-option>
         </mat-select>
-      </mat-form-field> <span  class="mt2 filter" [matMenuTriggerFor]="AttendanceFilterMenu">
+      </mat-form-field></div> <span style="display: flex; align-items: center;"  class="filter" [matMenuTriggerFor]="AttendanceFilterMenu">
         <mat-icon  fontIcon=filter_list></mat-icon>
-        <mat-label class="mt4 ">Filter</mat-label>
+        <mat-label class=" ">Filter</mat-label>
         <mat-menu #AttendanceFilterMenu="matMenu">
 
           <div *ngFor="let filterValue of filters" >
@@ -118,4 +135,5 @@
         </mat-tab-group>
       </div>
     </div>
+  </div>
   </div>
