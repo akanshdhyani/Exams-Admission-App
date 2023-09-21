@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CandidatePortalService } from '../services/candidate-portal.service';
 
@@ -27,18 +27,18 @@ export class CandidatePortalComponent implements OnInit {
 
   examCycleList = [
     {
-      examName: 'Exam Cucle 1',
+      examName: 'Exam Cycle 1',
       value: '1'
     },{
-      examName: 'Exam Cucle 2',
+      examName: 'Exam Cycle 2',
       value: '2'
     },{
-      examName: 'Exam Cucle 3',
+      examName: 'Exam Cycle 3',
       value: '3'
     },
   ]
 
-  examCycle = new FormControl('');
+  examCycle = new FormControl('',[Validators.required]);
 
   constructor(
     private router: Router,
