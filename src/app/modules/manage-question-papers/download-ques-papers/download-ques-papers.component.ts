@@ -9,6 +9,7 @@ import { ManageQuestionPaperService } from '../services/manage-question-paper.se
 })
 export class DownloadQuesPapersComponent {
   selectedExamCycleId: any;
+  cctvVerificationStatus = 'Verified'
   constructor(
     private questionPaperService: ManageQuestionPaperService,
   ) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CandidatePortalService } from '../services/candidate-portal.service';
+import { AuthServiceService } from 'src/app/core/services/auth-service/auth-service.service';
 
 @Component({
   selector: 'app-hall-ticket',
@@ -8,7 +9,7 @@ import { CandidatePortalService } from '../services/candidate-portal.service';
   styleUrls: ['./hall-ticket.component.scss']
 })
 export class HallTicketComponent implements OnInit {
-
+  loggedInUserRole: string;
   //#region (global variables)
   hallTicketDetails = {
     exmaCycleName: 'Exam Cycle 1',
@@ -82,8 +83,11 @@ export class HallTicketComponent implements OnInit {
   //#region (constructor)
   constructor(
     private router: Router,
-    private candidatePortalService: CandidatePortalService
-  ) {}
+    private candidatePortalService: CandidatePortalService,
+    private authService: AuthServiceService
+  ) {
+    this.loggedInUserRole = this.authService.getUserRoles()[0];
+  }
   //#endregion
 
   ngOnInit(): void {
@@ -114,6 +118,10 @@ export class HallTicketComponent implements OnInit {
   //#region (navigate to modify)
   redirectToModifyHallticket() {
     this.router.navigateByUrl('/candidate-portal/modify-hallticket')
+  }
+
+  cancel() {
+    this.router.navigateByUrl('/hall-ticket-management')
   }
   //#endregion
 

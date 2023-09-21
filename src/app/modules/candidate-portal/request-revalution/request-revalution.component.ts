@@ -26,6 +26,15 @@ export class RequestRevalutionComponent implements OnInit {
 
   examTableHeader = [
     {
+      header: '',
+      columnDef: 'select',
+      isSortable: false,
+      isCheckBox: true,
+      cell: (element: Record<string, any>) => ``,
+      cellStyle: {
+        'background-color': '#0000000a', 'width': '30px', 'color': '#00000099'
+      },
+    },{
       header: 'Name of exam',
       columnDef: 'examName',
       cell: (element: Record<string, any>) => `${element['examName']}`,
@@ -105,7 +114,12 @@ export class RequestRevalutionComponent implements OnInit {
   ]
 
   isHallTicket = true
-  examSelected = false
+
+  disableExamSelect = false;
+  examsSelected = 0;
+  amountToPay = 0;
+  costOfExam = 3000;
+  paymentDone = false;
   //#endregion
 
   //#region (constructor)
@@ -159,5 +173,55 @@ export class RequestRevalutionComponent implements OnInit {
 
   formateRevaluationData() {}
   //#endregion
+
+  onSelectedRows(event: any[]) {
+    this.examsSelected = event.length
+    this.amountToPay = (this.examsSelected * this.costOfExam)
+  }
+
+  payFee() {
+    const postData = {
+      endpoint: "https://eazypayuat.icicibank.com/EazyPG",
+      returnUrl: "https://payment.uphrh.in/api/v1/user/payment",
+      paymode: "9",
+      secret: "",
+      merchantId: "600547",
+      mandatoryFields: {
+        referenceNo: '', //generate random number (this.baseService.generate_uuidv4())
+        submerchantId: "45",
+        transactionAmount: this.amountToPay,
+        invoiceId: "x1",
+        invoiceDate: "x",
+        invoiceTime: "x",
+        merchantId: "x",
+        payerType: "registration", //module you create
+        payerId: 'instituteId',
+        transactionId: "x",
+        transactionDate: "x",
+        transactionTime: "x",
+        transactionStatus: "x",
+        refundId: "x",
+        refundDate: "x",
+        refundTime: "x",
+        refundStatus: "x",
+      },
+      optionalFields: "registration", //module you create
+    };
+    // this.candidatePortalService.getPaymentUrl(postData)
+    // .subscribe((result: any) => {
+    //   window.open(result.url, "_blank");
+    // })
+
+    // const dialogRef = this.dialog.open(LoadingDialogComponent, {
+    //   data: {
+    //     description: 'Please wait a while. you are redirecting to payment page'
+    //   },
+    //   width: '800px',
+    //   height: '500px',
+    //   maxWidth: '90vw',
+    //   maxHeight: '90vh'
+    // })
+    this.paymentDone = true
+  }
 
 }

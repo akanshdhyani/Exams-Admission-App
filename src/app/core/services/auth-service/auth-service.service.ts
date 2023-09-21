@@ -5,7 +5,7 @@ import { RequestParam, ServerResponse } from 'src/app/shared';
 import { ConfigService } from 'src/app/shared/services/config/config.service';
 import { environment } from 'src/environments/environment';
 import { HttpService } from '../http-service/http.service';
-import { JwtTokenService } from '../jwt-token-service/jwt-token.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +18,9 @@ export class AuthServiceService extends HttpService {
   private readonly ALL_ROLES = "all_roles";
 
   constructor(http: HttpClient, private configService: ConfigService,
-    jwtTokenService: JwtTokenService) {
-    super(http,jwtTokenService);
+    private cookieService: CookieService
+   ) {
+    super(http);
     this.baseUrl = environment.apiUrl;
     this.userManagementURL = environment.userManagementURL;
   }
@@ -109,14 +110,22 @@ export class AuthServiceService extends HttpService {
 
   saveToken(token: string): void {
     console.log(token)
-    this.jwtTokenService.setAccessToken(token);
+    const cookieOptions: any = {
+      expires: new Date(Date.now() + 3600000), // Example: Cookie expires in 1 hour
+      path: '/', // Set the path as needed
+      secure: true, // Only send the cookie over HTTPS (recommended)
+      httpOnly: true, // Set the HttpOnly flag
+    };
+    this.cookieService.set('access_token', token, undefined, undefined, undefined, undefined, cookieOptions);
+
+    //this.cookieService.set('access_token', token);
    // localStorage.setItem(this.TOKEN_KEY, token);
   }
 
   getToken(): string | null {
-    let tokenFromService = this.jwtTokenService.getAccessToken()
-    console.log(tokenFromService)
-    return this.jwtTokenService.getAccessToken();
+    let tokenFromCookie = this.cookieService.get('access_token')
+    console.log(tokenFromCookie)
+    return this.cookieService.get('access_token');
    // return localStorage.getItem(this.TOKEN_KEY);
   }
 
@@ -124,6 +133,7 @@ export class AuthServiceService extends HttpService {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_DATA);
     localStorage.removeItem(this.ALL_ROLES);
+    this.cookieService.delete('access_token');
   }
 
   isLoggedIn(): boolean{

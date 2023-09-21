@@ -60,6 +60,12 @@ export class ManageExamCycleListComponent {
       courseName: 'M.SC.(Nursing)',
       startDate: '29-06-2023',
       endDate: '29-06-2023',
+      hasStyle: true,
+      cellStyle: {
+        viewExamCycle: {
+          'color': '#0074B6'
+        }
+      }
     },
     {
       id: 1,
@@ -67,6 +73,12 @@ export class ManageExamCycleListComponent {
       courseName: 'M.SC.(Nursing)',
       startDate: '29-06-2024',
       endDate: '29-06-2024',
+      hasStyle: true,
+      cellStyle: {
+        viewExamCycle: {
+          'color': '#0074B6'
+        }
+      }
     }
   ]
   setTimeout(() => {
@@ -107,11 +119,12 @@ export class ManageExamCycleListComponent {
           cell: (element: Record<string, any>) => `${element['endDate']}`
         },
         {
-          columnDef: 'isLink',
+          columnDef: 'viewExamCycle',
           header: '',
           isSortable: false,
           isLink: false,
-          cell: (element: Record<string, any>) => `View`
+          cell: (element: Record<string, any>) => `View`,
+          isAction: true
         },
         {
           columnDef: 'isAction',
@@ -119,7 +132,7 @@ export class ManageExamCycleListComponent {
           isSortable: false,
           isLink: false,
           isAction: true,
-          showDeleteIcon: false,
+          showDeleteIcon: true,
           cell: (element: Record<string, any>) => ``
         },
       ]
@@ -239,5 +252,10 @@ export class ManageExamCycleListComponent {
             })        
           }
       })
+    }
+
+  onViewClick(event: any) {
+    console.log(event);
+    this.router.navigateByUrl('/manage-exam-cycle/details')
   }
 }

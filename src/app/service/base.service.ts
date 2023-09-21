@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
-import { JwtTokenService } from '../core/services/jwt-token-service/jwt-token.service';
 
 
 @Injectable({
@@ -15,12 +14,12 @@ export class BaseService extends HttpService {
   override baseUrl: string;
   headers = {
     'Accept': 'application/json',
-    'Authorization': `Bearer ${this.jwtTokenService.getAccessToken()}`
+    'Authorization': `Bearer `
   };
 
-  constructor(private httpClient: HttpClient,jwtTokenService: JwtTokenService
+  constructor(private httpClient: HttpClient
   ) {
-    super(httpClient,jwtTokenService);
+    super(httpClient);
     this.baseUrl = environment.apiUrl;
   }
 
@@ -36,6 +35,12 @@ export class BaseService extends HttpService {
           course: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
+          hasStyle: true,
+          cellStyle: {
+            viewHallTicket: {
+              'color': '#0074B6'
+            }
+          }
         },
         {
           id: 0,
@@ -43,6 +48,12 @@ export class BaseService extends HttpService {
           course: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
+          hasStyle: true,
+          cellStyle: {
+            viewHallTicket: {
+              'color': '#0074B6'
+            }
+          }
         },
         {
           id: 0,
@@ -50,6 +61,12 @@ export class BaseService extends HttpService {
           course: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
+          hasStyle: true,
+          cellStyle: {
+            viewHallTicket: {
+              'color': '#0074B6'
+            }
+          }
         },
         {
           id: 0,
@@ -57,6 +74,12 @@ export class BaseService extends HttpService {
           course: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
+          hasStyle: true,
+          cellStyle: {
+            viewHallTicket: {
+              'color': '#0074B6'
+            }
+          }
         },
       ]
     )

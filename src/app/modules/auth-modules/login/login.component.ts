@@ -33,7 +33,11 @@ export class LoginComponent {
       if (this.authService.isLoggedIn()) {
         // Redirect to the home page if logged in
         console.log("User is logged in !!")
-        this.router.navigate(['home']);
+        if (this.authService.isStudent()) {
+          this.router.navigate(['/candidate-portal'])
+        } else {
+          this.router.navigate(['home']);
+        }
       }
     }
   
@@ -46,7 +50,11 @@ export class LoginComponent {
           this.authService.saveUserData(res.responseData);
           this.getAllRoles();
           // this.getUserDetails();
-         this.router.navigate(['home'])
+          if (this.authService.isStudent()) {
+            this.router.navigate(['/candidate-portal'])
+          } else {
+            this.router.navigate(['home']);
+          }
         },
         error: (err) => {
             this.toastrService.showToastr(err.error, 'Error', 'error', '');

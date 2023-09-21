@@ -21,11 +21,13 @@ import { StudentEnrollmentModule } from './modules/student-enrollment/student-en
 import { TrackDispatchesModule } from './modules/track-dispatches/track-dispatches.module';
 import { HomeComponent } from './home/home.component';
 import { CandidatePortalModule } from './modules/candidate-portal/candidate-portal.module';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
