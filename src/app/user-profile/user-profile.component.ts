@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,14 +16,23 @@ export class UserProfileComponent {
   editDataObject: any;
   isEditData:boolean = false;
 
+  userObject={
+    name: 'Amit kumar',
+    enrollmentNumber: '1234567890',
+    emailId : 'amitkumar@gmail.com' ,
+    phoneNumber : '9876543210',
+    role: 'Candidate',
+    activeStatus: 'Active'
+  }
 
   constructor(private router: Router,
+    private _location: Location,
     private route: ActivatedRoute) {
     this.userForm = new FormGroup({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-      emailId: new FormControl('', [Validators.required, Validators.email]),
-      phoneNumber: new FormControl('', Validators.required),
+      firstName: new FormControl(this.userObject?.name.split(' ').slice(0, -1).join(' '), Validators.required),
+      lastName: new FormControl(this.userObject?.name.split(' ').slice(-1).join(' '), Validators.required),
+      emailId: new FormControl(this.userObject?.emailId, [Validators.required, Validators.email]),
+      phoneNumber: new FormControl(this.userObject?.phoneNumber, Validators.required),
       // role: new FormControl('', Validators.required),
       // activeStatus: new FormControl('', Validators.required)
     })
@@ -34,14 +44,15 @@ export class UserProfileComponent {
 
   setUserFormData() {
     this.userForm.setValue({
-      firstName: this.editDataObject?.fullName,
-      lastName: this.editDataObject?.fullName,
-      emailId: this.editDataObject?.email,
-      phoneNumber: this.editDataObject?.phoneNumber,
-      role: this.editDataObject?.role,
-      activeStatus: this.editDataObject?.accountStatus
+      firstName: this.userObject?.name,
+      lastName: this.userObject?.name,
+      emailId: this.userObject?.emailId,
+      phoneNumber: this.userObject?.phoneNumber,
+      role: this.userObject?.role,
+      activeStatus: this.userObject?.activeStatus
     })
   }
+  
 
   get firstName() {
     return this.userForm.get('firstName')
@@ -57,7 +68,9 @@ export class UserProfileComponent {
   get phoneNumber() {
     return this.userForm.get('phoneNumber')
   }
-
+  backClicked() {
+    this._location.back();
+  }
 
   addUserFn() {
     this.isUsertable = false;

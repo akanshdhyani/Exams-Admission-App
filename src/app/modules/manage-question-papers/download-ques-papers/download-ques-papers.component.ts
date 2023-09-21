@@ -97,7 +97,8 @@ export class DownloadQuesPapersComponent {
   ]
 
   examCycleSelected(e: Event) {
-
+    console.log(e)
+    
   }
 
   downloadQuestionPaper(questionPaperId: any) {

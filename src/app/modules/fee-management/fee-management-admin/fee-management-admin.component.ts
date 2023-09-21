@@ -22,13 +22,13 @@ export class FeeManagementAdminComponent implements OnInit {
 
   examCycleList = [
     {
-      examName: 'Exam Cucle 1',
+      examName: 'Exam Cycle 1',
       value: '1'
     },{
-      examName: 'Exam Cucle 2',
+      examName: 'Exam Cycle 2',
       value: '2'
     },{
-      examName: 'Exam Cucle 3',
+      examName: 'Exam Cycle 3',
       value: '3'
     },
   ]
