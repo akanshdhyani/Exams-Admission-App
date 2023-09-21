@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CandidatePortalService } from '../services/candidate-portal.service';
 
@@ -38,7 +38,7 @@ export class CandidatePortalComponent implements OnInit {
     },
   ]
 
-  examCycle = new FormControl('');
+  examCycle = new FormControl('',[Validators.required]);
 
   constructor(
     private router: Router,
