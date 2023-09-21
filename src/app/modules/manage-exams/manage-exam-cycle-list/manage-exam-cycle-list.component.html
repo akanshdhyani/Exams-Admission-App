@@ -1,12 +1,12 @@
 <div class="secondary-container">
     <mat-label class="title-header"> Manage Exam Cycles & Exams </mat-label>
-    <div class="exam-container">
+    <div style="display: flex; flex-direction: row; justify-content: space-between  ; margin-top: 24px;">
       <mat-form-field class="exam-form" appearance="outline">
         <input matInput placeholder="Search" />
       </mat-form-field>
       <div class="buttons">
         <div >
-          <button class="btn-1" (click)="openBulkUploadModal()">Bulk Upload <mat-icon>arrow_upward</mat-icon></button>
+          <button class="btn-1" style="display: flex; flex-direction: row; gap: 4px;align-items: center;" (click)="openBulkUploadModal()">Bulk Upload <mat-icon>arrow_upward</mat-icon></button>
         </div>
         <div >
           <button class="btn-2" (click)="goToCreate()">Add Exam Cycle</button>
@@ -36,7 +36,6 @@
             (pageChange)="handlePageChange($event)"
             (searchParmas)="getSearchParams($event)"
             (deleteAction)="onDeleteClick($event)"
-            (cellClickAction)="onViewClick($event)">
           >
           </app-shared-table>
         </mat-tab>
