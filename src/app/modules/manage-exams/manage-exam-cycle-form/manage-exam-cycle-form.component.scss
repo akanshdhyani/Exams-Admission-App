@@ -21,7 +21,8 @@
 .label{
     font-weight: 550; 
     font-size: 16px;
-   letter-spacing: 0.16px;    
+   letter-spacing: 0.16px; 
+   margin-bottom: 5px;   
 }
 .form-inputs{
     display: flex;
@@ -161,4 +162,11 @@
 .close-icon {
     width: 100%;
     text-align: right;
+}
+
+.time-input {
+    height: 53px;
+    border-radius: 3px;
+    border-width: thin;
+    font-size: 16px;
 }
