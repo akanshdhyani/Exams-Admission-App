@@ -90,4 +90,43 @@ export class BaseService extends HttpService {
 
     return of([])
   }
+
+  getInstitutesData$(): Observable<any> {
+    // return this.httpClient.get<any>("https://api.agify.io/?name=meelad");
+
+    return of(  [
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        instituteId: '123',
+        course: 'xxxx',
+        internalMarksProvided: true,
+        finalMarksProvided: true,
+        revisedFinalMarksProvided: true,
+       
+      },
+      {
+        instituteName: 'OLD COLLEGE OF NURSING',
+        instituteId: '123',
+        course: 'xxxx',
+        internalMarksProvided:false,
+        finalMarksProvided: true,
+        revisedfinalMarksProvided: false,
+     
+      },
+      {
+        instituteName: 'MODERN COLLEGE OF NURSING',
+        instituteId: '123',
+        course: 'xxxx',
+        internalMarksProvided: true,
+        finalMarksProvided: false,
+        revisedfinalMarksProvided: true,
+    
+      },
+    
+   
+    ])
+  }
+
+  
+
 }

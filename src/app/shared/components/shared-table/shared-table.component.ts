@@ -241,5 +241,7 @@ export class SharedTableComponent implements AfterViewInit {
       // Return true for options that you want to select by default
       return "All Exams" ;
     }
+
+    
     
 }
