@@ -1302,7 +1302,10 @@ export class FeeManagementAdminComponent implements OnInit {
   showInstitutesTable = true
 
   //#endregion
-
+  breadcrumbItems = [
+    { label: 'Exam Management', url: '/home' },
+    { label: 'Fee Management', url: '' },
+  ]
   constructor(
     private feeManagementService: FeeManagementService
   ) {}

@@ -31,6 +31,10 @@ export class StudentEnrollmentComponent {
   pageIndex = 0;
   pageSize = 10;
   length = 10;
+  breadcrumbItems = [
+    { label: 'Exam Management', url: '/home' },
+    { label: 'Student Enrollment', url: '' },
+  ]
 constructor(private router: Router, private authService: AuthServiceService){}
   courses: Course[] = [
     {value: 'bsc', viewValue: 'BSc'},
@@ -125,6 +129,11 @@ constructor(private router: Router, private authService: AuthServiceService){}
           header: '',
           isSortable: false,
           isLink: false,
+          cellStyle: {
+            'background-color': 'inherit',
+            'color': '#045DAD',
+            'cursor': 'pointer'
+          },
           cell: (element: Record<string, any>) => `View Enrollment`
         },
       ]
@@ -171,7 +180,12 @@ constructor(private router: Router, private authService: AuthServiceService){}
             header: '',
             isSortable: false,
             isLink: false,
-            cell: (element: Record<string, any>) => `View Enrollment`
+            cellStyle: {
+              'background-color': 'inherit',
+              'color': '#045DAD',
+              'cursor': 'pointer'
+            },
+            cell: (element: Record<string, any>) => `View Enrollment`,
           },
         ]
         break;

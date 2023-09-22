@@ -425,7 +425,10 @@ export class ManageResultAdminComponent {
   showInstitutesTable = true
 
   //#endregion
-
+  breadcrumbItems = [
+    { label: 'Exam Management', url: '/home' },
+    { label: 'Manage Results', url: '' },
+  ]
   constructor(
     private feeManagementService: FeeManagementService,
     private dialog: MatDialog,

@@ -321,7 +321,10 @@ export class FeeManagementListInstituteComponent implements OnInit {
   tabHeader = 'Pending'
 
   payingExams:any = []
-
+  breadcrumbItems = [
+    { label: 'Exam Management', url: '/home' },
+    { label: 'Fee Management', url: '' },
+  ]
   constructor(
     private dialog: MatDialog,
     private feeManagementService: FeeManagementService

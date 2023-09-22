@@ -27,6 +27,10 @@ export class ManageExamCycleListComponent {
   pageIndex = 0;
   pageSize = 10;
   length = 10;
+  breadcrumbItems = [
+    { label: 'Exam Management', url: '/home' },
+    { label: 'Manage Exam Cycles and Exams', url: '' },
+  ]
   constructor(private router: Router, private dialog: MatDialog){}
   courses: Course[] = [
     {value: 'bsc', viewValue: 'BSc'},
