@@ -32,7 +32,6 @@ export class StudentEnrollmentComponent {
   pageSize = 10;
   length = 10;
   breadcrumbItems = [
-    { label: 'Exam Management', url: '/home' },
     { label: 'Student Enrollment', url: '' },
   ]
 constructor(private router: Router, private authService: AuthServiceService){}

@@ -1303,7 +1303,6 @@ export class FeeManagementAdminComponent implements OnInit {
 
   //#endregion
   breadcrumbItems = [
-    { label: 'Exam Management', url: '/home' },
     { label: 'Fee Management', url: '' },
   ]
   constructor(

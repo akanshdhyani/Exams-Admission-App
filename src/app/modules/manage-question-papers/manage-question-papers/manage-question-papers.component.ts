@@ -92,7 +92,6 @@ export class ManageQuestionPapersComponent {
 
   ]
   breadcrumbItems = [
-    { label: 'Exam Management', url: '/home' },
     { label: 'Manage Question Paper', url: '' },
   ]
 

@@ -322,7 +322,6 @@ export class FeeManagementListInstituteComponent implements OnInit {
 
   payingExams:any = []
   breadcrumbItems = [
-    { label: 'Exam Management', url: '/home' },
     { label: 'Fee Management', url: '' },
   ]
   constructor(

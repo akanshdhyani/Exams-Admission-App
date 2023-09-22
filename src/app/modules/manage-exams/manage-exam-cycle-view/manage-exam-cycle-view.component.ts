@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 })
 export class ManageExamCycleViewComponent {
   breadcrumbItems = [
-    { label: 'Exam Management', url: '/home' },
     { label: 'Manage Exam Cycles and Exams', url: '' },
   ]
   constructor(private router: Router) {

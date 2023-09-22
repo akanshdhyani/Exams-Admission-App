@@ -348,7 +348,6 @@ export class CctvManagementAdminComponent {
   searcControl = '';
   //#endregion
   breadcrumbItems = [
-    { label: 'Exam Management', url: '/home' },
     { label: 'CCTV Management', url: '' },
   ]
   constructor(

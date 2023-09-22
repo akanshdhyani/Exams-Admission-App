@@ -25,7 +25,6 @@ export class ManageHallTicketsAdminListComponent {
 
   filters = ["Attendance > 75", "Attendance < 75"]
   breadcrumbItems = [
-    { label: 'Exam Management', url: '/home' },
     { label: 'Manage Hall Tickets', url: '' },
   ]
   constructor(

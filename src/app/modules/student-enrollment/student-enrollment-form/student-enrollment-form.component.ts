@@ -30,7 +30,6 @@ export class StudentEnrollmentFormComponent {
   loggedInUserRole: any;
   enrollmentId: any;
   breadcrumbItems = [
-    { label: 'Exam Management', url: '/home' },
     { label: 'Student Enrollment', url: '' },
   ]
   constructor(private formBuilder: FormBuilder, private studentEnrollmentService: StudentEnrollmentService, private authService: AuthServiceService, private route: ActivatedRoute) {

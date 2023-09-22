@@ -482,7 +482,6 @@ export class ManageTrackDispatchesComponent {
 
   //#endregion
   breadcrumbItems = [
-    { label: 'Exam Management', url: '/home' },
     { label: 'Manage Track Dispatches', url: '' },
   ]
   constructor(
