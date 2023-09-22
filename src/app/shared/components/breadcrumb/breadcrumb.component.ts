@@ -7,5 +7,5 @@ import { BreadcrumbItem } from '../../interfaces';
   styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent {
-  // @Input() breadcrumbItems: BreadcrumbItem[];
+  @Input() breadcrumbItems: BreadcrumbItem[];
 }
