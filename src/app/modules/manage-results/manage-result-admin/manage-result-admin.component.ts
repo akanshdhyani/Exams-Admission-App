@@ -5,7 +5,7 @@ import { UploadDialogComponent } from 'src/app/shared/components/upload-dialog/u
 import { ConformationDialogComponent } from 'src/app/shared/components/conformation-dialog/conformation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
-
+import { BaseService } from '../../../service/base.service';
 interface Course {
   value: string;
   viewValue: string;
@@ -19,6 +19,8 @@ interface Course {
 })
 export class ManageResultAdminComponent {
   selectedCellDetails: any;
+
+  
   courses: Course[] = [
     {value: 'bsc', viewValue: 'BSc'},
     {value: 'msc', viewValue: 'MSc'},
@@ -64,32 +66,38 @@ export class ManageResultAdminComponent {
       },
     },{
       header: 'Internal marks',
-      columnDef: 'internalMarks',
+      columnDef: 'internalMarksProvided',
       isSortable: false,
-      cell: (element: Record<string, any>) => `${element['internalMarks']}`,
+      cell: (element: Record<string, any>) => `${element['internalMarksProvided']}`,
       cellStyle: {
-        'background-color': '#0000000a', 'width': '160px', 'color': '#00000099'
+        'background-color': '#0000000a',
+        'color': '#00000099'
       },
+      hasStyle: true,
       isAction: true,
     },{
       header: 'Final marks',
-      columnDef: 'finalMarks',
+      columnDef: 'finalMarksProvided',
       isSortable: false,
-      cell: (element: Record<string, any>) => `${element['finalMarks']}`,
+      cell: (element: Record<string, any>) => `${element['finalMarksProvided']}`,
       cellStyle: {
-        'background-color': '#0000000a', 'width': '145px', 'color': '#00000099'
+        'background-color': '#0000000a',
+        'color': '#00000099'
       },
+      hasStyle: true,
       isAction: true,
     },
     {
       header: 'Revised final marks',
-      columnDef: 'revisedFinalMarks',
+      columnDef: 'revisedFinalMarksProvided',
       isSortable: false,
-      cell: (element: Record<string, any>) => `${element['revisedFinalMarks']}`,
+      cell: (element: Record<string, any>) => `${element['revisedFinalMarksProvided']}`,
       cellStyle: {
-        'background-color': '#0000000a', 'width': '145px', 'color': '#00000099'
+        'background-color': '#0000000a',
+        'color': '#00000099'
       },
       isAction: true,
+      hasStyle: true,
     },    
     {
       header: '',
@@ -97,238 +105,13 @@ export class ManageResultAdminComponent {
       isSortable: false,
       cell: (element: Record<string, any>) => `${element['publish']}`,
       cellStyle: {
-        'background-color': '#0000000a', 'width': '145px', 'color': '#00000099'
+        'background-color': '#0000000a',
+        'color': '#00000099'
       },
       isAction: true,
     }
   ]  
-  instituteTableData = [
-    {
-      instituteName: 'NEW COLLEGE OF NURSING',
-      instituteId: '123',
-      course: 'xxxx',
-      internalMarks: 'Pending',
-      finalMarks: '-',
-      revisedFinalMarks: '-',
-      publish:'-',
-      // // hasStyle: true,
-      // cellStyle: {
-      //   publish: {
-      //     'color': '#0074B6'
-      //   },
-      //   internalMarks :{
-      //     'color' : '#E99E38' 
-      //   },
-      //   finalMarks:{
-      //     'color': '#1D8923'
-      //   },
-        
-      //   revisedFinalMarks :{
-      //     'color' : '#E99E38'
-      //   }
-      // }
-    },
-    {
-      instituteName: 'NEW COLLEGE OF NURSING',
-      instituteId: '123',
-      course: 'xxxx',
-      internalMarks: 'View & download',
-      finalMarks: 'Upload',
-      revisedFinalMarks: '-',
-      publish:'-',
-      // // hasStyle: true,
-      // cellStyle: {
-      //   publish: {
-      //     'color': '#0074B6'
-      //   },
-      //   internalMarks :{
-      //     'color' : '#1D8923' 
-      //   },
-      //   finalMarks:{
-      //     'color': '#0074B6'
-      //   },
-        
-      //   revisedFinalMarks :{
-      //     'color' : '#E99E38'
-      //   }
-      // }
-    },
-    {
-      instituteName: 'NEW COLLEGE OF NURSING',
-      instituteId: '123',
-      course: 'xxxx',
-      internalMarks: 'View & download',
-      finalMarks: 'View & delete',
-      revisedFinalMarks: 'Upload',
-      publish:'Publish',
-      // // hasStyle: false,
-      // cellStyle: {
-      //   publish: {
-      //     'color': '#0074B6'
-      //   },
-      //   internalMarks :{
-      //     'color' : '#1D8923' 
-      //   },
-      //   finalMarks:{
-      //     'color': '#1D8923'
-      //   },
-        
-      //   revisedFinalMarks :{
-      //     'color' : '#0074B6'
-      //   }
-      // }
-    },
-    {
-      instituteName: 'NEW COLLEGE OF NURSING',
-      instituteId: '123',
-      course: 'xxxx',
-      internalMarks: 'View & download',
-      finalMarks: 'View & delete',
-      revisedFinalMarks: 'Upload',
-      publish:'Publish',
-      // // // hasStyle: true,
-      // cellStyle: {
-      //   publish: {
-      //     'color': '#0074B6'
-      //   },
-      //   internalMarks :{
-      //     'color' : '#1D8923' 
-      //   },
-      //   finalMarks:{
-      //     'color': '#1D8923'
-      //   },
-        
-      //   revisedFinalMarks :{
-      //     'color' : '#0074B6'
-      //   }
-      // }
-    },
-    {
-      instituteName: 'NEW COLLEGE OF NURSING',
-      instituteId: '123',
-      course: 'xxxx',
-      internalMarks: 'View & download',
-      finalMarks: 'View & delete',
-      revisedFinalMarks: 'Upload',
-      publish:'Publish',
-      // // hasStyle: true,
-      // cellStyle: {
-      //   publish: {
-      //     'color': '#0074B6'
-      //   },
-      //   internalMarks :{
-      //     'color' : '#1D8923' 
-      //   },
-      //   finalMarks:{
-      //     'color': '#1D8923'
-      //   },
-        
-      //   revisedFinalMarks :{
-      //     'color' : '#0074B6'
-      //   }
-      // }
-    },
-    {
-      instituteName: 'NEW COLLEGE OF NURSING',
-      instituteId: '123',
-      course: 'xxxx',
-      internalMarks: 'View & download',
-      finalMarks: 'View & delete',
-      revisedFinalMarks: 'Upload',
-      publish:'Publish',
-      // // hasStyle: true,
-      // cellStyle: {
-      //   publish: {
-      //     'color': '#0074B6'
-      //   },
-      //   internalMarks :{
-      //     'color' : '#1D8923' 
-      //   },
-      //   finalMarks:{
-      //     'color': '#1D8923'
-      //   },
-        
-      //   revisedFinalMarks :{
-      //     'color' : '#0074B6'
-      //   }
-      // }
-    },
-    {
-      instituteName: 'NEW COLLEGE OF NURSING',
-      instituteId: '123',
-      course: 'xxxx',
-      internalMarks: 'View & download',
-      finalMarks: 'View & delete',
-      revisedFinalMarks: 'Upload',
-      publish:'Publish',
-      // // hasStyle: true,
-      // cellStyle: {
-      //   publish: {
-      //     'color': '#0074B6'
-      //   },
-      //   internalMarks :{
-      //     'color' : '#1D8923' 
-      //   },
-      //   finalMarks:{
-      //     'color': '#1D8923'
-      //   },
-        
-      //   revisedFinalMarks :{
-      //     'color' : '#0074B6'
-      //   }
-      // }
-    },
-    {
-      instituteName: 'NEW COLLEGE OF NURSING',
-      instituteId: '123',
-      course: 'xxxx',
-      internalMarks: 'View & download',
-      finalMarks: 'View & delete',
-      revisedFinalMarks: 'Upload',
-      publish:'Publish',
-      // // hasStyle: true,
-      // cellStyle: {
-      //   publish: {
-      //     'color': '#0074B6'
-      //   },
-      //   internalMarks :{
-      //     'color' : '#1D8923' 
-      //   },
-      //   finalMarks:{
-      //     'color': '#1D8923'
-      //   },
-        
-      //   revisedFinalMarks :{
-      //     'color' : '#0074B6'
-      //   }
-      // }
-    },
-    {
-      instituteName: 'NEW COLLEGE OF NURSING',
-      instituteId: '123',
-      course: 'xxxx',
-      internalMarks: 'Pending',
-      finalMarks: '-',
-      revisedFinalMarks: '-',
-      publish:'-',
-      // hasStyle: false,
-      // cellStyle: {
-      //   publish: {
-      //     'color': '#0074B6'
-      //   },
-      //   internalMarks :{
-      //     'color' : '#E99E38' 
-      //   },
-      //   finalMarks:{
-      //     'color': '#1D8923'
-      //   },
-        
-      //   revisedFinalMarks :{
-      //     'color' : '#E99E38'
-      //   }
-      // }
-    },
-  ]
+  instituteTableData = [];
 
   studentExamsTableHeader = [
     {
@@ -429,8 +212,9 @@ export class ManageResultAdminComponent {
     { label: 'Manage Results', url: '' },
   ]
   constructor(
-    private feeManagementService: FeeManagementService,
+    private baseService: BaseService,
     private dialog: MatDialog,
+
   ) {
    
   }
@@ -445,17 +229,30 @@ export class ManageResultAdminComponent {
   }
 
   getExamCycles() {
-    this.feeManagementService.getExamCycles()
+    //this.baseService.getExamCycles()
     // .subscribe((examCucles: any) => {
     //   this.examCycleList = examCucles
     // })
   }
 
   getInstitutesData(searchKey: string = '') {
-    // this.feeManagementService.getInstitutesData(searchKey)
-    // .subscribe((InstitutesData: any) => {
-    //   this.instituteTableData = InstitutesData
-    // })
+    this.baseService.getInstitutesData$()
+     .subscribe((response: any) => {
+      console.log(response)
+      for (let institute of response) {
+        if(institute.internalMarksProvided &&  institute.finalMarksProvided && institute.revisedFinalMarksProvided ){
+          institute.publish = "Publish"
+        }else{
+          institute.publish = "-"
+        }
+        institute.internalMarksProvided ?  institute.internalMarksProvided = "View & Download" : institute.internalMarksProvided = "Pending"
+        institute.finalMarksProvided ?  institute.finalMarksProvided = "View & Delete" : institute.finalMarksProvided = "Upload"
+        institute.revisedFinalMarksProvided ?  institute.revisedFinalMarksProvided = "View & Delete" : institute.revisedFinalMarksProvided = "Upload"
+     
+      
+      }
+       this.instituteTableData = response
+     })
   }
 
   getExamsOfInstitute(instituteId: string) {
