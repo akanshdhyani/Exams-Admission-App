@@ -24,6 +24,9 @@ export class ManageHallTicketsAdminListComponent {
   generatedHallTicketsTableColumns: TableColumn[] = [];
 
   filters = ["Attendance > 75", "Attendance < 75"]
+  breadcrumbItems = [
+    { label: 'Manage Hall Tickets', url: '' },
+  ]
   constructor(
     private baseService: BaseService,
     private router: Router,

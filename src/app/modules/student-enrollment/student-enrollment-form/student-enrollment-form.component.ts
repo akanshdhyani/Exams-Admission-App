@@ -29,6 +29,9 @@ export class StudentEnrollmentFormComponent {
   fileUploadError: string;
   loggedInUserRole: any;
   enrollmentId: any;
+  breadcrumbItems = [
+    { label: 'Student Enrollment', url: '' },
+  ]
   constructor(private formBuilder: FormBuilder, private studentEnrollmentService: StudentEnrollmentService, private authService: AuthServiceService, private route: ActivatedRoute) {
     this.route.params.subscribe((param) => {
       if(param['id']) {

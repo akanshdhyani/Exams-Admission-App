@@ -111,22 +111,22 @@ export class ManageResultAdminComponent {
       finalMarks: '-',
       revisedFinalMarks: '-',
       publish:'-',
-      hasStyle: true,
-      cellStyle: {
-        publish: {
-          'color': '#0074B6'
-        },
-        internalMarks :{
-          'color' : '#E99E38' 
-        },
-        finalMarks:{
-          'color': '#1D8923'
-        },
+      // // hasStyle: true,
+      // cellStyle: {
+      //   publish: {
+      //     'color': '#0074B6'
+      //   },
+      //   internalMarks :{
+      //     'color' : '#E99E38' 
+      //   },
+      //   finalMarks:{
+      //     'color': '#1D8923'
+      //   },
         
-        revisedFinalMarks :{
-          'color' : '#E99E38'
-        }
-      }
+      //   revisedFinalMarks :{
+      //     'color' : '#E99E38'
+      //   }
+      // }
     },
     {
       instituteName: 'NEW COLLEGE OF NURSING',
@@ -136,22 +136,22 @@ export class ManageResultAdminComponent {
       finalMarks: 'Upload',
       revisedFinalMarks: '-',
       publish:'-',
-      hasStyle: true,
-      cellStyle: {
-        publish: {
-          'color': '#0074B6'
-        },
-        internalMarks :{
-          'color' : '#1D8923' 
-        },
-        finalMarks:{
-          'color': '#0074B6'
-        },
+      // // hasStyle: true,
+      // cellStyle: {
+      //   publish: {
+      //     'color': '#0074B6'
+      //   },
+      //   internalMarks :{
+      //     'color' : '#1D8923' 
+      //   },
+      //   finalMarks:{
+      //     'color': '#0074B6'
+      //   },
         
-        revisedFinalMarks :{
-          'color' : '#E99E38'
-        }
-      }
+      //   revisedFinalMarks :{
+      //     'color' : '#E99E38'
+      //   }
+      // }
     },
     {
       instituteName: 'NEW COLLEGE OF NURSING',
@@ -161,22 +161,22 @@ export class ManageResultAdminComponent {
       finalMarks: 'View & delete',
       revisedFinalMarks: 'Upload',
       publish:'Publish',
-      hasStyle: true,
-      cellStyle: {
-        publish: {
-          'color': '#0074B6'
-        },
-        internalMarks :{
-          'color' : '#1D8923' 
-        },
-        finalMarks:{
-          'color': '#1D8923'
-        },
+      // // hasStyle: false,
+      // cellStyle: {
+      //   publish: {
+      //     'color': '#0074B6'
+      //   },
+      //   internalMarks :{
+      //     'color' : '#1D8923' 
+      //   },
+      //   finalMarks:{
+      //     'color': '#1D8923'
+      //   },
         
-        revisedFinalMarks :{
-          'color' : '#0074B6'
-        }
-      }
+      //   revisedFinalMarks :{
+      //     'color' : '#0074B6'
+      //   }
+      // }
     },
     {
       instituteName: 'NEW COLLEGE OF NURSING',
@@ -186,22 +186,22 @@ export class ManageResultAdminComponent {
       finalMarks: 'View & delete',
       revisedFinalMarks: 'Upload',
       publish:'Publish',
-      hasStyle: true,
-      cellStyle: {
-        publish: {
-          'color': '#0074B6'
-        },
-        internalMarks :{
-          'color' : '#1D8923' 
-        },
-        finalMarks:{
-          'color': '#1D8923'
-        },
+      // // // hasStyle: true,
+      // cellStyle: {
+      //   publish: {
+      //     'color': '#0074B6'
+      //   },
+      //   internalMarks :{
+      //     'color' : '#1D8923' 
+      //   },
+      //   finalMarks:{
+      //     'color': '#1D8923'
+      //   },
         
-        revisedFinalMarks :{
-          'color' : '#0074B6'
-        }
-      }
+      //   revisedFinalMarks :{
+      //     'color' : '#0074B6'
+      //   }
+      // }
     },
     {
       instituteName: 'NEW COLLEGE OF NURSING',
@@ -211,22 +211,22 @@ export class ManageResultAdminComponent {
       finalMarks: 'View & delete',
       revisedFinalMarks: 'Upload',
       publish:'Publish',
-      hasStyle: true,
-      cellStyle: {
-        publish: {
-          'color': '#0074B6'
-        },
-        internalMarks :{
-          'color' : '#1D8923' 
-        },
-        finalMarks:{
-          'color': '#1D8923'
-        },
+      // // hasStyle: true,
+      // cellStyle: {
+      //   publish: {
+      //     'color': '#0074B6'
+      //   },
+      //   internalMarks :{
+      //     'color' : '#1D8923' 
+      //   },
+      //   finalMarks:{
+      //     'color': '#1D8923'
+      //   },
         
-        revisedFinalMarks :{
-          'color' : '#0074B6'
-        }
-      }
+      //   revisedFinalMarks :{
+      //     'color' : '#0074B6'
+      //   }
+      // }
     },
     {
       instituteName: 'NEW COLLEGE OF NURSING',
@@ -236,22 +236,22 @@ export class ManageResultAdminComponent {
       finalMarks: 'View & delete',
       revisedFinalMarks: 'Upload',
       publish:'Publish',
-      hasStyle: true,
-      cellStyle: {
-        publish: {
-          'color': '#0074B6'
-        },
-        internalMarks :{
-          'color' : '#1D8923' 
-        },
-        finalMarks:{
-          'color': '#1D8923'
-        },
+      // // hasStyle: true,
+      // cellStyle: {
+      //   publish: {
+      //     'color': '#0074B6'
+      //   },
+      //   internalMarks :{
+      //     'color' : '#1D8923' 
+      //   },
+      //   finalMarks:{
+      //     'color': '#1D8923'
+      //   },
         
-        revisedFinalMarks :{
-          'color' : '#0074B6'
-        }
-      }
+      //   revisedFinalMarks :{
+      //     'color' : '#0074B6'
+      //   }
+      // }
     },
     {
       instituteName: 'NEW COLLEGE OF NURSING',
@@ -261,22 +261,22 @@ export class ManageResultAdminComponent {
       finalMarks: 'View & delete',
       revisedFinalMarks: 'Upload',
       publish:'Publish',
-      hasStyle: true,
-      cellStyle: {
-        publish: {
-          'color': '#0074B6'
-        },
-        internalMarks :{
-          'color' : '#1D8923' 
-        },
-        finalMarks:{
-          'color': '#1D8923'
-        },
+      // // hasStyle: true,
+      // cellStyle: {
+      //   publish: {
+      //     'color': '#0074B6'
+      //   },
+      //   internalMarks :{
+      //     'color' : '#1D8923' 
+      //   },
+      //   finalMarks:{
+      //     'color': '#1D8923'
+      //   },
         
-        revisedFinalMarks :{
-          'color' : '#0074B6'
-        }
-      }
+      //   revisedFinalMarks :{
+      //     'color' : '#0074B6'
+      //   }
+      // }
     },
     {
       instituteName: 'NEW COLLEGE OF NURSING',
@@ -286,22 +286,22 @@ export class ManageResultAdminComponent {
       finalMarks: 'View & delete',
       revisedFinalMarks: 'Upload',
       publish:'Publish',
-      hasStyle: true,
-      cellStyle: {
-        publish: {
-          'color': '#0074B6'
-        },
-        internalMarks :{
-          'color' : '#1D8923' 
-        },
-        finalMarks:{
-          'color': '#1D8923'
-        },
+      // // hasStyle: true,
+      // cellStyle: {
+      //   publish: {
+      //     'color': '#0074B6'
+      //   },
+      //   internalMarks :{
+      //     'color' : '#1D8923' 
+      //   },
+      //   finalMarks:{
+      //     'color': '#1D8923'
+      //   },
         
-        revisedFinalMarks :{
-          'color' : '#0074B6'
-        }
-      }
+      //   revisedFinalMarks :{
+      //     'color' : '#0074B6'
+      //   }
+      // }
     },
     {
       instituteName: 'NEW COLLEGE OF NURSING',
@@ -311,22 +311,22 @@ export class ManageResultAdminComponent {
       finalMarks: '-',
       revisedFinalMarks: '-',
       publish:'-',
-      hasStyle: true,
-      cellStyle: {
-        publish: {
-          'color': '#0074B6'
-        },
-        internalMarks :{
-          'color' : '#E99E38' 
-        },
-        finalMarks:{
-          'color': '#1D8923'
-        },
+      // hasStyle: false,
+      // cellStyle: {
+      //   publish: {
+      //     'color': '#0074B6'
+      //   },
+      //   internalMarks :{
+      //     'color' : '#E99E38' 
+      //   },
+      //   finalMarks:{
+      //     'color': '#1D8923'
+      //   },
         
-        revisedFinalMarks :{
-          'color' : '#E99E38'
-        }
-      }
+      //   revisedFinalMarks :{
+      //     'color' : '#E99E38'
+      //   }
+      // }
     },
   ]
 
@@ -425,7 +425,9 @@ export class ManageResultAdminComponent {
   showInstitutesTable = true
 
   //#endregion
-
+  breadcrumbItems = [
+    { label: 'Manage Results', url: '' },
+  ]
   constructor(
     private feeManagementService: FeeManagementService,
     private dialog: MatDialog,

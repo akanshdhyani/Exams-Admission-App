@@ -91,6 +91,9 @@ export class ManageQuestionPapersComponent {
     },
 
   ]
+  breadcrumbItems = [
+    { label: 'Manage Question Paper', url: '' },
+  ]
 
 
   onUploadQuesPaper(qp: any){

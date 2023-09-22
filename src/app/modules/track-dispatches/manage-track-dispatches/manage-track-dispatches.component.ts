@@ -481,7 +481,9 @@ export class ManageTrackDispatchesComponent {
   showInstitutesTable = true
 
   //#endregion
-
+  breadcrumbItems = [
+    { label: 'Manage Track Dispatches', url: '' },
+  ]
   constructor(
     private feeManagementService: FeeManagementService,
     private dialog: MatDialog,

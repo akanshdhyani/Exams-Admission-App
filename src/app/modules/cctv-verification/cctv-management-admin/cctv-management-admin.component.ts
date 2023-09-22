@@ -347,7 +347,9 @@ export class CctvManagementAdminComponent {
 
   searcControl = '';
   //#endregion
-
+  breadcrumbItems = [
+    { label: 'CCTV Management', url: '' },
+  ]
   constructor(
     private cctvVerificationService: CctvVerificationService,
     private router: Router,

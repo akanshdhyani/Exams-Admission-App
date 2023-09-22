@@ -1,3 +1,4 @@
+<app-breadcrumb  [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
 <div class="secondary-container" id="enrollment">
   <div class="selector">
     <mat-form-field
@@ -29,11 +30,11 @@
       </mat-select>
     </mat-form-field>
   </div>
-<div class="buttons flex" style="justify-content: end;">
+<div class="buttons flex" style="justify-content: end;" *ngIf="loggedInUserRole === 'exams_institute'">
     <div >
       <button class="btn-1">Download List</button>
     </div>
-    <div >
+    <div>
       <button class="btn-2" (click)="addNewEnrollment()">New Student Enrolment</button>
     </div>
   </div>

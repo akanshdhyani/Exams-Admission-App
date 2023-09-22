@@ -7,7 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./manage-exam-cycle-view.component.scss']
 })
 export class ManageExamCycleViewComponent {
-
+  breadcrumbItems = [
+    { label: 'Manage Exam Cycles and Exams', url: '' },
+  ]
   constructor(private router: Router) {
     
   }
