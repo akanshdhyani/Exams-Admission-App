@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {NgFor} from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/core/services';
 import { Tabs } from 'src/app/shared/config';
 import { TableColumn } from 'src/app/interfaces/interfaces';
+import { StudentEnrollmentService } from '../services/student-enrollment.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 interface Course {
   value: string;
@@ -34,7 +36,9 @@ export class StudentEnrollmentComponent {
   breadcrumbItems = [
     { label: 'Student Enrollment', url: '' },
   ]
-constructor(private router: Router, private authService: AuthServiceService){}
+  searchForm: FormGroup;
+  searchParams: string;
+constructor(private router: Router, private authService: AuthServiceService, private enrollmentService: StudentEnrollmentService){}
   courses: Course[] = [
     {value: 'bsc', viewValue: 'BSc'},
     {value: 'msc', viewValue: 'MSc'},
@@ -49,15 +53,22 @@ constructor(private router: Router, private authService: AuthServiceService){}
     this.loggedInUserRole = this.authService.getUserRoles()[0];
     this.isDataLoading = false;
     this.initializeTabs();
+    this.initializeSearchForm();
+  }
+
+  initializeSearchForm() {
+    this.searchForm =  new FormGroup({
+      searchData:  new FormControl('')
+    })
+  }
+
+  getAllCourses() {
+
   }
 
   onClickItem(e: any) {
     const id = e?.id;
     this.router.navigate(['/student-enrollment/view-enrollment/'+id])
-    // e.tabName= this.selectedTab.name
-    // let id = parseInt(e?.ticketId)
-    // //console.log("Line 251", this.grievanceType);
-    // this.router.navigate(['/grievance/manage-tickets/'+ id],{ queryParams: {tabName:this.selectedTab.name}});
   }
 
   initializeTabs() {
@@ -88,6 +99,22 @@ constructor(private router: Router, private authService: AuthServiceService){}
   setTimeout(() => {
     this.isDataLoading = false;
   }, 2000);
+  const request = {}
+  this.isDataLoading = true;
+  this.enrollmentService.getEnrollmentList(request).subscribe({
+    next: (res) => {
+      this.enrollmentTableData = res.responseData;
+      console.log(res);
+    },
+    error: (error: HttpErrorResponse) => {
+      this.isDataLoading = false;
+      console.log(error);
+    }
+  })
+  }
+
+  applySearch(searchterms:any){ 
+     this.searchParams = searchterms;
   }
 
   initializeColumns(): void {
@@ -194,5 +221,20 @@ constructor(private router: Router, private authService: AuthServiceService){}
 
   addNewEnrollment() {
     this.router.navigate(['student-enrollment/add-enrollment']);
+  }
+
+  getSelectedInstitute(event: any) {
+    const selectedInsitute = event.value;
+    this.getEnrollmentData();
+  }
+
+  getSelectedCourse(event: any) {
+    const selectedCourse = event.value;
+    this.getEnrollmentData();
+  }
+
+  getSelectedAcademicYear(event: any) {
+    const selectedAcademicYear = event.value;
+    this.getEnrollmentData();
   }
 }

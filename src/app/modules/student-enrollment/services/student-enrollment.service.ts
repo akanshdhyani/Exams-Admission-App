@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { HttpService } from 'src/app/core/services';
 import { ConfigService, RequestParam, ServerResponse } from 'src/app/shared';
@@ -10,9 +11,9 @@ import { environment } from 'src/environments/environment';
 })
 export class StudentEnrollmentService extends HttpService {
   override baseUrl: string;
-  constructor(http: HttpClient, private configService: ConfigService
+  constructor(http: HttpClient, private configService: ConfigService, cookieService: CookieService
     ) {
-    super(http);
+    super(http, cookieService);
     this.baseUrl = environment.apiUrl;
    }
 
@@ -32,6 +33,14 @@ export class StudentEnrollmentService extends HttpService {
     const requestParam: RequestParam = {
       url: `${this.baseUrl}${this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_DETAILS_BY_ID}/${id}`,
       data: {},
+    }
+    return this.get(requestParam);
+  }
+
+  getEnrollmentList(request: any) {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_ENROLLMENT_LIST,
+      data: request,
     }
     return this.get(requestParam);
   }

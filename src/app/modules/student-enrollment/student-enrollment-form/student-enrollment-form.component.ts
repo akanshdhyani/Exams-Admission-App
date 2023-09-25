@@ -4,6 +4,7 @@ import { StudentEnrollmentService } from '../services/student-enrollment.service
 import { ConfigService } from 'src/app/shared';
 import { AuthServiceService } from 'src/app/core/services';
 import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-enrollment-form',
@@ -32,6 +33,7 @@ export class StudentEnrollmentFormComponent {
   breadcrumbItems = [
     { label: 'Student Enrollment', url: '' },
   ]
+  enrollmentDetails: any[] = [];
   constructor(private formBuilder: FormBuilder, private studentEnrollmentService: StudentEnrollmentService, private authService: AuthServiceService, private route: ActivatedRoute) {
     this.route.params.subscribe((param) => {
       if(param['id']) {
@@ -43,6 +45,9 @@ export class StudentEnrollmentFormComponent {
     this.loggedInUserRole = this.authService.getUserRoles()[0];
     this.initBasicDetailsForm();
     this.initEducationalDetailsForm();
+    if(this.enrollmentId !== undefined) {
+      this.getEnrollmentDetails();
+    }
   }
 
   initBasicDetailsForm() {
@@ -273,11 +278,28 @@ export class StudentEnrollmentFormComponent {
           formData.append(`${key}`, `${value}`)
           }
         this.studentEnrollmentService.enrollStudent(formData).subscribe({
-          next: (res => {
+          next: (res) => {
             console.log("res =>", res);
-          })
+          },
+          error: (error: HttpErrorResponse) => {
+           
+          }
         })
       }
+    }
+
+    getEnrollmentDetails() {
+      const id = this.enrollmentId;
+      this.studentEnrollmentService.getStudentDetailsById(id).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.enrollmentDetails = res.responseData;
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log("Error =>", error);
+          this.enrollmentDetails = [];
+        }
+      })
     }
   }
 

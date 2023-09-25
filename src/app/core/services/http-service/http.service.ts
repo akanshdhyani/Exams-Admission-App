@@ -6,6 +6,7 @@ import { of as observableOf, Observable, throwError } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { HttpOptions, RequestParam, ServerResponse, Response } from 'src/app/shared';
 import { AuthServiceService } from '../auth-service/auth-service.service';
+import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +16,7 @@ export class HttpService {
    */
   baseUrl: string;
   
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public cookieService: CookieService) {}
 
  /**
    * for making get api calls
@@ -179,12 +180,17 @@ multipartPost(requestParam: RequestParam): Observable<any> {
    */
     private getHeader(headers?: HttpOptions['headers']): HttpOptions['headers'] {
       //const access_token = localStorage.getItem('access_token');
+      const access_token = this.cookieService.get('access_token');
+      let default_headers:any = {};
      // const access_token =  this.authServiceService.getToken();
-      const default_headers = {
+      default_headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer `
+        
       };
+      if(access_token) {
+        default_headers["x-authenticated-user-token"] = access_token;
+      }
 
       if (headers) {
         return { ...default_headers, ...headers };
