@@ -19,9 +19,9 @@ export class AuthServiceService extends HttpService {
   private readonly ALL_ROLES = "all_roles";
 
   constructor(http: HttpClient, private configService: ConfigService,
-    private cookieService: CookieService
+    cookieService: CookieService
    ) {
-    super(http);
+    super(http, cookieService);
     this.baseUrl = environment.apiUrl;
     this.userManagementURL = environment.userManagementURL;
   }
