@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { HttpService } from 'src/app/core/services';
 import { RequestParam, ServerResponse, ConfigService } from 'src/app/shared';
@@ -9,9 +10,9 @@ import { RequestParam, ServerResponse, ConfigService } from 'src/app/shared';
 })
 export class ManageQuestionPaperService extends HttpService {
   override baseUrl: string;
-  constructor( http: HttpClient, private configService: ConfigService,
+  constructor( http: HttpClient, private configService: ConfigService,cookieService: CookieService
     ) { 
-    super(http);
+    super(http, cookieService);
     this.baseUrl= "https://exams.uphrh.in"
   }
 

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Injectable({
@@ -17,9 +18,9 @@ export class BaseService extends HttpService {
     'Authorization': `Bearer `
   };
 
-  constructor(private httpClient: HttpClient
+  constructor(private httpClient: HttpClient, cookieService: CookieService
   ) {
-    super(httpClient);
+    super(httpClient, cookieService);
     this.baseUrl = environment.apiUrl;
   }
 
