@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./manage-result-institute-list.component.scss']
 })
 export class ManageResultInstituteListComponent {
+  breadcrumbItems = [
+    {label: 'Manage Results', url: ''}
+  ]
   constructor(
     private router: Router,
   ){}

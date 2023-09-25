@@ -45,7 +45,9 @@ export class ManageResultInstituteComponent {
   ]
 
   examCycle = new FormControl('');
-
+  breadcrumbItems = [
+    {label: 'Manage Results', url: ''}
+  ]
   constructor(
     private router: Router,
     // private candidatePortalService: CandidatePortalService

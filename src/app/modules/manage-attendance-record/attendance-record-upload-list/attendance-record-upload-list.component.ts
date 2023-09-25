@@ -15,7 +15,9 @@ export class AttendanceRecordUploadListComponent {
    fileUploadError: string;
    listOfFiles: any[] = [];
    files: any[] = [];
-
+   breadcrumbItems = [
+    { label: 'Attendance Record', url: '' },
+  ]
 
    formatBytes(bytes: any, decimals = 2) {
     if (!+bytes) return '0 Bytes';

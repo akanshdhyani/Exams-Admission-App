@@ -95,7 +95,9 @@ export class DownloadQuesPapersComponent {
     },
 
   ]
-
+  breadcrumbItems = [
+    {label: 'Download Question Papers', url: ''}
+  ]
   examCycleSelected(e: Event) {
     console.log(e)
     

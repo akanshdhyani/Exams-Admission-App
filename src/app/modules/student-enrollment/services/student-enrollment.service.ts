@@ -36,6 +36,14 @@ export class StudentEnrollmentService extends HttpService {
     return this.get(requestParam);
   }
 
+  getEnrollmentList(request: any) {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_ENROLLMENT_LIST,
+      data: request,
+    }
+    return this.get(requestParam);
+  }
+
   /** verify student(Approve/reject) */
   updateStudentEnrollmentStatus() {
     
