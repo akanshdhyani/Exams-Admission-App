@@ -1,7 +1,7 @@
 {
     "URLS": {
         "LOGIN": "/v1/user/login",
-        "KEYCLOAK_LOGIN": "/v1/user/keycloak/usrlogin",
+        "KEYCLOAK_LOGIN": "/api/v1/user/keycloak/usrlogin",
         "QUESTION_PAPER": {
             "GET_ALL": "/v1/questionPaper/list",
             "UPLOAD": "/v1/questionPaper/upload",
