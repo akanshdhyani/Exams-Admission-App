@@ -1,14 +1,14 @@
 {
     "URLS": {
         "LOGIN": "/v1/user/login",
-        "KEYCLOAK_LOGIN": "/api/v1/user/keycloak/usrlogin",
+        "KEYCLOAK_LOGIN": "/v1/user/keycloak/usrlogin",
         "QUESTION_PAPER": {
-            "GET_ALL": "/api/questionPaper/list",
-            "UPLOAD": "/api/questionPaper/upload",
-            "DOWNLOAD": "/api/questionPaper/download",
-            "GET_BY_ID": "/api/questionPaper",
-            "GET_PREVIEW_URL": "/api/questionPaper/preview",
-            "DELETE": "/api/questionPaper/delete"
+            "GET_ALL": "/v1/questionPaper/list",
+            "UPLOAD": "/v1/questionPaper/upload",
+            "DOWNLOAD": "/v1/questionPaper/download",
+            "GET_BY_ID": "/v1/questionPaper",
+            "GET_PREVIEW_URL": "/v1/questionPaper/preview",
+            "DELETE": "/v1/questionPaper/delete"
         },
         "STUDENT_ENROLLMENT": {
             "CREATE": "/v1/students/add",
@@ -17,7 +17,10 @@
         "EXAM_MANAGEMENT": {
             "GET_EXAM_CYCLE_LIST": "/v1/admin/examCycle/list", 
             "CREATE_EXAM_CYCLE": "/v1/admin/examCycle/create",
-            "CREATE_EXAM": "/v1/admin/exam/create"
+            "CREATE_EXAM": "/v1/admin/examCycle"
+        },
+        "COURSE": {
+            "GET_ALL": "/api/v1/admin/courses/list"
         }
     }
 }
