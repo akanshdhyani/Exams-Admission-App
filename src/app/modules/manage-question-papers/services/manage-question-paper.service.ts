@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from 'src/app/core/services';
 import { RequestParam, ServerResponse, ConfigService } from 'src/app/shared';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ManageQuestionPaperService extends HttpService {
   constructor( http: HttpClient, private configService: ConfigService,
     ) { 
     super(http);
-    this.baseUrl= "https://exams.uphrh.in"
+    this.baseUrl=  environment.apiUrl;
   }
 
   getAllQuestionPapers(examCycleId: any, examId: any): Observable<ServerResponse>  {

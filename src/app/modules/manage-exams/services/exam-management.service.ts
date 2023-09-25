@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/core/services';
-import { JwtTokenService } from 'src/app/core/services/jwt-token-service/jwt-token.service';
 import { RequestParam } from 'src/app/shared';
 import { ConfigService } from 'src/app/shared/services/config/config.service';
 import { environment } from 'src/environments/environment';
@@ -11,9 +10,8 @@ import { environment } from 'src/environments/environment';
 })
 export class ExamManagementService extends HttpService {
   override baseUrl: string;
-  constructor(http: HttpClient, private configService: ConfigService,
-    jwtTokenService: JwtTokenService) {
-    super(http,jwtTokenService);
+  constructor(http: HttpClient, private configService: ConfigService) {
+    super(http);
     this.baseUrl = environment.apiUrl;
    }
 
@@ -27,15 +25,15 @@ export class ExamManagementService extends HttpService {
 
   createExamCycle(request: any) {
     const requestParam: RequestParam = {
-      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_MANAGEMENT.CREATE_EXAM_CYCLE,
+      url: `${this.baseUrl}${this.configService.urlConFig.URLS.EXAM_MANAGEMENT.CREATE_EXAM_CYCLE}`,
       data: request
     }
     return this.post(requestParam);
   }
 
-  createExam(request: any) {
+  createExam(request: any, examCycleId: any) {
     const requestParam: RequestParam = {
-      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_MANAGEMENT.this.configService.urlConFig.URLS.EXAM_MANAGEMENT.CREATE_EXAM,
+      url: `${this.baseUrl}${this.configService.urlConFig.URLS.EXAM_MANAGEMENT.this.configService.urlConFig.URLS.EXAM_MANAGEMENT.CREATE_EXAM}/${examCycleId}/addExam`,
       data: request
     }
     return this.post(requestParam);
