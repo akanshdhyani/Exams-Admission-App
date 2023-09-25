@@ -12,6 +12,12 @@ export class HomeComponent {
   constructor(private router: Router, private authService: AuthServiceService){}
   cardList: any[] = [
     {
+      title: 'User Management',
+      type: 'user-management',
+      url: '/user-management/superadmin',
+      visibility: 'exams_super_admin'
+    },
+    {
       title: 'Student Enrollment',
       type: 'student-enrollment-admin',
       url: '/student-enrollment/admin',
