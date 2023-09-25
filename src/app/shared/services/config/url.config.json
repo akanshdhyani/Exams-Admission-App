@@ -12,12 +12,17 @@
         },
         "STUDENT_ENROLLMENT": {
             "CREATE": "/v1/students/add",
-            "GET_DETAILS_BY_ID": "/v1/students"
+            "GET_DETAILS_BY_ID": "/v1/students",
+            "GET_ENROLLMENT_LIST": "",
+            "FIND_ENROLLMENT_BY_FILTER": "/v1/students/find"
         }, 
         "EXAM_MANAGEMENT": {
             "GET_EXAM_CYCLE_LIST": "/v1/admin/examCycle/list", 
             "CREATE_EXAM_CYCLE": "/v1/admin/examCycle/create",
             "CREATE_EXAM": "/v1/admin/exam/create"
+        },
+        "EXAM_STUDENT_REGISTRATION": {
+            "GET_BY_EXAM_CYCLE":"v1/studentExamRegistration"
         }
     }
 }
