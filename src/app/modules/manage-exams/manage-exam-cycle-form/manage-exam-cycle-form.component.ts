@@ -2,13 +2,18 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, inject} from '@angular/core';
 import { FormGroup ,AbstractControl, FormControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { switchMap } from 'rxjs';
+import { ExamManagementService } from '../services/exam-management.service';
+import { ToastrServiceService } from 'src/app/shared/services/toastr/toastr.service';
 // import { DateTime } from 'luxon';
 
 export interface Exam {
-  examname: string | undefined | null;
-  examdate:string | undefined | null;
-  starttime:string | undefined | null;
-  endtime:string | undefined | null;
+  examName: string | undefined | null;
+  examDate:string | undefined | null;
+  startTime:string | undefined | null;
+  endTime:string | undefined | null;
+  id?: number;
+  course?: any;
 }
 @Component({
   selector: 'app-manage-exam-cycle-form',
@@ -17,24 +22,40 @@ export interface Exam {
 })
 export class ManageExamCycleFormComponent {
   exams: Exam[]=[];
+  examsToAdd: Exam[]=[];
+  courses: any[]= [];
   startMinTime:"08:00";
   startMaxTime: "24:00";
+  savingDetails = false;
   announcer = inject(LiveAnnouncer);
   pickerMinDate = new Date(new Date().setHours(0, 0, 0, 0));
   createExamCycle = new FormGroup({
-    'examcycle':new FormControl('', Validators.required),
-    'coursename':new FormControl('', Validators.required),
-    'startdate':new FormControl('', Validators.required),
-    'enddate':new FormControl('',Validators.required),
-    'examname':new FormControl('', Validators.required),
-    'examdate':new FormControl('', Validators.required),
-    'starttime':new FormControl('', Validators.required),
-    'endtime':new FormControl('', Validators.required),
+    'examCycleName':new FormControl('', Validators.required),
+    'courseId':new FormControl('', Validators.required),
+    'startDate':new FormControl('', Validators.required),
+    'endDate':new FormControl('',Validators.required),
+    'examName':new FormControl('', Validators.required),
+    'examDate':new FormControl('', Validators.required),
+    'startTime':new FormControl('', Validators.required),
+    'endTime':new FormControl('', Validators.required),
   });
   breadcrumbItems = [
     { label: 'Manage Exam Cycles and Exams', url: '' },
   ]
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router, 
+    private examService: ExamManagementService,
+    private toasterService: ToastrServiceService,
+    ) {
+    this.courses= [
+      {
+          "id": 1,
+          "courseCode": "CS101",
+          "courseName": "Introduction to Computer Science",
+          "description": "This course covers the fundamentals of computer science."
+      }
+    ];
+  }
  
   
   ngOnInit(){
@@ -54,29 +75,68 @@ export class ManageExamCycleFormComponent {
  
  addNewExam() {
    const examCycleValue = this.createExamCycle.value;
+   const {examName, examDate, startTime, endTime, courseId} = this.createExamCycle.value;
+   const selectedCourse= this.courses.find(course => course.courseCode === courseId);
    console.log(examCycleValue);
-   this.exams.push({
-    examname: this.createExamCycle.value.examname,
-    examdate: this.convertDateFormat(this.createExamCycle.value.examdate),
-    starttime: this.createExamCycle.value.starttime ? this.createExamCycle.value.starttime : '10:00 AM',
-    endtime: this.createExamCycle.value.endtime ? this.createExamCycle.value.endtime: '10:00 PM',
-   })
-   console.log(this.exams);
+   const examDetail = {
+    examName: examName,
+    examDate: this.convertDateFormat(examDate),
+    startTime: startTime ? startTime : '10:00 AM',
+    endTime: endTime ? endTime: '10:00 PM',
+    course: selectedCourse
+   }
+   this.exams.push(examDetail);
+   this.examsToAdd.push(examDetail);
+   console.log(this.examsToAdd);
  }
+
   onSubmit(){
-   console.log(this.createExamCycle)
- }
+    const {examCycleName, courseId, startDate, endDate} = this.createExamCycle.value;
+    const examCycleDetail= {
+      examCycleName,
+      courseId,
+      startDate: this.convertDateFormat(startDate),
+      endDate: this.convertDateFormat(endDate),
+    };
+    this.savingDetails = true;
+    this.examService.createExamCycle(examCycleDetail).pipe(
+      switchMap((examCycleResponse) => {
+        // Extract examCycleId from examCycleResponse
+        const examCycleId = examCycleResponse.responseData.id; 
+  
+        // Call the createExam API with examCycleId
+        return this.examService.createExam(this.exams, examCycleId);
+      })
+    ).subscribe({
+      next: (res) => {
+        this.examsToAdd = [];
+        this.toasterService.showToastr("Exam Cycle and Exam is created successfully!", 'Success', 'success', '');
+        this.savingDetails = false;
+      },
+      error: (err) => {
+        this.toasterService.showToastr(err, 'Error', 'error', '');
+        this.savingDetails = false;
+        // Handle the error here in case of file upload or ticket creation failure
+      }
+    });
+
+    console.log(this.createExamCycle)
+  }
       
 
- remove(exams:Exam): void{
-   const index = this.exams.indexOf(exams);
- 
+ remove(exam:Exam): void{
+   const index = this.examsToAdd.indexOf(exam);
    if(index >= 0){
      this.exams.splice(index, 1);
- 
+     this.examsToAdd.splice(index, 1);
      this.announcer.announce('Removed ${exam}');
+     
+   } else {
+    const index = this.exams.indexOf(exam);
+    if(index >= 0) {
+      // delete exam using delete exam service
+    }
    }
- 
  }
 //  getFormattedTime(timestamp: string): string {
 //    const date = new Date(timestamp);
@@ -91,30 +151,30 @@ export class ManageExamCycleFormComponent {
 //  endTimeValidator() {
 //    console.log("Working");
    
-//    const starttime = this.createExamCycle.controls['starttime'].value;
-//    const endtime = this.createExamCycle.controls['endtime'].value;
+//    const startTime = this.createExamCycle.controls['startTime'].value;
+//    const endTime = this.createExamCycle.controls['endTime'].value;
  
-//    const startTime = new Date(starttime);
-//    startTime.setHours(starttime.getHours(), starttime.getMinutes());
+//    const startTime = new Date(startTime);
+//    startTime.setHours(startTime.getHours(), startTime.getMinutes());
  
-//    const endTime = new Date(endtime);
-//    endTime.setHours(endtime.getHours(), endtime.getMinutes());
-//    console.log(endtime.getHours());
-//    console.log(starttime.getHours());
+//    const endTime = new Date(endTime);
+//    endTime.setHours(endTime.getHours(), endTime.getMinutes());
+//    console.log(endTime.getHours());
+//    console.log(startTime.getHours());
  
  
 //    if (endTime <= startTime) {
-//      this.createExamCycle.controls['endtime'].setErrors({ endTimeInvalid: true });
+//      this.createExamCycle.controls['endTime'].setErrors({ endTimeInvalid: true });
 //    } else {
-//      this.createExamCycle.controls['endtime'].setErrors(null);
+//      this.createExamCycle.controls['endTime'].setErrors(null);
 //    }
    
    
 //  }
 
-goBack() {
-  this.router.navigate(['/manage-exam-cycle']);
-}
+  goBack() {
+    this.router.navigate(['/manage-exam-cycle']);
+  }
   
  }
 
