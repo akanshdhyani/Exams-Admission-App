@@ -22,6 +22,11 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       {
+        path: 'dashboard', 
+        loadChildren:()=> import('../app/modules/dashboard/dashboard.module').then(m=>m.DashboardModule),
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'student-enrollment',
         loadChildren:()=> import('../app/modules/student-enrollment/student-enrollment.module').then(m=>m.StudentEnrollmentModule),
         canActivate: [AuthGuard]

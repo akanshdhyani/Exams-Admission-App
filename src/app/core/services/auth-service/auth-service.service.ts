@@ -45,7 +45,6 @@ export class AuthServiceService extends HttpService {
     let role = '';
     if (token) {
       const userData= this.getUserData();
-      console.log("userData =>", userData);
       const userRole = userData.Role[0];
       switch(userRole) {
         case 'exams_superadmin':
@@ -116,7 +115,6 @@ export class AuthServiceService extends HttpService {
   }
 
   saveToken(token: string): void {
-    console.log(token)
     const cookieOptions: any = {
       expires: new Date(Date.now() + 3600000), // Example: Cookie expires in 1 hour
       path: '/', // Set the path as needed
@@ -131,7 +129,6 @@ export class AuthServiceService extends HttpService {
 
   getToken(): string | null {
     let tokenFromCookie = this.cookieService.get('access_token')
-    console.log(tokenFromCookie)
     return this.cookieService.get('access_token');
    // return localStorage.getItem(this.TOKEN_KEY);
   }
