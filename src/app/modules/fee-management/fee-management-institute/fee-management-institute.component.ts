@@ -25,7 +25,9 @@ export class FeeManagementInstituteComponent {
       examId: 3,
     }
   ];
-
+  breadcrumbItems = [
+    { label: 'Fee Management', url: '' },
+  ]
   constructor(
     private router: Router, private authService: AuthServiceService
   ) {}

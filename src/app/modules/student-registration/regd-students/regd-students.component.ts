@@ -8,7 +8,10 @@ import { RegdStudentsTableData, TableColumn } from 'src/app/interfaces/interface
   styleUrls: ['./regd-students.component.scss']
 })
 export class RegdStudentsComponent {
-  stateData : any;  
+  stateData : any; 
+  breadcrumbItems = [
+    { label: 'Register Students to Exam cycles and Exams', url: '' }
+  ] 
   constructor(
     private router: Router){
       this.stateData = this.router?.getCurrentNavigation()?.extras.state;
@@ -65,10 +68,10 @@ export class RegdStudentsComponent {
 
       }
     ]
+
   }
 
   initializeColumns(): void {
-
     this.viewStudentsTableColumns = [
       {
         columnDef: 'name',

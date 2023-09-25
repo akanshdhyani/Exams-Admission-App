@@ -15,7 +15,10 @@ export class AddNewRegnComponent {
 
   stateData : any;  
   searcKey: string = '';
-  studentsToRegister: any = []
+  studentsToRegister: any = [];
+  breadcrumbItems = [
+    { label: 'Register Students to Exam cycles and Exams', url: '' }
+  ]
   constructor(
     private router: Router,
     private dialog: MatDialog,

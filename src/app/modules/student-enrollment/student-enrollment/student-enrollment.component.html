@@ -7,7 +7,7 @@
       *ngIf="this.loggedInUserRole === 'exams_admin'"
     >
       <mat-label>Select Institute</mat-label>
-      <mat-select>
+      <mat-select (selectionChange)="getSelectedInstitute($event)">
         <mat-option *ngFor="let year of years" [value]="year.value">
           {{ year.viewValue }}
         </mat-option>
@@ -15,7 +15,7 @@
     </mat-form-field>
     <mat-form-field class="exam-form" appearance="outline">
       <mat-label class="label">Select Course</mat-label>
-      <mat-select>
+      <mat-select (selectionChange)="getSelectedCourse($event)">
         <mat-option *ngFor="let course of courses" [value]="course.value">
           {{ course.viewValue }}
         </mat-option>
@@ -23,7 +23,7 @@
     </mat-form-field>
     <mat-form-field class="exam-form" appearance="outline">
       <mat-label>Select Academic Year</mat-label>
-      <mat-select>
+      <mat-select (selectionChange)="getSelectedAcademicYear($event)">
         <mat-option *ngFor="let year of years" [value]="year.value">
           {{ year.viewValue }}
         </mat-option>
@@ -44,24 +44,23 @@
         <ng-template mat-tab-label>{{ tab.name }}</ng-template>
         <app-shared-skeleton-loading [isLoading]="isDataLoading">
         </app-shared-skeleton-loading>
-        <!-- <div style="display: flex; flex-direction: row;" *ngIf="!isDataLoading">
+        <div style="display: flex; flex-direction: row;" *ngIf="!isDataLoading">
             <div>
             <form [formGroup]="searchForm">
-            <mat-form-field>
+            <mat-form-field appearance="outline" class="feeManagementForms searchField mt2">
+              <mat-icon matPrefix class="search-icon">search</mat-icon>
               <input
                 matInput
                 formControlName="searchData"
-                appearance="standard"
-                (keyup)="applyFilter($event.target.value)"
+                (keyup)="applySearch($event.target.value)"
                 placeholder="Search"
               />
-            </mat-form-field>
-            
+            </mat-form-field>          
           </form>
           
         </div>
-        <app-common-filter *ngIf="!isDataLoading && userRole === 'Secretary'" (filteredvalue)="onClickApplyFilter($event)" (resetFilterValue)="resetFilterValueData($event)"></app-common-filter>
-          </div> -->
+        <!-- <app-common-filter *ngIf="!isDataLoading && userRole === 'Secretary'" (filteredvalue)="onClickApplyFilter($event)" (resetFilterValue)="resetFilterValueData($event)"></app-common-filter> -->
+        </div>
         <app-shared-table
           *ngIf="!isDataLoading"
           [tableColumns]="enrollmentTableColumns"

@@ -115,3 +115,7 @@ th.mdc-data-table__cell,
     --mdc-checkbox-unselected-icon-color: rgba(0, 0, 0, 0.54);
     --mdc-checkbox-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
 }
+
+.mat-mdc-table {
+    background: inherit !important;
+}

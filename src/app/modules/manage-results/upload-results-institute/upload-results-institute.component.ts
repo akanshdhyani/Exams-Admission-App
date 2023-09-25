@@ -11,7 +11,9 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./upload-results-institute.component.scss']
 })
 export class UploadResultsInstituteComponent {
-
+  breadcrumbItems = [
+    {label: 'Manage Results', url: ''}
+  ]
   constructor(
     private dialog: MatDialog,
     private router: Router,

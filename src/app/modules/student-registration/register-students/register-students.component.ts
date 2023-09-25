@@ -10,6 +10,9 @@ import { FormControl,  Validators } from '@angular/forms';
 })
 export class RegisterStudentsComponent {
   examCycle: string;
+  breadcrumbItems = [
+    { label: 'Register Students to Exam cycles and Exams', url: '' }
+  ]
   constructor(
     private router: Router,
   ) { }

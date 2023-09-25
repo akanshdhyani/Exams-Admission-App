@@ -117,6 +117,9 @@ export class AttendanceRecordListComponent {
     },
   ]
   isHallTicket = true
+  breadcrumbItems = [
+    { label: 'Attendance Record', url: '' },
+  ]
 
   goToUpload() {
     this.router.navigate(['manage-attendance/upload'])
