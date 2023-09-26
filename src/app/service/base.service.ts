@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { CookieService } from 'ngx-cookie-service';
+import { BehaviorSubject } from 'rxjs';
+
 
 
 @Injectable({
@@ -17,13 +19,17 @@ export class BaseService extends HttpService {
     'Accept': 'application/json',
     'Authorization': `Bearer `
   };
+  
+  private userData = new BehaviorSubject({})
+  currentUserData = this.userData.asObservable();
+
 
   constructor(private httpClient: HttpClient, cookieService: CookieService
   ) {
     super(httpClient, cookieService);
     this.baseUrl = environment.apiUrl;
   }
-
+  
 
   getHallTickets$(): Observable<any> {
     // return this.httpClient.get<any>("https://api.agify.io/?name=meelad");
@@ -128,6 +134,8 @@ export class BaseService extends HttpService {
     ])
   }
 
-  
+  setUserData(userData:any){
+    this.userData.next(userData)
+  }
 
 }
