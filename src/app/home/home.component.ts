@@ -14,8 +14,8 @@ export class HomeComponent {
     {
       title: 'User Management',
       type: 'user-management',
-      url: '/user-management/superadmin',
-      visibility: 'exams_super_admin'
+      url: '/user-management',
+      visibility: 'exams_superadmin'
     },
     {
       title: 'Student Enrollment',

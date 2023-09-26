@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { HttpService } from 'src/app/core/services';
 import { RequestParam } from 'src/app/shared';
 import { ConfigService } from 'src/app/shared/services/config/config.service';
@@ -10,8 +11,8 @@ import { environment } from 'src/environments/environment';
 })
 export class ExamManagementService extends HttpService {
   override baseUrl: string;
-  constructor(http: HttpClient, private configService: ConfigService) {
-    super(http);
+  constructor(http: HttpClient, private configService: ConfigService, cookieService: CookieService) {
+    super(http, cookieService);
     this.baseUrl = environment.apiUrl;
    }
 

@@ -22,7 +22,8 @@ import { TrackDispatchesModule } from './modules/track-dispatches/track-dispatch
 import { HomeComponent } from './home/home.component';
 import { CandidatePortalModule } from './modules/candidate-portal/candidate-portal.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { UserModulesModule } from './modules/user-modules/user-modules.module';
+// import { UserModulesModule } from './modules/user-modules/user-modules.module';
+import { UserModuleModule } from './modules/user-module/user-module.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +51,8 @@ import { UserModulesModule } from './modules/user-modules/user-modules.module';
     ManageAttendanceRecordModule,
     CandidatePortalModule,
     HttpClientModule,
-    UserModulesModule,
+    // UserModulesModule,
+    UserModuleModule,
     ToastrModule.forRoot(),
   ],
   providers: [],

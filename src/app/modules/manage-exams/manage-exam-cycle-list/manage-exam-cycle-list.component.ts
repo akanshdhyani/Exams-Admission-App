@@ -40,7 +40,7 @@ export class ManageExamCycleListComponent {
     {value: 'sem-2', viewValue: '2021'},
     {value: 'sem-3', viewValue: '2022'},
   ];
-
+  
   ngOnInit() {
    this.initializeTabs();
   }
@@ -54,6 +54,7 @@ export class ManageExamCycleListComponent {
     this.initializeColumns();
     this.getEnrollmentData();
   }
+
 
   getEnrollmentData() {
     this.isDataLoading = true;
@@ -141,6 +142,7 @@ export class ManageExamCycleListComponent {
       ]
     }
 
+  
   handlePageChange(event: any) {
 
   }
