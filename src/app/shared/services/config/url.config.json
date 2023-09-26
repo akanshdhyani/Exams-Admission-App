@@ -14,18 +14,20 @@
             "CREATE": "/v1/students/add",
             "GET_DETAILS_BY_ID": "/v1/students",
             "GET_ENROLLMENT_LIST": "",
-            "FIND_ENROLLMENT_BY_FILTER": "/v1/students/find"
+            "FIND_ENROLLMENT_BY_FILTER": "/v1/students/find",
+            "GET_INSTITUTE_BY_ID": "/v1/admin/institutes"
         }, 
         "EXAM_MANAGEMENT": {
             "GET_EXAM_CYCLE_LIST": "/v1/admin/examCycle/list", 
             "CREATE_EXAM_CYCLE": "/v1/admin/examCycle/create",
-            "CREATE_EXAM": "/v1/admin/examCycle"
+            "CREATE_EXAM": "/v1/admin/examCycle",
+            "EXAM_CYCLE_BULK_UPLOAD": "/v1/admin/examCycle/bulkUpload"
         },
         "EXAM_STUDENT_REGISTRATION": {
             "GET_BY_EXAM_CYCLE":"v1/studentExamRegistration"
         },
         "COURSE": {
-            "GET_ALL": "/api/v1/admin/courses/list"
+            "GET_ALL": "/v1/admin/courses/list"
         }
     }
 }

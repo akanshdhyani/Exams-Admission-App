@@ -3,8 +3,9 @@ import { Component, OnInit, inject} from '@angular/core';
 import { FormGroup ,AbstractControl, FormControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { switchMap } from 'rxjs';
-import { ExamManagementService } from '../services/exam-management.service';
 import { ToastrServiceService } from 'src/app/shared/services/toastr/toastr.service';
+import { BaseService } from 'src/app/service/base.service';
+import { HttpErrorResponse } from '@angular/common/http';
 // import { DateTime } from 'luxon';
 
 export interface Exam {
@@ -44,40 +45,44 @@ export class ManageExamCycleFormComponent {
   ]
   constructor(
     private router: Router, 
-    private examService: ExamManagementService,
     private toasterService: ToastrServiceService,
+    private baseService: BaseService
     ) {
-    this.courses= [
-      {
-          "id": 1,
-          "courseCode": "CS101",
-          "courseName": "Introduction to Computer Science",
-          "description": "This course covers the fundamentals of computer science."
-      }
-    ];
   }
  
   
   ngOnInit(){
    this.initForm();
+   this.getAllCourses();
  }
  
  initForm(){
  }
 
+ getAllCourses() {
+  this.baseService.getAllCourses$().subscribe({
+    next: (res) => {
+      this.courses = res.responseData
+    },
+    error: (error: HttpErrorResponse) => {
+      console.log(error);
+    }
+  })
+ }
+
  convertDateFormat(date: any) {
   const dateString = new Date(date);
-  console.log(dateString);
-  const formattedDate = dateString.getFullYear() + '-' + dateString.getMonth() + '-' + dateString.getDate();
+  const formattedDate = dateString.getFullYear()  + '-'
+             + ('0' + (dateString.getMonth()+1)).slice(-2) + '-'
+             + ('0' + dateString.getDate()).slice(-2);
   return formattedDate;
 }
  
  
  addNewExam() {
    const examCycleValue = this.createExamCycle.value;
-   const {examName, examDate, startTime, endTime, courseId} = this.createExamCycle.value;
+   const {examName, examDate, startTime, endTime, courseId, startDate, endDate} = this.createExamCycle.value;
    const selectedCourse= this.courses.find(course => course.courseCode === courseId);
-   console.log(examCycleValue);
    const examDetail = {
     examName: examName,
     examDate: this.convertDateFormat(examDate),
@@ -87,7 +92,6 @@ export class ManageExamCycleFormComponent {
    }
    this.exams.push(examDetail);
    this.examsToAdd.push(examDetail);
-   console.log(this.examsToAdd);
  }
 
   onSubmit(){
@@ -99,19 +103,21 @@ export class ManageExamCycleFormComponent {
       endDate: this.convertDateFormat(endDate),
     };
     this.savingDetails = true;
-    this.examService.createExamCycle(examCycleDetail).pipe(
+    // console.log(examCycleDetail);
+    this.baseService.createExamCycle(examCycleDetail).pipe(
       switchMap((examCycleResponse) => {
         // Extract examCycleId from examCycleResponse
         const examCycleId = examCycleResponse.responseData.id; 
   
         // Call the createExam API with examCycleId
-        return this.examService.createExam(this.exams, examCycleId);
+        return this.baseService.createExam(this.exams, examCycleId);
       })
     ).subscribe({
       next: (res) => {
         this.examsToAdd = [];
         this.toasterService.showToastr("Exam Cycle and Exam is created successfully!", 'Success', 'success', '');
         this.savingDetails = false;
+        this.router.navigate(['/manage-exam-cycle'])
       },
       error: (err) => {
         this.toasterService.showToastr(err, 'Error', 'error', '');
@@ -119,8 +125,6 @@ export class ManageExamCycleFormComponent {
         // Handle the error here in case of file upload or ticket creation failure
       }
     });
-
-    console.log(this.createExamCycle)
   }
       
 

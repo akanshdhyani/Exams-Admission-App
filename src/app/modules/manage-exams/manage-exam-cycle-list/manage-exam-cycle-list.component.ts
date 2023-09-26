@@ -5,6 +5,8 @@ import { TableColumn } from 'src/app/interfaces/interfaces';
 import { Tabs } from 'src/app/shared/config/tabs.config';
 import { ConformationDialogComponent } from 'src/app/shared/components/conformation-dialog/conformation-dialog.component';
 import { UploadFileComponent } from 'src/app/modules/manage-exams/upload-file/upload-file.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { BaseService } from 'src/app/service/base.service';
 
 interface Course {
   value: string;
@@ -20,7 +22,6 @@ interface Year {
   styleUrls: ['./manage-exam-cycle-list.component.scss']
 })
 export class ManageExamCycleListComponent {
-  tabs: any[] = [];
   isDataLoading: boolean = false;
   examCycleData: any[] = [];
   examCycleTableColumns: TableColumn[] = [];
@@ -30,7 +31,7 @@ export class ManageExamCycleListComponent {
   breadcrumbItems = [
     { label: 'Manage Exam Cycles and Exams', url: '' },
   ]
-  constructor(private router: Router, private dialog: MatDialog){}
+  constructor(private router: Router, private dialog: MatDialog, private baseService: BaseService){}
   courses: Course[] = [
     {value: 'bsc', viewValue: 'BSc'},
     {value: 'msc', viewValue: 'MSc'},
@@ -42,51 +43,27 @@ export class ManageExamCycleListComponent {
   ];
 
   ngOnInit() {
-   this.initializeTabs();
+    this.initializeColumns();
+    this.getExamCycleData();
   }
 
   goToCreate() {
     this.router.navigate(['manage-exam-cycle/form'])
   }
 
-  initializeTabs() {
-    this.tabs = Tabs['student_enrollment'];
-    this.initializeColumns();
-    this.getEnrollmentData();
-  }
 
-  getEnrollmentData() {
+  getExamCycleData() {
     this.isDataLoading = true;
-    this.examCycleData = [{
-      id: 0,
-      examCycle: 'M.SC.(Nursing) - Semester-1',
-      courseName: 'M.SC.(Nursing)',
-      startDate: '29-06-2023',
-      endDate: '29-06-2023',
-      hasStyle: true,
-      cellStyle: {
-        viewExamCycle: {
-          'color': '#0074B6'
-        }
-      }
+  this.baseService.getExamCycleList().subscribe({
+    next: (res) => {
+      this.isDataLoading = false;
+      this.examCycleData = res.responseData;
     },
-    {
-      id: 1,
-      examCycle: 'M.SC.(Nursing) - Semester-2',
-      courseName: 'M.SC.(Nursing)',
-      startDate: '29-06-2024',
-      endDate: '29-06-2024',
-      hasStyle: true,
-      cellStyle: {
-        viewExamCycle: {
-          'color': '#0074B6'
-        }
-      }
+    error: (error: HttpErrorResponse) => {
+      console.log(error);
+      this.isDataLoading = false;
     }
-  ]
-  setTimeout(() => {
-    this.isDataLoading = false;
-  }, 2000);
+  })
   }
 
   initializeColumns(): void {
@@ -94,11 +71,11 @@ export class ManageExamCycleListComponent {
   
       this.examCycleTableColumns = [
         {
-          columnDef: 'examCycle',
+          columnDef: 'examCycleName',
           header: 'Exam cycle',
           isSortable: true,
           isLink: false,
-          cell: (element: Record<string, any>) => `${element['examCycle']}`
+          cell: (element: Record<string, any>) => `${element['examCycleName']}`
         },
         {
           columnDef: 'courseName',
