@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {Location} from '@angular/common';
+import { BaseService } from '../service/base.service';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -27,25 +29,26 @@ export class UserProfileComponent {
 
   constructor(private router: Router,
     private _location: Location,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute, 
+    private baseService: BaseService) {
     this.userForm = new FormGroup({
-      firstName: new FormControl(this.userObject?.name.split(' ').slice(0, -1).join(' '), Validators.required),
-      lastName: new FormControl(this.userObject?.name.split(' ').slice(-1).join(' '), Validators.required),
-      emailId: new FormControl(this.userObject?.emailId, [Validators.required, Validators.email]),
-      phoneNumber: new FormControl(this.userObject?.phoneNumber, Validators.required),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      emailId: new FormControl('', [Validators.required, Validators.email]),
+      phoneNumber: new FormControl('', Validators.required),
       // role: new FormControl('', Validators.required),
       // activeStatus: new FormControl('', Validators.required)
     })
   }
 
   ngOnInit(): void {
-
+    this.setUserFormData();
   }
 
   setUserFormData() {
     this.userForm.setValue({
-      firstName: this.userObject?.name,
-      lastName: this.userObject?.name,
+      firstName: this.userObject?.name.split(' ').slice(0, -1).join(' '),
+      lastName: this.userObject?.name.split(' ').slice(-1).join(' '),
       emailId: this.userObject?.emailId,
       phoneNumber: this.userObject?.phoneNumber,
       role: this.userObject?.role,

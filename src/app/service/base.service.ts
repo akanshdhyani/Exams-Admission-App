@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { CookieService } from 'ngx-cookie-service';
+import { BehaviorSubject } from 'rxjs';
+
 import { ConfigService, RequestParam, ServerResponse } from '../shared';
 
 
@@ -14,13 +16,22 @@ import { ConfigService, RequestParam, ServerResponse } from '../shared';
 export class BaseService extends HttpService {
   token: string;
   override baseUrl: string;
+  headers = {
+    'Accept': 'application/json',
+    'Authorization': `Bearer `
+  };
+  
+  private userData = new BehaviorSubject({})
+  currentUserData = this.userData.asObservable();
+
+
   constructor(private httpClient: HttpClient, cookieService: CookieService, private configService: ConfigService
   ) {
     super(httpClient, cookieService);
     this.baseUrl = environment.apiUrl;
     this.token = this.cookieService.get('access_token');
   }
-
+  
 
   getHallTickets$(): Observable<any> {
     // return this.httpClient.get<any>("https://api.agify.io/?name=meelad");
@@ -125,6 +136,40 @@ export class BaseService extends HttpService {
     ])
   }
 
+  getUserData$(): Observable<any>{
+    return of([
+      {
+        fullName: 'Devaprathap Nagendra',
+        email: 'name@gmail.com',
+        phoneNumber: '9765454333',
+        role: 'Institute',
+        accountStatus: 'Active',
+        hasStyle: true,
+        cellStyle: {
+          viewExamCycle: {
+            'color': '#0074B6'
+          }
+        }
+      },
+      {
+        fullName: 'D. Nagendra',
+        email: 'name@gmail.com',
+        phoneNumber: '9765454333',
+        role: 'Admin',
+        accountStatus: 'Active',
+        hasStyle: true,
+        cellStyle: {
+          viewExamCycle: {
+            'color': '#0074B6'
+          }
+        }
+      },
+  ])
+  }
+
+  setUserData(userData:any){
+    this.userData.next(userData)
+  }
 
   getAllCourses$(): Observable<any> {
     const requestParam: RequestParam = {
