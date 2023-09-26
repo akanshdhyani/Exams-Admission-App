@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/core/services';
 import { Tabs } from 'src/app/shared/config';
 import { TableColumn } from 'src/app/interfaces/interfaces';
-import { StudentEnrollmentService } from '../services/student-enrollment.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BaseService } from 'src/app/service/base.service';
 
 interface Course {
   value: string;
@@ -38,7 +38,7 @@ export class StudentEnrollmentComponent {
   ]
   searchForm: FormGroup;
   searchParams: string;
-constructor(private router: Router, private authService: AuthServiceService, private enrollmentService: StudentEnrollmentService){}
+constructor(private router: Router, private authService: AuthServiceService, private baseService: BaseService){}
   courses: Course[] = [
     {value: 'bsc', viewValue: 'BSc'},
     {value: 'msc', viewValue: 'MSc'},
@@ -48,7 +48,7 @@ constructor(private router: Router, private authService: AuthServiceService, pri
     {value: 'sem-2', viewValue: '2021'},
     {value: 'sem-3', viewValue: '2022'},
   ];
-
+  isHallTicket: boolean = true;
   ngOnInit() {
     this.loggedInUserRole = this.authService.getUserRoles()[0];
     this.isDataLoading = false;
@@ -101,7 +101,7 @@ constructor(private router: Router, private authService: AuthServiceService, pri
   }, 2000);
   const request = {}
   this.isDataLoading = true;
-  this.enrollmentService.getEnrollmentList(request).subscribe({
+  this.baseService.getEnrollmentList(request).subscribe({
     next: (res) => {
       this.enrollmentTableData = res.responseData;
       console.log(res);

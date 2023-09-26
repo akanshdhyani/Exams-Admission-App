@@ -7,13 +7,14 @@ import { of } from 'rxjs/internal/observable/of';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
 
+import { ConfigService, RequestParam, ServerResponse } from '../shared';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class BaseService extends HttpService {
-
+  token: string;
   override baseUrl: string;
   headers = {
     'Accept': 'application/json',
@@ -24,10 +25,11 @@ export class BaseService extends HttpService {
   currentUserData = this.userData.asObservable();
 
 
-  constructor(private httpClient: HttpClient, cookieService: CookieService
+  constructor(private httpClient: HttpClient, cookieService: CookieService, private configService: ConfigService
   ) {
     super(httpClient, cookieService);
     this.baseUrl = environment.apiUrl;
+    this.token = this.cookieService.get('access_token');
   }
   
 
@@ -169,4 +171,91 @@ export class BaseService extends HttpService {
     this.userData.next(userData)
   }
 
+  getAllCourses$(): Observable<any> {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.COURSE.GET_ALL,
+      data: {}
+    }
+    return this.get(requestParam);
+  }
+
+
+  /**************************** exam services ****************************/
+  getExamCycleList() {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_MANAGEMENT.GET_EXAM_CYCLE_LIST,
+      data: {},
+    }
+    return this.get(requestParam);
+  }
+
+  createExamCycle(request: object) {
+    const requestParam: RequestParam = {
+      url: `${this.baseUrl}${this.configService.urlConFig.URLS.EXAM_MANAGEMENT.CREATE_EXAM_CYCLE}`,
+      data: request
+    }
+    return this.post(requestParam);
+  }
+
+  createExam(request: object, examCycleId: string | number) {
+    const requestParam: RequestParam = {
+      url: `${this.baseUrl}${this.configService.urlConFig.URLS.EXAM_MANAGEMENT.CREATE_EXAM}/${examCycleId}/addExam`,
+      data: request
+    }
+    return this.post(requestParam);
+  }
+
+  examcyclebulkupload(formdata: FormData): Observable<ServerResponse> {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_MANAGEMENT.EXAM_CYCLE_BULK_UPLOAD,
+      data: formdata,
+      header: {
+        'Accept': '*/*',
+        'x-authenticated-user-token': this.token
+      }
+    }
+    return this.multipartPost(requestParam);
+  }
+
+/*********************************** enrollment service *****************************/
+enrollStudent(formData: FormData): Observable<ServerResponse> {
+  const requestParam: RequestParam = {
+    url: this.baseUrl + this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.CREATE,
+    data: formData, 
+    header: {
+      'Accept': '*/*',
+    }
+  }
+  return this.multipartPost(requestParam);
+}
+
+/** institute login */
+getStudentDetailsById(id: string | number) {
+  const requestParam: RequestParam = {
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_DETAILS_BY_ID}/${id}`,
+    data: {},
+  }
+  return this.get(requestParam);
+}
+
+getEnrollmentList(request: object) {
+  const requestParam: RequestParam = {
+    url: this.baseUrl + this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_ENROLLMENT_LIST,
+    data: request,
+  }
+  return this.get(requestParam);
+}
+
+/** verify student(Approve/reject) */
+updateStudentEnrollmentStatus() {
+  
+}
+
+getInstituteById(id: string | number) {
+  const requestParam: RequestParam = {
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_INSTITUTE_BY_ID}/${id}`,
+    data: {},
+  }
+  return this.get(requestParam);
+}
 }

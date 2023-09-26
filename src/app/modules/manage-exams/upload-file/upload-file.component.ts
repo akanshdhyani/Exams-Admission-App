@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TableColumn } from '../../../shared/components/shared-table/shared-table.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { BaseService } from 'src/app/service/base.service';
 
 @Component({
   selector: 'app-upload-file',
@@ -22,7 +24,7 @@ export class UploadFileComponent implements OnInit {
   constructor(private dialog: MatDialog,
     private router: Router,
     public dialogRef: MatDialogRef<UploadFileComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any){
+    @Inject(MAT_DIALOG_DATA) public data: any, private baseService: BaseService){
       this.dialogDetails = data
   }
 
@@ -104,8 +106,19 @@ export class UploadFileComponent implements OnInit {
   }
 
   uploadExamCycle() {
-
-  }
+    const formData = new FormData();
+    formData.append('file', this.files[0].name);
+    formData.append('fileType', 'csv');
+    this.closeDialog('close');
+    this.baseService.examcyclebulkupload(formData).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+    })
+  } 
 
   closeDialog(btnType: string) {
     if (btnType === 'close') {

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { StudentEnrollmentService } from '../services/student-enrollment.service';
 import { ConfigService } from 'src/app/shared';
 import { AuthServiceService } from 'src/app/core/services';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BaseService } from 'src/app/service/base.service';
 
 @Component({
   selector: 'app-student-enrollment-form',
@@ -34,7 +34,7 @@ export class StudentEnrollmentFormComponent {
     { label: 'Student Enrollment', url: '' },
   ]
   enrollmentDetails: any[] = [];
-  constructor(private formBuilder: FormBuilder, private studentEnrollmentService: StudentEnrollmentService, private authService: AuthServiceService, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private baseService: BaseService, private authService: AuthServiceService, private route: ActivatedRoute) {
     this.route.params.subscribe((param) => {
       if(param['id']) {
         this.enrollmentId = param['id'];
@@ -105,7 +105,10 @@ export class StudentEnrollmentFormComponent {
 
   convertDateFormat(date: any) {
     const dateString = new Date(date);
-    const formattedDate = dateString.getFullYear() + '-' + dateString.getMonth() + '-' + dateString.getDate();
+    // const formattedDate = dateString.getFullYear() + '-' + dateString.getMonth() + '-' + dateString.getDate();
+    const formattedDate = dateString.getFullYear()  + '-'
+    + ('0' + (dateString.getMonth()+1)).slice(-2) + '-'
+    + ('0' + dateString.getDate()).slice(-2);
     return formattedDate;
   }
 
@@ -256,6 +259,7 @@ export class StudentEnrollmentFormComponent {
           category: this.basicDetailsForm.value.category,
           intermediatePassedBoard: this.educationalDetailsForm.value.intermediatePassedBoard,
           intermediateSubjects: this.educationalDetailsForm.value.intermediateSubjects,
+          intermediatePercentage: this.educationalDetailsForm.value.intermediatePercentage,
           mobileNo: this.basicDetailsForm.value.mobileNumber,
           emailId: this.basicDetailsForm.value.emailId,
           aadhaarNo: this.basicDetailsForm.value.aadharNo,
@@ -277,7 +281,7 @@ export class StudentEnrollmentFormComponent {
         for (let [key, value] of Object.entries(request)) {
           formData.append(`${key}`, `${value}`)
           }
-        this.studentEnrollmentService.enrollStudent(formData).subscribe({
+        this.baseService.enrollStudent(formData).subscribe({
           next: (res) => {
             console.log("res =>", res);
           },
@@ -290,7 +294,7 @@ export class StudentEnrollmentFormComponent {
 
     getEnrollmentDetails() {
       const id = this.enrollmentId;
-      this.studentEnrollmentService.getStudentDetailsById(id).subscribe({
+      this.baseService.getStudentDetailsById(id).subscribe({
         next: (res) => {
           console.log(res);
           this.enrollmentDetails = res.responseData;
