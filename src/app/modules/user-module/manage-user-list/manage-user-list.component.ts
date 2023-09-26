@@ -3,9 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TableColumn } from 'src/app/interfaces/interfaces';
 import { Tabs } from 'src/app/shared/config/tabs.config';
-import { ConformationDialogComponent } from 'src/app/shared/components/conformation-dialog/conformation-dialog.component';
-import { UploadFileComponent } from 'src/app/modules/manage-exams/upload-file/upload-file.component';
 import { BaseService } from 'src/app/service/base.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 
@@ -27,7 +26,9 @@ export class ManageUserListComponent {
     { label: 'Manage Users', url: '' },
   ]
   constructor(private router: Router, private dialog: MatDialog,
-    private baseService : BaseService){}
+    private baseService : BaseService){
+      this.getEnrollmentData()
+    }
    
 
   ngOnInit() {
@@ -45,36 +46,21 @@ export class ManageUserListComponent {
 
   getEnrollmentData() {
     this.isDataLoading = true;
-    this.examCycleData = [{
-      fullName: 'Devaprathap Nagendra',
-      email: 'name@gmail.com',
-      phoneNumber: '9765454333',
-      role: 'Institute',
-      accountStatus: 'Active',
-      hasStyle: true,
-      cellStyle: {
-        viewExamCycle: {
-          'color': '#0074B6'
-        }
+    this.baseService.getUserData$().subscribe({
+      next:(res:any)=>{
+        this.examCycleData = res
+        setTimeout(() => {
+          this.isDataLoading = false;
+        }, 1000);
+
+      },
+      error: (error: HttpErrorResponse) => {
+        this.isDataLoading = false;
+        console.log(error)
       }
-    },
-    {
-      fullName: 'D. Nagendra',
-      email: 'name@gmail.com',
-      phoneNumber: '9765454333',
-      role: 'Admin',
-      accountStatus: 'Active',
-      hasStyle: true,
-      cellStyle: {
-        viewExamCycle: {
-          'color': '#0074B6'
-        }
-      }
-    },
-  ]
-  setTimeout(() => {
-    this.isDataLoading = false;
-  }, 2000);
+
+    })
+
   }
 
   initializeColumns(): void {

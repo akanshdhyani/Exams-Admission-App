@@ -134,6 +134,37 @@ export class BaseService extends HttpService {
     ])
   }
 
+  getUserData$(): Observable<any>{
+    return of([
+      {
+        fullName: 'Devaprathap Nagendra',
+        email: 'name@gmail.com',
+        phoneNumber: '9765454333',
+        role: 'Institute',
+        accountStatus: 'Active',
+        hasStyle: true,
+        cellStyle: {
+          viewExamCycle: {
+            'color': '#0074B6'
+          }
+        }
+      },
+      {
+        fullName: 'D. Nagendra',
+        email: 'name@gmail.com',
+        phoneNumber: '9765454333',
+        role: 'Admin',
+        accountStatus: 'Active',
+        hasStyle: true,
+        cellStyle: {
+          viewExamCycle: {
+            'color': '#0074B6'
+          }
+        }
+      },
+  ])
+  }
+
   setUserData(userData:any){
     this.userData.next(userData)
   }
