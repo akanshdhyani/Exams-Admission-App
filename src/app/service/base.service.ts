@@ -193,9 +193,9 @@ getStudentDetailsById(id: string | number) {
   return this.get(requestParam);
 }
 
-getEnrollmentList(request: object) {
+getEnrollmentList(request: any) {
   const requestParam: RequestParam = {
-    url: this.baseUrl + this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_ENROLLMENT_LIST,
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.FIND_ENROLLMENT_BY_FILTER}?instituteId=${request.instituteId}&courseId=${request.courseId}&academicYear=${request.academicYear}&verificationStatus=${request.verificationStatus}`,
     data: request,
   }
   return this.get(requestParam);
