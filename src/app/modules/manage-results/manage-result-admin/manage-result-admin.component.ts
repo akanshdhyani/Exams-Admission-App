@@ -6,6 +6,7 @@ import { ConformationDialogComponent } from 'src/app/shared/components/conformat
 import { MatDialog } from '@angular/material/dialog';
 
 import { BaseService } from '../../../service/base.service';
+import { HttpErrorResponse } from '@angular/common/http';
 interface Course {
   value: string;
   viewValue: string;
@@ -19,6 +20,9 @@ interface Course {
 })
 export class ManageResultAdminComponent {
   selectedCellDetails: any;
+  isDataLoading: boolean = false;
+  studentResultData: any[] = [];
+
 
   
   courses: Course[] = [
@@ -109,6 +113,7 @@ export class ManageResultAdminComponent {
         'color': '#00000099'
       },
       isAction: true,
+      hasStyle: true,
     }
   ]  
   instituteTableData = [];
@@ -147,58 +152,22 @@ export class ManageResultAdminComponent {
     }
   ]
 
-  studentExamsTableData = [
-    {
-      studentName: 'Devaprathap Nagendra',
-      courseName: 'XXXX',
-      exams: 'Exam 1',
-      internalMarks: '45',
-      
-    },
-    {
-      studentName: 'Madison',
-      courseName: 'XXXX',
-      exams: 'Exam 1',
-      internalMarks: '48',
-      
-    },
-    {
-      studentName: 'Ravi',
-      courseName: 'XXXX',
-      exams: 'Exam 1',
-      internalMarks: '47',
-      
-    },
-    {
-      studentName: 'Kanaka Rao',
-      courseName: 'XXXX',
-      exams: 'Exam 1',
-      internalMarks: '49',
-      
-    },
-    {
-      studentName: 'Arun',
-      courseName: 'XXXX',
-      exams: 'Exam 1',
-      internalMarks: '49',
-      
-    },
-    {
-      studentName: 'Aman',
-      courseName: 'XXXX',
-      exams: 'Exam 1',
-      internalMarks: '45',
-      
-    },
-    {
-      studentName: 'Devaprathap N.',
-      courseName: 'XXXX',
-      exams: 'Exam 1',
-      internalMarks: '44',
-      
-    },
+  studentExamsTableData(){
+    this.isDataLoading = true;
+    this.baseService.getStudentResultData$().subscribe({
+      next:(res:any)=>{
+        this.studentResultData = res
+        setTimeout(() => {
+          this.isDataLoading = false;
+        }, 1000);
 
-  ];
+      },
+      error: (error: HttpErrorResponse) => {
+        this.isDataLoading = false;
+        console.log(error)
+      }
+
+    })  } 
   
   examCycleControl = new FormControl('');
   examControl = new FormControl('');
@@ -224,8 +193,9 @@ export class ManageResultAdminComponent {
   }
 
   intialisation() {
-    this.getExamCycles()
-    this.getInstitutesData()
+    // this.getExamCycles()
+    this.getInstitutesData();
+    this.studentExamsTableData();
   }
 
   getExamCycles() {
@@ -236,7 +206,7 @@ export class ManageResultAdminComponent {
   }
 
   getInstitutesData(searchKey: string = '') {
-    this.baseService.getInstitutesData$()
+    this.baseService.getInstitutesResultData$()
      .subscribe((response: any) => {
       console.log(response)
       for (let institute of response) {
@@ -281,13 +251,13 @@ export class ManageResultAdminComponent {
   onCellClick(event: any) {
     console.log("Cell Data", event);
     switch(event.columnDef) {
-      case "internalMarks":
+      case "internalMarksProvided":
         this.internalMarksHandler(event);
         break;
-      case "finalMarks": 
+      case "finalMarksProvided": 
         this.finalMarksHandler(event);
         break;
-      case "revisedFinalMarks": 
+      case "revisedFinalMarksProvided": 
         this.revisedFinalMarksHandler(event);
         break;
       case "publish":
@@ -299,30 +269,30 @@ export class ManageResultAdminComponent {
 
 
   internalMarksHandler(cellDetails: any) {
-    if(cellDetails.row.internalMarks === 'View & download'){
+    if(cellDetails.row.internalMarksProvided === 'View & download'){
       this.showInstitutesTable = false;
       this.selectedCellDetails  = cellDetails;
     }
   }
 
   finalMarksHandler(cellDetails:any) {
-    if(cellDetails.row.finalMarks === 'View & delete'){
+    if(cellDetails.row.finalMarksProvided === 'View & delete'){
       this.showInstitutesTable = false;
       this.selectedCellDetails  = cellDetails;
-    } else if(cellDetails.row.finalMarks === 'Upload') {
+    } else if(cellDetails.row.finalMarksProvided === 'Upload') {
       this.openUploadModal(cellDetails);
     }
 
   }
 
   revisedFinalMarksHandler(cellDetails:any) {
-    if(cellDetails.row.revisedFinalMarks === 'Upload') {
+    if(cellDetails.row.revisedFinalMarksProvided === 'Upload') {
       this.openUploadModal(cellDetails);
     }
   }
 
   openUploadModal(cellDetails: any){
-    const heading= cellDetails.columnDef === "finalMarks" ? "Upoad final marks" : "Upload revised marks";
+    const heading= cellDetails.columnDef === "finalMarksProvided" ? "Upoad final marks" : "Upload revised marks";
     const dialogRef = this.dialog.open(UploadDialogComponent, {
     data: {
               heading: heading,     

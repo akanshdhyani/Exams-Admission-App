@@ -28,10 +28,12 @@
       </div>
     </div>
     <ng-container *ngIf="showInstitutesTable; else istitueExamsFeeDetails">
+      <app-shared-skeleton-loading [isLoading]="isDataLoading">
+      </app-shared-skeleton-loading>
       <div>
         <app-shared-table 
           [tableColumns]="instituteTableHeader" 
-          [tableData]="instituteTableData" 
+          [tableData]="instituteData" 
           [isHallTicket]="true" 
           [removeTbodyColor]="true" 
           [isPageable]="true" 
@@ -40,10 +42,10 @@
       </div>
     </ng-container>
     <ng-template #istitueExamsFeeDetails>
-      <div>
+     <div>
         <app-shared-table 
           [tableColumns]="studentExamsTableHeader" 
-          [tableData]="studentExamsTableData" 
+          [tableData]="studentData" 
           [isHallTicket]="true" 
           [removeTbodyColor]="true" 
           [isPageable]="true"
