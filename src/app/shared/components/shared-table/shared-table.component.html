@@ -167,8 +167,8 @@
                                 <a *ngSwitchCase="'Publish'" mat-button [ngStyle]=" {'color':'blue'}"
                                 (click)="emitCellClickAction(element)" >{{ disCol?.cell(element) }}</a>
     
-                                <a *ngSwitchCase="'Pending'" mat-button [ngStyle]=" {'color':'orange'}"
-                                (click)="emitCellClickAction(element)" >{{ disCol?.cell(element) }}</a>
+                                <span *ngSwitchCase="'Pending'" mat-button [ngStyle]=" {'color':'orange'}"
+                                (click)="emitCellClickAction(element)" >{{ disCol?.cell(element) }}</span>
                                 </div>
                         
                         </ng-container>
