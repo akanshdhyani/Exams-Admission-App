@@ -39,7 +39,7 @@
     </div>
   </div>
   <div class="tab">
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" (selectedTabChange)="onTabChange($event)">
       <mat-tab *ngFor="let tab of tabs">
         <ng-template mat-tab-label>{{ tab.name }}</ng-template>
         <app-shared-skeleton-loading [isLoading]="isDataLoading">

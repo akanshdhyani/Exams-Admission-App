@@ -29,6 +29,8 @@ export class ManageExamCycleFormComponent {
   startMaxTime: "24:00";
   savingDetails = false;
   announcer = inject(LiveAnnouncer);
+  endDateError: boolean = false;
+  endTimeError: boolean = false;
   pickerMinDate = new Date(new Date().setHours(0, 0, 0, 0));
   createExamCycle = new FormGroup({
     'examCycleName':new FormControl('', Validators.required),
@@ -77,7 +79,7 @@ export class ManageExamCycleFormComponent {
              + ('0' + dateString.getDate()).slice(-2);
   return formattedDate;
 }
- 
+
  
  addNewExam() {
    const examCycleValue = this.createExamCycle.value;
@@ -178,6 +180,52 @@ export class ManageExamCycleFormComponent {
 
   goBack() {
     this.router.navigate(['/manage-exam-cycle']);
+  }
+
+
+  startDateChangeEvent(input: string, event: Event) {
+    this.endDateError = false;
+    const startdate = this.createExamCycle.value.startDate;
+    const enddate = this.createExamCycle.value.endDate;
+    if(enddate !== '' && enddate && startdate) {
+      if(enddate < startdate) {
+        // this.createExamCycle.controls['endDate'].setErrors({'incorrect': true})
+        this.endDateError = true;
+      }
+    }
+  }
+
+  endDateChangeEvent(input: string, event: Event) {
+    this.endDateError = false;
+    const startdate = this.createExamCycle.value.startDate;
+    const enddate = this.createExamCycle.value.endDate;
+    if(startdate !== '' && enddate && startdate) {
+      if(enddate < startdate) {
+        this.endDateError = true;
+      }
+    }
+  }
+
+  startTimeChangeEvent(event: Event) {
+    this.endTimeError = false;
+    const starttime = this.createExamCycle.value.startTime;
+    const endtime = this.createExamCycle.value.endTime;
+    if(starttime !== '' && endtime && starttime) {
+      if(endtime < starttime) {
+        this.endTimeError = true;
+      }
+    }
+  }
+
+  endTimeChangeEvent(event: Event) {
+    this.endTimeError = false;
+    const starttime = this.createExamCycle.value.startTime;
+    const endtime = this.createExamCycle.value.endTime;
+    if(starttime !== '' && endtime && starttime) {
+      if(endtime < starttime) {
+        this.endTimeError = true;
+      }
+    }
   }
   
  }

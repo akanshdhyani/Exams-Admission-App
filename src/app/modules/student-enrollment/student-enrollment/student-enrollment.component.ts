@@ -10,6 +10,7 @@ import { Tabs } from 'src/app/shared/config';
 import { TableColumn } from 'src/app/interfaces/interfaces';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BaseService } from 'src/app/service/base.service';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 interface Course {
   value: string;
@@ -33,6 +34,7 @@ export class StudentEnrollmentComponent {
   pageIndex = 0;
   pageSize = 10;
   length = 10;
+  selectedTab: any;
   breadcrumbItems = [
     { label: 'Student Enrollment', url: '' },
   ]
@@ -73,38 +75,27 @@ constructor(private router: Router, private authService: AuthServiceService, pri
 
   initializeTabs() {
     this.tabs = Tabs['student_enrollment'];
+    this.selectedTab = this.tabs[0];
     this.initializeColumns();
     this.getEnrollmentData();
   }
 
   getEnrollmentData() {
-    this.isDataLoading = true;
-    this.enrollmentTableData = [{
-      id: 0,
-      applicantName: 'Devaprathap Nagendra',
-      provisionalEnrollmentNumber: '9876543210',
-      courseName: 'B.SC Nursing',
-      admissionYear: '2019',
-      marks: '80',
-    },
-    {
-      id: 1,
-      applicantName: 'Madison Tran',
-      provisionalEnrollmentNumber: '9876543210',
-      courseName: 'B.SC Nursing',
-      admissionYear: '2019',
-      marks: '90',
-    }
-  ]
-  setTimeout(() => {
-    this.isDataLoading = false;
-  }, 2000);
-  const request = {}
+  const request = {
+    instituteId: '',
+    courseId: '',
+    academicYear: '',
+    verificationStatus: this.selectedTab.name === 'Approved'? 'VERIFIED' : this.selectedTab.name.toUpperCase()
+  }
+  console.log(request);
   this.isDataLoading = true;
   this.baseService.getEnrollmentList(request).subscribe({
     next: (res) => {
+      this.isDataLoading = false;
+      res.responseData.map((obj: any) => {
+        obj.courseName = obj.course.courseName;
+      })
       this.enrollmentTableData = res.responseData;
-      console.log(res);
     },
     error: (error: HttpErrorResponse) => {
       this.isDataLoading = false;
@@ -123,11 +114,11 @@ constructor(private router: Router, private authService: AuthServiceService, pri
       case 'exams_institute': 
       this.enrollmentTableColumns = [
         {
-          columnDef: 'applicantName',
+          columnDef: 'firstName',
           header: 'Applicant Name',
           isSortable: false,
           isLink: false,
-          cell: (element: Record<string, any>) => `${element['applicantName']}`
+          cell: (element: Record<string, any>) => `${element['firstName']} ${element['surname']}`
         },
         {
           columnDef: 'provisionalEnrollmentNumber',
@@ -137,18 +128,18 @@ constructor(private router: Router, private authService: AuthServiceService, pri
           cell: (element: Record<string, any>) => `${element['provisionalEnrollmentNumber']}`
         },
         {
-          columnDef: 'courseName',
+          columnDef: 'course',
           header: 'Course Name',
           isSortable: false,
           isLink: false,
           cell: (element: Record<string, any>) => `${element['courseName']}`
         },
         {
-          columnDef: 'admissionYear',
-          header: 'Admission Year',
+          columnDef: 'enrollmentDate',
+          header: 'Admission Date',
           isSortable: false,
           isLink: false,
-          cell: (element: Record<string, any>) => `${element['admissionYear']}`
+          cell: (element: Record<string, any>) => `${element['enrollmentDate']}`
         },
         {
           columnDef: 'isLink',
@@ -235,6 +226,12 @@ constructor(private router: Router, private authService: AuthServiceService, pri
 
   getSelectedAcademicYear(event: any) {
     const selectedAcademicYear = event.value;
+    this.getEnrollmentData();
+  }
+
+  onTabChange(event: MatTabChangeEvent) {
+    const selectedIndex = event.index;
+    this.selectedTab = this.tabs[selectedIndex];
     this.getEnrollmentData();
   }
 }
