@@ -122,13 +122,10 @@ export class ManageUserListComponent {
   }
 
   onClickItem(event: any) {
-  console.log("item clicked")
   }
 
   onClickEdit(user: any){
     this.isEditData = true;
-    console.log(this.isEditData);
-    console.log(user)
     this.baseService.setUserData(user)
     this.router.navigate(['user-management/user-form'])
   }
