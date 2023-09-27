@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { QuestionPaper } from 'src/app/interfaces/interfaces';
 
 
@@ -10,7 +11,7 @@ import { QuestionPaper } from 'src/app/interfaces/interfaces';
 export class ManageQuestionPapersComponent {
 
   examCycleList: string[] = ['examCycle1', 'examCycle2', 'examCycle3'];
-  examCycleControl: any;
+  examCycleControl = new FormControl();
   questionPapersList: QuestionPaper[] = [
     {
 

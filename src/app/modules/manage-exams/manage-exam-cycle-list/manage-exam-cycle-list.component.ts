@@ -118,8 +118,8 @@ export class ManageExamCycleListComponent {
       ]
     }
 
+  
   handlePageChange(event: any) {
-
   }
 
   onClickItem(event: any) {
