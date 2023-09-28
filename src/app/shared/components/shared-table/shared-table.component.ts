@@ -165,7 +165,7 @@ export class SharedTableComponent implements AfterViewInit {
     this.deleteAction.emit(row);
   }
 
-  emitCellClickAction(row: any, columnDef: string) {
+  emitCellClickAction(row: any, columnDef?: string) {
     const data = {
       row: row,
       columnDef: columnDef

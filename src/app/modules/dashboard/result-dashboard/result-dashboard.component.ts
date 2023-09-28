@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { HallTicket, Institute, Course, Year, TableColumn } from '../../../interfaces/interfaces';
+import { BaseService } from 'src/app/service/base.service';
+import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-result-dashboard',
@@ -14,12 +17,19 @@ export class ResultDashboardComponent {
   years: Year[];
   marksTableColumns: TableColumn[] = [];
   marksData: any[];
-  isDataLoading: false;
+  isDataLoading: boolean = false;
+
+
+  constructor(
+    private baseService : BaseService){
+      this.getMarksData()
+    }
 
   ngOnInit(): void {
 
     this.initializeTableColumns();
     this.initializePageData();
+    this.getMarksData();
 
   }
 
@@ -150,86 +160,23 @@ export class ResultDashboardComponent {
       { value: 'sem-3', viewValue: '2022' },
     ];
 
-    this.marksData = [
-      {
-        examName: 'Anatomy',
-        totalMarks: 100,
-        passingMarks: 40,
-        totalAttempts: 96,
-        failedAttempts: 12,
-        passedAttempts: 84,
-        passPercentage: 88,
-        maximumMarks: 96,
-        minimumMarks: 16,
-        avgMarks: 62,
-        standardDeviation: 15,
+  }
+  getMarksData() {
+    this.isDataLoading = true;
+    this.baseService.getMarksForDashboard$().subscribe({
+      next:(res:any)=>{
+        this.marksData = res
+        setTimeout(() => {
+          this.isDataLoading = false;
+        }, 1000);
 
       },
-      {
-        examName: 'Physiology',
-        totalMarks: 100,
-        passingMarks: 40,
-        totalAttempts: 96,
-        failedAttempts: 12,
-        passedAttempts: 84,
-        passPercentage: 88,
-        maximumMarks: 96,
-        minimumMarks: 16,
-        avgMarks: 62,
-        standardDeviation: 15,
-      },
-      {
-        examName: 'Biochemistry',
-        totalMarks: 100,
-        passingMarks: 40,
-        totalAttempts: 96,
-        failedAttempts: 12,
-        passedAttempts: 84,
-        passPercentage: 88,
-        maximumMarks: 96,
-        minimumMarks: 16,
-        avgMarks: 62,
-        standardDeviation: 15,
-      },
-      {
-        examName: 'Pathology',
-        totalMarks: 100,
-        passingMarks: 40,
-        totalAttempts: 96,
-        failedAttempts: 12,
-        passedAttempts: 84,
-        passPercentage: 88,
-        maximumMarks: 96,
-        minimumMarks: 16,
-        avgMarks: 62,
-        standardDeviation: 15,
-      },
-      {
-        examName: 'Microbiology',
-        totalMarks: 100,
-        passingMarks: 40,
-        totalAttempts: 96,
-        failedAttempts: 12,
-        passedAttempts: 84,
-        passPercentage: 88,
-        maximumMarks: 96,
-        minimumMarks: 16,
-        avgMarks: 62,
-        standardDeviation: 15,
-      },
-      {
-        examName: 'Aggregate',
-        totalMarks: 'NA',
-        passingMarks: 'NA',
-        totalAttempts: 480,
-        failedAttempts: 60,
-        passedAttempts: 420,
-        passPercentage: 88,
-        maximumMarks: 96,
-        minimumMarks: 16,
-        avgMarks: 62,
-        standardDeviation: 15,
-      },
-    ]
+      error: (error: HttpErrorResponse) => {
+        this.isDataLoading = false;
+        console.log(error)
+      }
+
+    })
   }
+
 }

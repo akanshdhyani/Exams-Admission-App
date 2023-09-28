@@ -203,7 +203,7 @@ export class BaseService extends HttpService {
     return of([])
   }
 
-  getInstitutesData$(): Observable<any> {
+  getInstitutesResultData$(): Observable<any> {
     // return this.httpClient.get<any>("https://api.agify.io/?name=meelad");
 
     return of(  [
@@ -238,6 +238,62 @@ export class BaseService extends HttpService {
    
     ])
   }
+  getStudentResultData$():Observable<any>{
+    return of(
+      [
+        {
+          studentName: 'Devaprathap Nagendra',
+          courseName: 'XXXX',
+          exams: 'Exam 1',
+          internalMarks: '45',
+          
+        },
+        {
+          studentName: 'Madison',
+          courseName: 'XXXX',
+          exams: 'Exam 1',
+          internalMarks: '48',
+          
+        },
+        {
+          studentName: 'Ravi',
+          courseName: 'XXXX',
+          exams: 'Exam 1',
+          internalMarks: '47',
+          
+        },
+        {
+          studentName: 'Kanaka Rao',
+          courseName: 'XXXX',
+          exams: 'Exam 1',
+          internalMarks: '49',
+          
+        },
+        {
+          studentName: 'Arun',
+          courseName: 'XXXX',
+          exams: 'Exam 1',
+          internalMarks: '49',
+          
+        },
+        {
+          studentName: 'Aman',
+          courseName: 'XXXX',
+          exams: 'Exam 1',
+          internalMarks: '45',
+          
+        },
+        {
+          studentName: 'Devaprathap N.',
+          courseName: 'XXXX',
+          exams: 'Exam 1',
+          internalMarks: '44',
+          
+        },
+    
+   
+      ])
+    }
 
   getUserData$(): Observable<any>{
     return of([
@@ -270,9 +326,314 @@ export class BaseService extends HttpService {
   ])
   }
 
+  getInstituteFeeTableData$(): Observable<any>{
+    return of([
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '10',
+        paidStudentsCount: '10',
+        totalFeePaid: '10000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      },
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '25',
+        paidStudentsCount: '25',
+        totalFeePaid: '25000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      },
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '30',
+        paidStudentsCount: '28',
+        totalFeePaid: '28000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      },
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '50',
+        paidStudentsCount: '40',
+        totalFeePaid: '40000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      },
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '30',
+        paidStudentsCount: '20',
+        totalFeePaid: '28000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      },
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '25',
+        paidStudentsCount: '25',
+        totalFeePaid: '25000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      },
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '10',
+        paidStudentsCount: '10',
+        totalFeePaid: '10000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      },
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '25',
+        paidStudentsCount: '25',
+        totalFeePaid: '25000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      }
+    ])
+  }
+  getStudentFeeTableData$(): Observable<any>{
+    return of([
+      {
+        studentName: '',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam ',
+        numberOfExams: '',
+        fee: '000',
+        status: 'Paid',
+        hasStyle: true,
+        cellStyle: {
+          status: {
+            'color': '#1D8923'
+          },
+        }
+      },
+      {
+        studentName: 'Madison Tran',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam 1,Exam 2,Exam 3 ',
+        numberOfExams: '3',
+        fee: '3000',
+        status: 'Paid',
+        hasStyle: true,
+        cellStyle: {
+          status: {
+            'color': '#1D8923'
+          },
+        }
+      },
+      {
+        studentName: 'Raci Verma',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam 2',
+        numberOfExams: '1',
+        fee: '1000',
+        status: 'Paid',
+        hasStyle: true,
+        cellStyle: {
+          status: {
+            'color': '#1D8923'
+          },
+        }
+      },
+      {
+        studentName: 'Sumalatha Krishna',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam 3',
+        numberOfExams: '1',
+        fee: '1000',
+        status: 'Paid',
+        hasStyle: true,
+        cellStyle: {
+          status: {
+            'color': '#1D8923'
+          },
+        }
+      },
+      {
+        studentName: 'Kanaka Rao',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam 1,Exam 2',
+        numberOfExams: '2',
+        fee: '2000',
+        status: 'Paid',
+        hasStyle: true,
+        cellStyle: {
+          status: {
+            'color': '#1D8923'
+          },
+        }
+      },
+      {
+        studentName: 'Ravi Verma',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam 2',
+        numberOfExams: '1',
+        fee: '1000',
+        status: 'Paid',
+        hasStyle: true,
+        cellStyle: {
+          status: {
+            'color': '#1D8923'
+          },
+        }
+      }
+    ])
+  }
+  getMarksForDashboard$(): Observable<any>{
+    return of(
+      [
+        {
+          examName: 'Anatomy',
+          totalMarks: 100,
+          passingMarks: 40,
+          totalAttempts: 96,
+          failedAttempts: 12,
+          passedAttempts: 84,
+          passPercentage: 88,
+          maximumMarks: 96,
+          minimumMarks: 16,
+          avgMarks: 62,
+          standardDeviation: 15,
+  
+        },
+        {
+          examName: 'Physiology',
+          totalMarks: 100,
+          passingMarks: 40,
+          totalAttempts: 96,
+          failedAttempts: 12,
+          passedAttempts: 84,
+          passPercentage: 88,
+          maximumMarks: 96,
+          minimumMarks: 16,
+          avgMarks: 62,
+          standardDeviation: 15,
+        },
+        {
+          examName: 'Biochemistry',
+          totalMarks: 100,
+          passingMarks: 40,
+          totalAttempts: 96,
+          failedAttempts: 12,
+          passedAttempts: 84,
+          passPercentage: 88,
+          maximumMarks: 96,
+          minimumMarks: 16,
+          avgMarks: 62,
+          standardDeviation: 15,
+        },
+        {
+          examName: 'Pathology',
+          totalMarks: 100,
+          passingMarks: 40,
+          totalAttempts: 96,
+          failedAttempts: 12,
+          passedAttempts: 84,
+          passPercentage: 88,
+          maximumMarks: 96,
+          minimumMarks: 16,
+          avgMarks: 62,
+          standardDeviation: 15,
+        },
+        {
+          examName: 'Microbiology',
+          totalMarks: 100,
+          passingMarks: 40,
+          totalAttempts: 96,
+          failedAttempts: 12,
+          passedAttempts: 84,
+          passPercentage: 88,
+          maximumMarks: 96,
+          minimumMarks: 16,
+          avgMarks: 62,
+          standardDeviation: 15,
+        },
+        {
+          examName: 'Aggregate',
+          totalMarks: 'NA',
+          passingMarks: 'NA',
+          totalAttempts: 480,
+          failedAttempts: 60,
+          passedAttempts: 420,
+          passPercentage: 88,
+          maximumMarks: 96,
+          minimumMarks: 16,
+          avgMarks: 62,
+          standardDeviation: 15,
+        },
+      ]
+    )
+  }
+
   setUserData(userData:any){
     this.userData.next(userData)
   }
+
 
   getAllCourses$(): Observable<any> {
     const requestParam: RequestParam = {
@@ -282,6 +643,7 @@ export class BaseService extends HttpService {
     return this.get(requestParam);
   }
 
+  
 
   /**************************** exam services ****************************/
   getExamCycleList() {
@@ -341,9 +703,9 @@ getStudentDetailsById(id: string | number) {
   return this.get(requestParam);
 }
 
-getEnrollmentList(request: object) {
+getEnrollmentList(request: any) {
   const requestParam: RequestParam = {
-    url: this.baseUrl + this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_ENROLLMENT_LIST,
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.FIND_ENROLLMENT_BY_FILTER}?instituteId=${request.instituteId}&courseId=${request.courseId}&academicYear=${request.academicYear}&verificationStatus=${request.verificationStatus}`,
     data: request,
   }
   return this.get(requestParam);

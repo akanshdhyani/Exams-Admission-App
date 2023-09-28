@@ -55,6 +55,7 @@
                       [matDatepicker]="picker"
                       formControlName="startDate"
                       [min]="pickerMinDate"
+                      (dateInput)="startDateChangeEvent('input', $event)" (dateChange)="startDateChangeEvent('change', $event)"
                     />
                     <mat-datepicker-toggle
                       matIconSuffix
@@ -72,6 +73,7 @@
                       [matDatepicker]="picker1"
                       formControlName="endDate"
                       [min]="pickerMinDate"
+                      (dateInput)="endDateChangeEvent('input', $event)" (dateChange)="endDateChangeEvent('change', $event)"
                     />
                     <mat-datepicker-toggle
                       matIconSuffix
@@ -79,6 +81,7 @@
                     ></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                   </mat-form-field>
+                  <mat-error *ngIf="endDateError">End date cannot be before start date</mat-error>
                 </div>
               </div>
             </div>
@@ -125,7 +128,9 @@
                     formControlName="startTime"
                     min="startMinTime"
                     max="startMaxTime"
-                    pattern="[0-9]{2}:[0-9]{2}" />
+                    pattern="[0-9]{2}:[0-9]{2}" 
+                    (change)="startTimeChangeEvent($event)"
+                    />
                 </div>
               </div>
               <div class="sm-col sm-col-12 md-col-12 lg-col-3 mb2">
@@ -134,13 +139,16 @@
                     type="time"
                     min="startMinTime"
                     max="startMaxTime"
-                    name="endtime" pattern="[0-9]{2}:[0-9]{2}" formControlName="endTime">
+                    name="endtime" pattern="[0-9]{2}:[0-9]{2}" formControlName="endTime"
+                    (change)="endTimeChangeEvent($event)"
+                    >
+                    <mat-error *ngIf="endTimeError">End time cannot be before start time</mat-error>
               </div>
             </div>
             <div>
               <button
                 class="text-class action-btns"
-                [disabled]="!createExamCycle.valid"
+                [disabled]="!createExamCycle.valid || endDateError || endTimeError"
                 type="button"
                 mat-raised-button
                 color="primary"
