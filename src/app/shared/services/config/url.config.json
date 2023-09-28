@@ -27,6 +27,11 @@
         },
         "COURSE": {
             "GET_ALL": "/v1/admin/courses/list"
+        },
+        "EXAM_CENTER": {
+            "UPDATE_CCTV_STATUS": "/api/v1/admin/updateCctvStatus",
+            "ASSIGN_ALTERNATE_EXAM_CENTER": "/api/v1/admin/assignAlternate",
+            "VERIFIED_EXAM_CENTERS": "/api/v1/admin/verifiedExamCenters"
         }
     }
 }

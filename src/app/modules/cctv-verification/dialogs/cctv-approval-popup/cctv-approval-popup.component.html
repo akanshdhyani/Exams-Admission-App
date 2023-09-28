@@ -9,7 +9,8 @@
                         </div>
                         <div class="mb1">
                             <mat-form-field appearance="outline" class="w-full text-class">
-                                <input matInput [placeholder]="control.placeholder" [formControlName]="control.controlName" >
+                                <input matInput [placeholder]="control.placeholder" [formControlName]="control.controlName" 
+                                [readonly]="control.disabled">
                             </mat-form-field>
                         </div>
                     </ng-container>
