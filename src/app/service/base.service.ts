@@ -32,6 +32,109 @@ export class BaseService extends HttpService {
     this.token = this.cookieService.get('access_token');
   }
   
+  //#region (common apis)
+  getExamCycleList$() {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_MANAGEMENT.GET_EXAM_CYCLE_LIST,
+      data: {},
+    }
+    return this.get(requestParam);
+  }
+
+  getAllInstitutesList$() {
+    const response = {
+      "result": {
+        "response": [
+            {
+                "institute": {
+                    "allowedForExamCentre": false,
+                    "courses": [
+                        {
+                            "course_id": 3,
+                            "courseName": "MSc in Nursing",
+                            "seatCapacity": 30,
+                            "courseCode": "GNM102",
+                            "description": "MSc in Nursing"
+                        },
+                        {
+                            "course_id": 2,
+                            "courseName": "GNM",
+                            "seatCapacity": 10,
+                            "courseCode": "GNM101",
+                            "description": "General Nursing and Midwifery"
+                        }
+                    ],
+                    "address": "abc",
+                    "district": "Bhopal",
+                    "instituteCode": "121",
+                    "ipAddress": "2654789",
+                    "instituteId": 1,
+                    "cctvVerified": false,
+                    "email": "abc@gmail.com",
+                    "remarks": "abcd",
+                    "instituteName": "RGPV"
+                }
+            },
+            {
+                "institute": {
+                    "allowedForExamCentre": true,
+                    "courses": [
+                        {
+                            "course_id": 3,
+                            "courseName": "MSc in Nursing",
+                            "seatCapacity": 20,
+                            "courseCode": "GNM102",
+                            "description": "MSc in Nursing"
+                        },
+                        {
+                            "course_id": 2,
+                            "courseName": "GNM",
+                            "seatCapacity": 10,
+                            "courseCode": "GNM101",
+                            "description": "General Nursing and Midwifery"
+                        }
+                    ],
+                    "address": "Victoria Hospital Campus, Thyagi M Palanivelu Rd, Bengaluru, Karnataka 560002",
+                    "district": "Bengaluru",
+                    "instituteCode": "122",
+                    "ipAddress": "26704342",
+                    "instituteId": 2,
+                    "cctvVerified": true,
+                    "email": "abcd@gmail.com",
+                    "remarks": "abc",
+                    "instituteName": "Bangalore Medical College and Research Institute"
+                }
+            },
+            {
+                "institute": {
+                    "allowedForExamCentre": false,
+                    "courses": [
+                        {
+                            "course_id": 2,
+                            "courseName": "GNM",
+                            "seatCapacity": 50,
+                            "courseCode": "GNM101",
+                            "description": "General Nursing and Midwifery"
+                        }
+                    ],
+                    "address": "XHHG+3W5, 5th Main Rd, Gandhi Nagar, Bengaluru, Karnataka 560009",
+                    "district": "lucknow",
+                    "instituteCode": "123",
+                    "ipAddress": "560009",
+                    "instituteId": 3,
+                    "cctvVerified": true,
+                    "email": "abcde@gmail.com",
+                    "remarks": "abcde",
+                    "instituteName": "Sri Laxmi gnm Nursing College"
+                }
+            }
+        ],
+      }
+    }
+    return response
+  }
+  //#endregion
+
 
   getHallTickets$(): Observable<any> {
     // return this.httpClient.get<any>("https://api.agify.io/?name=meelad");
@@ -248,8 +351,39 @@ getEnrollmentList(request: object) {
 
 /** verify student(Approve/reject) */
 updateStudentEnrollmentStatus() {
-  
 }
+  
+  //#region (CCTV management admin) 
+  updateCCTVstatus$(request: any) {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.UPDATE_CCTV_STATUS,
+      data: request,
+    }
+    return this.put(requestParam);
+  }
+
+  assignAlternateExamCenter$(request: any) {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.ASSIGN_ALTERNATE_EXAM_CENTER,
+      data: request,
+    }
+    return this.put(requestParam);
+  }
+
+  getNearestInstitutesList(formBody: any) {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.VERIFIED_EXAM_CENTERS,
+      data: formBody,
+    }
+    return this.get(requestParam);
+  }
+  //#endregion
+
+  //#region (track dispatches)
+  getExams$() {}
+  //#endregion
+
+  
 
 getInstituteById(id: string | number) {
   const requestParam: RequestParam = {

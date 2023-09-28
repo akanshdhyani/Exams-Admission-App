@@ -3,6 +3,8 @@ import { FormControl } from '@angular/forms';
 import { FeeManagementService } from '../../fee-management/services/fee-management.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewProofModalAdminComponent } from '../view-proof-modal-admin/view-proof-modal-admin.component';
+import { BaseService } from 'src/app/service/base.service';
+import { mergeMap, retry } from 'rxjs';
 
 interface Course {
   value: string;
@@ -19,16 +21,27 @@ export class ManageTrackDispatchesComponent {
     {value: 'bsc', viewValue: 'BSc'},
     {value: 'msc', viewValue: 'MSc'},
   ];
-  examCycleList = [
+  examCycleList: { 
+    id: number; 
+    examCycleName: string; 
+    courseId: string; 
+    status: string; 
+  }[] = [
     {
-      examName: 'Exam Cycle 1',
-      value: '1'
+      examCycleName: 'Exam Cycle 1',
+      id: 1,
+      courseId: '',
+      status: '',
     },{
-      examName: 'Exam Cycle 2',
-      value: '2'
+      examCycleName: 'Exam Cycle 2',
+      id: 2,
+      courseId: '',
+      status: '',
     },{
-      examName: 'Exam Cycle 3',
-      value: '3'
+      examCycleName: 'Exam Cycle 3',
+      id: 3,
+      courseId: '',
+      status: '',
     },
   ]
 
@@ -431,6 +444,117 @@ export class ManageTrackDispatchesComponent {
       }
     },
   ]
+  
+  examCycleControl = new FormControl('');
+  examControl = new FormControl('');
+
+  // searcControl = '';
+  // searchKey = ''
+  showInstitutesTable = true
+
+  //#endregion
+  breadcrumbItems = [
+    { label: 'Manage Track Dispatches', url: '' },
+  ]
+  constructor(
+    private feeManagementService: FeeManagementService,
+    private dialog: MatDialog,
+    private baseService: BaseService,
+  ) {}
+
+  ngOnInit(): void {
+    this.intialisation()
+  }
+
+  //#region (intialisation)
+  intialisation() {
+    // this.getExamCycles()
+    this.getInstitutesData()
+  }
+
+  getExamCycles() {
+    this.baseService.getExamCycleList$()
+    .pipe(mergeMap((res) => {
+      return this.formateExamCycles(res)
+    }))
+    .subscribe((examCucles: any) => {
+      this.examCycleList = examCucles
+   })
+  }
+
+  formateExamCycles(response: any) {
+    const examCycles: { 
+      id: number; 
+      examCycleName: string; 
+      courseId: string; 
+      status: string; 
+    }[] = []
+    if (response && response.length > 0) {
+      response.forEach((examCycle: any) => {
+        const exam = {
+          id: examCycle.id,
+          examCycleName: examCycle.examCycleName,
+          courseId: examCycle.courseId,
+          status: examCycle.status,
+        }
+
+        examCycles.push(exam)
+      })
+    }
+    return examCycles
+  }
+
+  getInstitutesData(searchKey: string = '') {
+    // this.baseService.getInstitutesData$()
+    // .pipe((response: any) => {
+    //   return this.formateInstitutes(response)
+    // })
+    // .subscribe((InstitutesData: any) => {
+    //   this.instituteTableData = InstitutesData
+    // })
+  }
+
+  formateInstitutes(institutesData: any) {
+    const formatedInstitutesList = []
+    if (institutesData && institutesData.length) {
+      institutesData.forEach((institute: any) => {
+        const formatedInstitute = institute
+        formatedInstitutesList.push(formatedInstitute)
+      })
+    }
+    // return formatedInstitutesList;
+  }
+
+  getExams(examCycleId: number) {
+    // this.courses = []
+    // const formBody = {} 
+    // this.baseService.getExams$()
+    // .pipe(mergeMap((response: any) => {
+    //   return this.formateExams(response)
+    // }))
+    // .subscribe((exams: any) => {
+    //   this.courses = exams
+    // })
+  }
+
+  formateExams(exams: any) {
+    const formatedExams = []
+    if (exams && exams.length) {
+      exams.forEach((exam: any) => {
+        const formatedexame = exam
+        formatedExams.push(formatedexame)
+      })
+    }
+    // return formatedExams;
+  }
+  //#endregion
+
+  getExamsOfInstitute(instituteId: string) {
+    // .subscribe((examsFeeDetails: any) => {
+    //   this.studentExamsTableData = examsFeeDetails
+    // })
+  }
+
 
   viewProof(event: any) {
     const dialogRef = this.dialog.open(ViewProofModalAdminComponent, {
@@ -472,51 +596,6 @@ export class ManageTrackDispatchesComponent {
     })
   }
 
-  
-  examCycleControl = new FormControl('');
-  examControl = new FormControl('');
-
-  // searcControl = '';
-  // searchKey = ''
-  showInstitutesTable = true
-
-  //#endregion
-  breadcrumbItems = [
-    { label: 'Manage Track Dispatches', url: '' },
-  ]
-  constructor(
-    private feeManagementService: FeeManagementService,
-    private dialog: MatDialog,
-  ) {}
-
-  ngOnInit(): void {
-    this.intialisation()
-  }
-
-  intialisation() {
-    this.getExamCycles()
-    this.getInstitutesData()
-  }
-
-  getExamCycles() {
-    this.feeManagementService.getExamCycles()
-    // .subscribe((examCucles: any) => {
-    //   this.examCycleList = examCucles
-    // })
-  }
-
-  getInstitutesData(searchKey: string = '') {
-    // this.feeManagementService.getInstitutesData(searchKey)
-    // .subscribe((InstitutesData: any) => {
-    //   this.instituteTableData = InstitutesData
-    // })
-  }
-
-  getExamsOfInstitute(instituteId: string) {
-    // .subscribe((examsFeeDetails: any) => {
-    //   this.studentExamsTableData = examsFeeDetails
-    // })
-  }
 
   // search() {
   //   this.searchKey = this.searcControl
