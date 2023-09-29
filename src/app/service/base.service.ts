@@ -718,15 +718,15 @@ updateStudentEnrollmentStatus() {
   //#region (CCTV management admin) 
   updateCCTVstatus$(request: any) {
     const requestParam: RequestParam = {
-      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.UPDATE_CCTV_STATUS,
-      data: request,
+      url: `${this.baseUrl}${this.configService.urlConFig.URLS.EXAM_CENTER.UPDATE_CCTV_STATUS}/${request.instituteId}?ipAddress=${request.ipAddress}&remarks=${request.remarks}&status=${request.status}`,
+      data: {},
     }
     return this.put(requestParam);
   }
 
   assignAlternateExamCenter$(request: any) {
     const requestParam: RequestParam = {
-      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.ASSIGN_ALTERNATE_EXAM_CENTER,
+      url: `${this.baseUrl}${this.configService.urlConFig.URLS.EXAM_CENTER.ASSIGN_ALTERNATE_EXAM_CENTER}/${request.instituteID}?alternateInstituteId=${request.alternateInstituteId}`,
       data: request,
     }
     return this.put(requestParam);
@@ -734,7 +734,7 @@ updateStudentEnrollmentStatus() {
 
   getNearestInstitutesList(formBody: any) {
     const requestParam: RequestParam = {
-      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.VERIFIED_EXAM_CENTERS,
+      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.VERIFIED_EXAM_CENTERS + '?district=' + formBody.district,
       data: formBody,
     }
     return this.get(requestParam);

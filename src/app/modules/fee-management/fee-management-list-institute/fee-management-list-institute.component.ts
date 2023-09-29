@@ -54,8 +54,8 @@ export class FeeManagementListInstituteComponent implements OnInit {
   //     },
   //   },{
   //     header: 'Exam',
-  //     columnDef: 'examName',
-  //     cell: (element: Record<string, any>) => `${element['examName']}`,
+  //     columnDef: 'examNames',
+  //     cell: (element: Record<string, any>) => `${element['examNames']}`,
   //     cellStyle: {
   //       'background-color': '#0000000a', 'width': '300px', 'color': '#00000099'
   //     },
@@ -144,8 +144,8 @@ export class FeeManagementListInstituteComponent implements OnInit {
       },
     },{
       header: 'Exam',
-      columnDef: 'examName',
-      cell: (element: Record<string, any>) => `${element['examName']}`,
+      columnDef: 'examNames',
+      cell: (element: Record<string, any>) => `${element['examNames']}`,
       cellStyle: {
         'background-color': '#0000000a', 'width': '300px', 'color': '#00000099'
       },
@@ -176,7 +176,7 @@ export class FeeManagementListInstituteComponent implements OnInit {
   pendingFeeTableData= [
     {
       studentName: 'Nancy Kurian',
-      examName: 'Exam 1',
+      examNames: 'Exam 1',
       noOfExams: '1',
       fee: '1000',
       status: 'Pending',
@@ -188,7 +188,7 @@ export class FeeManagementListInstituteComponent implements OnInit {
       }
     },{
       studentName: 'Jordan Allen',
-      examName: 'Exam 1, Exam 2',
+      examNames: 'Exam 1, Exam 2',
       noOfExams: '2',
       fee: '2000',
       status: 'Pending',
@@ -200,7 +200,7 @@ export class FeeManagementListInstituteComponent implements OnInit {
       }
     },{
       studentName: 'Purandara Das',
-      examName: 'Exam 1, Exam 2',
+      examNames: 'Exam 1, Exam 2',
       noOfExams: '2',
       fee: '2000',
       status: 'Pending',
@@ -224,8 +224,8 @@ export class FeeManagementListInstituteComponent implements OnInit {
       }
     },{
       header: 'Exam',
-      columnDef: 'examName',
-      cell: (element: Record<string, any>) => `${element['examName']}`,
+      columnDef: 'examNames',
+      cell: (element: Record<string, any>) => `${element['examNames']}`,
       cellStyle: {
         'background-color': '#0000000a', 'width': '300px', 'color': '#00000099'
       }
@@ -256,7 +256,7 @@ export class FeeManagementListInstituteComponent implements OnInit {
   paidFeeTableData= [
     {
       studentName: 'Devaprathap Nagendra',
-      examName: 'Exam 1, Exam 2',
+      examNames: 'Exam 1, Exam 2',
       noOfExams: '2',
       fee: '2000',
       status: 'Paid',
@@ -268,7 +268,7 @@ export class FeeManagementListInstituteComponent implements OnInit {
       }
     },{
       studentName: 'Madison Tran',
-      examName: 'Exam 1, Exam 2, Exam 3',
+      examNames: 'Exam 1, Exam 2, Exam 3',
       noOfExams: '3',
       fee: '3000',
       status: 'Paid',
@@ -280,7 +280,7 @@ export class FeeManagementListInstituteComponent implements OnInit {
       }
     },{
       studentName: 'Ravi Verma',
-      examName: 'Exam 2',
+      examNames: 'Exam 2',
       noOfExams: '1',
       fee: '1000',
       status: 'Paid',
@@ -292,7 +292,7 @@ export class FeeManagementListInstituteComponent implements OnInit {
       }
     },{
       studentName: 'Sumalatha Krishna',
-      examName: 'Exam 3',
+      examNames: 'Exam 3',
       noOfExams: '1',
       fee: '1000',
       status: 'Paid',
@@ -304,7 +304,7 @@ export class FeeManagementListInstituteComponent implements OnInit {
       }
     },{
       studentName: 'Kanaka Rao',
-      examName: 'Exam 1, Exam 2',
+      examNames: 'Exam 1, Exam 2',
       noOfExams: '2',
       fee: '2000',
       status: 'Paid',

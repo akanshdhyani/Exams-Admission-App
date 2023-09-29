@@ -22,7 +22,7 @@
                             <mat-form-field appearance="outline" class="w-full text-class">
                                 <mat-select [placeholder]="control.placeholder" [formControlName]="control.controlName" >
                                     <ng-container *ngFor="let option of control.optionsList">
-                                        <mat-option [value]="option.id">{{option.displayName}}</mat-option>
+                                        <mat-option [value]="option.id">{{option.instituteName}}</mat-option>
                                     </ng-container>
                                 </mat-select>
                             </mat-form-field>

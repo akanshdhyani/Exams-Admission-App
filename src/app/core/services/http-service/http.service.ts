@@ -159,8 +159,9 @@ multipartPost(requestParam: RequestParam): Observable<any> {
  */
   put(requestParam: RequestParam): Observable<ServerResponse> {
     const httpOptions: HttpOptions = {
-      headers: requestParam.header,
+      headers: requestParam.header ? requestParam.header : this.getHeader(),
       params: requestParam.param,
+      body: requestParam.data
     };
     return this.http.put<Response>(requestParam.url, requestParam.data, httpOptions).pipe(
       mergeMap((data: Response) => {
