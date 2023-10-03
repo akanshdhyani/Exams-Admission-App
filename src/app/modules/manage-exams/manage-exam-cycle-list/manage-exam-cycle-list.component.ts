@@ -7,6 +7,8 @@ import { ConformationDialogComponent } from 'src/app/shared/components/conformat
 import { UploadFileComponent } from 'src/app/modules/manage-exams/upload-file/upload-file.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BaseService } from 'src/app/service/base.service';
+import { ToastrService } from 'ngx-toastr';
+import { ToastrServiceService } from 'src/app/shared/services/toastr/toastr.service';
 
 interface Course {
   value: string;
@@ -30,8 +32,8 @@ export class ManageExamCycleListComponent {
   length = 10;
   breadcrumbItems = [
     { label: 'Manage Exam Cycles and Exams', url: '' },
-  ]
-  constructor(private router: Router, private dialog: MatDialog, private baseService: BaseService){}
+  ];
+  constructor(private router: Router, private dialog: MatDialog, private baseService: BaseService, private toastrService: ToastrServiceService){}
   courses: Course[] = [
     {value: 'bsc', viewValue: 'BSc'},
     {value: 'msc', viewValue: 'MSc'},
@@ -58,6 +60,9 @@ export class ManageExamCycleListComponent {
     next: (res) => {
       this.isDataLoading = false;
       this.examCycleData = res.responseData;
+      this.examCycleData.map((obj, index) => {
+        obj.courseName = obj.course?.courseName;
+      })
     },
     error: (error: HttpErrorResponse) => {
       console.log(error);
@@ -123,7 +128,7 @@ export class ManageExamCycleListComponent {
   }
 
   onClickItem(event: any) {
-
+    this.router.navigate(['/manage-exam-cycle/form/'+event.id])
   }
 
   onDeleteClick(event: any) {
@@ -154,7 +159,19 @@ export class ManageExamCycleListComponent {
     })
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-       this.router.navigateByUrl('/candidate-portal')
+        this.isDataLoading = true;
+        this.baseService.deleteExamCycle(event.id).subscribe({
+          next: (res) => {
+            this.isDataLoading = false;
+            this.toastrService.showToastr('Exam cycle deleted successfully', 'Success', 'success', '');
+          },
+          error: (err: HttpErrorResponse) => {
+            console.log("Entered error loop");
+            this.isDataLoading = false;
+            this.toastrService.showToastr('Something went wrong. Please try again', 'Error', 'error', '');
+          }
+        })
+        
       }
     })
   }

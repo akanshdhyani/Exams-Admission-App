@@ -1,7 +1,7 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, inject} from '@angular/core';
 import { FormGroup ,AbstractControl, FormControl, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { ToastrServiceService } from 'src/app/shared/services/toastr/toastr.service';
 import { BaseService } from 'src/app/service/base.service';
@@ -45,20 +45,25 @@ export class ManageExamCycleFormComponent {
   breadcrumbItems = [
     { label: 'Manage Exam Cycles and Exams', url: '' },
   ]
+  examcycleId: string;
+  examCycleDetails: any = {};
   constructor(
     private router: Router, 
     private toasterService: ToastrServiceService,
-    private baseService: BaseService
+    private baseService: BaseService,
+    private route: ActivatedRoute
     ) {
+      this.route.params.subscribe(param => {
+        this.examcycleId = param['id'];
+      })
   }
  
   
   ngOnInit(){
-   this.initForm();
    this.getAllCourses();
- }
- 
- initForm(){
+   if(this.examcycleId !== undefined) {
+    this.getExamCycleDetailsById();
+   }
  }
 
  getAllCourses() {
@@ -68,6 +73,29 @@ export class ManageExamCycleFormComponent {
     },
     error: (error: HttpErrorResponse) => {
       console.log(error);
+    }
+  })
+ }
+
+ initializeFormValues() {
+  this.createExamCycle.patchValue({
+    'examCycleName': this.examCycleDetails?.examCycleName,
+    'courseId': this.examCycleDetails?.course.id,
+    'startDate': this.examCycleDetails?.startDate,
+    'endDate': this.examCycleDetails?.endDate,
+  })
+ }
+
+ getExamCycleDetailsById() {
+  this.baseService.getExamCycleDetails(this.examcycleId).subscribe({
+    next:(res) => {
+        this.examCycleDetails = res.responseData;
+        console.log("examCycleDetails =>", this.examCycleDetails);
+        this.initializeFormValues();
+    },
+    error:(err: HttpErrorResponse) => {
+      console.log(err);
+      this.toasterService.showToastr('Something went wrong. Please try again', 'Error', 'error', '');
     }
   })
  }
@@ -84,7 +112,7 @@ export class ManageExamCycleFormComponent {
  addNewExam() {
    const examCycleValue = this.createExamCycle.value;
    const {examName, examDate, startTime, endTime, courseId, startDate, endDate} = this.createExamCycle.value;
-   const selectedCourse= this.courses.find(course => course.courseCode === courseId);
+   const selectedCourse= this.courses.find(course => course.id === courseId);
    const examDetail = {
     examName: examName,
     examDate: this.convertDateFormat(examDate),
@@ -100,33 +128,57 @@ export class ManageExamCycleFormComponent {
     const {examCycleName, courseId, startDate, endDate} = this.createExamCycle.value;
     const examCycleDetail= {
       examCycleName,
-      courseId,
+      course: {
+        id: courseId,
+      },
       startDate: this.convertDateFormat(startDate),
       endDate: this.convertDateFormat(endDate),
     };
     this.savingDetails = true;
     // console.log(examCycleDetail);
-    this.baseService.createExamCycle(examCycleDetail).pipe(
-      switchMap((examCycleResponse) => {
-        // Extract examCycleId from examCycleResponse
-        const examCycleId = examCycleResponse.responseData.id; 
-  
-        // Call the createExam API with examCycleId
-        return this.baseService.createExam(this.exams, examCycleId);
-      })
-    ).subscribe({
+    this.baseService.createExamCycle(examCycleDetail).subscribe({
       next: (res) => {
-        this.examsToAdd = [];
-        this.toasterService.showToastr("Exam Cycle and Exam is created successfully!", 'Success', 'success', '');
-        this.savingDetails = false;
-        this.router.navigate(['/manage-exam-cycle'])
+        const examCycleId = res.responseData.id;
+        if(examCycleId) {
+          this.createExams(examCycleId);
+        }
       },
-      error: (err) => {
-        this.toasterService.showToastr(err, 'Error', 'error', '');
-        this.savingDetails = false;
-        // Handle the error here in case of file upload or ticket creation failure
+      error: (err: HttpErrorResponse) => {
+        this.toasterService.showToastr('Something went wrong. Please try again', 'Error', 'error', '');
       }
-    });
+    })
+  }
+
+  //   this.baseService.createExamCycle(examCycleDetail).pipe(
+  //     switchMap((examCycleResponse) => {
+  //       alert("1");
+  //       const examCycleId = examCycleResponse.responseData.id; 
+  
+  //       // Call the createExam API with examCycleId
+  //       return this.baseService.createExam(this.exams, examCycleId);
+  //     })
+  //   ).subscribe({
+  //     next: (res) => {
+  //       this.examsToAdd = [];
+  //       this.toasterService.showToastr("Exam Cycle and Exam is created successfully!", 'Success', 'success', '');
+  //       this.savingDetails = false;
+  //       this.router.navigate(['/manage-exam-cycle'])
+  //     },
+  //   });
+  // }
+
+  createExams(examCycleId: string | number) {
+    this.baseService.createExam(this.exams, examCycleId).subscribe({
+      next: (res) => {
+        this.toasterService.showToastr('Exam cycle and Exams created successfully', 'Success', 'success', '');
+        this.examsToAdd = [];
+        this.savingDetails = false;
+        this.router.navigate(['/manage-exam-cycle']);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.toasterService.showToastr('Something went wrong. Please try again', 'Error', 'error', '');
+      }
+    })
   }
       
 
