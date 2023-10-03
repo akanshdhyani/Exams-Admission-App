@@ -40,22 +40,23 @@ export class StudentEnrollmentComponent {
   ]
   searchForm: FormGroup;
   searchParams: string;
-constructor(private router: Router, private authService: AuthServiceService, private baseService: BaseService){}
-  courses: Course[] = [
-    {value: 'bsc', viewValue: 'BSc'},
-    {value: 'msc', viewValue: 'MSc'},
-  ];
+  instituteList: any[] = [];
+  courses: any[] = []
   years: Year[] = [
-    {value: 'sem-1', viewValue: '2020'},
-    {value: 'sem-2', viewValue: '2021'},
-    {value: 'sem-3', viewValue: '2022'},
+    {value: '2020-2021', viewValue: '2020-2021'},
+    {value: '2021-2022', viewValue: '2021-2022'},
+    {value: '2022-2023', viewValue: '2022-2023'},
+    {value: '2023-2024', viewValue: '2023-2024'},
+    {value: '2024-2025', viewValue: '2024-2025'},
   ];
   isHallTicket: boolean = true;
+constructor(private router: Router, private authService: AuthServiceService, private baseService: BaseService){}
   ngOnInit() {
     this.loggedInUserRole = this.authService.getUserRoles()[0];
     this.isDataLoading = false;
     this.initializeTabs();
     this.initializeSearchForm();
+    this.getAllInstitutes();
   }
 
   initializeSearchForm() {
@@ -65,7 +66,23 @@ constructor(private router: Router, private authService: AuthServiceService, pri
   }
 
   getAllCourses() {
+    this.baseService.getAllCourses$().subscribe({
+      next: (res) => {
+        this.courses = res.responseData;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+      }
+    })
+  }
 
+  getAllInstitutes() {
+    this.baseService.getAllInstitutes().subscribe({
+      next: (res) => {
+        console.log("res");
+        this.instituteList = res.responseData;
+      }
+    })
   }
 
   onClickItem(e: any) {
@@ -80,11 +97,11 @@ constructor(private router: Router, private authService: AuthServiceService, pri
     this.getEnrollmentData();
   }
 
-  getEnrollmentData() {
+  getEnrollmentData(instituteId?: string, courseId?: string, academicYear?: string) {
   const request = {
-    instituteId: '',
-    courseId: '',
-    academicYear: '',
+    instituteId: instituteId !== ''? instituteId : '',
+    courseId: courseId !== ''? courseId : '',
+    academicYear: academicYear !== ''? academicYear: '',
     verificationStatus: this.selectedTab.name === 'Approved'? 'VERIFIED' : this.selectedTab.name.toUpperCase()
   }
   console.log(request);
@@ -145,12 +162,7 @@ constructor(private router: Router, private authService: AuthServiceService, pri
           columnDef: 'isLink',
           header: '',
           isSortable: false,
-          isLink: false,
-          cellStyle: {
-            'background-color': 'inherit',
-            'color': '#045DAD',
-            'cursor': 'pointer'
-          },
+          isLink: true,
           cell: (element: Record<string, any>) => `View Enrollment`
         },
       ]
@@ -158,11 +170,11 @@ constructor(private router: Router, private authService: AuthServiceService, pri
       case 'exams_admin':
         this.enrollmentTableColumns = [
           {
-            columnDef: 'applicantName',
+            columnDef: 'firstName',
             header: 'Applicant Name',
             isSortable: false,
             isLink: false,
-            cell: (element: Record<string, any>) => `${element['applicantName']}`
+            cell: (element: Record<string, any>) => `${element['firstName']} ${element['surname']}`
           },
           {
             columnDef: 'provisionalEnrollmentNumber',
@@ -190,18 +202,13 @@ constructor(private router: Router, private authService: AuthServiceService, pri
             header: 'Admission Year',
             isSortable: false,
             isLink: false,
-            cell: (element: Record<string, any>) => `${element['admissionYear']}`
+            cell: (element: Record<string, any>) => `${element['enrollmentDate']}`
           },
           {
             columnDef: 'isLink',
             header: '',
             isSortable: false,
-            isLink: false,
-            cellStyle: {
-              'background-color': 'inherit',
-              'color': '#045DAD',
-              'cursor': 'pointer'
-            },
+            isLink: true,
             cell: (element: Record<string, any>) => `View Enrollment`,
           },
         ]
@@ -216,17 +223,17 @@ constructor(private router: Router, private authService: AuthServiceService, pri
 
   getSelectedInstitute(event: any) {
     const selectedInsitute = event.value;
-    this.getEnrollmentData();
+    this.getEnrollmentData(selectedInsitute);
   }
 
   getSelectedCourse(event: any) {
     const selectedCourse = event.value;
-    this.getEnrollmentData();
+    this.getEnrollmentData(selectedCourse);
   }
 
   getSelectedAcademicYear(event: any) {
     const selectedAcademicYear = event.value;
-    this.getEnrollmentData();
+    this.getEnrollmentData(selectedAcademicYear);
   }
 
   onTabChange(event: MatTabChangeEvent) {
