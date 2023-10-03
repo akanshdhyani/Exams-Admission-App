@@ -57,6 +57,8 @@ constructor(private router: Router, private authService: AuthServiceService, pri
     this.initializeTabs();
     this.initializeSearchForm();
     this.getAllInstitutes();
+    // courses to be fetched based on institute
+    this.getAllCourses();
   }
 
   initializeSearchForm() {
@@ -68,6 +70,7 @@ constructor(private router: Router, private authService: AuthServiceService, pri
   getAllCourses() {
     this.baseService.getAllCourses$().subscribe({
       next: (res) => {
+        console.log(res.responseData);
         this.courses = res.responseData;
       },
       error: (err: HttpErrorResponse) => {
@@ -99,9 +102,9 @@ constructor(private router: Router, private authService: AuthServiceService, pri
 
   getEnrollmentData(instituteId?: string, courseId?: string, academicYear?: string) {
   const request = {
-    instituteId: instituteId !== ''? instituteId : '',
-    courseId: courseId !== ''? courseId : '',
-    academicYear: academicYear !== ''? academicYear: '',
+    instituteId: instituteId !== undefined? instituteId : '',
+    courseId: courseId !== undefined? courseId : '',
+    academicYear: academicYear !== undefined? academicYear: '',
     verificationStatus: this.selectedTab.name === 'Approved'? 'VERIFIED' : this.selectedTab.name.toUpperCase()
   }
   console.log(request);
@@ -223,17 +226,17 @@ constructor(private router: Router, private authService: AuthServiceService, pri
 
   getSelectedInstitute(event: any) {
     const selectedInsitute = event.value;
-    this.getEnrollmentData(selectedInsitute);
+    this.getEnrollmentData(selectedInsitute, '', '');
   }
 
   getSelectedCourse(event: any) {
     const selectedCourse = event.value;
-    this.getEnrollmentData(selectedCourse);
+    this.getEnrollmentData('', selectedCourse, '');
   }
 
   getSelectedAcademicYear(event: any) {
     const selectedAcademicYear = event.value;
-    this.getEnrollmentData(selectedAcademicYear);
+    this.getEnrollmentData('','',selectedAcademicYear);
   }
 
   onTabChange(event: MatTabChangeEvent) {

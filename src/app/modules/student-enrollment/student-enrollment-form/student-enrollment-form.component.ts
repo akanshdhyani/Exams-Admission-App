@@ -93,6 +93,7 @@ export class StudentEnrollmentFormComponent {
         pincode: new FormControl('', Validators.required)
       })
     })
+    console.log(this.basicDetailsForm.value);
   }
 
   initEducationalDetailsForm() {
@@ -119,13 +120,12 @@ export class StudentEnrollmentFormComponent {
         certificate: new FormControl('', Validators.required) 
       })
     })
-    console.log(this.educationalDetailsForm.value);
   }
 
   assignFormValues() {
     this.basicDetailsForm.patchValue({
-      firstName: this.enrollmentDetails?.firstName.trim(),
-      lastName: this.enrollmentDetails?.surname.trim(),
+      firstName: this.enrollmentDetails?.firstName,
+      lastName: this.enrollmentDetails?.surname,
       mothersName: this.enrollmentDetails?.motherName.trim(),
       fathersName: this.enrollmentDetails?.fatherName.trim(),
       dateOfBirth: this.enrollmentDetails?.dateOfBirth.trim(),
@@ -135,13 +135,13 @@ export class StudentEnrollmentFormComponent {
       mobileNumber: this.enrollmentDetails?.mobileNo.trim(),
       emailId: this.enrollmentDetails?.emailId.trim(),
       aadharNo: this.enrollmentDetails?.aadhaarNo.trim(),
-    })
-    this.basicDetailsForm.controls['address'].patchValue({
+      address: {
         addressLine1: this.enrollmentDetails?.address.trim(),
         district: this.enrollmentDetails?.district.trim(),
         state: this.enrollmentDetails?.state.trim(),
         country: this.enrollmentDetails?.country.trim(),
         pincode: this.enrollmentDetails?.pinCode.trim(),
+      }
     })
     this.educationalDetailsForm.patchValue({
         courseCode: this.enrollmentDetails?.course,
@@ -155,14 +155,14 @@ export class StudentEnrollmentFormComponent {
     this.educationalDetailsForm.controls['highSchoolDocuments'].patchValue({
       rollNo: this.enrollmentDetails?.highSchoolRollNo,
       yearOfPassing:this.enrollmentDetails?.highSchoolYearOfPassing,
-        marksSheet: this.enrollmentDetails?.highSchoolMarksheet,
-        certificate: this.enrollmentDetails?.highSchoolCertificate 
+        marksSheet: this.enrollmentDetails?.highSchoolMarksheetPath,
+        certificate: this.enrollmentDetails?.highSchoolCertificatePath 
     })
     this.educationalDetailsForm.controls['intermediateDocuments'].patchValue({
       rollNo: this.enrollmentDetails?.intermediateRollNo,
       yearOfPassing:this.enrollmentDetails?.intermediateYearOfPassing,
-        marksSheet: this.enrollmentDetails?.intermediateMarksheet,
-        certificate: this.enrollmentDetails?.intermediateCertificate 
+        marksSheet: this.enrollmentDetails?.intermediateMarksheetPath,
+        certificate: this.enrollmentDetails?.intermediateCertificatePath
     })
   }
 
@@ -505,6 +505,7 @@ export class StudentEnrollmentFormComponent {
     getIntermediatePassedBoard() {
       this.baseService.getIntermediatePassedBoard().subscribe({
         next: (res) => {
+          console.log(res);
           this.intermediatePassedBoardList = res;
         }
       })
