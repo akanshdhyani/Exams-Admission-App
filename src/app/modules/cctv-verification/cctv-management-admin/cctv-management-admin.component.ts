@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { CctvVerificationService } from '../services/cctv-verification.service';
 import { Router, Routes } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { CctvApprovalPopupComponent } from '../dialogs/cctv-approval-popup/cctv-approval-popup.component';
+import { CctvApprovalPopupComponent } from '../../../shared/components/cctv-approval-popup/cctv-approval-popup.component';
 interface Course {
   value: string;
   viewValue: string;
