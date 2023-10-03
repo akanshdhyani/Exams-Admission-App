@@ -30,12 +30,12 @@ export class HttpService {
   };
   return this.http.get<Response>(requestParam.url, httpOptions).pipe(
     mergeMap((data: Response) => {
-      if (data.status && data.status !== 200) {
+      if (data.error && data.error) {
         return throwError(() => new Error(data.error));
       }
       const serverRes: ServerResponse ={
         statusInfo: {statusCode: 200, statusMessage: "success"},
-        responseData: data.body? data.body : data
+        responseData: data.result?.response? data.result.response : data
       }
       return observableOf(serverRes);
     }));
@@ -49,12 +49,30 @@ multipartPost(requestParam: RequestParam): Observable<any> {
   };
   return this.http.post<Response>(requestParam.url, requestParam.data, httpOptions).pipe(
     mergeMap((data: Response) => {
-      if (data.status && data.status !== 200) {
+      if (data.error && data.error) {
         return throwError(() => new Error(data.error));
       }
       const serverRes: ServerResponse ={
         statusInfo: {statusCode: 200, statusMessage: "success"},
-        responseData: data.body? data.body : data
+        responseData: data.result?.response? data.result.response : data
+      }
+      return observableOf(serverRes);
+    }));
+}
+
+multipartPut(requestParam: RequestParam): Observable<any> {
+  const httpOptions: HttpOptions = {
+    headers: requestParam.header,
+    params: requestParam.param
+  };
+  return this.http.put<Response>(requestParam.url, requestParam.data, httpOptions).pipe(
+    mergeMap((data: Response) => {
+      if (data.error && data.error) {
+        return throwError(() => new Error(data.error));
+      }
+      const serverRes: ServerResponse ={
+        statusInfo: {statusCode: 200, statusMessage: "success"},
+        responseData: data.result?.response? data.result.response : data
       }
       return observableOf(serverRes);
     }));
@@ -73,12 +91,12 @@ multipartPost(requestParam: RequestParam): Observable<any> {
     };
     return this.http.post<Response>(requestParam.url, requestParam.data, httpOptions).pipe(
       mergeMap((data: Response) => {
-        if (data.status && data.status !== 200) {
+        if (data.error && data.error) {
           return throwError(() => new Error(data.error));
         }
         const serverRes: ServerResponse ={
           statusInfo: {statusCode: 200, statusMessage: "success"},
-          responseData: data.body? data.body : data
+          responseData: data.result?.response? data.result.response : data
         }
         return observableOf(serverRes);
       }));
@@ -95,12 +113,12 @@ multipartPost(requestParam: RequestParam): Observable<any> {
     };
     return this.http.post<Response>(requestParam.url, requestParam.data, httpOptions).pipe(
       mergeMap((data: Response) => {
-        if (data.status && data.status !== 200) {
+        if (data.error && data.error) {
           return throwError(() => new Error(data.error));
         }
         const serverRes: ServerResponse ={
           statusInfo: {statusCode: 200, statusMessage: "success"},
-          responseData: data.body? data.body : data
+          responseData: data.result?.response? data.result.response : data
         }
         return observableOf(serverRes);
       }));
@@ -119,12 +137,12 @@ multipartPost(requestParam: RequestParam): Observable<any> {
     };
     return this.http.patch<Response>(requestParam.url, requestParam.data, httpOptions).pipe(
       mergeMap((data: Response) => {
-        if (data.status !== 200) {
+        if (data.error && data.error) {
           return throwError(() => new Error(data.error));
         }
         const serverRes: ServerResponse ={
           statusInfo: {statusCode: 200, statusMessage: "success"},
-          responseData: data.body
+          responseData: data.result?.response? data.result.response : data
         }
         return observableOf(serverRes);
       }));
@@ -142,12 +160,13 @@ multipartPost(requestParam: RequestParam): Observable<any> {
     };
     return this.http.delete<Response> (requestParam.url, httpOptions).pipe(
       mergeMap((data: Response) => {
-        if (data.status !== 200) {
+        console.log(data);
+        if (data.error && data.error) {
           return throwError(() => new Error(data.error));
         }
         const serverRes: ServerResponse ={
           statusInfo: {statusCode: 200, statusMessage: "success"},
-          responseData: data.body
+          responseData: data.result?.response? data.result.response : data
         }
         return observableOf(serverRes);
       }));
@@ -159,17 +178,18 @@ multipartPost(requestParam: RequestParam): Observable<any> {
  */
   put(requestParam: RequestParam): Observable<ServerResponse> {
     const httpOptions: HttpOptions = {
-      headers: requestParam.header,
+      headers: requestParam.header ? requestParam.header : this.getHeader(),
       params: requestParam.param,
+      body: requestParam.data
     };
     return this.http.put<Response>(requestParam.url, requestParam.data, httpOptions).pipe(
       mergeMap((data: Response) => {
-        if (data.status && data.status !== 200) {
+        if (data.error && data.error) {
           return throwError(() => new Error(data.error));
         }
         const serverRes: ServerResponse ={
           statusInfo: {statusCode: 200, statusMessage: "success"},
-          responseData: data.body? data.body : data
+          responseData: data.result?.response? data.result.response : data
         }
         return observableOf(serverRes);
       }));
