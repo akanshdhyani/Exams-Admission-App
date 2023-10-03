@@ -10,7 +10,7 @@
             <mat-form-field appearance="outline" class="feeManagementForms">
               <mat-select [formControl]="examCycleControl">
                   <ng-container *ngFor="let examCycle of examCycleList">
-                      <mat-option [value]="examCycle.value">{{examCycle.examName}}</mat-option>
+                      <mat-option [value]="examCycle.id">{{examCycle.examCycleName}}</mat-option>
                   </ng-container>
                   <mat-option style="display: none;" value="">Select here</mat-option>
               </mat-select>
@@ -23,8 +23,43 @@
         </div>
       </div>
     </div>
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-        <mat-tab label="Pending">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start"
+    (selectedTabChange)="tabChange($event)">
+      <ng-container *ngFor="let tab of tabs">
+        <mat-tab [label]="tabs.name">
+          <ng-template mat-tab-label>{{ tab.name }}</ng-template>
+          <app-shared-skeleton-loading [isLoading]="isDataLoading">
+          </app-shared-skeleton-loading>
+          <ng-container *ngIf="!isDataLoading">
+            <div>
+              <mat-form-field appearance="outline" class="feeManagementForms searchField mt2">
+                <mat-icon matPrefix class="search-icon">search</mat-icon>
+                <input matInput [(ngModel)]="searcControl" placeholder="Search" >
+              </mat-form-field>
+            </div>
+            <div>
+              <ng-container *ngIf="instituteesTableColumns.length > 0">
+                <app-shared-table 
+                  [tableColumns]="instituteesTableColumns" 
+                  [tableData]="instituteesTableData" 
+                  [isHallTicket]="true" 
+                  [removeTbodyColor]="true" 
+                  [isPageable]="true" 
+                  [length]="instituteesTableData?.length"
+                  [hidePageSize]="false"
+                  [showPageSizeOptions]="true"
+                  [showFirstLastButtons]="true"
+                  [pageIndex]="pageIndex"
+                  [isServerSideSorting]="false"
+                  [isServerSidePagination]="false"
+                  (rowAction)="updateInstituteCCTVStatus($event)"
+                ></app-shared-table>
+              </ng-container>
+            </div>
+          </ng-container>
+        </mat-tab>
+      </ng-container>
+        <!-- <mat-tab label="Pending">
           <div>
             <mat-form-field appearance="outline" class="feeManagementForms searchField mt2">
               <mat-icon matPrefix class="search-icon">search</mat-icon>
@@ -38,7 +73,7 @@
               [isHallTicket]="true" 
               [removeTbodyColor]="true" 
               [isPageable]="true" 
-              (rowAction)="approveOrReject($event)"
+              (rowAction)="ApproveOrRejectInstituteCCTV($event)"
             ></app-shared-table>
           </div>
         </mat-tab>
@@ -56,7 +91,7 @@
               [isHallTicket]="true" 
               [removeTbodyColor]="true" 
               [isPageable]="true" 
-              (rowAction)="rejectCCTV($event)"
+              (rowAction)="RejectInstituteCCTV($event)"
             ></app-shared-table>
           </div>
         </mat-tab>
@@ -77,7 +112,7 @@
               (rowAction)="assignAlternateInstitute($event)"
             ></app-shared-table>
           </div>
-        </mat-tab>
+        </mat-tab> -->
     </mat-tab-group>
-   
+
   </div>

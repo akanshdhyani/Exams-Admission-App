@@ -13,6 +13,20 @@ export const Tabs = {
             id: 4,
             name: 'Closed'
         }
+    ],
+    'CCTV_Management': [
+        {
+            id: 1,
+            name: 'Pending'
+        },
+        {
+            id: 2,
+            name: 'Verified'
+        },
+        {
+            id: 3,
+            name: 'Rejected'
+        },
     ]
 
 }

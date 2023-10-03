@@ -36,8 +36,8 @@ export class UserProfileComponent {
       lastName: new FormControl('', Validators.required),
       emailId: new FormControl('', [Validators.required, Validators.email]),
       phoneNumber: new FormControl('', Validators.required),
-      // role: new FormControl('', Validators.required),
-      // activeStatus: new FormControl('', Validators.required)
+      role: new FormControl('', Validators.required),
+      activeStatus: new FormControl('', Validators.required)
     })
   }
 

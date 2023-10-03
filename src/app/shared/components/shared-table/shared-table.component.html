@@ -156,19 +156,21 @@
                             *ngIf="disCol?.hasStyle else styleLessActionCell">
                             <div [ngSwitch]="disCol?.cell(element)">
                                 <a *ngSwitchCase="'View & Download'" mat-button [ngStyle]="{'color':'green'}"
-                                (click)="emitCellClickAction(element)" >{{ disCol?.cell(element) }}</a>
+                                (click)="emitCellClickAction(element, disCol?.columnDef)" >{{ disCol?.cell(element) }}</a>
 
                                 <a *ngSwitchCase="'View & Delete'" mat-button [ngStyle]="{'color':'green'}"
-                                (click)="emitCellClickAction(element)" >{{ disCol?.cell(element) }}</a>
+                                (click)="emitCellClickAction(element, disCol?.columnDef)" >{{ disCol?.cell(element) }}</a>
     
                                 <a *ngSwitchCase="'Upload'" mat-button [ngStyle]=" {'color':'blue'}"
-                                (click)="emitCellClickAction(element)" >{{ disCol?.cell(element) }}</a>
+                                (click)="emitCellClickAction(element, disCol?.columnDef)" >{{ disCol?.cell(element) }}</a>
     
                                 <a *ngSwitchCase="'Publish'" mat-button [ngStyle]=" {'color':'blue'}"
-                                (click)="emitCellClickAction(element)" >{{ disCol?.cell(element) }}</a>
+                                (click)="emitCellClickAction(element, disCol?.columnDef)" >{{ disCol?.cell(element) }}</a>
     
                                 <span *ngSwitchCase="'Pending'" mat-button [ngStyle]=" {'color':'orange'}"
-                                (click)="emitCellClickAction(element)" >{{ disCol?.cell(element) }}</span>
+                                (click)="emitCellClickAction(element, disCol?.columnDef)" >{{ disCol?.cell(element) }}</span>
+                                <!-- <a *ngSwitchCase="'Pending'" mat-button [ngStyle]=" {'color':'orange'}"
+                                (click)="emitCellClickAction(element, disCol?.columnDef)" >{{ disCol?.cell(element) }}</a> -->
                                 </div>
                         
                         </ng-container>

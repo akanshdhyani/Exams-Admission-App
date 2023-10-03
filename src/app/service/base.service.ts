@@ -32,6 +32,109 @@ export class BaseService extends HttpService {
     this.token = this.cookieService.get('access_token');
   }
   
+  //#region (common apis)
+  getExamCycleList$() {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_MANAGEMENT.GET_EXAM_CYCLE_LIST,
+      data: {},
+    }
+    return this.get(requestParam);
+  }
+
+  getAllInstitutesList$() {
+    const response = {
+      "result": {
+        "response": [
+            {
+                "institute": {
+                    "allowedForExamCentre": false,
+                    "courses": [
+                        {
+                            "course_id": 3,
+                            "courseName": "MSc in Nursing",
+                            "seatCapacity": 30,
+                            "courseCode": "GNM102",
+                            "description": "MSc in Nursing"
+                        },
+                        {
+                            "course_id": 2,
+                            "courseName": "GNM",
+                            "seatCapacity": 10,
+                            "courseCode": "GNM101",
+                            "description": "General Nursing and Midwifery"
+                        }
+                    ],
+                    "address": "abc",
+                    "district": "Bhopal",
+                    "instituteCode": "121",
+                    "ipAddress": "2654789",
+                    "instituteId": 1,
+                    "cctvVerified": false,
+                    "email": "abc@gmail.com",
+                    "remarks": "abcd",
+                    "instituteName": "RGPV"
+                }
+            },
+            {
+                "institute": {
+                    "allowedForExamCentre": true,
+                    "courses": [
+                        {
+                            "course_id": 3,
+                            "courseName": "MSc in Nursing",
+                            "seatCapacity": 20,
+                            "courseCode": "GNM102",
+                            "description": "MSc in Nursing"
+                        },
+                        {
+                            "course_id": 2,
+                            "courseName": "GNM",
+                            "seatCapacity": 10,
+                            "courseCode": "GNM101",
+                            "description": "General Nursing and Midwifery"
+                        }
+                    ],
+                    "address": "Victoria Hospital Campus, Thyagi M Palanivelu Rd, Bengaluru, Karnataka 560002",
+                    "district": "Bengaluru",
+                    "instituteCode": "122",
+                    "ipAddress": "26704342",
+                    "instituteId": 2,
+                    "cctvVerified": true,
+                    "email": "abcd@gmail.com",
+                    "remarks": "abc",
+                    "instituteName": "Bangalore Medical College and Research Institute"
+                }
+            },
+            {
+                "institute": {
+                    "allowedForExamCentre": false,
+                    "courses": [
+                        {
+                            "course_id": 2,
+                            "courseName": "GNM",
+                            "seatCapacity": 50,
+                            "courseCode": "GNM101",
+                            "description": "General Nursing and Midwifery"
+                        }
+                    ],
+                    "address": "XHHG+3W5, 5th Main Rd, Gandhi Nagar, Bengaluru, Karnataka 560009",
+                    "district": "lucknow",
+                    "instituteCode": "123",
+                    "ipAddress": "560009",
+                    "instituteId": 3,
+                    "cctvVerified": true,
+                    "email": "abcde@gmail.com",
+                    "remarks": "abcde",
+                    "instituteName": "Sri Laxmi gnm Nursing College"
+                }
+            }
+        ],
+      }
+    }
+    return response
+  }
+  //#endregion
+
 
   getHallTickets$(): Observable<any> {
     // return this.httpClient.get<any>("https://api.agify.io/?name=meelad");
@@ -100,7 +203,7 @@ export class BaseService extends HttpService {
     return of([])
   }
 
-  getInstitutesData$(): Observable<any> {
+  getInstitutesResultData$(): Observable<any> {
     // return this.httpClient.get<any>("https://api.agify.io/?name=meelad");
 
     return of(  [
@@ -135,6 +238,62 @@ export class BaseService extends HttpService {
    
     ])
   }
+  getStudentResultData$():Observable<any>{
+    return of(
+      [
+        {
+          studentName: 'Devaprathap Nagendra',
+          courseName: 'XXXX',
+          exams: 'Exam 1',
+          internalMarks: '45',
+          
+        },
+        {
+          studentName: 'Madison',
+          courseName: 'XXXX',
+          exams: 'Exam 1',
+          internalMarks: '48',
+          
+        },
+        {
+          studentName: 'Ravi',
+          courseName: 'XXXX',
+          exams: 'Exam 1',
+          internalMarks: '47',
+          
+        },
+        {
+          studentName: 'Kanaka Rao',
+          courseName: 'XXXX',
+          exams: 'Exam 1',
+          internalMarks: '49',
+          
+        },
+        {
+          studentName: 'Arun',
+          courseName: 'XXXX',
+          exams: 'Exam 1',
+          internalMarks: '49',
+          
+        },
+        {
+          studentName: 'Aman',
+          courseName: 'XXXX',
+          exams: 'Exam 1',
+          internalMarks: '45',
+          
+        },
+        {
+          studentName: 'Devaprathap N.',
+          courseName: 'XXXX',
+          exams: 'Exam 1',
+          internalMarks: '44',
+          
+        },
+    
+   
+      ])
+    }
 
   getUserData$(): Observable<any>{
     return of([
@@ -167,9 +326,314 @@ export class BaseService extends HttpService {
   ])
   }
 
+  getInstituteFeeTableData$(): Observable<any>{
+    return of([
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '10',
+        paidStudentsCount: '10',
+        totalFeePaid: '10000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      },
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '25',
+        paidStudentsCount: '25',
+        totalFeePaid: '25000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      },
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '30',
+        paidStudentsCount: '28',
+        totalFeePaid: '28000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      },
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '50',
+        paidStudentsCount: '40',
+        totalFeePaid: '40000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      },
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '30',
+        paidStudentsCount: '20',
+        totalFeePaid: '28000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      },
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '25',
+        paidStudentsCount: '25',
+        totalFeePaid: '25000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      },
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '10',
+        paidStudentsCount: '10',
+        totalFeePaid: '10000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      },
+      {
+        instituteName: 'NEW COLLEGE OF NURSING',
+        courseName: 'xxxx',
+        instituteCode: 'xxxx',
+        registerStudentsCount: '25',
+        paidStudentsCount: '25',
+        totalFeePaid: '25000',
+        viewList: 'View list',
+        hasStyle: true,
+        cellStyle: {
+          viewList: {
+            'color': '#0074B6'
+          },
+        }
+      }
+    ])
+  }
+  getStudentFeeTableData$(): Observable<any>{
+    return of([
+      {
+        studentName: '',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam ',
+        numberOfExams: '',
+        fee: '000',
+        status: 'Paid',
+        hasStyle: true,
+        cellStyle: {
+          status: {
+            'color': '#1D8923'
+          },
+        }
+      },
+      {
+        studentName: 'Madison Tran',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam 1,Exam 2,Exam 3 ',
+        numberOfExams: '3',
+        fee: '3000',
+        status: 'Paid',
+        hasStyle: true,
+        cellStyle: {
+          status: {
+            'color': '#1D8923'
+          },
+        }
+      },
+      {
+        studentName: 'Raci Verma',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam 2',
+        numberOfExams: '1',
+        fee: '1000',
+        status: 'Paid',
+        hasStyle: true,
+        cellStyle: {
+          status: {
+            'color': '#1D8923'
+          },
+        }
+      },
+      {
+        studentName: 'Sumalatha Krishna',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam 3',
+        numberOfExams: '1',
+        fee: '1000',
+        status: 'Paid',
+        hasStyle: true,
+        cellStyle: {
+          status: {
+            'color': '#1D8923'
+          },
+        }
+      },
+      {
+        studentName: 'Kanaka Rao',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam 1,Exam 2',
+        numberOfExams: '2',
+        fee: '2000',
+        status: 'Paid',
+        hasStyle: true,
+        cellStyle: {
+          status: {
+            'color': '#1D8923'
+          },
+        }
+      },
+      {
+        studentName: 'Ravi Verma',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam 2',
+        numberOfExams: '1',
+        fee: '1000',
+        status: 'Paid',
+        hasStyle: true,
+        cellStyle: {
+          status: {
+            'color': '#1D8923'
+          },
+        }
+      }
+    ])
+  }
+  getMarksForDashboard$(): Observable<any>{
+    return of(
+      [
+        {
+          examName: 'Anatomy',
+          totalMarks: 100,
+          passingMarks: 40,
+          totalAttempts: 96,
+          failedAttempts: 12,
+          passedAttempts: 84,
+          passPercentage: 88,
+          maximumMarks: 96,
+          minimumMarks: 16,
+          avgMarks: 62,
+          standardDeviation: 15,
+  
+        },
+        {
+          examName: 'Physiology',
+          totalMarks: 100,
+          passingMarks: 40,
+          totalAttempts: 96,
+          failedAttempts: 12,
+          passedAttempts: 84,
+          passPercentage: 88,
+          maximumMarks: 96,
+          minimumMarks: 16,
+          avgMarks: 62,
+          standardDeviation: 15,
+        },
+        {
+          examName: 'Biochemistry',
+          totalMarks: 100,
+          passingMarks: 40,
+          totalAttempts: 96,
+          failedAttempts: 12,
+          passedAttempts: 84,
+          passPercentage: 88,
+          maximumMarks: 96,
+          minimumMarks: 16,
+          avgMarks: 62,
+          standardDeviation: 15,
+        },
+        {
+          examName: 'Pathology',
+          totalMarks: 100,
+          passingMarks: 40,
+          totalAttempts: 96,
+          failedAttempts: 12,
+          passedAttempts: 84,
+          passPercentage: 88,
+          maximumMarks: 96,
+          minimumMarks: 16,
+          avgMarks: 62,
+          standardDeviation: 15,
+        },
+        {
+          examName: 'Microbiology',
+          totalMarks: 100,
+          passingMarks: 40,
+          totalAttempts: 96,
+          failedAttempts: 12,
+          passedAttempts: 84,
+          passPercentage: 88,
+          maximumMarks: 96,
+          minimumMarks: 16,
+          avgMarks: 62,
+          standardDeviation: 15,
+        },
+        {
+          examName: 'Aggregate',
+          totalMarks: 'NA',
+          passingMarks: 'NA',
+          totalAttempts: 480,
+          failedAttempts: 60,
+          passedAttempts: 420,
+          passPercentage: 88,
+          maximumMarks: 96,
+          minimumMarks: 16,
+          avgMarks: 62,
+          standardDeviation: 15,
+        },
+      ]
+    )
+  }
+
   setUserData(userData:any){
     this.userData.next(userData)
   }
+
 
   getAllCourses$(): Observable<any> {
     const requestParam: RequestParam = {
@@ -179,6 +643,7 @@ export class BaseService extends HttpService {
     return this.get(requestParam);
   }
 
+  
 
   /**************************** exam services ****************************/
   getExamCycleList() {
@@ -246,6 +711,40 @@ getEnrollmentList(request: any) {
   }
   return this.get(requestParam);
 }
+
+/** verify student(Approve/reject) */
+
+  //#region (CCTV management admin) 
+  updateCCTVstatus$(request: any) {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.UPDATE_CCTV_STATUS,
+      data: request,
+    }
+    return this.put(requestParam);
+  }
+
+  assignAlternateExamCenter$(request: any) {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.ASSIGN_ALTERNATE_EXAM_CENTER,
+      data: request,
+    }
+    return this.put(requestParam);
+  }
+
+  getNearestInstitutesList(formBody: any) {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.VERIFIED_EXAM_CENTERS,
+      data: formBody,
+    }
+    return this.get(requestParam);
+  }
+  //#endregion
+
+  //#region (track dispatches)
+  getExams$() {}
+  //#endregion
+
+  
 
 getInstituteById(id: string | number) {
   const requestParam: RequestParam = {

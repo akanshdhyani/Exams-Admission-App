@@ -44,14 +44,18 @@ export class CctvApprovalPopupComponent {
   buttonClicked(type: string) {
     if (type === 'close') {
       this.dialogRef.close()
-    } else if (type === 'submit') {
-      this.submit()
+    } else {
+      this.submit(type)
     }
   }
 
-  submit() {
+  submit(type: string) {
     if (this.dynamicFormGroup.valid) {
-      this.dialogRef.close(this.dynamicFormGroup.value)
+      const data = {
+        form: this.dynamicFormGroup.value,
+        type: type,
+      }
+      this.dialogRef.close(data)
     }
   }
 }
