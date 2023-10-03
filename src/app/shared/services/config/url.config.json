@@ -14,19 +14,26 @@
             "CREATE": "/v1/students/add",
             "GET_DETAILS_BY_ID": "/v1/students",
             "FIND_ENROLLMENT_BY_FILTER": "/v1/students/find",
-            "GET_INSTITUTE_BY_ID": "/v1/admin/institutes"
+            "GET_INSTITUTE_BY_ID": "/v1/admin/institutes",
+            "GET_INTERMEDIATE_SUBJECT_LIST": "/v1/admin/subject/list", 
+            "VERIFY_STUDENT":"/v1/students"
         }, 
         "EXAM_MANAGEMENT": {
             "GET_EXAM_CYCLE_LIST": "/v1/admin/examCycle/list", 
             "CREATE_EXAM_CYCLE": "/v1/admin/examCycle/create",
             "CREATE_EXAM": "/v1/admin/examCycle",
-            "EXAM_CYCLE_BULK_UPLOAD": "/v1/admin/examCycle/bulkUpload"
+            "EXAM_CYCLE_BULK_UPLOAD": "/v1/admin/examCycle/bulkUpload",
+            "GET_EXAM_CYCLE_BY_ID": "/v1/admin/examCycle",
+            "DELETE_EXAM_CYCLE": "/v1/admin/examCycle/delete"
         },
         "EXAM_STUDENT_REGISTRATION": {
             "GET_BY_EXAM_CYCLE":"v1/studentExamRegistration"
         },
         "COURSE": {
             "GET_ALL": "/v1/admin/courses/list"
+        },
+        "INSTITUTE_COURSE_MAPPING": {
+            "GET_ALL_INSTITUTE_COURSE_MAPPING": "/v1/admin/instituteCourseMap/all"
         },
         "EXAM_CENTER": {
             "UPDATE_CCTV_STATUS": "/api/v1/admin/updateCctvStatus",
