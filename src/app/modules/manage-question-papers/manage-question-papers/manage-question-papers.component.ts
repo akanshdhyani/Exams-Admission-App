@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,6 +24,9 @@ export class ManageQuestionPapersComponent {
    listOfFiles: any[] = [];
    files: any[] = [];
 
+   isDataLoading: boolean = false;
+   questionPapersList: QuestionPaper[] = [];
+
   constructor(
     private baseService: BaseService,
     private dialog: MatDialog,
@@ -31,86 +35,30 @@ export class ManageQuestionPapersComponent {
     this.loggedInUserRole = this.authService.getUserRoles()[0];
     this.userData = this.authService.getUserRepresentation();
   }
-  questionPapersList: QuestionPaper[] = [
-    {
 
-      examId: 1,
-      courseName: 'One',
-      examDate: 'One',
-      examStartTime: '10.00 A.M.',
-      marks: '100',
-      examName: 'msc Nursing (Exam 1)',
-      questionPaperList: [
-        {
-          id: 1234,
-          name: 'Question paper set 1'
-        },
-        {
-          id: 1234,
-          name: 'Question paper set 2'
-        }
-      ]
-    },
-    {
-      examId: 1,
-      courseName: 'Two',
-      examDate: 'Some date',
-      marks: '100',
-      examStartTime: '12.00 A.M.',
-      examName: 'msc Nursing (Exam 2)',
-      questionPaperList: [
-        {
-          id: 1234,
-          name: 'Question paper set 1'
-        },
-        {
-          id: 1234,
-          name: 'Question paper set 2'
-        }
-      ]
+  ngOnInit(): void {
+    this.getQuestionPapersList()
+  }
 
-    },
-    {
-      examId: 1,
-      courseName: 'Three',
-      examDate: 'Some date',
-      examStartTime: '10.00 A.M.',
-      marks: '100',
-      examName: 'msc Nursing (Exam 3)',
-      questionPaperList: [
-        {
-          id: 1234,
-          name: 'Question paper set 1'
-        },
-        {
-          id: 1234,
-          name: 'Question paper set 2'
-        }
-      ]
+  getQuestionPapersList() {
+    this.isDataLoading = true;
+    this.baseService.getExamsAndQuestionPapersList$().subscribe({
+      next:(res:any)=>{
+        console.log(res)
+        this.questionPapersList = res;
+        setTimeout(() => {
+          this.isDataLoading = false;
+        }, 1000);
 
-    },
-    {
+      },
+      error: (error: HttpErrorResponse) => {
+        this.isDataLoading = false;
+        console.log(error)
+      }
 
-      examId: 1,
-      courseName: 'Four',
-      examDate: 'Some date',
-      examStartTime: '10.00 A.M.',
-      marks: '100',
-      examName: 'msc Nursing (Exam 4)',
-      questionPaperList: [
-        {
-          id: 1234,
-          name: 'Question paper set 1'
-        },
-        {
-          id: 1234,
-          name: 'Question paper set 2'
-        }
-      ]
+    })  
+  } 
 
-    },
-
-  ]
   breadcrumbItems = [
     { label: 'Manage Question Paper', url: '' },
   ]

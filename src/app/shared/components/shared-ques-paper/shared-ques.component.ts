@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { QuestionPaper } from 'src/app/interfaces/interfaces';
-import { Router } from '@angular/router';
 import { FormControl,  Validators } from '@angular/forms';
 import { AuthServiceService } from 'src/app/core/services';
 
@@ -18,10 +17,14 @@ export class SharedQuestionPaperComponent {
   @Input() examCycleList : string[] ;
   @Input() examCycleControl: FormControl;
   @Input() questionPapersList : QuestionPaper[];
+  @Input() showCardDetails : Boolean;
 
   @Output() viewRegdStdnts: EventEmitter<any> = new EventEmitter<any>();//view regd students
   @Output() addNewStdnts: EventEmitter<any> = new EventEmitter<any>();//add new students
   @Output() uploadQuesPaper: EventEmitter<any> = new EventEmitter<any>();//upload ques paper
+  @Output() viewQuestionPaper: EventEmitter<any> = new EventEmitter<any>();//view ques paper
+  @Output() downloadQuestionPaper: EventEmitter<any> = new EventEmitter<any>();//download ques paper
+  
   loggedInUserRole: string;
   ngOnInit(): void {
     this.loggedInUserRole = this.authService.getUserRoles()[0];
@@ -55,5 +58,15 @@ export class SharedQuestionPaperComponent {
       this.uploadQuesPaper.emit(event);
     }
   }
+
+  emitViewQuestionPaper(event: QuestionPaper) {
+  
+    this.viewQuestionPaper.emit(event);
+   // console.log(this.viewQuestionPaper)
+  }
+
+  emitDownloadQuestionPaper(event: QuestionPaper) {
+    this.downloadQuestionPaper.emit(event);
+}
 
 }
