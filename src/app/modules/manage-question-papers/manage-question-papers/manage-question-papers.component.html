@@ -6,6 +6,9 @@
 
   <app-shared-ques-paper [examCycleList]="examCycleList" [examCycleControl]="examCycleControl"
   [questionPapersList]="questionPapersList" [showCardDetails]=true
+  (viewQuestionPaper)="viewQuestionPapers($event)"
+  (downloadQuestionPaper)="downloadQuestionPaper($event)"
+  [showCardDetails]=true
   (uploadQuesPaper)="onUploadQuesPaper($event)">
   
 </app-shared-ques-paper>

@@ -10,9 +10,10 @@
         </mat-card >
 
         <app-shared-ques-paper
+        [examCycleControl]="examCycleControl"
          [examCycleList]="examCycleList" 
         [questionPapersList]="examDetails" 
-        (viewQuestionPaper)="viewQuestionPaperrrrrr($event)"
+        (viewQuestionPaper)="viewQuestionPapers($event)"
         (downloadQuestionPaper)="downloadQuestionPaper($event)"
         [showCardDetails]=true
         >

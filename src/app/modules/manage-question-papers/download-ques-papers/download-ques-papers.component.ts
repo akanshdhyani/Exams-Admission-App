@@ -11,91 +11,20 @@ import { BaseService } from 'src/app/service/base.service';
 export class DownloadQuesPapersComponent {
   selectedExamCycleId: any;
   cctvVerificationStatus = 'Verified'
+  examDetails: any[] = [];
   constructor(
     private baseService: BaseService,
   ) {
-
+  }
+  ngOnInit() {
+    this.baseService.getExamsAndQuestionPapersList$().subscribe({
+      next: (res) => {
+        this.examDetails = res;
+      }
+    });
   }
   examCycleControl = new FormControl();
   examCycleList: string[] = ['examCycle1', 'examCycle2', 'examCycle3'];
-
-  examDetails: QuestionPaper[] = [
-    {
-      examId:2,
-      courseName: 'One',
-      examDate: 'One',
-      examStartTime: '10.00 A.M.',
-      marks: '100',
-      examName: 'msc Nursing (Exam 1)',
-      questionPaperList: [
-        {
-          id: 1234,
-          name: 'Question paper set 1'
-        },
-        {
-          id: 1234,
-          name: 'Question paper set 2'
-        }
-      ]
-    },
-    {
-      examId:2,
-      courseName: 'Two',
-      examDate: 'Some date',
-      marks: '100',
-      examStartTime: '12.00 A.M.',
-      examName: 'msc Nursing (Exam 2)',
-      questionPaperList: [
-        {
-          id: 1234,
-          name: 'Question paper set 1'
-        },
-        {
-          id: 1234,
-          name: 'Question paper set 2'
-        }
-      ]
-    },
-    {
-      examId:2,
-      courseName: 'Three',
-      examDate: 'Some date',
-      examStartTime: '10.00 A.M.',
-      marks: '100',
-      examName: 'msc Nursing (Exam 3)',
-      questionPaperList: [
-        {
-          id: 1234,
-          name: 'Question paper set 1'
-        },
-        {
-          id: 1234,
-          name: 'Question paper set 2'
-        }
-      ]
-
-    },
-    {
-      examId:2,
-      courseName: 'Four',
-      examDate: 'Some date',
-      examStartTime: '10.00 A.M.',
-      marks: '100',
-      examName: 'msc Nursing (Exam 4)',
-      questionPaperList: [
-        {
-          id: 1234,
-          name: 'Question paper set 1'
-        },
-        {
-          id: 1234,
-          name: 'Question paper set 2'
-        }
-      ]
-
-    },
-
-  ]
   breadcrumbItems = [
     {label: 'Download Question Papers', url: ''}
   ]
@@ -126,7 +55,7 @@ export class DownloadQuesPapersComponent {
     })
   }
 
-  viewQuestionPaperrrrrr(questionPaperId: any) {
+  viewQuestionPapers(questionPaperId: any) {
     console.log("viewQuestionPaper questionPaperId",questionPaperId)
     this.baseService.getQuestionPaperPreviewUrl(questionPaperId).subscribe({
       next: (response) => {

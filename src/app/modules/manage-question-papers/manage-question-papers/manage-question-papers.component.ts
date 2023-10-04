@@ -139,4 +139,28 @@ export class ManageQuestionPapersComponent {
       })
     }
   }
+
+  downloadQuestionPaper(questionPaperId: any) {
+    this.baseService.downloadQuestionPaper(questionPaperId).subscribe({
+      next: (response) => {
+        console.log("Download question paper response", response);
+      },
+      error: (error) => {
+        console.log("Download question paper error", error);
+      }
+    });
+  }
+
+  viewQuestionPapers(questionPaperId: any) {
+    console.log(questionPaperId);
+    console.log("viewQuestionPaper questionPaperId",questionPaperId)
+    this.baseService.getQuestionPaperPreviewUrl(questionPaperId).subscribe({
+      next: (response) => {
+        console.log("question paper preview url response", response);
+      },
+      error: (error) => {
+        console.log("question paper preview url error", error);
+      }
+    });
+  }
 }
