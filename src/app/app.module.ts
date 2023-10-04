@@ -44,7 +44,7 @@ import { UserModuleModule } from './modules/user-module/user-module.module';
     FeeManagementModule,
     ManageExamsModule,
     ManageHallTicketsModule,
-    ManageQuestionPapersModule,
+    // ManageQuestionPapersModule,
     ManageResultsModule,
     StudentEnrollmentModule,
     TrackDispatchesModule,

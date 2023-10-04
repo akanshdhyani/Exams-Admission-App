@@ -9,21 +9,29 @@
             <span [ngClass]="{'verified': cctvVerificationStatus === 'Verified'}">CCTV Verification Status: {{cctvVerificationStatus}}</span>
         </mat-card >
 
-        <span>
+        <app-shared-ques-paper
+         [examCycleList]="examCycleList" 
+        [questionPapersList]="examDetails" 
+        (viewQuestionPaper)="viewQuestionPaperrrrrr($event)"
+        (downloadQuestionPaper)="downloadQuestionPaper($event)"
+        [showCardDetails]=true
+        >
+        
+      </app-shared-ques-paper>
+
+     <!--    <span>
             Exam cycle
 
         </span>
         <div>
             <mat-form-field appearance="outline">
                 <mat-label>Select here</mat-label>
-                <!--     <input matInput placeholder="" formControlName="state"> -->
                 <mat-select (selectionChange)="examCycleSelected($event)">
                     <span *ngFor='let examCycle of examCycleList;'>
                         <mat-option [value]="examCycle">{{examCycle}}</mat-option>
                     </span>
                 </mat-select>
-                <!--   <mat-error *ngIf="newRegCertDetailsformGroup.controls['credType'].invalid">
-        </mat-error> -->
+              
             </mat-form-field>
         </div>
 
@@ -108,7 +116,7 @@
                 </p>
             </mat-card-content>
 
-        </mat-card>
+        </mat-card> -->
 
 
     </div>

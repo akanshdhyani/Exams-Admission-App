@@ -4,6 +4,7 @@ import { BaseService } from '../../../service/base.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatTabGroup } from '@angular/material/tabs';
 import { Router } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-manage-hall-tickets-admin-list',
   templateUrl: './manage-hall-tickets-admin-list.component.html',
@@ -42,8 +43,11 @@ export class ManageHallTicketsAdminListComponent {
   }
 
 
-
-
+  hallTicketControl = new FormControl('',[Validators.required]);
+  courseControl = new FormControl('',[Validators.required]);
+  examCycleControl = new FormControl('',[Validators.required]);
+  instituteControl = new FormControl('',[Validators.required]);
+  
   initializeTableColumns(): void {
 
     this.pendingHallTicketsTableColumns = [
@@ -58,19 +62,19 @@ export class ManageHallTicketsAdminListComponent {
         },
       },
       {
-        columnDef: 'name',
-        header: 'Name',
+        columnDef: 'studentName',
+        header: 'Student Name',
         isSortable: true,
-        cell: (element: Record<string, any>) => `${element['name']}`,
+        cell: (element: Record<string, any>) => `${element['studentName']}`,
         cellStyle: {
           'background-color': '#0000000a', 'width': '160px', 'color': '#00000099'
         },
       },
       {
-        columnDef: 'course',
-        header: 'Course',
+        columnDef: 'courseName',
+        header: 'Course Name',
         isSortable: true,
-        cell: (element: Record<string, any>) => `${element['course']}`,
+        cell: (element: Record<string, any>) => `${element['courseName']}`,
         cellStyle: {
           'background-color': '#0000000a', 'width': '160px', 'color': '#00000099'
         },
@@ -85,7 +89,7 @@ export class ManageHallTicketsAdminListComponent {
       },
       {
         columnDef: 'rollNo',
-        header: 'Roll No',
+        header: 'Roll Number',
         isSortable: true,
         cell: (element: Record<string, any>) => `${element['rollNo']}`,
         cellStyle: {
@@ -95,7 +99,7 @@ export class ManageHallTicketsAdminListComponent {
       },
       {
         columnDef: 'attendancePercentage',
-        header: 'Attendance',
+        header: 'Attendance(%)',
         isSortable: false,
         isLink: true,
         cell: (element: Record<string, any>) => `${element['attendancePercentage']}`,
@@ -131,19 +135,19 @@ export class ManageHallTicketsAdminListComponent {
 
     this.generatedHallTicketsTableColumns = [
       {
-        columnDef: 'name',
-        header: 'Name',
+        columnDef: 'studentName',
+        header: 'Student Name',
         isSortable: true,
-        cell: (element: Record<string, any>) => `${element['name']}`,
+        cell: (element: Record<string, any>) => `${element['studentName']}`,
         cellStyle: {
           'background-color': '#0000000a', 'width': '180px', 'color': '#00000099'
         },
       },
       {
-        columnDef: 'course',
-        header: 'Course',
+        columnDef: 'courseName',
+        header: 'Course Name',
         isSortable: true,
-        cell: (element: Record<string, any>) => `${element['course']}`,
+        cell: (element: Record<string, any>) => `${element['courseName']}`,
         cellStyle: {
           'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
         },
@@ -158,7 +162,7 @@ export class ManageHallTicketsAdminListComponent {
       },
       {
         columnDef: 'rollNo',
-        header: 'Roll No',
+        header: 'Roll Number',
         isSortable: true,
         cell: (element: Record<string, any>) => `${element['rollNo']}`,
         cellStyle: {
@@ -168,12 +172,12 @@ export class ManageHallTicketsAdminListComponent {
       },
       {
         columnDef: 'attendancePercentage',
-        header: 'Attendance',
+        header: 'Attendance(%)',
         isSortable: false,
         isLink: true,
         cell: (element: Record<string, any>) => `${element['attendancePercentage']}`,
         cellStyle: {
-          'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
+          'background-color': '#0000000a', 'width': '160px', 'color': '#00000099'
         },
       },
       {
@@ -215,10 +219,10 @@ export class ManageHallTicketsAdminListComponent {
   initializePageData() {
     this.halltickets = [
       {
-        value: 'new hall ticket', viewValue: "New Hall Tikcet"
+        value: 'new_hall_ticket', viewValue: "New Hall Tikcet"
       },
       {
-        value: 'modification hall ticket', viewValue: "Modification Hall Ticket"
+        value: 'modification_hall_ticket', viewValue: "Modification Hall Ticket"
 
       }
     ]

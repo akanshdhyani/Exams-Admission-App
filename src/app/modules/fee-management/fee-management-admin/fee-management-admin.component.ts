@@ -25,6 +25,13 @@ export class FeeManagementAdminComponent implements OnInit {
   showInstitutesTable = true;
   instituteTableHeader: TableColumn[] = [];
   studentExamsTableHeader: TableColumn[] = [];
+  courses: Course[] = [
+    {value: 'bsc', viewValue: 'BSc'},
+    {value: 'msc', viewValue: 'MSc'},
+  ];
+
+  examCycleList = []
+
 
   breadcrumbItems = [
     { label: 'Fee Management', url: '' },
@@ -50,24 +57,6 @@ export class FeeManagementAdminComponent implements OnInit {
     this.initializeStudentColumns();
     this.studentExamsTableData();
   }
-
-  courses: Course[] = [
-    {value: 'bsc', viewValue: 'BSc'},
-    {value: 'msc', viewValue: 'MSc'},
-  ];
-
-  examCycleList = [
-    {
-      examName: 'Exam Cycle 1',
-      value: '1'
-    },{
-      examName: 'Exam Cycle 2',
-      value: '2'
-    },{
-      examName: 'Exam Cycle 3',
-      value: '3'
-    },
-  ]
 
   initializeColumns():void{
     this.instituteTableHeader = [];

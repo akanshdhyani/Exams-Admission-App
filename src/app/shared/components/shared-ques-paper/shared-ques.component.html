@@ -25,12 +25,26 @@
         </div>
 
         <mat-card style="margin-top: 38px;" *ngFor="let questionPpr of questionPapersList">
-           
+           <div style="display: flex; flex-direction: row-reverse; justify-content: space-between;">
             <mat-card-content>
                 <ng-container *ngIf="loggedInUserRole ==='exams_admin' ; else instituteRole">
                     <div class="button-group">
-                        <button class="button" mat-raised-button color="primary" (click)="emitUploadQuesPaper(questionPpr)">Upload
-                            Question Paper</button>
+                        <button class="button" mat-raised-button color="primary">
+                            <label for="fileUpload1" class="custom-file-upload">
+                                <a>Upload Question Paper</a>
+                              </label>
+                        </button>
+                        <span class="error" style="color: red;">{{ fileUploadError }}</span>
+  
+              <input
+                id="fileUpload1"
+                type="file"
+                style="display: none"
+                enctype="multipart/form-data"
+                (change)="emitUploadQuesPaper(questionPpr)"
+                multiple="true"
+                accept=".pdf"
+              />
                     </div>
                 </ng-container>
                 <ng-template #instituteRole>
@@ -51,6 +65,7 @@
 
                 </mat-card-content>
             </p>
+        </div>
             <mat-divider></mat-divider>
             <p>
                 <mat-grid-list cols="4" rowHeight="20px">
@@ -90,9 +105,38 @@
                         <div> {{questionPpr.marks}} Marks</div>
                     </mat-grid-tile>
                 </mat-grid-list>
-
+                <button type="button" class="cancel-button" mat-stroked-button
+                color="primary" (click)="emitViewQuestionPaper(questionPpr)">View</button>
             </p>
-           
+         
+            <mat-card-content *ngIf="showCardDetails">
+                <p>
+                    <mat-list role="list" *ngIf="questionPpr.examStartTime !== '12.00 A.M.'  ;  else notYetexamTime">
+                        <mat-list-item style="background-color: #f4f4f4; margin-bottom: 1rem;" role="listitem"
+                            *ngFor="let qp of questionPpr.questionPaperList" >
+                            <div class=""> 
+                                <span>{{qp.name}}</span>
+                                <span class="button-group" >
+                                    <button type="button" class="cancel-button" mat-stroked-button
+                                        color="primary" (click)="emitViewQuestionPaper(qp)">View</button>
+                                    <button class="next-button" mat-raised-button color="primary"
+                                        (click)="emitDownloadQuestionPaper(qp)">Download</button>
+                                </span>
+            
+                            </div>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </mat-list>
+                    <ng-template #notYetexamTime>
+                        <p>
+                            <mat-hint style="color: red;"> *Question Paper will appear 30 mins before exam for
+                                download</mat-hint>
+
+                        </p>
+
+                    </ng-template>
+                </p>
+            </mat-card-content>
 
         </mat-card>
 

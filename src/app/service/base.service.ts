@@ -143,8 +143,8 @@ export class BaseService extends HttpService {
       [
         {
           id: 0,
-          name: "Vidhu",
-          course: "BSC GNM",
+          studentName: "Vidhu",
+          courseName: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
           hasStyle: true,
@@ -156,8 +156,8 @@ export class BaseService extends HttpService {
         },
         {
           id: 0,
-          name: "Vidhu",
-          course: "BSC GNM",
+          studentName: "Vidhu",
+          courseName: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
           hasStyle: true,
@@ -169,8 +169,8 @@ export class BaseService extends HttpService {
         },
         {
           id: 0,
-          name: "Vidhu",
-          course: "BSC GNM",
+          studentName: "Vidhu",
+          courseName: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
           hasStyle: true,
@@ -182,8 +182,8 @@ export class BaseService extends HttpService {
         },
         {
           id: 0,
-          name: "Vidhu",
-          course: "BSC GNM",
+          studentName: "Vidhu",
+          courseName: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
           hasStyle: true,
@@ -643,6 +643,95 @@ export class BaseService extends HttpService {
     return this.get(requestParam);
   }
 
+  getExamsAndQuestionPapersList$(): Observable<any> {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.COURSE.GET_ALL,
+      data: {}
+    }
+    return of ([
+      {
+  
+        examId: 1,
+        courseName: 'One',
+        examDate: 'One',
+        examStartTime: '10.00 A.M.',
+        marks: '100',
+        examName: 'msc Nursing (Exam 1)',
+        questionPaperList: [
+          {
+            id: 1234,
+            name: 'Question paper set 1'
+          },
+          {
+            id: 1234,
+            name: 'Question paper set 2'
+          }
+        ]
+      },
+      {
+        examId: 1,
+        courseName: 'Two',
+        examDate: 'Some date',
+        marks: '100',
+        examStartTime: '12.00 A.M.',
+        examName: 'msc Nursing (Exam 2)',
+        questionPaperList: [
+          {
+            id: 1234,
+            name: 'Question paper set 1'
+          },
+          {
+            id: 1234,
+            name: 'Question paper set 2'
+          }
+        ]
+  
+      },
+      {
+        examId: 1,
+        courseName: 'Three',
+        examDate: 'Some date',
+        examStartTime: '10.00 A.M.',
+        marks: '100',
+        examName: 'msc Nursing (Exam 3)',
+        questionPaperList: [
+          {
+            id: 1234,
+            name: 'Question paper set 1'
+          },
+          {
+            id: 1234,
+            name: 'Question paper set 2'
+          }
+        ]
+  
+      },
+      {
+  
+        examId: 1,
+        courseName: 'Four',
+        examDate: 'Some date',
+        examStartTime: '10.00 A.M.',
+        marks: '100',
+        examName: 'msc Nursing (Exam 4)',
+        questionPaperList: [
+          {
+            id: 1234,
+            name: 'Question paper set 1'
+          },
+          {
+            id: 1234,
+            name: 'Question paper set 2'
+          }
+        ]
+  
+      },
+  
+    ])
+  }
+
+
+
   
 
   /**************************** exam services ****************************/
@@ -717,15 +806,15 @@ getEnrollmentList(request: any) {
   //#region (CCTV management admin) 
   updateCCTVstatus$(request: any) {
     const requestParam: RequestParam = {
-      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.UPDATE_CCTV_STATUS,
-      data: request,
+      url: `${this.baseUrl}${this.configService.urlConFig.URLS.EXAM_CENTER.UPDATE_CCTV_STATUS}/${request.instituteId}?ipAddress=${request.ipAddress}&remarks=${request.remarks}&status=${request.status}`,
+      data: {},
     }
     return this.put(requestParam);
   }
 
   assignAlternateExamCenter$(request: any) {
     const requestParam: RequestParam = {
-      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.ASSIGN_ALTERNATE_EXAM_CENTER,
+      url: `${this.baseUrl}${this.configService.urlConFig.URLS.EXAM_CENTER.ASSIGN_ALTERNATE_EXAM_CENTER}/${request.instituteID}?alternateInstituteId=${request.alternateInstituteId}`,
       data: request,
     }
     return this.put(requestParam);
@@ -733,7 +822,7 @@ getEnrollmentList(request: any) {
 
   getNearestInstitutesList(formBody: any) {
     const requestParam: RequestParam = {
-      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.VERIFIED_EXAM_CENTERS,
+      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.VERIFIED_EXAM_CENTERS + '?district=' + formBody.district,
       data: formBody,
     }
     return this.get(requestParam);
@@ -754,6 +843,130 @@ getInstituteById(id: string | number) {
   return this.get(requestParam);
 }
 
+/*********************************** manage hall tickets service *****************************/
+// getInstituteById(id: string | number) {
+//   const requestParam: RequestParam = {
+//     url: `${this.baseUrl}${this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_INSTITUTE_BY_ID}/${id}`,
+//     data: {},
+//   }
+//   return this.get(requestParam);
+// }
+// }
+// hallTicketModification(request: object) {
+//   const requestParam: RequestParam = {
+//     url: `${this.baseUrl}${this.configService.urlConFig.URLS.HALL_TICKET.HALL_TICKET_MODIFICATION}`,
+//     data: request
+//   }
+//   return this.post(requestParam);
+// }
+
+
+
+// ************************ manage question papers ************************************
+
+getAllQuestionPapers(examCycleId: any, examId: any): Observable<ServerResponse>  {
+  const  reqParam: RequestParam = { 
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.QUESTION_PAPER.GET_ALL}?examCycleId=${examCycleId}&examId=${examId}`
+  }
+  return this.get(reqParam);
+}
+
+uploadQuestionPaper(fileData: any):  Observable<ServerResponse> {
+  const reqParam: RequestParam = {
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.QUESTION_PAPER.UPLOAD}`,
+    data: fileData,
+    header: {
+      Accept: "*/*",
+      "Content-Type": "multipart/form-data",
+    }
+
+  }
+ return this.post(reqParam);
+}
+
+downloadQuestionPaper(payloadData: any): Observable<ServerResponse> {
+  const reqParam: RequestParam = {
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.QUESTION_PAPER.DOWNLOAD}`,
+    data: payloadData
+  }
+ return this.post(reqParam);
+}
+
+
+getQuestionPaperById(questionPaperId: any): Observable<ServerResponse>  {
+  const  reqParam: RequestParam = { 
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.QUESTION_PAPER.GET_BY_ID}/${questionPaperId}`
+  }
+  return this.get(reqParam);
+}
+
+
+getQuestionPaperPreviewUrl(questionPaperId: any): Observable<ServerResponse>  {
+  const  reqParam: RequestParam = { 
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.QUESTION_PAPER.GET_PREVIEW_URL}/${questionPaperId}`
+  }
+  return this.get(reqParam);
+}
+
+deleteQuestionPaper(questionPaperId: any): Observable<ServerResponse>  {
+  const  reqParam: RequestParam = { 
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.QUESTION_PAPER.DELETE}/${questionPaperId}`
+  }
+  return this.delete(reqParam);
+  //#region (candidate portal)
+}
+  getResults() {
+    const response = [
+      {
+        examName: 'Exam 1', 
+        internalMarks: '45', 
+        externalMarks: '45',
+        totalMarks: '90',
+        status: 'Pass'
+      },{
+        examName: 'Exam 2', 
+        internalMarks: '45', 
+        externalMarks: '45',
+        totalMarks: '95',
+        status: 'Pass',
+      },{
+        examName: 'Exam 3', 
+        internalMarks: '25', 
+        externalMarks: '5',
+        totalMarks: '30',
+        status: 'Fail',
+      },
+    ]
+    return of(response)
+  }
+
+  formateResultDetails() {
+    const response = [
+
+    {
+      examName: 'Exam 1', 
+      internalMarks: '45', 
+      externalMarks: '45',
+      totalMarks: '90',
+      status: 'Pass',
+      hasStyle: true
+    },{
+      examName: 'Exam 2', 
+      internalMarks: '45', 
+      externalMarks: '45',
+      totalMarks: '95',
+      status: 'Pass',
+    },{
+      examName: 'Exam 3', 
+      internalMarks: '25', 
+      externalMarks: '5',
+      totalMarks: '30',
+      status: 'Fail',
+    },
+    ]
+    return of(response)
+  }
+  //#endregion
 getIntermediateSubjectList() {
   const requestParam: RequestParam = {
     url: this.baseUrl + this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_INTERMEDIATE_SUBJECT_LIST,
