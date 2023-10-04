@@ -24,7 +24,9 @@
             "CREATE_EXAM": "/v1/admin/examCycle",
             "EXAM_CYCLE_BULK_UPLOAD": "/v1/admin/examCycle/bulkUpload",
             "GET_EXAM_CYCLE_BY_ID": "/v1/admin/examCycle",
-            "DELETE_EXAM_CYCLE": "/v1/admin/examCycle/delete"
+            "DELETE_EXAM_CYCLE": "/v1/admin/examCycle/delete",
+            "GET_EXAM_BY_EXAM_CYCLE_ID": "/v1/admin/exam/byExamCycle",
+            "UPDATE_EXAM_CYCLE_DETAILS": "/v1/admin/examCycle/update"
         },
         "EXAM_STUDENT_REGISTRATION": {
             "GET_BY_EXAM_CYCLE":"v1/studentExamRegistration"

@@ -47,6 +47,7 @@ export class StudentEnrollmentFormComponent {
   admissionSessionList: string[] = [];
   currentFY:string;
   centerDetails="INS-301 - Institute Name";
+  isCreateView: boolean = true;
   constructor(private formBuilder: FormBuilder, private baseService: BaseService, private authService: AuthServiceService, private route: ActivatedRoute, private router: Router, private dialog: MatDialog) {
     this.route.params.subscribe((param) => {
       if(param['id']) {
@@ -54,11 +55,9 @@ export class StudentEnrollmentFormComponent {
       } 
     })
   }
+  iseditable: boolean = true;
   ngOnInit() {
     this.loggedInUserRole = this.authService.getUserRoles()[0];
-    if(this.loggedInUserRole === 'exams_admin') {
-      this.isAdmin = true;
-    }
     this.getAdmissionSessionList();
     this.getExamCycleList();
     this.getIntermediateSubjects();
@@ -67,6 +66,7 @@ export class StudentEnrollmentFormComponent {
     this.initBasicDetailsForm();
     this.initEducationalDetailsForm();
     if(this.enrollmentId !== undefined) {
+      this.isCreateView = false;
       this.getEnrollmentDetails();
     }
     
@@ -86,14 +86,13 @@ export class StudentEnrollmentFormComponent {
       emailId: new FormControl('', Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")),
       aadharNo: new FormControl('', Validators.pattern(`^[0-9]*$`)),
       address: this.formBuilder.group({
-        addressLine1: new FormControl('', Validators.required),
+        addressLine1: new FormControl(''),
         district: new FormControl('', Validators.required),
         state: new FormControl('', Validators.required),
         country: new FormControl('', Validators.required),
         pincode: new FormControl('', Validators.required)
       })
     })
-    console.log(this.basicDetailsForm.value);
   }
 
   initEducationalDetailsForm() {
@@ -124,8 +123,8 @@ export class StudentEnrollmentFormComponent {
 
   assignFormValues() {
     this.basicDetailsForm.patchValue({
-      firstName: this.enrollmentDetails?.firstName,
-      lastName: this.enrollmentDetails?.surname,
+      firstName: this.enrollmentDetails?.firstName.trim(),
+      lastName: this.enrollmentDetails?.surname.trim(),
       mothersName: this.enrollmentDetails?.motherName.trim(),
       fathersName: this.enrollmentDetails?.fatherName.trim(),
       dateOfBirth: this.enrollmentDetails?.dateOfBirth.trim(),
@@ -202,17 +201,13 @@ export class StudentEnrollmentFormComponent {
   next() {
     this.selectedLink = 'Educational Details';
     this.showInfo(this.selectedLink);
-    // this.selectLink(this.selectedLink);
-    // this.educationalDetails = true;
-    // this.basicDetails = false;
+    console.log(this.basicDetailsForm.value);
+    
   }
 
   previous() {
-    this.selectedLink = 'Basic details';
+    this.selectedLink = 'Basic Details';
     this.showInfo(this.selectedLink);
-    // this.selectLink(this.selectedLink);
-    // this.educationalDetails = false;
-    // this.basicDetails = true;
   }
 
   formatBytes(bytes: any, decimals = 2) {
@@ -389,6 +384,12 @@ export class StudentEnrollmentFormComponent {
         next: (res) => {
           this.enrollmentDetails = res.responseData;
           this.assignFormValues();
+          if(this.loggedInUserRole === 'exams_institute' && this.enrollmentDetails?.verificationStatus === 'REJECTED') {
+            this.iseditable = true;
+          }
+          else {
+            this.iseditable = false;
+          }
         },
         error: (error: HttpErrorResponse) => {
           console.log("Error =>", error);
@@ -463,7 +464,12 @@ export class StudentEnrollmentFormComponent {
     }
 
     navigateToList() {
+      if(this.loggedInUserRole === 'exams_admin') {
       this.router.navigate(['/student-enrollment/admin']);
+      }
+      else {
+        this.router.navigate(['/student-enrollment/institute']);
+      }
     }
 
     getAdmissionSessionList() {

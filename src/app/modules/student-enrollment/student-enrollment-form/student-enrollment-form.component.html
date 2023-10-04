@@ -17,18 +17,16 @@
           </mat-list-item>
         </mat-nav-list>
       </mat-drawer>
-      <div *ngIf="enrollmentId !== undefined && enrollmentDetails?.verificationStatus !== 'PENDING'" style="background-color: rgba(0, 0, 0, 0.08);
-    padding: 4px;
-    text-align: center;">
-      <p style="background-color: rgba(0, 0, 0, 0.08); margin: 4px; padding-top:4px; padding-bottom: 5px">
-        <span style="margin-top: 5px; margin-bottom: 5px"[ngStyle]="enrollmentDetails?.verificationStatus === 'VERIFIED'? {'color': 'green'} : enrollmentDetails?.verificationStatus === 'REJECTED' ? {'color': 'red'}: ''">Status: {{enrollmentDetails?.verificationStatus === 'VERIFIED'? 'Approved' : enrollmentDetails?.verificationStatus === 'REJECTED'? 'Rejected': ''}}</span>
+      <div *ngIf="enrollmentId !== undefined && enrollmentDetails?.verificationStatus !== 'PENDING'" class="statusBackground">
+      <p>
+        <span class="span" [ngStyle]="enrollmentDetails?.verificationStatus === 'VERIFIED'? {'color': 'green'} : enrollmentDetails?.verificationStatus === 'REJECTED' ? {'color': 'red'}: ''">Status: {{enrollmentDetails?.verificationStatus === 'VERIFIED'? 'Approved' : enrollmentDetails?.verificationStatus === 'REJECTED'? 'Rejected': ''}}</span>
       </p>
       <p>{{enrollmentDetails?.adminRemarks}}</p>
     </div>
       <div class="px2 py2 outer-bg" [ngClass]="enrollmentDetails?.verificationStatus !== 'PENDING' ? 'mt2': ''">
         <div class="content-container">
           <div class="content-details">
-            <form [formGroup]="basicDetailsForm" *ngIf="basicDetails">
+            <form [formGroup]="basicDetailsForm" *ngIf="selectedLink === 'Basic Details'">
               <div class="clearfix">
                 <div class="sm-col sm-col-12 md-col-12 lg-col-6">
                   <h4 class="w-full mat-label">First Name*</h4>
@@ -37,7 +35,7 @@
                       matInput
                       placeholder="Type here"
                       formControlName="firstName"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     />
                     <mat-error
                       *ngIf="basicDetailsForm.controls['firstName'].invalid"
@@ -55,7 +53,7 @@
                       matInput
                       placeholder="Type here"
                       formControlName="lastName"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     />
                     <mat-error
                       *ngIf="basicDetailsForm.controls['lastName'].invalid"
@@ -73,7 +71,7 @@
                       matInput
                       placeholder="Type here"
                       formControlName="mothersName"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     />
                     <mat-error
                       *ngIf="basicDetailsForm.controls['mothersName'].invalid"
@@ -91,7 +89,7 @@
                       matInput
                       placeholder="Type here"
                       formControlName="fathersName"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     />
                     <mat-error
                       *ngIf="basicDetailsForm.controls['fathersName'].invalid"
@@ -110,13 +108,13 @@
                       matInput
                       [matDatepicker]="picker"
                       formControlName="dateOfBirth"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     />
                     <mat-datepicker-toggle
                       matIconSuffix
                       [for]="picker"
                     ></mat-datepicker-toggle>
-                    <mat-datepicker #picker [disabled]="isAdmin"></mat-datepicker>
+                    <mat-datepicker #picker [disabled]="!iseditable"></mat-datepicker>
                     <mat-error
                       *ngIf="basicDetailsForm.controls['dateOfBirth'].invalid"
                     >
@@ -136,7 +134,7 @@
                       class=""
                       *ngFor="let item of genderList"
                       [value]="item"
-                      [disabled]="isAdmin"
+                      [disabled]="!iseditable"
                     >
                       {{ item }}
                     </mat-radio-button>
@@ -159,7 +157,7 @@
                       class=""
                       *ngFor="let item of casteList"
                       [value]="item"
-                      [disabled]="isAdmin"
+                      [disabled]="!iseditable"
                     >
                       {{ item }}
                     </mat-radio-button>
@@ -182,7 +180,7 @@
                       class=""
                       *ngFor="let item of categoryList"
                       [value]="item"
-                      [disabled]="isAdmin"
+                      [disabled]="!iseditable"
                     >
                       {{ item }}
                     </mat-radio-button>
@@ -198,7 +196,7 @@
                       maxlength="10"
                       placeholder="Type here"
                       formControlName="mobileNumber"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     />
                     <mat-error
                       *ngIf="
@@ -233,7 +231,7 @@
                       matInput
                       placeholder="Type here"
                       formControlName="emailId"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     />
                     <mat-error
                       *ngIf="
@@ -258,7 +256,7 @@
                       maxlength="12"
                       placeholder="Type here"
                       formControlName="aadharNo"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     />
                     <mat-error
                       *ngIf="
@@ -283,7 +281,7 @@
                         matInput
                         placeholder="Type here"
                         formControlName="addressLine1"
-                        [readonly]="isAdmin"
+                        [readonly]="!iseditable"
                       />
                       <mat-error
                         *ngIf="
@@ -305,7 +303,7 @@
                         matInput
                         placeholder="Type here"
                         formControlName="district"
-                        [readonly]="isAdmin"
+                        [readonly]="!iseditable"
                       />
                       <mat-error
                         *ngIf="
@@ -325,7 +323,7 @@
                         matInput
                         placeholder="Type here"
                         formControlName="state"
-                        [readonly]="isAdmin"
+                        [readonly]="!iseditable"
                       />
                       <mat-error
                         *ngIf="
@@ -346,7 +344,7 @@
                         matInput
                         placeholder="Type here"
                         formControlName="country"
-                        [readonly]="isAdmin"
+                        [readonly]="!iseditable"
                       />
                       <mat-error
                         *ngIf="
@@ -366,7 +364,7 @@
                         matInput
                         placeholder="Type here"
                         formControlName="pincode"
-                        [readonly]="isAdmin"
+                        [readonly]="!iseditable"
                       />
                       <mat-error
                         *ngIf="
@@ -384,12 +382,11 @@
             </form>
             <form
               [formGroup]="educationalDetailsForm"
-              *ngIf="educationalDetails"
+              *ngIf="selectedLink === 'Educational Details'"
             >
               <div class="clearfix">
                 <div class="sm-col sm-col-12 md-col-12 lg-col-6">
                   <h4 class="w-full mat-label">Institute code and Name</h4>
-                  <mat-form-field appearance="outline" class="w-full">
                     <mat-form-field appearance="outline" class="w-full">
                       <input
                         matInput
@@ -398,7 +395,6 @@
                         value="centerDetails"
                         readonly
                       />
-                    </mat-form-field>
                   </mat-form-field>
                 </div>
               </div>
@@ -411,7 +407,7 @@
                       [(value)]="courseCode"
                       formControlName="courseCode"
                       placeholder="Select here"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     >
                       <span *ngFor="let course of courseList; let i = index">
                         <mat-option [value]="course">{{
@@ -429,7 +425,7 @@
                     <mat-select
                     formControlName="sessionOfAdmission"
                     placeholder="Select here"
-                    [readonly]="isAdmin"
+                    [readonly]="!iseditable"
                   >
                     <span *ngFor="let session of admissionSessionList; let i = index">
                       <mat-option [value]="session">{{
@@ -451,7 +447,7 @@
                       [(value)]="examBatch"
                       formControlName="examBatch"
                       placeholder="Select here"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     >
                       <span *ngFor="let batch of examBatchList; let i = index">
                         <mat-option [value]="batch.id">{{
@@ -478,14 +474,14 @@
                       matInput
                       [matDatepicker]="picker"
                       formControlName="admissionDate"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     />
                     <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
                     <mat-datepicker-toggle
                       matIconSuffix
                       [for]="picker"
                     ></mat-datepicker-toggle>
-                    <mat-datepicker #picker [disabled]="isAdmin"></mat-datepicker>
+                    <mat-datepicker #picker [disabled]="!iseditable"></mat-datepicker>
                     <mat-error
                       *ngIf="
                         educationalDetailsForm.controls['admissionDate'].invalid
@@ -505,7 +501,7 @@
                       [(value)]="intermediateStream"
                       formControlName="intermediateStream"
                       placeholder="Select here"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     >
                       <span
                         *ngFor="
@@ -538,7 +534,7 @@
                       [(value)]="intermediatePassedBoard"
                       formControlName="intermediatePassedBoard"
                       placeholder="Select here"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     >
                       <span
                         *ngFor="
@@ -573,7 +569,7 @@
                       [(value)]="intermediateSubjects"
                       formControlName="intermediateSubjects"
                       placeholder="Select here"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     >
                       <span
                         *ngFor="
@@ -605,7 +601,7 @@
                       matInput
                       placeholder="Type here"
                       formControlName="intermediatePercentage"
-                      [readonly]="isAdmin"
+                      [readonly]="!iseditable"
                     />
                     <mat-error
                       *ngIf="
@@ -632,7 +628,7 @@
                           matInput
                           placeholder="Type here"
                           formControlName="rollNo"
-                          [readonly]="isAdmin"
+                          [readonly]="!iseditable"
                         />
                         <mat-error
                           *ngIf="
@@ -652,7 +648,7 @@
                           matInput
                           placeholder="Type here"
                           formControlName="yearOfPassing"
-                          [readonly]="isAdmin"
+                          [readonly]="!iseditable"
                         />
                         <mat-error
                           *ngIf="
@@ -703,7 +699,7 @@
                       "
                       *ngIf="
                         educationalDetailsForm.get('highSchoolDocuments')
-                          .controls['marksSheet'].value !== '' && !isAdmin
+                          .controls['marksSheet'].value !== ''
                       "
                     >
                       <div
@@ -741,7 +737,7 @@
                       class="fileUpload-container"
                       *ngIf="
                         educationalDetailsForm.get('highSchoolDocuments')
-                          .controls['certificate'].value == '' && !isAdmin
+                          .controls['certificate'].value == ''
                       "
                     >
                       <mat-label class=""
@@ -770,7 +766,7 @@
                       "
                       *ngIf="
                         educationalDetailsForm.get('highSchoolDocuments')
-                          .controls['certificate'].value !== '' && !isAdmin
+                          .controls['certificate'].value !== ''
                       "
                     >
                       <div
@@ -815,7 +811,7 @@
                           matInput
                           placeholder="Type here"
                           formControlName="rollNo"
-                          [readonly]="isAdmin"
+                          [readonly]="!iseditable"
                         />
                         <mat-error
                           *ngIf="
@@ -835,7 +831,7 @@
                           matInput
                           placeholder="Type here"
                           formControlName="yearOfPassing"
-                          [readonly]="isAdmin"
+                          [readonly]="!iseditable"
                         />
                         <mat-error
                           *ngIf="
@@ -857,7 +853,7 @@
                      class="fileUpload-container"
                       *ngIf="
                         educationalDetailsForm.get('intermediateDocuments')
-                          .controls['marksSheet'].value == '' && !isAdmin
+                          .controls['marksSheet'].value == ''
                       "
                     >
                       <mat-label class=""
@@ -886,7 +882,7 @@
                       "
                       *ngIf="
                         educationalDetailsForm.get('intermediateDocuments')
-                          .controls['marksSheet'].value !== '' && !isAdmin
+                          .controls['marksSheet'].value !== ''
                       "
                     >
                       <div
@@ -924,7 +920,7 @@
                       class="fileUpload-container"
                       *ngIf="
                         educationalDetailsForm.get('intermediateDocuments')
-                          .controls['certificate'].value == '' && !isAdmin
+                          .controls['certificate'].value == ''
                       "
                     >
                       <mat-label class=""
@@ -953,7 +949,7 @@
                       "
                       *ngIf="
                         educationalDetailsForm.get('intermediateDocuments')
-                          .controls['certificate'].value !== '' && !isAdmin
+                          .controls['certificate'].value !== ''
                       "
                     >
                       <div
@@ -1008,7 +1004,8 @@
               </button>
             </div>
             <div>
-              <button *ngIf="(loggedInUserRole === 'exams_institute' || (selectedLink === 'Basic Details' && loggedInUserRole === 'exams_admin'))"
+              <div *ngIf="selectedLink === 'Basic Details'">
+              <button
                 class="text-class action-btns mr2"
                 type="cancel"
                 mat-raised-button
@@ -1018,21 +1015,21 @@
               </button>
               <button
                 class="text-class action-btns"
-                type="submit"
+                type="button"
                 mat-raised-button
                 color="primary"
-                *ngIf="selectedLink === 'Basic Details'"
                 [disabled]="!basicDetailsForm.valid"
                 (click)="next()"
               >
                 Next<mat-icon>arrow_right_alt</mat-icon>
               </button>
+              </div>
               <button
                 class="text-class action-btns"
                 type="submit"
                 mat-raised-button
                 color="primary"
-                *ngIf="selectedLink === 'Educational Details' && loggedInUserRole === 'exams_institute'"
+                *ngIf="(selectedLink === 'Educational Details' && loggedInUserRole === 'exams_institute') && isCreateView"
                 [disabled]="!educationalDetailsForm.valid"
                 (click)="createEnrollment()"
               >
@@ -1050,7 +1047,7 @@
               </button>
               <button *ngIf="selectedLink === 'Educational Details' && loggedInUserRole === 'exams_admin'"
               class="text-class action-btns"
-                type="submit"
+                type="button"
                 mat-raised-button
                 color="primary"
                 (click)="rejectStudentEnrollment($event)"
@@ -1058,10 +1055,10 @@
               Reject
               </button>
               </div>
-              <div *ngIf="enrollmentDetails?.verificationStatus !== 'PENDING'">
-                <button *ngIf="selectedLink === 'Educational Details' && loggedInUserRole === 'exams_admin'"
+              <div *ngIf="enrollmentDetails?.verificationStatus !== 'REJECTED'">
+                <button *ngIf="selectedLink === 'Educational Details' && !isCreateView && !isEditable"
                 class="text-class action-btns"
-                  type="submit"
+                  type="button"
                   mat-raised-button
                   color="primary"
                   (click)="navigateToList()"
@@ -1069,6 +1066,17 @@
                 Back to List
                 </button>
               </div>
+              <button
+                class="text-class action-btns"
+                type="submit"
+                mat-raised-button
+                color="primary"
+                *ngIf="selectedLink === 'Educational Details' && loggedInUserRole === 'exams_institute' && enrollmentDetails?.verificationStatus === 'REJECTED'"
+                [disabled]="!educationalDetailsForm.valid"
+                (click)="createEnrollment()"
+              >
+                Edit and re-apply
+              </button>
             </div>
           </div>
         </div>

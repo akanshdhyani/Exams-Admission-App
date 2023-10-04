@@ -37,11 +37,13 @@ export class ManageExamCycleFormComponent {
     'courseId':new FormControl('', Validators.required),
     'startDate':new FormControl('', Validators.required),
     'endDate':new FormControl('',Validators.required),
+  });
+  createExamForm = new FormGroup({
     'examName':new FormControl('', Validators.required),
     'examDate':new FormControl('', Validators.required),
     'startTime':new FormControl('', Validators.required),
     'endTime':new FormControl('', Validators.required),
-  });
+  })
   breadcrumbItems = [
     { label: 'Manage Exam Cycles and Exams', url: '' },
   ]
@@ -77,6 +79,15 @@ export class ManageExamCycleFormComponent {
   })
  }
 
+ getExamsByExamCycle() {
+  this.baseService.getExamsByExamCycleId(this.examcycleId).subscribe({
+    next: (res) => {
+      this.exams = res.responseData;
+      console.log(res.responseData);
+    }
+  })
+ }
+
  initializeFormValues() {
   this.createExamCycle.patchValue({
     'examCycleName': this.examCycleDetails?.examCycleName,
@@ -91,6 +102,7 @@ export class ManageExamCycleFormComponent {
     next:(res) => {
         this.examCycleDetails = res.responseData;
         console.log("examCycleDetails =>", this.examCycleDetails);
+        this.getExamsByExamCycle();
         this.initializeFormValues();
     },
     error:(err: HttpErrorResponse) => {
@@ -111,7 +123,8 @@ export class ManageExamCycleFormComponent {
  
  addNewExam() {
    const examCycleValue = this.createExamCycle.value;
-   const {examName, examDate, startTime, endTime, courseId, startDate, endDate} = this.createExamCycle.value;
+   const {examName, examDate, startTime, endTime} = this.createExamForm.value;
+   const  {courseId, startDate, endDate} = this.createExamCycle.value;
    const selectedCourse= this.courses.find(course => course.id === courseId);
    const examDetail = {
     examName: examName,
@@ -136,10 +149,11 @@ export class ManageExamCycleFormComponent {
     };
     this.savingDetails = true;
     // console.log(examCycleDetail);
+    if(this.examcycleId === undefined) {
     this.baseService.createExamCycle(examCycleDetail).subscribe({
       next: (res) => {
         const examCycleId = res.responseData.id;
-        if(examCycleId) {
+        if(examCycleId && this.exams.length > 0) {
           this.createExams(examCycleId);
         }
       },
@@ -147,6 +161,10 @@ export class ManageExamCycleFormComponent {
         this.toasterService.showToastr('Something went wrong. Please try again', 'Error', 'error', '');
       }
     })
+  } 
+  else {
+    this.updateExamCycleDetails(examCycleDetail);
+  }
   }
 
   //   this.baseService.createExamCycle(examCycleDetail).pipe(
@@ -260,8 +278,8 @@ export class ManageExamCycleFormComponent {
 
   startTimeChangeEvent(event: Event) {
     this.endTimeError = false;
-    const starttime = this.createExamCycle.value.startTime;
-    const endtime = this.createExamCycle.value.endTime;
+    const starttime = this.createExamForm.value.startTime;
+    const endtime = this.createExamForm.value.endTime;
     if(starttime !== '' && endtime && starttime) {
       if(endtime < starttime) {
         this.endTimeError = true;
@@ -271,8 +289,8 @@ export class ManageExamCycleFormComponent {
 
   endTimeChangeEvent(event: Event) {
     this.endTimeError = false;
-    const starttime = this.createExamCycle.value.startTime;
-    const endtime = this.createExamCycle.value.endTime;
+    const starttime = this.createExamForm.value.startTime;
+    const endtime = this.createExamForm.value.endTime;
     if(starttime !== '' && endtime && starttime) {
       if(endtime < starttime) {
         this.endTimeError = true;
@@ -280,5 +298,16 @@ export class ManageExamCycleFormComponent {
     }
   }
   
+  updateExamCycleDetails(request: object) {
+    this.baseService.updateExamCycleDetails(request, this.examcycleId).subscribe({
+      next: (res) => {
+        this.toasterService.showToastr('Exam cycle details updated successfully', 'Success', 'success', '');
+        this.router.navigate(['/manage-exam-cycle']);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.toasterService.showToastr('Something went wrong. Please try again', 'Error', 'error', '');
+      }
+    })
+  }
  }
 

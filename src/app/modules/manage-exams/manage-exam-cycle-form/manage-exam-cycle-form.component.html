@@ -6,7 +6,7 @@
         (ngSubmit)="onSubmit()"
       >
       <div class="body-header">
-        <h2 class="title-header">Add</h2>
+        <h2 class="title-header">{{examcycleId !== undefined ? 'View' : 'Add'}}</h2>
         <div class="button-group">
           <button class="btn-1" (click)="goBack()">Cancel</button>
           <button class="btn-2" type="submit" [disabled]="!createExamCycle.valid">Save</button>
@@ -86,6 +86,7 @@
             </div>
 
             <!-- exam input -->
+            <form [formGroup]="createExamForm">
             <div class="clearfix">
               <div class="sm-col sm-col-12 md-col-12 lg-col-12">
                 <div class="sm-col sm-col-12 md-col-12 lg-col-3 mr2">
@@ -147,7 +148,7 @@
             <div>
               <button
                 class="text-class action-btns"
-                [disabled]="!createExamCycle.valid || endDateError || endTimeError"
+                [disabled]="!createExamForm.valid || endDateError || endTimeError"
                 type="button"
                 mat-raised-button
                 color="primary"
@@ -156,6 +157,7 @@
                 Add Exam
               </button>
             </div>
+            </form>
             <!-- div to view exams -->
             <div class="clearfix" style="padding-top: 20px">
               <div class="sm-col sm-col-12">

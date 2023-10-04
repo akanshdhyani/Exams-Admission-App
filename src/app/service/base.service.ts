@@ -1040,5 +1040,21 @@ getAllInstitutes(): Observable<ServerResponse> {
   return this.get(requestParam);
 }
 
+getExamsByExamCycleId(id: string | number): Observable<ServerResponse> {
+  const requestParam: RequestParam = {
+    url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_MANAGEMENT.GET_EXAM_BY_EXAM_CYCLE_ID + `/${id}`,
+    data: {}
+  }
+  return this.get(requestParam)
+}
+
+updateExamCycleDetails(request: object, id: string | number): Observable<ServerResponse> {
+  const requestParam: RequestParam = {
+    url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_MANAGEMENT.UPDATE_EXAM_CYCLE_DETAILS + `/${id}`,
+    data: request
+  }
+  return this.put(requestParam);
+}
+
 
 }
