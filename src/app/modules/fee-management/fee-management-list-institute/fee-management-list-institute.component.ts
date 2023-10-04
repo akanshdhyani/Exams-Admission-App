@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { LoadingDialogComponent } from '../loading-dialog/loading-dialog.component';
-import { FeeManagementService } from '../services/fee-management.service';
+import { BaseService } from 'src/app/service/base.service';
+import { Tabs } from 'src/app/shared';
 
 interface Course {
   value: string;
@@ -20,6 +21,9 @@ interface Year {
 })
 export class FeeManagementListInstituteComponent implements OnInit {
 
+  tabs: any[] = [];
+  currentTabIndex: number;
+
   courses: Course[] = [
     {value: 'bsc', viewValue: 'BSc'},
     {value: 'msc', viewValue: 'MSc'},
@@ -32,97 +36,7 @@ export class FeeManagementListInstituteComponent implements OnInit {
 
   isHallTicket = true;
   removeTbodyColor = true;
-
-  // allFeeTableHeader = [
-  //   {
-  //     header: '',
-  //     columnDef: 'select',
-  //     isSortable: false,
-  //     isCheckBox: true,
-  //     cell: (element: Record<string, any>) => ``,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '30px', 'color': '#00000099'
-  //     },
-  //   }, {
-  //     header: 'Full name',
-  //     columnDef: 'studentName',
-  //     isSortable: true,
-  //     cell: (element: Record<string, any>) => `${element['studentName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a',
-  //       'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'Exam',
-  //     columnDef: 'examNames',
-  //     cell: (element: Record<string, any>) => `${element['examNames']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '300px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'No. of Exams',
-  //     columnDef: 'noOfExams',
-  //     cell: (element: Record<string, any>) => `${element['noOfExams']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '135px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'Fee',
-  //     columnDef: 'fee',
-  //     cell: (element: Record<string, any>) => `${element['fee']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '100px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: '',
-  //     columnDef: 'status',
-  //     cell: (element: Record<string, any>) => `${element['status']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '130px', 'color': '#00000099'
-  //     },
-  //   }
-  // ]
-
-  // allFeeTableData = [
-  //   {
-  //     studentName: 'Nancy Kurian',
-  //     examName: 'Exam 1',
-  //     noOfExams: '1',
-  //     fee: '1000',
-  //     status: 'Pending',
-  //     hasStyle: true,
-  //     cellStyle: {
-  //         status: {
-  //         'color': 'rgb(0, 116, 182)'
-  //       },
-  //     }
-  //   },{
-  //     studentName: 'Sumalatha Krishna',
-  //     examName: 'Exam 3',
-  //     noOfExams: '1',
-  //     fee: '1000',
-  //     status: 'Paid',
-  //     hasStyle: true,
-  //     cellStyle: {
-  //         status: {
-  //         'color': 'rgb(29, 137, 35)'
-  //       },
-  //     }
-  //   },{
-  //     studentName: 'Purandara Das',
-  //     examName: 'Exam 1, Exam 2',
-  //     noOfExams: '2',
-  //     fee: '2000',
-  //     status: 'Pending',
-  //     hasStyle: true,
-  //     cellStyle: {
-  //         status: {
-  //         'color': 'rgb(0, 116, 182)'
-  //       },
-  //     }
-  //   },
-  // ]
-
+  tableColumns: any = []
   pendingFeeTableHeader = [
     {
       header: '',
@@ -326,7 +240,7 @@ export class FeeManagementListInstituteComponent implements OnInit {
   ]
   constructor(
     private dialog: MatDialog,
-    private feeManagementService: FeeManagementService
+    private baseService: BaseService
   ) {
     this.filterForm = new FormGroup({
       search: new FormControl(''),
@@ -335,12 +249,77 @@ export class FeeManagementListInstituteComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.getExamFeeDetails()
+  ngOnInit() {
+    this.intialisation();
   }
 
+  //#region (intialisation)
+  intialisation() {
+    this.initializeTabs()
+    this.initializeTableColumns()
+  }
+
+  initializeTabs() {
+    this.tabs = Tabs['Fee_Management'];
+  }
+
+  initializeTableColumns() {
+    this.tableColumns = []
+    const tableColumns = [
+      {
+        header: 'Full name',
+        columnDef: 'studentName',
+        cell: (element: Record<string, any>) => `${element['studentName']}`,
+        cellStyle: {
+          'background-color': '#0000000a',
+          'color': '#00000099'
+        }
+      },{
+        header: 'Exam',
+        columnDef: 'examNames',
+        cell: (element: Record<string, any>) => `${element['examNames']}`,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '300px', 'color': '#00000099'
+        }
+      },{
+        header: 'No. of Exams',
+        columnDef: 'noOfExams',
+        cell: (element: Record<string, any>) => `${element['noOfExams']}`,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '135px', 'color': '#00000099'
+        }
+      },{
+        header: 'Fee',
+        columnDef: 'fee',
+        cell: (element: Record<string, any>) => `${element['fee']}`,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '100px', 'color': '#00000099'
+        }
+      },{
+        header: '',
+        columnDef: 'status',
+        cell: (element: Record<string, any>) => `${element['status']}`,
+        cellStyle: {
+          'background-color': '#0000000a', 'width': '130px', 'color': '#00000099'
+        }
+      },
+    ]
+
+    switch (this.currentTabIndex) {
+      case 0: {
+        break
+      }
+      case 1: {
+        break
+      }
+    }
+
+    this.tableColumns = tableColumns
+  }
+
+
   getExamFeeDetails() {
-    this.feeManagementService.getExamFeeDetails('')
+    // this.baseService.getExamFeeDetails('')
     // .subscribe((result: any) => {
     //   this.pendingFeeTableData = result.filter((exam: any) => {})
     //   this.paidFeeTableData = result.filter((exam: any) => {})

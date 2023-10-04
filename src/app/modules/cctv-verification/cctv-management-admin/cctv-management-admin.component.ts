@@ -5,7 +5,7 @@ import { Router, Routes } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CctvApprovalPopupComponent } from '../dialogs/cctv-approval-popup/cctv-approval-popup.component';
 import { BaseService } from 'src/app/service/base.service';
-import { mergeMap } from 'rxjs';
+import { mergeMap, of } from 'rxjs';
 import { TableColumn } from 'src/app/interfaces/interfaces';
 import { Tabs } from 'src/app/shared';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -51,134 +51,6 @@ export class CctvManagementAdminComponent {
   instituteesTableColumns: TableColumn[] = [];
   instituteesTableData = []
   pageSize = 10;
-
-  // instituteesCCTVpendingTableHeaders = [
-  //   {
-  //     header: 'Institute name',
-  //     columnDef: 'instituteName',
-  //     isSortable: true,
-  //     cell: (element: Record<string, any>) => `${element['instituteName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a',
-  //       'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'Institute Code',
-  //     columnDef: 'instituteCode',
-  //     cell: (element: Record<string, any>) => `${element['instituteCode']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'District name',
-  //     columnDef: 'district',
-  //     cell: (element: Record<string, any>) => `${element['districtName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '165px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: '',
-  //     columnDef: 'status',
-  //     cell: (element: Record<string, any>) => `${element['status']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   }, {
-  //   //   header: '',
-  //   //   columnDef: 'updateStatus',
-  //   //   isLink: true
-  //   //   cell: (element: Record<string, any>) => `${element['updateStatus']} === true? 'Approve/Reject'`
-  //   }
-  // ]
-  // instituteesCCTVpendingTableData = [
-  // ];
-
-  // instituteesCCTVverifiedTableHeaders = [
-  //   {
-  //     header: 'Institute name',
-  //     columnDef: 'instituteName',
-  //     isSortable: true,
-  //     cell: (element: Record<string, any>) => `${element['instituteName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a',
-  //       'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'Institute Code',
-  //     columnDef: 'instituteCode',
-  //     cell: (element: Record<string, any>) => `${element['instituteCode']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'District name',
-  //     columnDef: 'districtName',
-  //     cell: (element: Record<string, any>) => `${element['districtName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'IP address',
-  //     columnDef: 'IPaddress',
-  //     cell: (element: Record<string, any>) => `${element['IPaddress']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: '',
-  //     columnDef: 'status',
-  //     cell: (element: Record<string, any>) => `${element['status']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '100px', 'color': '#00000099'
-  //     },
-  //   }
-  // ]
-  // instituteesCCTVverifiedTableData = [
-  // ];
-
-  // instituteesCCTVrejectedTableHeaders = [
-  //   {
-  //     header: 'Institute name',
-  //     columnDef: 'instituteName',
-  //     isSortable: true,
-  //     cell: (element: Record<string, any>) => `${element['instituteName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a',
-  //       'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'Institute Code',
-  //     columnDef: 'instituteCode',
-  //     cell: (element: Record<string, any>) => `${element['instituteCode']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'District name',
-  //     columnDef: 'districtName',
-  //     cell: (element: Record<string, any>) => `${element['districtName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'IP address',
-  //     columnDef: 'IPaddress',
-  //     cell: (element: Record<string, any>) => `${element['IPaddress']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: '',
-  //     columnDef: 'status',
-  //     cell: (element: Record<string, any>) => `${element['status']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '215px', 'color': '#00000099'
-  //     },
-  //   }
-  // ]
-  // instituteesCCTVrejectedTableData = [
-  // ];
-
   searcControl = '';
   //#endregion
 
@@ -303,12 +175,13 @@ export class CctvManagementAdminComponent {
   //#region (exam cycles)
   getExamCycles() {
     this.baseService.getExamCycleList()
-      // .pipe(mergeMap((res: any) => {
-      //   return this.formatExamCycles(res.responseData)
-      // }))
+      .pipe(mergeMap((res: any) => {
+        return this.formatExamCycles(res.responseData)
+      }))
       .subscribe({
         next: (res: any) => {
-          this.examCycleList = this.formatExamCycles(res.responseData);
+          // this.examCycleList = this.formatExamCycles(res.responseData);
+          this.examCycleList = res.examCyclesList;
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);
@@ -316,13 +189,17 @@ export class CctvManagementAdminComponent {
       })
   }
 
-  formatExamCycles(response: any) {
+  formatExamCycles(response: any)  {
     const examCycles: {
-      id: number;
-      examCycleName: string;
-      courseId: string;
-      status: string;
-    }[] = []
+      examCyclesList: {
+        id: number;
+        examCycleName: string;
+        courseId: string;
+        status: string;
+      }[]
+   } = {
+    examCyclesList: []
+   }
     if (response && response.length > 0) {
       response.forEach((examCycle: any) => {
         const exam = {
@@ -331,10 +208,10 @@ export class CctvManagementAdminComponent {
           courseId: examCycle.courseId,
           status: examCycle.status,
         }
-        examCycles.push(exam)
+        examCycles.examCyclesList.push(exam)
       })
     }
-    return examCycles
+    return of(examCycles)
   }
   //#endregion
 
@@ -439,49 +316,6 @@ export class CctvManagementAdminComponent {
     setTimeout(() => {
       this.isDataLoading = false;
     }, 0)
-    // this.instituteesCCTVpendingTableData = InstituteesCCTVtableData.filter((institute: any) => {
-    //   if (institute.cctvVerified === false) {
-    //     institute.updateStatus == true;
-    //     const pendingInstitute = institute;
-    //     pendingInstitute['status'] = 'Approve / Reject',
-    //     pendingInstitute['hasStyle'] = true,
-    //     pendingInstitute['cellStyle'] = {
-    //         status: {
-    //         'color': '#0074B6',
-    //         'cursor': 'pointer',
-    //       },
-    //     }
-    //     return pendingInstitute;
-    //   }
-    // })
-    // this.instituteesCCTVverifiedTableData = InstituteesCCTVtableData.filter((institute: any) => {
-    //   if (institute.cctvVerified === true && institute.allowedForExamCentre === true) {
-    //     const approvedInstitute = institute;
-    //     approvedInstitute['status'] = 'Reject',
-    //     approvedInstitute['hasStyle'] = true,
-    //     approvedInstitute['cellStyle'] = {
-    //         status: {
-    //         'color': '#0074B6',
-    //         'cursor': 'pointer',
-    //       },
-    //     }
-    //     return approvedInstitute;
-    //   }
-    // })
-    // this.instituteesCCTVrejectedTableData = InstituteesCCTVtableData.filter((institute: any) => {
-    //   if (institute.cctvVerified === true && institute.allowedForExamCentre === false) {
-    //     const approvedInstitute = institute;
-    //     approvedInstitute['status'] = 'Enter alternate Institute',
-    //     approvedInstitute['hasStyle'] = true,
-    //     approvedInstitute['cellStyle'] = {
-    //         status: {
-    //         'color': '#0074B6',
-    //         'cursor': 'pointer',
-    //       },
-    //     }
-    //     return approvedInstitute;
-    //   }
-    // })
   }
 
   //#endregion

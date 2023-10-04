@@ -754,4 +754,58 @@ getInstituteById(id: string | number) {
   }
   return this.get(requestParam);
 }
+
+  //#region (candidate portal)
+  getResults() {
+    const response = [
+      {
+        examName: 'Exam 1', 
+        internalMarks: '45', 
+        externalMarks: '45',
+        totalMarks: '90',
+        status: 'Pass'
+      },{
+        examName: 'Exam 2', 
+        internalMarks: '45', 
+        externalMarks: '45',
+        totalMarks: '95',
+        status: 'Pass',
+      },{
+        examName: 'Exam 3', 
+        internalMarks: '25', 
+        externalMarks: '5',
+        totalMarks: '30',
+        status: 'Fail',
+      },
+    ]
+    return of(response)
+  }
+
+  formateResultDetails() {
+    const response = [
+
+    {
+      examName: 'Exam 1', 
+      internalMarks: '45', 
+      externalMarks: '45',
+      totalMarks: '90',
+      status: 'Pass',
+      hasStyle: true
+    },{
+      examName: 'Exam 2', 
+      internalMarks: '45', 
+      externalMarks: '45',
+      totalMarks: '95',
+      status: 'Pass',
+    },{
+      examName: 'Exam 3', 
+      internalMarks: '25', 
+      externalMarks: '5',
+      totalMarks: '30',
+      status: 'Fail',
+    },
+    ]
+    return of(response)
+  }
+  //#endregion
 }
