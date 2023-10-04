@@ -60,7 +60,6 @@ export class SharedQuestionPaperComponent {
   }
 
   emitViewQuestionPaper(event: QuestionPaper) {
-  
     this.viewQuestionPaper.emit(event);
    // console.log(this.viewQuestionPaper)
   }
