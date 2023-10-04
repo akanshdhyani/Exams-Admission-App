@@ -11,7 +11,7 @@ import { SharedModule } from 'src/app/shared';
 //#region (created modules && components)
 import { CctvVerificationRoutingModule } from './cctv-verification-routing.module';
 import { CctvManagementAdminComponent } from './cctv-management-admin/cctv-management-admin.component';
-import { CctvApprovalPopupComponent } from './dialogs/cctv-approval-popup/cctv-approval-popup.component';
+import { CctvApprovalPopupComponent } from '../../shared/components/cctv-approval-popup/cctv-approval-popup.component';
 
 @NgModule({
   declarations: [

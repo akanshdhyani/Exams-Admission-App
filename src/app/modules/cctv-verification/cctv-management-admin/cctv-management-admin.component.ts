@@ -3,12 +3,17 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router, Routes } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { CctvApprovalPopupComponent } from '../dialogs/cctv-approval-popup/cctv-approval-popup.component';
+import { CctvApprovalPopupComponent } from '../../../shared/components/cctv-approval-popup/cctv-approval-popup.component';
 import { BaseService } from 'src/app/service/base.service';
 import { mergeMap, of } from 'rxjs';
 import { TableColumn } from 'src/app/interfaces/interfaces';
 import { Tabs } from 'src/app/shared';
 import { HttpErrorResponse } from '@angular/common/http';
+
+interface Course {
+  value: string;
+  viewValue: string;
+}
 
 //#endregion
 

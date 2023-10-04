@@ -16,8 +16,13 @@
     height: 3rem;
     width: 6rem;
   }
-  mat-drawer{
+  mat-drawer, .mat-drawer-container{
     background-color:#F0F3F4 !important;
+    border-right: 0 !important;
+  }
+
+  .outer-bg {
+    background-color: #fff;
   }
   
   .content{
