@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { QuestionPaper } from 'src/app/interfaces/interfaces';
 import { BaseService } from 'src/app/service/base.service';
 
@@ -15,7 +16,7 @@ export class DownloadQuesPapersComponent {
   ) {
 
   }
-
+  examCycleControl = new FormControl();
   examCycleList: string[] = ['examCycle1', 'examCycle2', 'examCycle3'];
 
   examDetails: QuestionPaper[] = [
@@ -115,7 +116,7 @@ export class DownloadQuesPapersComponent {
   }
 
   getQuestionPapers(examCycleId: any, examId: any) {
-    this.baseService.getAllQuestionPapers(examCycleId, examId).subscribe({
+    this.baseService.getExamsAndQuestionPapersList$().subscribe({
       next: (response) => {
         console.log("All Question Papers response", response);
       },
@@ -125,7 +126,8 @@ export class DownloadQuesPapersComponent {
     })
   }
 
-  viewQuestionPaper(questionPaperId: any) {
+  viewQuestionPaperrrrrr(questionPaperId: any) {
+    console.log("viewQuestionPaper questionPaperId",questionPaperId)
     this.baseService.getQuestionPaperPreviewUrl(questionPaperId).subscribe({
       next: (response) => {
         console.log("question paper preview url response", response);

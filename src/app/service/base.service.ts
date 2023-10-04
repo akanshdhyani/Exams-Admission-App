@@ -643,6 +643,95 @@ export class BaseService extends HttpService {
     return this.get(requestParam);
   }
 
+  getExamsAndQuestionPapersList$(): Observable<any> {
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.COURSE.GET_ALL,
+      data: {}
+    }
+    return of ([
+      {
+  
+        examId: 1,
+        courseName: 'One',
+        examDate: 'One',
+        examStartTime: '10.00 A.M.',
+        marks: '100',
+        examName: 'msc Nursing (Exam 1)',
+        questionPaperList: [
+          {
+            id: 1234,
+            name: 'Question paper set 1'
+          },
+          {
+            id: 1234,
+            name: 'Question paper set 2'
+          }
+        ]
+      },
+      {
+        examId: 1,
+        courseName: 'Two',
+        examDate: 'Some date',
+        marks: '100',
+        examStartTime: '12.00 A.M.',
+        examName: 'msc Nursing (Exam 2)',
+        questionPaperList: [
+          {
+            id: 1234,
+            name: 'Question paper set 1'
+          },
+          {
+            id: 1234,
+            name: 'Question paper set 2'
+          }
+        ]
+  
+      },
+      {
+        examId: 1,
+        courseName: 'Three',
+        examDate: 'Some date',
+        examStartTime: '10.00 A.M.',
+        marks: '100',
+        examName: 'msc Nursing (Exam 3)',
+        questionPaperList: [
+          {
+            id: 1234,
+            name: 'Question paper set 1'
+          },
+          {
+            id: 1234,
+            name: 'Question paper set 2'
+          }
+        ]
+  
+      },
+      {
+  
+        examId: 1,
+        courseName: 'Four',
+        examDate: 'Some date',
+        examStartTime: '10.00 A.M.',
+        marks: '100',
+        examName: 'msc Nursing (Exam 4)',
+        questionPaperList: [
+          {
+            id: 1234,
+            name: 'Question paper set 1'
+          },
+          {
+            id: 1234,
+            name: 'Question paper set 2'
+          }
+        ]
+  
+      },
+  
+    ])
+  }
+
+
+
   
 
   /**************************** exam services ****************************/
