@@ -143,8 +143,8 @@ export class BaseService extends HttpService {
       [
         {
           id: 0,
-          name: "Vidhu",
-          course: "BSC GNM",
+          studentName: "Vidhu",
+          courseName: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
           hasStyle: true,
@@ -156,8 +156,8 @@ export class BaseService extends HttpService {
         },
         {
           id: 0,
-          name: "Vidhu",
-          course: "BSC GNM",
+          studentName: "Vidhu",
+          courseName: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
           hasStyle: true,
@@ -169,8 +169,8 @@ export class BaseService extends HttpService {
         },
         {
           id: 0,
-          name: "Vidhu",
-          course: "BSC GNM",
+          studentName: "Vidhu",
+          courseName: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
           hasStyle: true,
@@ -182,8 +182,8 @@ export class BaseService extends HttpService {
         },
         {
           id: 0,
-          name: "Vidhu",
-          course: "BSC GNM",
+          studentName: "Vidhu",
+          courseName: "BSC GNM",
           rollNo: "2020",
           attendancePercentage: "3",
           hasStyle: true,
@@ -753,5 +753,77 @@ getInstituteById(id: string | number) {
     data: {},
   }
   return this.get(requestParam);
+}
+
+/*********************************** manage hall tickets service *****************************/
+// getInstituteById(id: string | number) {
+//   const requestParam: RequestParam = {
+//     url: `${this.baseUrl}${this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_INSTITUTE_BY_ID}/${id}`,
+//     data: {},
+//   }
+//   return this.get(requestParam);
+// }
+// }
+// hallTicketModification(request: object) {
+//   const requestParam: RequestParam = {
+//     url: `${this.baseUrl}${this.configService.urlConFig.URLS.HALL_TICKET.HALL_TICKET_MODIFICATION}`,
+//     data: request
+//   }
+//   return this.post(requestParam);
+// }
+
+
+
+// ************************ manage question papers ************************************
+
+getAllQuestionPapers(examCycleId: any, examId: any): Observable<ServerResponse>  {
+  const  reqParam: RequestParam = { 
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.QUESTION_PAPER.GET_ALL}?examCycleId=${examCycleId}&examId=${examId}`
+  }
+  return this.get(reqParam);
+}
+
+uploadQuestionPaper(fileData: any):  Observable<ServerResponse> {
+  const reqParam: RequestParam = {
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.QUESTION_PAPER.UPLOAD}`,
+    data: fileData,
+    header: {
+      Accept: "*/*",
+      "Content-Type": "multipart/form-data",
+    }
+
+  }
+ return this.post(reqParam);
+}
+
+downloadQuestionPaper(payloadData: any): Observable<ServerResponse> {
+  const reqParam: RequestParam = {
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.QUESTION_PAPER.DOWNLOAD}`,
+    data: payloadData
+  }
+ return this.post(reqParam);
+}
+
+
+getQuestionPaperById(questionPaperId: any): Observable<ServerResponse>  {
+  const  reqParam: RequestParam = { 
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.QUESTION_PAPER.GET_BY_ID}/${questionPaperId}`
+  }
+  return this.get(reqParam);
+}
+
+
+getQuestionPaperPreviewUrl(questionPaperId: any): Observable<ServerResponse>  {
+  const  reqParam: RequestParam = { 
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.QUESTION_PAPER.GET_PREVIEW_URL}/${questionPaperId}`
+  }
+  return this.get(reqParam);
+}
+
+deleteQuestionPaper(questionPaperId: any): Observable<ServerResponse>  {
+  const  reqParam: RequestParam = { 
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.QUESTION_PAPER.DELETE}/${questionPaperId}`
+  }
+  return this.delete(reqParam);
 }
 }

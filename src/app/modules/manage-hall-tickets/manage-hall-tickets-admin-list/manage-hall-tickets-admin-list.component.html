@@ -14,13 +14,14 @@
         <label class="examCycleLable">Hall Ticket Type</label>
       </div>
       <mat-form-field class="exam-form" appearance="outline">
-        <mat-select>
+        <mat-select [formControl]="hallTicketControl">
           <mat-option
             *ngFor="let hallticket of halltickets"
             [value]="hallticket.value"
           >
             {{ hallticket.viewValue }}
           </mat-option>
+          <mat-option style="display: none;" value="">Select here</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -53,10 +54,11 @@
       </div>
       <mat-form-field class="exam-form" appearance="outline">
         <!-- <mat-label class="label">Course</mat-label> -->
-        <mat-select>
+        <mat-select [formControl]="courseControl">
           <mat-option *ngFor="let course of courses" [value]="course.value">
             {{ course.viewValue }}
           </mat-option>
+          <mat-option style="display: none;" value="">Select here</mat-option>
         </mat-select>
       </mat-form-field>
       </div>
@@ -65,10 +67,11 @@
           <label class="examCycleLable">Exam cycle</label>
         </div>
       <mat-form-field class="exam-form" appearance="outline">
-        <mat-select>
+        <mat-select [formControl]="examCycleControl">
           <mat-option *ngFor="let year of years" [value]="year.value">
             {{ year.viewValue }}
           </mat-option>
+          <mat-option style="display: none;" value="">Select here</mat-option>
         </mat-select>
       </mat-form-field>
       </div>
@@ -77,13 +80,14 @@
           <label class="examCycleLable">Institute</label>
         </div>
       <mat-form-field class="exam-form" appearance="outline">
-        <mat-select>
+        <mat-select [formControl]="instituteControl">
           <mat-option
             *ngFor="let institute of institutes"
             [value]="institute.value"
           >
             {{ institute.viewValue }}
           </mat-option>
+          <mat-option style="display: none;" value="">Select here</mat-option>
         </mat-select>
       </mat-form-field></div> <span style="display: flex; align-items: center;"  class="filter" [matMenuTriggerFor]="AttendanceFilterMenu">
         <mat-icon  fontIcon=filter_list></mat-icon>

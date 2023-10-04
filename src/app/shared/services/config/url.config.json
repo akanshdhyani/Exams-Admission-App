@@ -32,6 +32,12 @@
             "UPDATE_CCTV_STATUS": "/api/v1/admin/updateCctvStatus",
             "ASSIGN_ALTERNATE_EXAM_CENTER": "/api/v1/admin/assignAlternate",
             "VERIFIED_EXAM_CENTERS": "/api/v1/admin/verifiedExamCenters"
+        },
+        "HALL_TICKET": {
+            "HALL_TICKET_DOWNLOAD":"/api/v1/admin/hallticket/download?dateOfBirth=1995-12-15&id=45&type=Pdf",
+            "HALL_TICKET_MODIFICATION": "/api/v1/admin/hallticket/dataCorrection/request",
+            "HALL_TICKET_REJECT": "/api/v1/admin/hallticket/dataCorrection/1/reject?rejectionReason=date can't be changed",
+            "HALL_TICKET_APPROVE": "/api/v1/admin/hallticket/dataCorrection/6/approve"
         }
     }
 }

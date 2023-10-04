@@ -25,12 +25,26 @@
         </div>
 
         <mat-card style="margin-top: 38px;" *ngFor="let questionPpr of questionPapersList">
-           
+           <div style="display: flex; flex-direction: row-reverse; justify-content: space-between;">
             <mat-card-content>
                 <ng-container *ngIf="loggedInUserRole ==='exams_admin' ; else instituteRole">
                     <div class="button-group">
-                        <button class="button" mat-raised-button color="primary" (click)="emitUploadQuesPaper(questionPpr)">Upload
-                            Question Paper</button>
+                        <button class="button" mat-raised-button color="primary">
+                            <label for="fileUpload1" class="custom-file-upload">
+                                <a>Upload Question Paper</a>
+                              </label>
+                        </button>
+                        <span class="error" style="color: red;">{{ fileUploadError }}</span>
+  
+              <input
+                id="fileUpload1"
+                type="file"
+                style="display: none"
+                enctype="multipart/form-data"
+                (change)="emitUploadQuesPaper(questionPpr)"
+                multiple="true"
+                accept=".pdf"
+              />
                     </div>
                 </ng-container>
                 <ng-template #instituteRole>
@@ -51,6 +65,7 @@
 
                 </mat-card-content>
             </p>
+        </div>
             <mat-divider></mat-divider>
             <p>
                 <mat-grid-list cols="4" rowHeight="20px">
