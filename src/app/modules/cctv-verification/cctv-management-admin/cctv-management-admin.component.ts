@@ -5,7 +5,7 @@ import { Router, Routes } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CctvApprovalPopupComponent } from '../../../shared/components/cctv-approval-popup/cctv-approval-popup.component';
 import { BaseService } from 'src/app/service/base.service';
-import { mergeMap } from 'rxjs';
+import { mergeMap, of } from 'rxjs';
 import { TableColumn } from 'src/app/interfaces/interfaces';
 import { Tabs } from 'src/app/shared';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -25,30 +25,30 @@ interface Course {
 export class CctvManagementAdminComponent {
 
   //#region (global variables)
-  examCycleList: { 
-    id: number; 
-    examCycleName: string; 
-    courseId: string; 
-    status: string; 
+  examCycleList: {
+    id: number;
+    examCycleName: string;
+    courseId: string;
+    status: string;
   }[] = [
-    {
-      examCycleName: 'Exam Cycle 1',
-      id: 1,
-      courseId: '',
-      status: '',
-    },{
-      examCycleName: 'Exam Cycle 2',
-      id: 2,
-      courseId: '',
-      status: '',
-    },{
-      examCycleName: 'Exam Cycle 3',
-      id: 3,
-      courseId: '',
-      status: '',
-    },
-  ]
-  examCycleControl = new FormControl(''); 
+      {
+        examCycleName: 'Exam Cycle 1',
+        id: 1,
+        courseId: '',
+        status: '',
+      }, {
+        examCycleName: 'Exam Cycle 2',
+        id: 2,
+        courseId: '',
+        status: '',
+      }, {
+        examCycleName: 'Exam Cycle 3',
+        id: 3,
+        courseId: '',
+        status: '',
+      },
+    ]
+  examCycleControl = new FormControl('');
 
   tabs: any[] = [];
   isDataLoading: boolean = true;
@@ -56,134 +56,6 @@ export class CctvManagementAdminComponent {
   instituteesTableColumns: TableColumn[] = [];
   instituteesTableData = []
   pageSize = 10;
-
-  // instituteesCCTVpendingTableHeaders = [
-  //   {
-  //     header: 'Institute name',
-  //     columnDef: 'instituteName',
-  //     isSortable: true,
-  //     cell: (element: Record<string, any>) => `${element['instituteName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a',
-  //       'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'Institute Code',
-  //     columnDef: 'instituteCode',
-  //     cell: (element: Record<string, any>) => `${element['instituteCode']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'District name',
-  //     columnDef: 'district',
-  //     cell: (element: Record<string, any>) => `${element['districtName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '165px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: '',
-  //     columnDef: 'status',
-  //     cell: (element: Record<string, any>) => `${element['status']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   }, {
-  //   //   header: '',
-  //   //   columnDef: 'updateStatus',
-  //   //   isLink: true
-  //   //   cell: (element: Record<string, any>) => `${element['updateStatus']} === true? 'Approve/Reject'`
-  //   }
-  // ]
-  // instituteesCCTVpendingTableData = [
-  // ];
-
-  // instituteesCCTVverifiedTableHeaders = [
-  //   {
-  //     header: 'Institute name',
-  //     columnDef: 'instituteName',
-  //     isSortable: true,
-  //     cell: (element: Record<string, any>) => `${element['instituteName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a',
-  //       'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'Institute Code',
-  //     columnDef: 'instituteCode',
-  //     cell: (element: Record<string, any>) => `${element['instituteCode']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'District name',
-  //     columnDef: 'districtName',
-  //     cell: (element: Record<string, any>) => `${element['districtName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'IP address',
-  //     columnDef: 'IPaddress',
-  //     cell: (element: Record<string, any>) => `${element['IPaddress']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: '',
-  //     columnDef: 'status',
-  //     cell: (element: Record<string, any>) => `${element['status']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '100px', 'color': '#00000099'
-  //     },
-  //   }
-  // ]
-  // instituteesCCTVverifiedTableData = [
-  // ];
-
-  // instituteesCCTVrejectedTableHeaders = [
-  //   {
-  //     header: 'Institute name',
-  //     columnDef: 'instituteName',
-  //     isSortable: true,
-  //     cell: (element: Record<string, any>) => `${element['instituteName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a',
-  //       'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'Institute Code',
-  //     columnDef: 'instituteCode',
-  //     cell: (element: Record<string, any>) => `${element['instituteCode']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'District name',
-  //     columnDef: 'districtName',
-  //     cell: (element: Record<string, any>) => `${element['districtName']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: 'IP address',
-  //     columnDef: 'IPaddress',
-  //     cell: (element: Record<string, any>) => `${element['IPaddress']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
-  //     },
-  //   },{
-  //     header: '',
-  //     columnDef: 'status',
-  //     cell: (element: Record<string, any>) => `${element['status']}`,
-  //     cellStyle: {
-  //       'background-color': '#0000000a', 'width': '215px', 'color': '#00000099'
-  //     },
-  //   }
-  // ]
-  // instituteesCCTVrejectedTableData = [
-  // ];
-
   searcControl = '';
   //#endregion
 
@@ -194,7 +66,7 @@ export class CctvManagementAdminComponent {
     private baseService: BaseService,
     private router: Router,
     private dialog: MatDialog,
-  ){
+  ) {
   }
 
   ngOnInit() {
@@ -225,14 +97,14 @@ export class CctvManagementAdminComponent {
           'background-color': '#0000000a',
           'color': '#00000099'
         },
-      },{
+      }, {
         header: 'Institute Code',
         columnDef: 'instituteCode',
         cell: (element: Record<string, any>) => `${element['instituteCode']}`,
         cellStyle: {
           'background-color': '#0000000a', 'width': '200px', 'color': '#00000099'
         },
-      },{
+      }, {
         header: 'District name',
         columnDef: 'district',
         cell: (element: Record<string, any>) => `${element['district']}`,
@@ -242,7 +114,7 @@ export class CctvManagementAdminComponent {
       },
     ]
 
-    switch(this.currentTabIndex) {
+    switch (this.currentTabIndex) {
       case 0: {
         TableColumns.push(
           {
@@ -308,27 +180,31 @@ export class CctvManagementAdminComponent {
   //#region (exam cycles)
   getExamCycles() {
     this.baseService.getExamCycleList()
-    .pipe(mergeMap((res: any) => {
-      return this.formatExamCycles(res)
-    }))
-    .subscribe({
-      next: (res: any) => {
-        this.examCycleList = res;
-      },
-      error: (error: HttpErrorResponse) => {
-        console.log(error);
-        this.isDataLoading = false;
-      }
-    })
+      .pipe(mergeMap((res: any) => {
+        return this.formatExamCycles(res.responseData)
+      }))
+      .subscribe({
+        next: (res: any) => {
+          // this.examCycleList = this.formatExamCycles(res.responseData);
+          this.examCycleList = res.examCyclesList;
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log(error);
+        }
+      })
   }
 
-  formatExamCycles(response: any) {
-    const examCycles: { 
-      id: number; 
-      examCycleName: string; 
-      courseId: string; 
-      status: string; 
-    }[] = []
+  formatExamCycles(response: any)  {
+    const examCycles: {
+      examCyclesList: {
+        id: number;
+        examCycleName: string;
+        courseId: string;
+        status: string;
+      }[]
+   } = {
+    examCyclesList: []
+   }
     if (response && response.length > 0) {
       response.forEach((examCycle: any) => {
         const exam = {
@@ -337,11 +213,10 @@ export class CctvManagementAdminComponent {
           courseId: examCycle.courseId,
           status: examCycle.status,
         }
-
-        examCycles.push(exam)
+        examCycles.examCyclesList.push(exam)
       })
     }
-    return examCycles
+    return of(examCycles)
   }
   //#endregion
 
@@ -361,12 +236,12 @@ export class CctvManagementAdminComponent {
   getformatInstitutesTablesData(instituteesList: any) {
     const formattedInstitutesList: {
       instituteId: number,
-          instituteName: string,
-          instituteCode: string,
-          district: string,
-          allowedForExamCentre: boolean,
-          cctvVerified: boolean,
-          ipAddress: string,
+      instituteName: string,
+      instituteCode: string,
+      district: string,
+      allowedForExamCentre: boolean,
+      cctvVerified: boolean,
+      ipAddress: string,
     }[] = [];
     if (instituteesList && instituteesList.length) {
       instituteesList.forEach((institute: any) => {
@@ -387,107 +262,65 @@ export class CctvManagementAdminComponent {
   }
 
   getTablesData(InstituteesCCTVtableData: any) {
-    // InstituteesCCTVtableData.filter((institute: any) => {})
-    switch(this.currentTabIndex) {
-      case 0 : {
-        this.instituteesTableData = InstituteesCCTVtableData.filter((institute: any) => {
+    this.instituteesTableData = InstituteesCCTVtableData.filter((institute: any) => {
+      let pendingInstitute: any = institute
+      switch (this.currentTabIndex) {
+        case 0: {
           if (institute.cctvVerified === false) {
             institute.updateStatus == true;
-            const pendingInstitute = institute;
-            pendingInstitute['status'] = 'Approve / Reject',
-            pendingInstitute['hasStyle'] = true,
+            pendingInstitute['hasStyle'] = true;
             pendingInstitute['cellStyle'] = {
-                status: {
+              status: {
                 'color': '#0074B6',
                 'cursor': 'pointer',
               },
             }
-            return pendingInstitute;
+            pendingInstitute['status'] = 'Approve / Reject';
+          } else {
+            pendingInstitute = null
           }
-        })
-        break;
-      }
-      case 1 : {
-        this.instituteesTableData = InstituteesCCTVtableData.filter((institute: any) => {
+          break;
+        }
+        case 1: {
           if (institute.cctvVerified && institute.allowedForExamCentre ) {
-            const approvedInstitute = institute;
-            approvedInstitute['status'] = 'Reject',
-            approvedInstitute['hasStyle'] = true,
-            approvedInstitute['cellStyle'] = {
-                status: {
+            institute.updateStatus == true;
+            pendingInstitute['hasStyle'] = true;
+            pendingInstitute['cellStyle'] = {
+              status: {
                 'color': '#0074B6',
                 'cursor': 'pointer',
               },
             }
-            return approvedInstitute;
+            pendingInstitute['status'] = 'Reject';
+          } else {
+            pendingInstitute = null
           }
-        })
-        break;
-      }
-      case 2 : {
-        this.instituteesTableData = InstituteesCCTVtableData.filter((institute: any) => {
-          if (institute.cctvVerified === true && institute.allowedForExamCentre === false) {
-            const approvedInstitute = institute;
-            approvedInstitute['status'] = 'Enter alternate Institute',
-            approvedInstitute['hasStyle'] = true,
-            approvedInstitute['cellStyle'] = {
-                status: {
+          break;
+        }
+        case 2: {
+          if (institute.cctvVerified && institute.allowedForExamCentre === false) {
+            institute.updateStatus == true;
+            pendingInstitute['hasStyle'] = true;
+            pendingInstitute['cellStyle'] = {
+              status: {
                 'color': '#0074B6',
                 'cursor': 'pointer',
               },
             }
-            return approvedInstitute;
+            pendingInstitute['status'] = 'Enter alternate Institute';
+          } else {
+            pendingInstitute = null
           }
-        })
-        break;
+          break
+        }
       }
-    }
+      if (pendingInstitute !== undefined) {
+        return pendingInstitute
+      }
+    })
     setTimeout(() => {
       this.isDataLoading = false;
     }, 0)
-    // this.instituteesCCTVpendingTableData = InstituteesCCTVtableData.filter((institute: any) => {
-    //   if (institute.cctvVerified === false) {
-    //     institute.updateStatus == true;
-    //     const pendingInstitute = institute;
-    //     pendingInstitute['status'] = 'Approve / Reject',
-    //     pendingInstitute['hasStyle'] = true,
-    //     pendingInstitute['cellStyle'] = {
-    //         status: {
-    //         'color': '#0074B6',
-    //         'cursor': 'pointer',
-    //       },
-    //     }
-    //     return pendingInstitute;
-    //   }
-    // })
-    // this.instituteesCCTVverifiedTableData = InstituteesCCTVtableData.filter((institute: any) => {
-    //   if (institute.cctvVerified === true && institute.allowedForExamCentre === true) {
-    //     const approvedInstitute = institute;
-    //     approvedInstitute['status'] = 'Reject',
-    //     approvedInstitute['hasStyle'] = true,
-    //     approvedInstitute['cellStyle'] = {
-    //         status: {
-    //         'color': '#0074B6',
-    //         'cursor': 'pointer',
-    //       },
-    //     }
-    //     return approvedInstitute;
-    //   }
-    // })
-    // this.instituteesCCTVrejectedTableData = InstituteesCCTVtableData.filter((institute: any) => {
-    //   if (institute.cctvVerified === true && institute.allowedForExamCentre === false) {
-    //     const approvedInstitute = institute;
-    //     approvedInstitute['status'] = 'Enter alternate Institute',
-    //     approvedInstitute['hasStyle'] = true,
-    //     approvedInstitute['cellStyle'] = {
-    //         status: {
-    //         'color': '#0074B6',
-    //         'cursor': 'pointer',
-    //       },
-    //     }
-    //     return approvedInstitute;
-    //   }
-    // })
   }
 
   //#endregion
@@ -496,7 +329,7 @@ export class CctvManagementAdminComponent {
     this.isDataLoading = true
     this.currentTabIndex = event.index;
     this.initializeTableColumns()
-    switch(event.index) {
+    switch (event.index) {
       case 0: {
         break;
       }
@@ -512,7 +345,7 @@ export class CctvManagementAdminComponent {
   //#region (approve or reject cctv status)
 
   updateInstituteCCTVStatus(event: any) {
-    switch(this.currentTabIndex) {
+    switch (this.currentTabIndex) {
       case 0: {
         this.ApproveOrRejectInstituteCCTV(event)
         break;
@@ -522,7 +355,7 @@ export class CctvManagementAdminComponent {
         break;
       }
       case 2: {
-        this.assignAlternateInstitute(event)
+        this.getNearestInstitutesList(event)
         break;
       }
     }
@@ -538,7 +371,7 @@ export class CctvManagementAdminComponent {
           value: event.ipAddress,
           validators: ['required'],
           disabled: true,
-        },{
+        }, {
           controlLable: 'Enter remarks',
           controlName: 'remarks',
           controlType: 'textArea',
@@ -547,6 +380,7 @@ export class CctvManagementAdminComponent {
           validators: []
         },
       ],
+      instituteId: event.instituteId,
       buttons: [
         {
           btnText: 'Cancel',
@@ -558,7 +392,7 @@ export class CctvManagementAdminComponent {
           btnText: 'Approve',
           positionClass: 'right',
           btnClass: 'btn-full',
-          type: 'Approved'
+          type: 'approve'
         },
         {
           btnText: 'Reject',
@@ -571,7 +405,7 @@ export class CctvManagementAdminComponent {
     this.openApproveOrRejectPopup(dialogData)
   }
 
-  RejectInstituteCCTV(event: any){
+  RejectInstituteCCTV(event: any) {
     const dialogData = {
       controls: [
         {
@@ -582,7 +416,7 @@ export class CctvManagementAdminComponent {
           value: event.ipAddress,
           validators: ['required'],
           disabled: true
-        },{
+        }, {
           controlLable: 'Enter remarks',
           controlName: 'remarks',
           controlType: 'textArea',
@@ -591,6 +425,7 @@ export class CctvManagementAdminComponent {
           validators: []
         },
       ],
+      instituteId: event.instituteId,
       buttons: [
         {
           btnText: 'Cancel',
@@ -622,7 +457,8 @@ export class CctvManagementAdminComponent {
         const formBody = {
           ipAddress: response.form.IPaddress,
           remarks: response.form.remarks,
-          status: response.type
+          status: response.type,
+          instituteId: response.instituteId
         }
         this.updateCCTVstatus(formBody)
       }
@@ -633,11 +469,11 @@ export class CctvManagementAdminComponent {
     if (formBody) {
       //add loader
       this.baseService.updateCCTVstatus$(formBody)
-      .subscribe((res: any) => {
-        if (res) {
-          this.getInstitutesCCTVtableData();
-        }
-      })
+        .subscribe((res: any) => {
+          if (res) {
+            this.getInstitutesCCTVtableData();
+          }
+        })
     }
   }
   //#endregion
@@ -645,66 +481,67 @@ export class CctvManagementAdminComponent {
   assignAlternateInstitute(event: any) {
 
     this.getNearestInstitutesList(event)
-    
-    let nearestInstitutesList = [
-      {
-        displayName: 'ABC Nursing College',
-        id: '1'
-      },{
-        displayName: 'Agra Paramedical Collgege',
-        id: '2'
-      },{
-        displayName: 'Agra Nursing College',
-        id: '3'
-      },{
-        displayName: 'XYZ Agra',
-        id: '4'
-      },
-    ]
-    const dialogRef = this.dialog.open(CctvApprovalPopupComponent, {
-      data: {
-        controls: [
-          {
-            controlLable: 'Institute District',
-            controlName: 'instituteDistrict',
-            controlType: 'input',
-            placeholder: 'Type here',
-            value: 'Agra',
-            validators: ['required'],
-            readonly: true
-          },{
-            controlLable: 'Near Institute List',
-            controlName: 'institute',
-            controlType: 'select',
-            optionsList: nearestInstitutesList,
-            value: null,
-            placeholder: 'Select the Institute',
-            validators: ['required'],
-          },
-        ],
-        buttons: [
-          {
-            btnText: 'Cancel',
-            positionClass: 'left',
-            btnClass: 'btn-outline',
-            type: 'close'
-          },
-          {
-            btnText: 'Assign',
-            positionClass: 'right',
-            btnClass: 'btn-full',
-            type: 'assign'
-          },
-        ],
-      },
-      width: '700px',
-      maxWidth: '90vw',
-      maxHeight: '90vh'
-    })
-    dialogRef.afterClosed().subscribe((response: any) => {
-      if (response) {
-      }
-    })
+
+    // let nearestInstitutesList = [
+    //   {
+    //     displayName: 'ABC Nursing College',
+    //     id: '1'
+    //   }, {
+    //     displayName: 'Agra Paramedical Collgege',
+    //     id: '2'
+    //   }, {
+    //     displayName: 'Agra Nursing College',
+    //     id: '3'
+    //   }, {
+    //     displayName: 'XYZ Agra',
+    //     id: '4'
+    //   },
+    // ]
+    // const dialogRef = this.dialog.open(CctvApprovalPopupComponent, {
+    //   data: {
+    //     controls: [
+    //       {
+    //         controlLable: 'Institute District',
+    //         controlName: 'instituteDistrict',
+    //         controlType: 'input',
+    //         placeholder: 'Type here',
+    //         value: 'Agra',
+    //         validators: ['required'],
+    //         readonly: true
+    //       }, {
+    //         controlLable: 'Near Institute List',
+    //         controlName: 'institute',
+    //         controlType: 'select',
+    //         optionsList: nearestInstitutesList,
+    //         value: null,
+    //         placeholder: 'Select the Institute',
+    //         validators: ['required'],
+    //       },
+    //     ],
+    //     instituteId: event.instituteId,
+    //     buttons: [
+    //       {
+    //         btnText: 'Cancel',
+    //         positionClass: 'left',
+    //         btnClass: 'btn-outline',
+    //         type: 'close'
+    //       },
+    //       {
+    //         btnText: 'Assign',
+    //         positionClass: 'right',
+    //         btnClass: 'btn-full',
+    //         type: 'assign'
+    //       },
+    //     ],
+    //   },
+    //   width: '700px',
+    //   maxWidth: '90vw',
+    //   maxHeight: '90vh'
+    // })
+    // dialogRef.afterClosed().subscribe((response: any) => {
+    //   if (response) {
+    //   }
+    // })
   }
 
   getNearestInstitutesList(event: any) {
@@ -713,58 +550,68 @@ export class CctvManagementAdminComponent {
       district: event.district,
     }
     this.baseService.getNearestInstitutesList(formBody)
-    .pipe(mergeMap((res: any) => {
-      return this.formatNearestInstitutesList(res)
-    }))
-    .subscribe((institutesList: any) => {
-      if (institutesList) {
-        let nearestInstitutesList = institutesList
-        const dialogRef = this.dialog.open(CctvApprovalPopupComponent, {
-          data: {
-            controls: [
-              {
-                controlLable: 'Institute District',
-                controlName: 'instituteDistrict',
-                controlType: 'input',
-                placeholder: 'Type here',
-                value: 'Agra',
-                validators: ['required'],
-                readonly: true
-              },{
-                controlLable: 'Near Institute List',
-                controlName: 'institute',
-                controlType: 'select',
-                optionsList: nearestInstitutesList,
-                value: null,
-                placeholder: 'Select the Institute',
-                validators: ['required'],
-              },
-            ],
-            buttons: [
-              {
-                btnText: 'Cancel',
-                positionClass: 'left',
-                btnClass: 'btn-outline',
-                type: 'close'
-              },
-              {
-                btnText: 'Assign',
-                positionClass: 'right',
-                btnClass: 'btn-full',
-                type: 'assign'
-              },
-            ],
-          },
-          width: '700px',
-          maxWidth: '90vw',
-          maxHeight: '90vh'
-        })
-        dialogRef.afterClosed().subscribe((response: any) => {
-          if (response) {
-          }
-        })
-      }
-    })
+      // .pipe(mergeMap((res: any) => {
+      //   const institute = {
+      //     institutesList: this.formatNearestInstitutesList(res.responseData)
+      //   }
+      //   return institute
+      // }))
+      .subscribe((response: any) => {
+        const institutesList = this.formatNearestInstitutesList(response.responseData)
+        if (institutesList) {
+          let nearestInstitutesList = institutesList
+          const dialogRef = this.dialog.open(CctvApprovalPopupComponent, {
+            data: {
+              controls: [
+                {
+                  controlLable: 'Institute District',
+                  controlName: 'instituteDistrict',
+                  controlType: 'input',
+                  placeholder: 'Type here',
+                  value: 'Agra',
+                  validators: ['required'],
+                  readonly: true
+                }, {
+                  controlLable: 'Near Institute List',
+                  controlName: 'institute',
+                  controlType: 'select',
+                  optionsList: nearestInstitutesList,
+                  value: null,
+                  placeholder: 'Select the Institute',
+                  validators: ['required'],
+                },
+              ],
+              instituteId: event.instituteId,
+              buttons: [
+                {
+                  btnText: 'Cancel',
+                  positionClass: 'left',
+                  btnClass: 'btn-outline',
+                  type: 'close'
+                },
+                {
+                  btnText: 'Assign',
+                  positionClass: 'right',
+                  btnClass: 'btn-full',
+                  type: 'assign'
+                },
+              ],
+            },
+            width: '700px',
+            maxWidth: '90vw',
+            maxHeight: '90vh'
+          })
+          dialogRef.afterClosed().subscribe((response: any) => {
+            if (response) {
+              const formBody = {
+                instituteID: response.instituteId,
+                alternateInstituteId: response.form.institute
+              }
+              this.assignAlternateExamCenter(formBody)
+            }
+          })
+        }
+      })
   }
 
   formatNearestInstitutesList(institutes: any) {
@@ -772,7 +619,7 @@ export class CctvManagementAdminComponent {
       id: number,
       instituteName: string,
       instituteCode: string,
-    } [] = [];
+    }[] = [];
     if (institutes && institutes.length) {
       institutes.forEach((institute: any) => {
         const formattedInstitute = {
@@ -784,6 +631,13 @@ export class CctvManagementAdminComponent {
       })
     }
     return formattedInstitutesList
+  }
+
+  assignAlternateExamCenter(formBody: any) {
+    this.baseService.assignAlternateExamCenter$(formBody)
+    .subscribe(() => {
+      this.getInstitutesCCTVtableData()
+    })
   }
 
   cancel() {

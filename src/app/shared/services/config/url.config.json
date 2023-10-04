@@ -36,9 +36,9 @@
             "GET_ALL_INSTITUTE_COURSE_MAPPING": "/v1/admin/instituteCourseMap/all"
         },
         "EXAM_CENTER": {
-            "UPDATE_CCTV_STATUS": "/api/v1/admin/updateCctvStatus",
-            "ASSIGN_ALTERNATE_EXAM_CENTER": "/api/v1/admin/assignAlternate",
-            "VERIFIED_EXAM_CENTERS": "/api/v1/admin/verifiedExamCenters"
+            "UPDATE_CCTV_STATUS": "/v1/admin/updateCctvStatus",
+            "ASSIGN_ALTERNATE_EXAM_CENTER": "/v1/admin/assignAlternate",
+            "VERIFIED_EXAM_CENTERS": "/v1/admin/verifiedExamCenters"
         }
     }
 }

@@ -717,15 +717,15 @@ getEnrollmentList(request: any) {
   //#region (CCTV management admin) 
   updateCCTVstatus$(request: any) {
     const requestParam: RequestParam = {
-      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.UPDATE_CCTV_STATUS,
-      data: request,
+      url: `${this.baseUrl}${this.configService.urlConFig.URLS.EXAM_CENTER.UPDATE_CCTV_STATUS}/${request.instituteId}?ipAddress=${request.ipAddress}&remarks=${request.remarks}&status=${request.status}`,
+      data: {},
     }
     return this.put(requestParam);
   }
 
   assignAlternateExamCenter$(request: any) {
     const requestParam: RequestParam = {
-      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.ASSIGN_ALTERNATE_EXAM_CENTER,
+      url: `${this.baseUrl}${this.configService.urlConFig.URLS.EXAM_CENTER.ASSIGN_ALTERNATE_EXAM_CENTER}/${request.instituteID}?alternateInstituteId=${request.alternateInstituteId}`,
       data: request,
     }
     return this.put(requestParam);
@@ -733,7 +733,7 @@ getEnrollmentList(request: any) {
 
   getNearestInstitutesList(formBody: any) {
     const requestParam: RequestParam = {
-      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.VERIFIED_EXAM_CENTERS,
+      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.VERIFIED_EXAM_CENTERS + '?district=' + formBody.district,
       data: formBody,
     }
     return this.get(requestParam);
@@ -754,6 +754,59 @@ getInstituteById(id: string | number) {
   return this.get(requestParam);
 }
 
+  //#region (candidate portal)
+  getResults() {
+    const response = [
+      {
+        examName: 'Exam 1', 
+        internalMarks: '45', 
+        externalMarks: '45',
+        totalMarks: '90',
+        status: 'Pass'
+      },{
+        examName: 'Exam 2', 
+        internalMarks: '45', 
+        externalMarks: '45',
+        totalMarks: '95',
+        status: 'Pass',
+      },{
+        examName: 'Exam 3', 
+        internalMarks: '25', 
+        externalMarks: '5',
+        totalMarks: '30',
+        status: 'Fail',
+      },
+    ]
+    return of(response)
+  }
+
+  formateResultDetails() {
+    const response = [
+
+    {
+      examName: 'Exam 1', 
+      internalMarks: '45', 
+      externalMarks: '45',
+      totalMarks: '90',
+      status: 'Pass',
+      hasStyle: true
+    },{
+      examName: 'Exam 2', 
+      internalMarks: '45', 
+      externalMarks: '45',
+      totalMarks: '95',
+      status: 'Pass',
+    },{
+      examName: 'Exam 3', 
+      internalMarks: '25', 
+      externalMarks: '5',
+      totalMarks: '30',
+      status: 'Fail',
+    },
+    ]
+    return of(response)
+  }
+  //#endregion
 getIntermediateSubjectList() {
   const requestParam: RequestParam = {
     url: this.baseUrl + this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_INTERMEDIATE_SUBJECT_LIST,

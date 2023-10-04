@@ -27,6 +27,16 @@ export const Tabs = {
             id: 3,
             name: 'Rejected'
         },
-    ]
+    ],
+    'Fee_Management': [
+        {
+            id: 1,
+            name: 'Pending'
+        },
+        {
+            id: 2,
+            name: 'Paid'
+        },
+    ],
 
 }
