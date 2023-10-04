@@ -21,14 +21,14 @@ import { SharedQuestionPaperComponent } from './components/shared-ques-paper/sha
   declarations: [
     HeaderComponent,
     SharedTableComponent,
-     SharedSkeletonLoadingComponent,
+    SharedSkeletonLoadingComponent,
     // SharedDialogOverlayComponent,
     ConfirmationPopupComponent,
     CommonLayoutComponent,
     BreadcrumbComponent,
     ConformationDialogComponent,
     UploadDialogComponent,
-    SharedQuestionPaperComponent
+    SharedQuestionPaperComponent,
   ],
   imports: [
     CommonModule,

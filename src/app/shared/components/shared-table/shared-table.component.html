@@ -258,7 +258,7 @@
 
  
 
-    <mat-paginator *ngIf="isPageable && !isServerSidePagination" [pageSizeOptions]="pageSizeOptions? pageSizeOptions: [10,20,50]" showFirstLastButtons
+    <mat-paginator *ngIf="isPageable && !isServerSidePagination" [pageSizeOptions]="pageSizeOptions.length > 0? pageSizeOptions: [10,20,50]" showFirstLastButtons
 
         aria-label="Select page..">
 

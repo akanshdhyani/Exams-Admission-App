@@ -54,6 +54,7 @@ export class CctvApprovalPopupComponent {
       const data = {
         form: this.dynamicFormGroup.value,
         type: type,
+        instituteId: this.dialogDetails.instituteId
       }
       this.dialogRef.close(data)
     }

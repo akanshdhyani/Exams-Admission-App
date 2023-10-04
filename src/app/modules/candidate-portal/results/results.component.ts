@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CandidatePortalService } from '../services/candidate-portal.service';
+import { mergeMap, of } from 'rxjs';
+import { BaseService } from 'src/app/service/base.service';
 
 @Component({
   selector: 'app-results',
@@ -64,45 +65,7 @@ export class ResultsComponent implements OnInit {
     },
   ]
 
-  examTableData= [
-    {
-      examName: 'Exam 1', 
-      internalMarks: '45', 
-      externalMarks: '45',
-      totalMarks: '90',
-      status: 'Pass',
-      hasStyle: true,
-      cellStyle: {
-          status: {
-          'color': 'green'
-        },
-      }
-    },{
-      examName: 'Exam 2', 
-      internalMarks: '45', 
-      externalMarks: '45',
-      totalMarks: '95',
-      status: 'Pass',
-      hasStyle: true,
-      cellStyle: {
-          status: {
-          'color': 'green'
-        },
-      }
-    },{
-      examName: 'Exam 3', 
-      internalMarks: '25', 
-      externalMarks: '5',
-      totalMarks: '30',
-      status: 'Fail',
-      hasStyle: true,
-      cellStyle: {
-          status: {
-          'color': 'red'
-        },
-      }
-    },
-  ]
+  examTableData= []
 
   isHallTicket = true
   //#endregion
@@ -110,7 +73,7 @@ export class ResultsComponent implements OnInit {
   //#region (constructor)
   constructor(
     private router: Router,
-    private candidatePortalService: CandidatePortalService
+    private baseService: BaseService
   ) {}
   //#endregion
 
@@ -124,18 +87,53 @@ export class ResultsComponent implements OnInit {
   }
 
   getExamResults() {
-    this.candidatePortalService.getResults()
-    // .pipe(mergeMap((res: any) => {
-    //   return this.formateResultDetails(res)
-    // })).subscribe((results: any)) {
-
-    // }
+    this.baseService.getResults()
+    .pipe(mergeMap((res: any) => {
+      return this.formateResultDetails(res)
+    })).subscribe((results: any) => {
+      this.examTableData = results.examResults
+    })
   }
 
-  // formateResultDetails(examData: any) {
-  //   let formatedData = examData
-  //   return formatedData;
-  // }
+  formateResultDetails(results: any) {
+    const exams: {
+      examResults: {
+        examName: string,
+        internalMarks: string,
+        externalMarks: string,
+        totalMarks: string,
+        status: string,
+        hasStyle: boolean,
+        cellStyle: {
+          status: {
+            color: string
+          }
+        },
+      }[]
+    } = {
+      examResults: []
+    }
+
+    if (results) {
+      results.forEach((result: any) => {
+        const examResult = {
+          examName: result.examName,
+          internalMarks: result.internalMarks,
+          externalMarks: result.externalMarks,
+          totalMarks: result.totalMarks,
+          status: result.status,
+          hasStyle: true,
+          cellStyle: {
+            status: {
+              color: result.status === 'Fail' ? 'red' : 'green'
+            }
+          },
+        }
+        exams.examResults.push(examResult)
+      })
+    }
+    return of(exams);
+  }
 
   //#endregion
 

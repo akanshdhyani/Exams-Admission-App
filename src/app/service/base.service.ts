@@ -694,6 +694,7 @@ enrollStudent(formData: FormData): Observable<ServerResponse> {
   return this.multipartPost(requestParam);
 }
 
+
 /** institute login */
 getStudentDetailsById(id: string | number) {
   const requestParam: RequestParam = {
@@ -712,21 +713,19 @@ getEnrollmentList(request: any) {
 }
 
 /** verify student(Approve/reject) */
-updateStudentEnrollmentStatus() {
-}
-  
+
   //#region (CCTV management admin) 
   updateCCTVstatus$(request: any) {
     const requestParam: RequestParam = {
-      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.UPDATE_CCTV_STATUS,
-      data: request,
+      url: `${this.baseUrl}${this.configService.urlConFig.URLS.EXAM_CENTER.UPDATE_CCTV_STATUS}/${request.instituteId}?ipAddress=${request.ipAddress}&remarks=${request.remarks}&status=${request.status}`,
+      data: {},
     }
     return this.put(requestParam);
   }
 
   assignAlternateExamCenter$(request: any) {
     const requestParam: RequestParam = {
-      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.ASSIGN_ALTERNATE_EXAM_CENTER,
+      url: `${this.baseUrl}${this.configService.urlConFig.URLS.EXAM_CENTER.ASSIGN_ALTERNATE_EXAM_CENTER}/${request.instituteID}?alternateInstituteId=${request.alternateInstituteId}`,
       data: request,
     }
     return this.put(requestParam);
@@ -734,7 +733,7 @@ updateStudentEnrollmentStatus() {
 
   getNearestInstitutesList(formBody: any) {
     const requestParam: RequestParam = {
-      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.VERIFIED_EXAM_CENTERS,
+      url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_CENTER.VERIFIED_EXAM_CENTERS + '?district=' + formBody.district,
       data: formBody,
     }
     return this.get(requestParam);
@@ -825,5 +824,132 @@ deleteQuestionPaper(questionPaperId: any): Observable<ServerResponse>  {
     url: `${this.baseUrl}${this.configService.urlConFig.URLS.QUESTION_PAPER.DELETE}/${questionPaperId}`
   }
   return this.delete(reqParam);
+  //#region (candidate portal)
 }
+  getResults() {
+    const response = [
+      {
+        examName: 'Exam 1', 
+        internalMarks: '45', 
+        externalMarks: '45',
+        totalMarks: '90',
+        status: 'Pass'
+      },{
+        examName: 'Exam 2', 
+        internalMarks: '45', 
+        externalMarks: '45',
+        totalMarks: '95',
+        status: 'Pass',
+      },{
+        examName: 'Exam 3', 
+        internalMarks: '25', 
+        externalMarks: '5',
+        totalMarks: '30',
+        status: 'Fail',
+      },
+    ]
+    return of(response)
+  }
+
+  formateResultDetails() {
+    const response = [
+
+    {
+      examName: 'Exam 1', 
+      internalMarks: '45', 
+      externalMarks: '45',
+      totalMarks: '90',
+      status: 'Pass',
+      hasStyle: true
+    },{
+      examName: 'Exam 2', 
+      internalMarks: '45', 
+      externalMarks: '45',
+      totalMarks: '95',
+      status: 'Pass',
+    },{
+      examName: 'Exam 3', 
+      internalMarks: '25', 
+      externalMarks: '5',
+      totalMarks: '30',
+      status: 'Fail',
+    },
+    ]
+    return of(response)
+  }
+  //#endregion
+getIntermediateSubjectList() {
+  const requestParam: RequestParam = {
+    url: this.baseUrl + this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_INTERMEDIATE_SUBJECT_LIST,
+    data: {}
+  }
+  return this.get(requestParam);
+}
+
+updateStudentEnrollmentStatus(request: any) {
+  const {id, status, remarks} = request;
+  const requestParam: RequestParam = {
+    url: `${this.baseUrl + this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.VERIFY_STUDENT}/${id}/verify?status=${status}&remarks=${remarks}`,
+    data: {}
+  }
+  return this.put(requestParam);
+}
+
+updateEnrollmentDetails(request: object, id: string | number) {
+  const requestParam: RequestParam = {
+    url: `${this.baseUrl}${this.configService.urlConFig.URLS.STUDENT_ENROLLMENT.GET_INSTITUTE_BY_ID}/${id}`,
+     data: request
+  }
+  return this.multipartPut(requestParam);
+}
+
+// getIntermediateSubjects(): Observable<any> {
+//   return of([
+//     'Physics', 'Chemistry', 'Biology', 'Mathematics','Biotechnology','Economics','Political Science', 'History', 'Geography', 'Civics', 'Business studies', 'Accountancy', 'Home science', 'Sociology', 'Psychology', 'Philosophy', 'Health Care Science - Vocational Stream', 'Science', 'Literature', 'Education', 'English Core', 'Englist Elective', 'Without English'
+//   ])
+// }
+
+getIntermediateStreamList(): Observable<any> {
+  return of([
+    {
+      id: 1, 
+      name: 'U.P. BOARD'
+    }
+  ])
+}
+
+getIntermediatePassedBoard(): Observable<any> {
+  return of([
+    {
+      name: 'U.P. BOARD OF HIGH SCHOOL, ALLAHABAD',
+      id: 1
+    }
+  ])
+}
+
+getExamCycleDetails(id: string): Observable<ServerResponse> {
+  const requestParam: RequestParam = {
+    url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_MANAGEMENT.GET_EXAM_CYCLE_BY_ID + `/${id}`,
+    data: {}
+  }
+  return this.get(requestParam);
+}
+
+deleteExamCycle(id: string): Observable<ServerResponse> {
+  const requestParam: RequestParam = {
+    url: this.baseUrl + this.configService.urlConFig.URLS.EXAM_MANAGEMENT.DELETE_EXAM_CYCLE + `/${id}`,
+    data: {}
+  }
+  return this.delete(requestParam);
+}
+
+getAllInstitutes(): Observable<ServerResponse> {
+  const requestParam: RequestParam = {
+    url: this.baseUrl + this.configService.urlConFig.URLS.INSTITUTE_COURSE_MAPPING.GET_ALL_INSTITUTE_COURSE_MAPPING,
+    data: {}
+  }
+  return this.get(requestParam);
+}
+
+
 }

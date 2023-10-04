@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CandidatePortalService } from '../services/candidate-portal.service';
+import { mergeMap, of } from 'rxjs';
+import { BaseService } from 'src/app/service/base.service';
 
 @Component({
   selector: 'app-request-revalution',
@@ -17,7 +19,7 @@ export class RequestRevalutionComponent implements OnInit {
       lastName: 'Kumaravel',
       roolNumber: '12345 89078',
       DOB: '24-01-1998',
-    }, 
+    },
     hallTicketDetqails: {
       courseName: 'M. Sc. Nursing',
       courseYear: '2022 - 2023'
@@ -34,7 +36,7 @@ export class RequestRevalutionComponent implements OnInit {
       cellStyle: {
         'background-color': '#0000000a', 'width': '30px', 'color': '#00000099'
       },
-    },{
+    }, {
       header: 'Name of exam',
       columnDef: 'examName',
       cell: (element: Record<string, any>) => `${element['examName']}`,
@@ -42,28 +44,28 @@ export class RequestRevalutionComponent implements OnInit {
         'background-color': '#0000000a',
         'color': '#00000099'
       }
-    },{
+    }, {
       header: 'Internal mark',
       columnDef: 'internalMarks',
       cell: (element: Record<string, any>) => `${element['internalMarks']}`,
       cellStyle: {
         'background-color': '#0000000a', 'width': '135px', 'color': '#00000099'
       }
-    },{
+    }, {
       header: 'External mark',
       columnDef: 'externalMarks',
       cell: (element: Record<string, any>) => `${element['externalMarks']}`,
       cellStyle: {
         'background-color': '#0000000a', 'width': '135px', 'color': '#00000099'
       }
-    },{
+    }, {
       header: 'Total marks',
       columnDef: 'totalMarks',
       cell: (element: Record<string, any>) => `${element['totalMarks']}`,
       cellStyle: {
         'background-color': '#0000000a', 'width': '135px', 'color': '#00000099'
       }
-    },{
+    }, {
       header: 'Status',
       columnDef: 'status',
       cell: (element: Record<string, any>) => `${element['status']}`,
@@ -73,45 +75,7 @@ export class RequestRevalutionComponent implements OnInit {
     },
   ]
 
-  examTableData= [
-    {
-      examName: 'Exam 1', 
-      internalMarks: '45', 
-      externalMarks: '45',
-      totalMarks: '90',
-      status: 'Pass',
-      hasStyle: true,
-      cellStyle: {
-          status: {
-          'color': 'green'
-        },
-      }
-    },{
-      examName: 'Exam 2', 
-      internalMarks: '45', 
-      externalMarks: '45',
-      totalMarks: '95',
-      status: 'Pass',
-      hasStyle: true,
-      cellStyle: {
-          status: {
-          'color': 'green'
-        },
-      }
-    },{
-      examName: 'Exam 3', 
-      internalMarks: '25', 
-      externalMarks: '5',
-      totalMarks: '30',
-      status: 'Fail',
-      hasStyle: true,
-      cellStyle: {
-          status: {
-          'color': 'red'
-        },
-      }
-    },
-  ]
+  examTableData = []
 
   isHallTicket = true
 
@@ -125,8 +89,9 @@ export class RequestRevalutionComponent implements OnInit {
   //#region (constructor)
   constructor(
     private router: Router,
-    private candidatePortalService: CandidatePortalService
-  ) {}
+    private candidatePortalService: CandidatePortalService,
+    private baseService: BaseService,
+  ) { }
   //#endregion
 
   ngOnInit(): void {
@@ -139,18 +104,54 @@ export class RequestRevalutionComponent implements OnInit {
   }
 
   getExamResults() {
-    this.candidatePortalService.getResults()
-    // .pipe(mergeMap((res: any) => {
-    //   return this.formateResultDetails(res)
-    // })).subscribe((results: any)) {
-
-    // }
+    this.baseService.getResults()
+      .pipe(mergeMap((res: any) => {
+        return this.formateResultDetails(res)
+      })).subscribe((results: any) => {
+        this.examTableData = results.examResults
+      })
   }
 
-  // formateResultDetails(results: any) {
-  //   let formatedData = results
-  //   return formatedData;
-  // }
+  formateResultDetails(results: any) {
+    const exams: {
+      examResults: {
+        examName: string,
+        internalMarks: string,
+        externalMarks: string,
+        totalMarks: string,
+        status: string,
+        hasStyle: boolean,
+        cellStyle: {
+          status: {
+            color: string
+          }
+        },
+      }[]
+    } = {
+      examResults: []
+    }
+
+    if (results) {
+      results.forEach((result: any) => {
+        const examResult = {
+          examName: result.examName,
+          internalMarks: result.internalMarks,
+          externalMarks: result.externalMarks,
+          totalMarks: result.totalMarks,
+          status: result.status,
+          hasStyle: true,
+          cellStyle: {
+            status: {
+              color: result.status === 'Fail' ? 'red' : 'green'
+            }
+          },
+        }
+        exams.examResults.push(examResult)
+      })
+    }
+
+    return of(exams);
+  }
 
   //#endregion
 
@@ -166,12 +167,12 @@ export class RequestRevalutionComponent implements OnInit {
     this.candidatePortalService.requestRevolution(formatedData)
     // .subscribe((response: any) => {
     //   if(response) {
-      this.router.navigateByUrl('/candidate-portal')
+    this.router.navigateByUrl('/candidate-portal')
     //   }
     // })
   }
 
-  formateRevaluationData() {}
+  formateRevaluationData() { }
   //#endregion
 
   onSelectedRows(event: any[]) {
