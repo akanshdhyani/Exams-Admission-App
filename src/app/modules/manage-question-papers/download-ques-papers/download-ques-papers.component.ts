@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { QuestionPaper } from 'src/app/interfaces/interfaces';
-import { ManageQuestionPaperService } from '../services/manage-question-paper.service';
+import { BaseService } from 'src/app/service/base.service';
 
 @Component({
   selector: 'app-download-ques-papers',
@@ -11,7 +11,7 @@ export class DownloadQuesPapersComponent {
   selectedExamCycleId: any;
   cctvVerificationStatus = 'Verified'
   constructor(
-    private questionPaperService: ManageQuestionPaperService,
+    private baseService: BaseService,
   ) {
 
   }
@@ -104,7 +104,7 @@ export class DownloadQuesPapersComponent {
   }
 
   downloadQuestionPaper(questionPaperId: any) {
-    this.questionPaperService.downloadQuestionPaper(questionPaperId).subscribe({
+    this.baseService.downloadQuestionPaper(questionPaperId).subscribe({
       next: (response) => {
         console.log("Download question paper response", response);
       },
@@ -115,7 +115,7 @@ export class DownloadQuesPapersComponent {
   }
 
   getQuestionPapers(examCycleId: any, examId: any) {
-    this.questionPaperService.getAllQuestionPapers(examCycleId, examId).subscribe({
+    this.baseService.getAllQuestionPapers(examCycleId, examId).subscribe({
       next: (response) => {
         console.log("All Question Papers response", response);
       },
@@ -126,7 +126,7 @@ export class DownloadQuesPapersComponent {
   }
 
   viewQuestionPaper(questionPaperId: any) {
-    this.questionPaperService.getQuestionPaperPreviewUrl(questionPaperId).subscribe({
+    this.baseService.getQuestionPaperPreviewUrl(questionPaperId).subscribe({
       next: (response) => {
         console.log("question paper preview url response", response);
       },

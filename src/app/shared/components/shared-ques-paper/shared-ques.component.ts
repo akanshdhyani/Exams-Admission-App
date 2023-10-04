@@ -50,9 +50,9 @@ export class SharedQuestionPaperComponent {
     }
   }
 
-  emitUploadQuesPaper(questionPaper: QuestionPaper) {
+  emitUploadQuesPaper(event: QuestionPaper) {
     if (this.examCycleControl.valid) {
-      this.uploadQuesPaper.emit(questionPaper);
+      this.uploadQuesPaper.emit(event);
     }
   }
 

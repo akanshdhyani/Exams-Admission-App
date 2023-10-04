@@ -7,6 +7,28 @@
   <app-shared-ques-paper [examCycleList]="examCycleList" [examCycleControl]="examCycleControl"
   [questionPapersList]="questionPapersList"
   (uploadQuesPaper)="onUploadQuesPaper($event)"></app-shared-ques-paper>
+  <span class="error" style="color: red;">{{ fileUploadError }}</span>
+
+  <!-- <mat-card-content>
+    <p>
+        <mat-list role="list" >
+            <mat-list-item style="background-color: #f4f4f4; margin-bottom: 1rem;" role="listitem"
+                *ngFor="let qp of questionPapersList.questionPaperList" >
+                <div class="question-paper-item-container"> 
+                    <span>{{qp}}</span>
+                    <span class="button-group" >
+                        <button type="button" class="cancel-button" mat-stroked-button
+                            color="primary" (click)="viewQuestionPaper(qp.id)">View</button>
+                        <button class="next-button" mat-raised-button color="primary"
+                            (click)="downloadQuestionPaper(qp.id)">Download</button>
+                    </span>
+
+                </div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+        </mat-list>
+    </p>
+</mat-card-content> -->
 
 
 </div>
