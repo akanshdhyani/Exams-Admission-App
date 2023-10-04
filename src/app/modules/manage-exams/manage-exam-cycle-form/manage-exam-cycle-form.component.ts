@@ -84,6 +84,7 @@ export class ManageExamCycleFormComponent {
     next: (res) => {
       this.exams = res.responseData;
       console.log(res.responseData);
+      this.initializeFormValues();
     }
   })
  }
@@ -95,6 +96,7 @@ export class ManageExamCycleFormComponent {
     'startDate': this.examCycleDetails?.startDate,
     'endDate': this.examCycleDetails?.endDate,
   })
+  
  }
 
  getExamCycleDetailsById() {
@@ -103,7 +105,7 @@ export class ManageExamCycleFormComponent {
         this.examCycleDetails = res.responseData;
         console.log("examCycleDetails =>", this.examCycleDetails);
         this.getExamsByExamCycle();
-        this.initializeFormValues();
+       
     },
     error:(err: HttpErrorResponse) => {
       console.log(err);
@@ -137,7 +139,7 @@ export class ManageExamCycleFormComponent {
    this.examsToAdd.push(examDetail);
  }
 
-  onSubmit(){
+  onSubmit(value: any){
     const {examCycleName, courseId, startDate, endDate} = this.createExamCycle.value;
     const examCycleDetail= {
       examCycleName,

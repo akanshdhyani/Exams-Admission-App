@@ -3,7 +3,7 @@
   <div class="secondary-container">
     <form
         [formGroup]="createExamCycle"
-        (ngSubmit)="onSubmit()"
+        (ngSubmit)="onSubmit(createExamCycle.value)"
       >
       <div class="body-header">
         <h2 class="title-header">{{examcycleId !== undefined ? 'View' : 'Add'}}</h2>
@@ -53,8 +53,8 @@
                       matInput
                       [matDatepicker]="picker"
                       formControlName="startDate"
-                      [min]="pickerMinDate"
-                      (dateInput)="startDateChangeEvent('input', $event)" (dateChange)="startDateChangeEvent('change', $event)"
+                      (dateInput)="startDateChangeEvent('input', $event)" 
+                      (dateChange)="startDateChangeEvent('change', $event)"
                     />
                     <mat-datepicker-toggle
                       matIconSuffix
@@ -71,8 +71,8 @@
                       matInput
                       [matDatepicker]="picker1"
                       formControlName="endDate"
-                      [min]="pickerMinDate"
-                      (dateInput)="endDateChangeEvent('input', $event)" (dateChange)="endDateChangeEvent('change', $event)"
+                      (dateInput)="endDateChangeEvent('input', $event)"
+                       (dateChange)="endDateChangeEvent('change', $event)"
                     />
                     <mat-datepicker-toggle
                       matIconSuffix
