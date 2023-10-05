@@ -4,7 +4,7 @@
         "KEYCLOAK_LOGIN": "/api/v1/user/keycloak/usrlogin",
         "QUESTION_PAPER": {
             "GET_ALL": "/v1/questionPaper/list",
-            "UPLOAD": "/v1/questionPaper/upload",
+            "UPLOAD": "/questionPaper/upload",
             "DOWNLOAD": "/v1/questionPaper/download",
             "GET_BY_ID": "/v1/questionPaper",
             "GET_PREVIEW_URL": "/v1/questionPaper/preview",
