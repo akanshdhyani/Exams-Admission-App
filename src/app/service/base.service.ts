@@ -146,52 +146,28 @@ export class BaseService extends HttpService {
           studentName: "Vidhu",
           courseName: "BSC GNM",
           rollNo: "2020",
-          attendancePercentage: "3",
-          hasStyle: true,
-          cellStyle: {
-            viewHallTicket: {
-              'color': '#0074B6'
-            }
-          }
+          attendancePercentage: "3"
         },
         {
           id: 0,
           studentName: "Vidhu",
           courseName: "BSC GNM",
           rollNo: "2020",
-          attendancePercentage: "3",
-          hasStyle: true,
-          cellStyle: {
-            viewHallTicket: {
-              'color': '#0074B6'
-            }
-          }
+          attendancePercentage: "3"
         },
         {
           id: 0,
           studentName: "Vidhu",
           courseName: "BSC GNM",
           rollNo: "2020",
-          attendancePercentage: "3",
-          hasStyle: true,
-          cellStyle: {
-            viewHallTicket: {
-              'color': '#0074B6'
-            }
-          }
+          attendancePercentage: "3"
         },
         {
           id: 0,
           studentName: "Vidhu",
           courseName: "BSC GNM",
           rollNo: "2020",
-          attendancePercentage: "3",
-          hasStyle: true,
-          cellStyle: {
-            viewHallTicket: {
-              'color': '#0074B6'
-            }
-          }
+          attendancePercentage: "3"
         },
       ]
     )
@@ -273,21 +249,21 @@ export class BaseService extends HttpService {
           studentName: 'Arun',
           courseName: 'XXXX',
           exams: 'Exam 1',
-          internalMarks: '49',
+          internalMarks: '49'
           
         },
         {
           studentName: 'Aman',
           courseName: 'XXXX',
           exams: 'Exam 1',
-          internalMarks: '45',
+          internalMarks: '45'
           
         },
         {
           studentName: 'Devaprathap N.',
           courseName: 'XXXX',
           exams: 'Exam 1',
-          internalMarks: '44',
+          internalMarks: '44'
           
         },
     
@@ -302,26 +278,14 @@ export class BaseService extends HttpService {
         email: 'name@gmail.com',
         phoneNumber: '9765454333',
         role: 'Institute',
-        accountStatus: 'Active',
-        hasStyle: true,
-        cellStyle: {
-          viewExamCycle: {
-            'color': '#0074B6'
-          }
-        }
+        accountStatus: 'Active'
       },
       {
         fullName: 'D. Nagendra',
         email: 'name@gmail.com',
         phoneNumber: '9765454333',
         role: 'Admin',
-        accountStatus: 'Active',
-        hasStyle: true,
-        cellStyle: {
-          viewExamCycle: {
-            'color': '#0074B6'
-          }
-        }
+        accountStatus: 'Active'
       },
   ])
   }
@@ -335,13 +299,7 @@ export class BaseService extends HttpService {
         registerStudentsCount: '10',
         paidStudentsCount: '10',
         totalFeePaid: '10000',
-        viewList: 'View list',
-        hasStyle: true,
-        cellStyle: {
-          viewList: {
-            'color': '#0074B6'
-          },
-        }
+        viewList: 'View list'
       },
       {
         instituteName: 'NEW COLLEGE OF NURSING',
@@ -350,13 +308,7 @@ export class BaseService extends HttpService {
         registerStudentsCount: '25',
         paidStudentsCount: '25',
         totalFeePaid: '25000',
-        viewList: 'View list',
-        hasStyle: true,
-        cellStyle: {
-          viewList: {
-            'color': '#0074B6'
-          },
-        }
+        viewList: 'View list'
       },
       {
         instituteName: 'NEW COLLEGE OF NURSING',
@@ -365,13 +317,7 @@ export class BaseService extends HttpService {
         registerStudentsCount: '30',
         paidStudentsCount: '28',
         totalFeePaid: '28000',
-        viewList: 'View list',
-        hasStyle: true,
-        cellStyle: {
-          viewList: {
-            'color': '#0074B6'
-          },
-        }
+        viewList: 'View list'
       },
       {
         instituteName: 'NEW COLLEGE OF NURSING',
@@ -380,13 +326,7 @@ export class BaseService extends HttpService {
         registerStudentsCount: '50',
         paidStudentsCount: '40',
         totalFeePaid: '40000',
-        viewList: 'View list',
-        hasStyle: true,
-        cellStyle: {
-          viewList: {
-            'color': '#0074B6'
-          },
-        }
+        viewList: 'View list'
       },
       {
         instituteName: 'NEW COLLEGE OF NURSING',
@@ -395,13 +335,7 @@ export class BaseService extends HttpService {
         registerStudentsCount: '30',
         paidStudentsCount: '20',
         totalFeePaid: '28000',
-        viewList: 'View list',
-        hasStyle: true,
-        cellStyle: {
-          viewList: {
-            'color': '#0074B6'
-          },
-        }
+        viewList: 'View list'
       },
       {
         instituteName: 'NEW COLLEGE OF NURSING',
@@ -410,13 +344,7 @@ export class BaseService extends HttpService {
         registerStudentsCount: '25',
         paidStudentsCount: '25',
         totalFeePaid: '25000',
-        viewList: 'View list',
-        hasStyle: true,
-        cellStyle: {
-          viewList: {
-            'color': '#0074B6'
-          },
-        }
+        viewList: 'View list'
       },
       {
         instituteName: 'NEW COLLEGE OF NURSING',
@@ -425,13 +353,7 @@ export class BaseService extends HttpService {
         registerStudentsCount: '10',
         paidStudentsCount: '10',
         totalFeePaid: '10000',
-        viewList: 'View list',
-        hasStyle: true,
-        cellStyle: {
-          viewList: {
-            'color': '#0074B6'
-          },
-        }
+        viewList: 'View list'
       },
       {
         instituteName: 'NEW COLLEGE OF NURSING',
@@ -440,13 +362,7 @@ export class BaseService extends HttpService {
         registerStudentsCount: '25',
         paidStudentsCount: '25',
         totalFeePaid: '25000',
-        viewList: 'View list',
-        hasStyle: true,
-        cellStyle: {
-          viewList: {
-            'color': '#0074B6'
-          },
-        }
+        viewList: 'View list'
       }
     ])
   }
@@ -459,13 +375,7 @@ export class BaseService extends HttpService {
         exams: 'Exam ',
         numberOfExams: '',
         fee: '000',
-        status: 'Paid',
-        hasStyle: true,
-        cellStyle: {
-          status: {
-            'color': '#1D8923'
-          },
-        }
+        status: 'Paid'
       },
       {
         studentName: 'Madison Tran',
@@ -474,13 +384,7 @@ export class BaseService extends HttpService {
         exams: 'Exam 1,Exam 2,Exam 3 ',
         numberOfExams: '3',
         fee: '3000',
-        status: 'Paid',
-        hasStyle: true,
-        cellStyle: {
-          status: {
-            'color': '#1D8923'
-          },
-        }
+        status: 'Paid'
       },
       {
         studentName: 'Raci Verma',
@@ -489,13 +393,7 @@ export class BaseService extends HttpService {
         exams: 'Exam 2',
         numberOfExams: '1',
         fee: '1000',
-        status: 'Paid',
-        hasStyle: true,
-        cellStyle: {
-          status: {
-            'color': '#1D8923'
-          },
-        }
+        status: 'Paid'
       },
       {
         studentName: 'Sumalatha Krishna',
@@ -504,13 +402,7 @@ export class BaseService extends HttpService {
         exams: 'Exam 3',
         numberOfExams: '1',
         fee: '1000',
-        status: 'Paid',
-        hasStyle: true,
-        cellStyle: {
-          status: {
-            'color': '#1D8923'
-          },
-        }
+        status: 'Paid'
       },
       {
         studentName: 'Kanaka Rao',
@@ -519,13 +411,7 @@ export class BaseService extends HttpService {
         exams: 'Exam 1,Exam 2',
         numberOfExams: '2',
         fee: '2000',
-        status: 'Paid',
-        hasStyle: true,
-        cellStyle: {
-          status: {
-            'color': '#1D8923'
-          },
-        }
+        status: 'Paid'
       },
       {
         studentName: 'Ravi Verma',
@@ -534,14 +420,35 @@ export class BaseService extends HttpService {
         exams: 'Exam 2',
         numberOfExams: '1',
         fee: '1000',
-        status: 'Paid',
-        hasStyle: true,
-        cellStyle: {
-          status: {
-            'color': '#1D8923'
-          },
-        }
-      }
+        status: 'Paid'
+      },
+
+
+      {
+        studentName: 'Nancy Kurian',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam 1',
+        numberOfExams: '1',
+        fee: '1000',
+        status: 'Pending',
+      },{
+        studentName: 'Jordan Allen',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam 1, Exam 2',
+        numberOfExams: '2',
+        fee: '2000',
+        status: 'Pending'
+      },{
+        studentName: 'Purandara Das',
+        enrolementNumber: 'XXXX',
+        courseName: 'XXXX',
+        exams: 'Exam 1, Exam 2',
+        numberOfExams: '2',
+        fee: '2000',
+        status: 'Pending'
+      },
     ])
   }
   getMarksForDashboard$(): Observable<any>{
@@ -948,8 +855,7 @@ deleteQuestionPaper(questionPaperId: any): Observable<ServerResponse>  {
       internalMarks: '45', 
       externalMarks: '45',
       totalMarks: '90',
-      status: 'Pass',
-      hasStyle: true
+      status: 'Pass'
     },{
       examName: 'Exam 2', 
       internalMarks: '45', 

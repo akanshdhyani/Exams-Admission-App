@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MatTabGroup } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
+import { mergeMap, of } from 'rxjs';
 @Component({
   selector: 'app-manage-hall-tickets-admin-list',
   templateUrl: './manage-hall-tickets-admin-list.component.html',
@@ -198,10 +199,14 @@ export class ManageHallTicketsAdminListComponent {
 
   getHallTickets() {
     this.isDataLoading = true;
-    this.baseService.getHallTickets$().subscribe({
+    this.baseService.getHallTickets$()
+    .pipe((mergeMap((response: any) => {
+      return this.formateHallTicketsData(response)
+    })))
+    .subscribe({
       next: (res: any) => {
         console.log(res)
-        this.hallTicketsData = res
+        this.hallTicketsData = res.hallTicketsDetailsList
         setTimeout(() => {
           this.isDataLoading = false;
         }, 1000);
@@ -214,6 +219,35 @@ export class ManageHallTicketsAdminListComponent {
 
     })
 
+  }
+
+  formateHallTicketsData(response: any) {
+    const formatedHallTicketsDetails: {
+      hallTicketsDetailsList: any[]
+    } = {
+      hallTicketsDetailsList: []
+    }
+
+    if(response) {
+      response.forEach((hallTicketsDetails: any) => {
+        const formatedHallTicketDetails = {
+          id: hallTicketsDetails.id,
+          studentName: hallTicketsDetails.studentName,
+          courseName: hallTicketsDetails.courseName,
+          rollNo: hallTicketsDetails.rollNo,
+          attendancePercentage: hallTicketsDetails.attendancePercentage,
+          hasStyle: true,
+          cellStyle: {
+            viewHallTicket: {
+              'color': '#0074B6'
+            }
+          }
+        }
+
+        formatedHallTicketsDetails.hallTicketsDetailsList.push(formatedHallTicketDetails)
+      })
+    }
+    return of(formatedHallTicketsDetails);
   }
 
   initializePageData() {
