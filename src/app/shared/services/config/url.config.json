@@ -38,9 +38,10 @@
             "GET_ALL_INSTITUTE_COURSE_MAPPING": "/v1/admin/instituteCourseMap/all"
         },
         "EXAM_CENTER": {
-            "UPDATE_CCTV_STATUS": "/api/v1/admin/updateCctvStatus",
-            "ASSIGN_ALTERNATE_EXAM_CENTER": "/api/v1/admin/assignAlternate",
-            "VERIFIED_EXAM_CENTERS": "/api/v1/admin/verifiedExamCenters"
+            "UPDATE_CCTV_STATUS": "/v1/admin/updateCctvStatus",
+            "ASSIGN_ALTERNATE_EXAM_CENTER": "/v1/admin/assignAlternate",
+            "VERIFIED_EXAM_CENTERS": "/v1/admin/verifiedExamCenters",
+            "ALL_CENTERS": "/v1/admin/examCenters/all"
         },
         "HALL_TICKET": {
             "HALL_TICKET_DOWNLOAD":"/api/v1/admin/hallticket/download?dateOfBirth=1995-12-15&id=45&type=Pdf",
@@ -50,6 +51,9 @@
             "UPDATE_CCTV_STATUS": "/v1/admin/updateCctvStatus",
             "ASSIGN_ALTERNATE_EXAM_CENTER": "/v1/admin/assignAlternate",
             "VERIFIED_EXAM_CENTERS": "/v1/admin/verifiedExamCenters"
+        },
+        "TRACK_DISPATCHES": {
+            "GET_DISPATCHES_LIST": "/v1/institutes/dispatchList"
         }
     }
 }
