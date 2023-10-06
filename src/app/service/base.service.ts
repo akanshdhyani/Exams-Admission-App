@@ -136,49 +136,6 @@ export class BaseService extends HttpService {
   //#endregion
 
 
-  getHallTickets$(): Observable<any> {
-    // return this.httpClient.get<any>("https://api.agify.io/?name=meelad");
-
-    return of(
-      [
-        {
-          id: 0,
-          studentName: "Vidhu",
-          courseName: "BSC GNM",
-          rollNo: "2020",
-          attendancePercentage: "3"
-        },
-        {
-          id: 0,
-          studentName: "Vidhu",
-          courseName: "BSC GNM",
-          rollNo: "2020",
-          attendancePercentage: "3"
-        },
-        {
-          id: 0,
-          studentName: "Vidhu",
-          courseName: "BSC GNM",
-          rollNo: "2020",
-          attendancePercentage: "3"
-        },
-        {
-          id: 0,
-          studentName: "Vidhu",
-          courseName: "BSC GNM",
-          rollNo: "2020",
-          attendancePercentage: "3"
-        },
-      ]
-    )
-  }
-
-  generateHallTkt$(): Observable<any> {
-    // return this.httpClient.get<any>("https://api.agify.io/?name=meelad");
-
-    return of([])
-  }
-
   getInstitutesResultData$(): Observable<any> {
     // return this.httpClient.get<any>("https://api.agify.io/?name=meelad");
 
@@ -637,7 +594,60 @@ export class BaseService extends HttpService {
     ])
   }
 
+  /**************************** hall ticket services start ****************************/
 
+
+  generateHallTkt$(): Observable<any> {
+
+    return of([])
+  }
+
+  getHallTickets$(): Observable<any> {
+
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.HALL_TICKET.GET_ALL_DETAILS,
+      data: {},
+    }
+    return this.get(requestParam);
+
+  }
+
+  private hallTktData = new BehaviorSubject<any>([]);
+
+  setHallTicketData$(newData: any) {
+    this.hallTktData.next(newData);
+    console.log(newData)
+  }
+
+  getHallTicketData$(id: number) {
+    return this.hallTktData.asObservable();
+  }
+
+  
+
+  approveHallTicket$(id: number): Observable<any> {
+
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.HALL_TICKET.APPROVE+id+'/approve',
+      data: {}
+    //  data: paramsBody
+    }
+    return this.post(requestParam);
+
+  }
+ 
+
+/*   rejectHallTicket$(rejectReason: any): Observable<any> {
+
+    const requestParam: RequestParam = {
+      url: this.baseUrl + this.configService.urlConFig.URLS.HALL_TICKET.REJECT?rejectionReason=${rejectReason},
+      data: {},
+    //  data: paramsBody
+    }
+    return this.get(requestParam);
+
+  } */
+    /**************************** hall ticket services ends ****************************/
 
   
 
