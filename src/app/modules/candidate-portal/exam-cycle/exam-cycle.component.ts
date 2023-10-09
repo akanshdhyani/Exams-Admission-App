@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CandidatePortalService } from '../services/candidate-portal.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConformationDialogComponent } from 'src/app/shared/components/conformation-dialog/conformation-dialog.component';
 import { AuthServiceService } from 'src/app/core/services';
+import { BaseService } from '../../../service/base.service';
 
 @Component({
   selector: 'app-exam-cycle',
@@ -22,7 +23,9 @@ export class ExamCycleComponent {
     private router: Router,
     private candidatePortalService: CandidatePortalService,
     private dialog: MatDialog,
-    private authService: AuthServiceService
+    private authService: AuthServiceService,
+    private baseService: BaseService,
+    private route: ActivatedRoute
   ) {
     this.loggedInUserRole = this.authService.getUserRoles()[0];
   }
@@ -60,12 +63,36 @@ export class ExamCycleComponent {
     this.router.navigateByUrl('/candidate-portal')
   }
 
+  getTicketID(){
+    let id = parseFloat(this?.route?.snapshot?.paramMap?.get('id') || '0'); 
+    this.baseService.approveHallTicket$(id).subscribe({
+      next: (res: any) => {
+      },
+      error: (error: any) => {
+        alert(error.message)
+      }
+    })
+  }
+
   onApprove() {
     console.log("Approve details");
+    this.getTicketID();
+  
   }
 
   onReject() {
     console.log("Reject details");
+/*     this.baseService.rejectHallTicket$().subscribe({
+      next: (res: any) => {
+        setTimeout(() => {
+          this.isDataLoading = false;
+        }, 1000);
+        this.tabGroup.selectedIndex = 1;
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message)
+      }
+    }) */
   }
 
 
